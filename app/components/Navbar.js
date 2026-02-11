@@ -8,10 +8,10 @@ export default function Navbar() {
         Reagan
       </Link>
       <ul className={styles.links}>
-        <li><Link href="/">Home</Link></li>
-        <li><Link href="/about">About</Link></li>
-        <li><Link href="/projects">Projects</Link></li>
-        <li><Link href="/contact">Contact</Link></li>
+        <li><Link href="/#home">HOME</Link></li>
+        <li><Link href="/#about">ABOUT</Link></li>
+        <li><Link href="/#works">WORKS</Link></li>
+        <li><Link href="/#contact">CONTACT</Link></li>
       </ul>
     </nav>
   );
