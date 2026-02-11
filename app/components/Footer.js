@@ -5,13 +5,13 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerTop}>
-        <Image src="/star-icon.png" alt="" width={24} height={24} className={styles.starIcon} unoptimized />
+        <Image src="/icons/a.png" alt="" width={24} height={24} className={styles.starIcon} unoptimized />
         <p className={styles.footerName}>Reagan Lung</p>
       </div>
       <div className={styles.footerDivider} />
       <div className={styles.footerColumns}>
         <div className={styles.footerCol}>
-          <Image src="/dragon.png" alt="Reagan" width={48} height={48} className={styles.dragonIcon} unoptimized />
+          <Image src="/icons/dragon.png" alt="Reagan" width={48} height={48} className={styles.dragonIcon} unoptimized />
         </div>
         <div className={styles.footerColDivider} />
         <div className={styles.footerCol}>

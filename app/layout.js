@@ -7,6 +7,9 @@ import Navbar from "./components/Navbar";
 export const metadata = {
   title: "Reagan",
   description: "Portfolio",
+  icons: {
+    icon: "/icons/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
