@@ -52,7 +52,7 @@ export default function AnimatedName() {
   return (
     <h1 className={styles.name}>
       <span ref={rRef} className={styles.nameIconWrapper}>
-        <Image src="/r-icon.png" alt="R" fill className={styles.nameIcon} sizes="20rem" />
+        <Image src="/r-icon.png" alt="R" fill className={styles.nameIcon} sizes="20rem" unoptimized />
       </span>
       <span ref={textRef} className={styles.nameText}>
         eagan Lung

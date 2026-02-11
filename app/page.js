@@ -7,10 +7,34 @@ import WorksMarquee from "./components/WorksMarquee";
 import styles from "./page.module.css";
 
 const projects = [
-  { slug: "panday", title: "PANDAY", description: "Project description for Panday. A creative branding and design project." },
-  { slug: "whatsup", title: "WHATSUP", description: "Project description for WhatsUp. A digital design and branding initiative." },
-  { slug: "cuisine-clinic", title: "CUISINE CLINIC", description: "Project description for Cuisine Clinic. A UI/UX design for a culinary wellness platform." },
-  { slug: "soul-of-south-korea", title: "SOUL OF SOUTH KOREA", description: "Project description for Soul of South Korea. A branding and digital project." },
+  {
+    slug: "panday",
+    title: "Panday",
+    subtitle: "UI/UX CASE STUDY",
+    date: "Sep - Dec 2025",
+    description: "Built to bridge the gap between ambition and certification, Panday transforms the complexity of skilled trades into a clear, visual journey. This project utilized AI-driven guidance and career mapping to simplify the road to Red Seal, turning a daunting process into a structured path forward.",
+  },
+  {
+    slug: "cuisine-clinic",
+    title: "Cuisine Clinic",
+    subtitle: "Custom Packaging & Dieline",
+    date: "Oct 2025",
+    description: "Built to evoke the calm of a fresh start, Cuisine Clinic turns a medical remedy into a physical experience. This project involved crafting custom packaging dielines and mockups to bring a sense of order to the morning after.",
+  },
+  {
+    slug: "whatsup",
+    title: "WhatSUP",
+    subtitle: "Redesign & Brand Identity",
+    date: "Jan - May 2025",
+    description: "Built to breathe new life into a digital legacy, WhatSUP transforms an outdated presence into a sharp, modern experience. This project centered on a complete visual overhaul and logo redesign, using sitemap restructuring and usability testing to create an intuitive\u00A0flow.",
+  },
+  {
+    slug: "soul-of-south-korea",
+    title: "Soul of South Korea",
+    subtitle: "Travel Brochure & Publication",
+    date: "Oct 2025",
+    description: "Built to transport the curious traveler, Soul of South Korea turns a tour itinerary into a tactile journey. This project involved crafting a clean editorial layout and print-ready brochure designed to make an unfamiliar destination feel like home.",
+  },
 ];
 
 export default function Home() {
@@ -48,9 +72,12 @@ export default function Home() {
                 {/* Add project image: <Image src="..." fill /> */}
               </div>
               <div className={styles.projectInfo}>
-                <h3 className={styles.projectTitle}>[{project.title}]</h3>
-                <p className={styles.projectLabel}>PROJECT NAME</p>
-                <p className={styles.projectDesc}>{project.description}</p>
+                <div className={`${styles.projectInfoHead} ${i % 2 === 1 ? styles.projectInfoHeadRight : styles.projectInfoHeadLeft}`}>
+                  <h3 className={styles.projectTitle}>[ {project.title} ]</h3>
+                  <p className={styles.projectSubtitle}>[ {project.subtitle} ]</p>
+                  <p className={styles.projectDate}>[ {project.date} ]</p>
+                </div>
+                <p className={`${styles.projectDesc} ${i % 2 === 1 ? styles.projectDescLeft : styles.projectDescRight}`}>{project.description}</p>
               </div>
             </Link>
           ))}

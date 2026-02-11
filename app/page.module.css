@@ -108,6 +108,7 @@
 .projectRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: stretch;
   text-decoration: none;
   color: inherit;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -118,12 +119,12 @@
   background: rgba(0, 0, 0, 0.02);
 }
 
-.projectRowReverse {
-  direction: rtl;
+.projectRowReverse .projectImage {
+  order: 2;
 }
 
-.projectRowReverse > * {
-  direction: ltr;
+.projectRowReverse .projectInfo {
+  order: 1;
 }
 
 .projectImage {
@@ -141,36 +142,79 @@
 }
 
 .projectInfo {
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  aspect-ratio: 1;
+  position: relative;
+  padding: 3rem 2.5rem;
+  background: #e8e8e8;
+  color: #2d2d2d;
+}
+
+.projectInfoHead {
+  position: absolute;
+  top: 2.5rem;
+}
+
+.projectInfoHeadLeft {
+  left: 4%;
+  text-align: left;
+}
+
+.projectInfoHeadRight {
+  right: 4%;
+  text-align: right;
 }
 
 .projectTitle {
-  font-size: 1.25rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 600;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+  color: #2d2d2d;
+  margin: 0 0 0.5rem;
+  line-height: 1.1;
 }
 
-.projectRow:hover .projectTitle {
-  opacity: 0.85;
+.projectSubtitle {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #2d2d2d;
+  margin: 0 0 0.35rem;
 }
 
-.projectLabel {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
+.projectDate {
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: #2d2d2d;
+  margin: 0;
+}
+
+.projectRow:hover .projectTitle,
+.projectRow:hover .projectSubtitle,
+.projectRow:hover .projectDate {
+  opacity: 0.9;
 }
 
 .projectDesc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.5;
+  position: absolute;
+  bottom: 3rem;
+  width: 70%;
+  max-width: 480px;
+  font-size: 20px;
+  line-height: 1.65;
+  text-wrap: balance;
+  color: #2d2d2d;
+  margin: 0;
+}
+
+.projectDescRight {
+  right: 2.5rem;
+  text-align: right;
+}
+
+.projectDescLeft {
+  left: 2.5rem;
+  text-align: left;
 }
 
 /* About */

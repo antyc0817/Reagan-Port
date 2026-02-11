@@ -1,9 +1,9 @@
 import Link from "next/link";
-import styles from "../_styles/project.module.css";
+import styles from "../project.module.css";
 
 export const metadata = {
-  title: "WhatsUp | Reagan",
-  description: "WhatsUp project by Reagan Lung",
+  title: "WhatSUP | Reagan",
+  description: "WhatSUP project by Reagan Lung",
 };
 
 export default function WhatsUpProject() {
@@ -11,10 +11,13 @@ export default function WhatsUpProject() {
     <main className={styles.project}>
       <div className={styles.container}>
         <Link href="/#works" className={styles.back}>← Back to Works</Link>
-        <h1 className={styles.title}>[WHATSUP]</h1>
-        <p className={styles.label}>PROJECT</p>
-        <div className={styles.content}>
-          <p>Project details and case study for WhatsUp. Add your project description, images, and process here.</p>
+        <div className={styles.header}>
+          <h1 className={styles.title}>[ WhatSUP ]</h1>
+          <p className={styles.subtitle}>[ Redesign & Brand Identity ]</p>
+          <p className={styles.date}>[ Jan - May 2025 ]</p>
+        </div>
+        <div className={styles.description}>
+          <p>Built to breathe new life into a digital legacy, WhatSUP transforms an outdated presence into a sharp, modern experience. This project centered on a complete visual overhaul and logo redesign, using sitemap restructuring and usability testing to create an intuitive flow.</p>
         </div>
       </div>
     </main>

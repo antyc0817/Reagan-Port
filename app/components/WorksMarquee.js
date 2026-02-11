@@ -1,14 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import starIcon from "../../assets/icons/a.png";
 import styles from "./WorksMarquee.module.css";
 
 function WorksSegment() {
   return (
     <span className={styles.segment}>
       Works{" "}
-      <Image src={starIcon} alt="" width={18} height={18} className={styles.star} />
+      <Image src="/star-icon.png" alt="" width={18} height={18} className={styles.star} unoptimized />
       {" "}
     </span>
   );

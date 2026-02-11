@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../_styles/project.module.css";
+import styles from "../project.module.css";
 
 export const metadata = {
   title: "Soul of South Korea | Reagan",
@@ -11,10 +11,13 @@ export default function SoulOfSouthKoreaProject() {
     <main className={styles.project}>
       <div className={styles.container}>
         <Link href="/#works" className={styles.back}>← Back to Works</Link>
-        <h1 className={styles.title}>[SOUL OF SOUTH KOREA]</h1>
-        <p className={styles.label}>PROJECT</p>
-        <div className={styles.content}>
-          <p>Project details and case study for Soul of South Korea. Add your project description, images, and process here.</p>
+        <div className={styles.header}>
+          <h1 className={styles.title}>[ Soul of South Korea ]</h1>
+          <p className={styles.subtitle}>[ Travel Brochure & Publication ]</p>
+          <p className={styles.date}>[ Oct 2025 ]</p>
+        </div>
+        <div className={styles.description}>
+          <p>Built to transport the curious traveler, Soul of South Korea turns a tour itinerary into a tactile journey. This project involved crafting a clean editorial layout and print-ready brochure designed to make an unfamiliar destination feel like home.</p>
         </div>
       </div>
     </main>
