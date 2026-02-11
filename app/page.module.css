@@ -179,23 +179,19 @@
     text-align: left;
 }
 
-/* About */
-.about {
+.comingSoon {
     padding: 4rem 2rem;
-    max-width: 700px;
-    margin: 0 auto;
+    text-align: center;
+    background: var(--background);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.aboutTitle {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-}
-
-.aboutText {
-    font-size: 1rem;
-    line-height: 1.7;
+.comingSoonText {
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-style: italic;
     color: var(--text-muted);
+    letter-spacing: 0.02em;
 }
 
 /* Contact */

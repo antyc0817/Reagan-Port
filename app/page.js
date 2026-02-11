@@ -82,16 +82,9 @@ export default function Home() {
             </Link>
           ))}
         </div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className={styles.about}>
-        <h2 className={styles.aboutTitle}>About</h2>
-        <p className={styles.aboutText}>
-          Creative designer with a passion for branding, UI/UX, and digital experiences. 
-          I craft visual identities and user-centered solutions that resonate with audiences. 
-          With expertise across branding, interface design, and digital media, I bring ideas to life.
-        </p>
+        <div className={styles.comingSoon}>
+          <span className={styles.comingSoonText}>Game — Coming soon</span>
+        </div>
       </section>
 
       {/* Contact Section */}

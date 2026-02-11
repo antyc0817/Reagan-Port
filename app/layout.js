@@ -20,7 +20,9 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <Navbar />
-        {children}
+        <div style={{ paddingTop: "4.5rem" }}>
+          {children}
+        </div>
       </body>
     </html>
   );
