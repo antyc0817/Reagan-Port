@@ -1,5 +1,5 @@
 .section {
-  padding: 5rem 2rem 6rem;
+  padding: 2.5rem 2rem 6rem;
   text-align: center;
 }
 
@@ -7,8 +7,12 @@
   font-size: 1.25rem;
   font-weight: 400;
   color: var(--foreground);
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
   letter-spacing: 0.02em;
+}
+
+.serviceItem:first-child .serviceTitle {
+  margin-bottom: 1.5rem;
 }
 
 .serviceList {
@@ -31,6 +35,10 @@
   color: var(--foreground);
   margin: 0 0 1rem;
   line-height: 1;
+}
+
+.serviceItem:last-child .serviceTitle {
+  margin-bottom: 1.75rem;
 }
 
 .serviceSub {
