@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import styles from "../project.module.css";
 
@@ -9,16 +10,16 @@ export const metadata = {
 export default function CuisineClinicProject() {
   return (
     <main className={styles.project}>
+      <div className={styles.backBar}>
+        <Link href="/#works" className={styles.back} aria-label="Back to Works">
+          <Image src="/icons/arrow.svg" alt="" width={20} height={20} className={styles.backArrow} />
+        </Link>
+      </div>
+      <div className={styles.heroWrap}>
+        <Image src="/images/cuisine-clinic/herocc.png" alt="Cuisine Clinic" fill className={styles.heroImg} sizes="100vw" unoptimized priority />
+      </div>
       <div className={styles.container}>
-        <Link href="/#works" className={styles.back}>← Back to Works</Link>
-        <div className={styles.header}>
-          <h1 className={styles.title}>[ Cuisine Clinic ]</h1>
-          <p className={styles.subtitle}>[ Custom Packaging & Dieline ]</p>
-          <p className={styles.date}>[ Oct 2025 ]</p>
-        </div>
-        <div className={styles.description}>
-          <p>Built to evoke the calm of a fresh start, Cuisine Clinic turns a medical remedy into a physical experience. This project involved crafting custom packaging dielines and mockups to bring a sense of order to the morning after.</p>
-        </div>
+        <p className={styles.underConstruction}>Under construction</p>
       </div>
     </main>
   );
