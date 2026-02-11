@@ -2,7 +2,6 @@
   --background: #e8e8e8;
   --foreground: #2d2d2d;
   --turquoise: #40b4c4;
-  --turquoise-dark: #3599a6;
   --accent-red: #c74a4a;
   --text-muted: #666;
 }
@@ -35,4 +34,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-

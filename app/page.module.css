@@ -55,44 +55,6 @@
   background: rgba(255, 255, 255, 0.6);
 }
 
-/* Skills */
-.skills {
-  padding: 4rem 2rem;
-}
-
-.sectionLabel {
-  text-align: center;
-  font-size: 0.75rem;
-  text-transform: lowercase;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  margin-bottom: 2rem;
-}
-
-.skillList {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.skillItem {
-  margin-bottom: 2.5rem;
-  text-align: center;
-}
-
-.skillTitle {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
-}
-
-.skillDesc {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  max-width: 400px;
-  margin: 0 auto;
-}
-
 /* Works - Full width edge-to-edge */
 .works {
   padding: 4rem 0 2rem;
@@ -144,8 +106,8 @@
 .projectInfo {
   position: relative;
   padding: 3rem 2.5rem;
-  background: #e8e8e8;
-  color: #2d2d2d;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 .projectInfoHead {
@@ -167,7 +129,7 @@
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 600;
   letter-spacing: -0.02em;
-  color: #2d2d2d;
+  color: var(--foreground);
   margin: 0 0 0.5rem;
   line-height: 1.1;
 }
@@ -176,7 +138,7 @@
   font-size: clamp(1rem, 2.5vw, 1.35rem);
   font-weight: 500;
   letter-spacing: 0.02em;
-  color: #2d2d2d;
+  color: var(--foreground);
   margin: 0 0 0.35rem;
 }
 
@@ -185,7 +147,7 @@
   font-weight: 400;
   font-style: italic;
   letter-spacing: 0.02em;
-  color: #2d2d2d;
+  color: var(--foreground);
   margin: 0;
 }
 
@@ -203,7 +165,7 @@
   font-size: 20px;
   line-height: 1.65;
   text-wrap: balance;
-  color: #2d2d2d;
+  color: var(--foreground);
   margin: 0;
 }
 
