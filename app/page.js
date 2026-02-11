@@ -30,7 +30,7 @@ const projects = [
     subtitle: "Redesign & Brand Identity",
     date: "Jan - May 2025",
     description: "Built to breathe new life into a digital legacy, WhatSUP transforms an outdated presence into a sharp, modern experience. This project centered on a complete visual overhaul and logo redesign, using sitemap restructuring and usability testing to create an intuitive\u00A0flow.",
-    cover: "/images/whatsup/cover.jpg",
+    cover: "/images/whatsup/coverimg.png",
   },
   {
     slug: "soul-of-south-korea",
@@ -38,7 +38,7 @@ const projects = [
     subtitle: "Travel Brochure & Publication",
     date: "Oct 2025",
     description: "Built to transport the curious traveler, Soul of South Korea turns a tour itinerary into a tactile journey. This project involved crafting a clean editorial layout and print-ready brochure designed to make an unfamiliar destination feel like home.",
-    cover: "/images/soul-of-south-korea/cover.jpg",
+    cover: "/images/soul-of-south-korea/coverimg.png",
   },
 ];
 
