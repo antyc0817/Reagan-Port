@@ -1,0 +1,38 @@
+.footer {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footerSep {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.footerName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footerIcon {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.footerPrivacy:hover {
+  text-decoration: underline;
+}

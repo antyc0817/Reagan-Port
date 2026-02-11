@@ -2,33 +2,65 @@
   color: var(--foreground);
 }
 
-/* Hero */
+/* Hero - Full screen, name covers viewport */
 .hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 4rem 2rem 3rem;
   text-align: center;
 }
 
 .name {
-  font-size: clamp(2.5rem, 8vw, 4rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  font-size: clamp(5rem, 18vw, 12rem);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   margin-bottom: 2rem;
+  line-height: 1;
+}
+
+.nameIconWrapper {
+  position: relative;
+  display: inline-block;
+  width: 0.95em;
+  height: 1.1em;
+  margin-right: -0.08em;
+  vertical-align: middle;
+}
+
+.nameIcon {
+  object-fit: contain;
+}
+
+.nameText {
+  letter-spacing: -0.02em;
 }
 
 .heroBlock {
   position: relative;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto 1.5rem;
-  aspect-ratio: 16 / 9;
-  border-radius: 4px;
+  height: 100vh;
+  min-height: 400px;
+  margin-bottom: 1.5rem;
   overflow: hidden;
 }
 
-.turquoiseBlock {
+.heroImage {
   position: absolute;
   inset: 0;
   background: var(--turquoise);
+}
+
+.heroImage img,
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .sliderStrip {
@@ -43,9 +75,13 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: white;
+}
+
+.sliderDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .heroFooter {
@@ -54,6 +90,7 @@
   align-items: center;
   max-width: 900px;
   margin: 0 auto;
+  padding: 0 2rem;
   font-size: 0.875rem;
   color: var(--text-muted);
 }
@@ -105,9 +142,9 @@
   margin: 0 auto;
 }
 
-/* Works */
+/* Works - Full width edge-to-edge */
 .works {
-  padding: 4rem 2rem;
+  padding: 4rem 0 2rem;
 }
 
 .worksTitle {
@@ -116,62 +153,69 @@
   letter-spacing: 0.05em;
   text-align: center;
   margin-bottom: 2rem;
+  padding: 0 2rem;
   color: var(--text-muted);
 }
 
-.projectGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0;
-  max-width: 900px;
-  margin: 0 auto;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.projectCard {
-  min-height: 220px;
-  padding: 1.5rem;
+.projectList {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 0;
+  width: 100%;
 }
 
-.projectCard.turquoise {
+.projectRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  transition: background 0.2s;
+}
+
+.projectRow:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.projectRowReverse {
+  direction: rtl;
+}
+
+.projectRowReverse > * {
+  direction: ltr;
+}
+
+.projectImage {
+  position: relative;
+  aspect-ratio: 1;
   background: var(--turquoise);
 }
 
-.projectCard.grey {
-  background: var(--background);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.projectLink {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.projectImage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  min-height: 180px;
-  color: white;
-  font-weight: 600;
-  font-size: 1.25rem;
-  letter-spacing: 0.05em;
-  transition: opacity 0.2s;
+  object-fit: cover;
 }
 
-.projectLink:hover {
-  opacity: 0.9;
+.projectInfo {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  aspect-ratio: 1;
 }
 
-.projectContent .projectTitle {
+.projectTitle {
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
 }
 
-.projectContent .projectTitle:hover {
-  opacity: 0.8;
+.projectRow:hover .projectTitle {
+  opacity: 0.85;
 }
 
 .projectLabel {
@@ -266,44 +310,4 @@
 
 .formButton:hover {
   opacity: 0.9;
-}
-
-/* Footer */
-.footer {
-  padding: 3rem 2rem;
-  text-align: center;
-}
-
-.footerSep {
-  display: block;
-  font-size: 1rem;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-}
-
-.footerName {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-}
-
-.footerBottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 500px;
-  margin: 0 auto;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.footerIcon {
-  font-weight: 700;
-  font-size: 1rem;
-}
-
-.footerPrivacy:hover {
-  text-decoration: underline;
 }

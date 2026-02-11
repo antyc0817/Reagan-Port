@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import Footer from "./components/Footer";
 import styles from "./page.module.css";
 
 const projects = [
@@ -11,15 +13,22 @@ const projects = [
 export default function Home() {
   return (
     <main className={styles.page}>
-      {/* Hero Section */}
+      {/* Hero Section - Full screen, image to be added */}
       <section id="home" className={styles.hero}>
-        <h1 className={styles.name}>Reagan Lung</h1>
+        <h1 className={styles.name}>
+          <span className={styles.nameIconWrapper}>
+            <Image src="/r-icon.png" alt="R" fill className={styles.nameIcon} sizes="20rem" />
+          </span>
+          <span className={styles.nameText}>eagan Lung</span>
+        </h1>
         <div className={styles.heroBlock}>
-          <div className={styles.turquoiseBlock} />
+          <div className={styles.heroImage}>
+            {/* Add your full-screen image here: <Image src="..." fill className={styles.heroImg} /> */}
+          </div>
           <div className={styles.sliderStrip}>
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
+            <span className={styles.sliderDot} />
+            <span className={styles.sliderDot} />
+            <span className={styles.sliderDot} />
           </div>
         </div>
         <div className={styles.heroFooter}>
@@ -47,29 +56,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Works Section */}
+      {/* Works Section - Zigzag: image left/right alternating */}
       <section id="works" className={styles.works}>
         <h2 className={styles.worksTitle}>Works x Works x Works x Works</h2>
-        <div className={styles.projectGrid}>
+        <div className={styles.projectList}>
           {projects.map((project, i) => (
-            <div
+            <Link
               key={project.slug}
-              className={`${styles.projectCard} ${i % 2 === 0 ? styles.turquoise : styles.grey}`}
+              href={`/projects/${project.slug}`}
+              className={`${styles.projectRow} ${i % 2 === 1 ? styles.projectRowReverse : ""}`}
             >
-              {i % 2 === 0 ? (
-                <Link href={`/projects/${project.slug}`} className={styles.projectLink}>
-                  [{project.title}]
-                </Link>
-              ) : (
-                <div className={styles.projectContent}>
-                  <Link href={`/projects/${project.slug}`}>
-                    <h3 className={styles.projectTitle}>[{project.title}]</h3>
-                  </Link>
-                  <p className={styles.projectLabel}>PROJECT NAME</p>
-                  <p className={styles.projectDesc}>{project.description}</p>
-                </div>
-              )}
-            </div>
+              <div className={styles.projectImage}>
+                {/* Add project image: <Image src="..." fill /> */}
+              </div>
+              <div className={styles.projectInfo}>
+                <h3 className={styles.projectTitle}>[{project.title}]</h3>
+                <p className={styles.projectLabel}>PROJECT NAME</p>
+                <p className={styles.projectDesc}>{project.description}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -95,16 +100,7 @@ export default function Home() {
         </form>
       </section>
 
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <span className={styles.footerSep}>x</span>
-        <p className={styles.footerName}>Reagan Lung</p>
-        <div className={styles.footerBottom}>
-          <span className={styles.footerIcon}>R</span>
-          <span className={styles.footerCopy}>COPYRIGHT 2017</span>
-          <a href="#" className={styles.footerPrivacy}>PRIVACY</a>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
