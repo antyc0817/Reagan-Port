@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "./project.module.css";
+import styles from "../_styles/project.module.css";
 
 export const metadata = {
   title: "WhatsUp | Reagan",
