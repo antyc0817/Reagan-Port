@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 
@@ -5,7 +6,9 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <Link href="/" className={styles.logo}>
-        Reagan
+        <span className={styles.logoCircle}>
+          <Image src="/dragon.png" alt="Home" width={36} height={36} className={styles.logoIcon} />
+        </span>
       </Link>
       <ul className={styles.links}>
         <li><Link href="/#home">HOME</Link></li>

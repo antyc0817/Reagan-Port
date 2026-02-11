@@ -1,0 +1,42 @@
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  background: transparent;
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: scroll 45s linear infinite;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.segment {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.star {
+  margin: 0 0.6em;
+  flex-shrink: 0;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

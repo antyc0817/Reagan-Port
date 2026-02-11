@@ -12,41 +12,12 @@
   text-align: center;
 }
 
-.name {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  font-size: clamp(5rem, 18vw, 12rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  margin-bottom: 2rem;
-  line-height: 1;
-}
-
-.nameIconWrapper {
-  position: relative;
-  display: inline-block;
-  width: 0.95em;
-  height: 1.1em;
-  margin-right: -0.08em;
-  vertical-align: middle;
-}
-
-.nameIcon {
-  object-fit: contain;
-}
-
-.nameText {
-  letter-spacing: -0.02em;
-}
-
 .heroBlock {
   position: relative;
   width: 100%;
   height: 100vh;
   min-height: 400px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   overflow: hidden;
 }
 
@@ -82,26 +53,6 @@
   height: 6px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.6);
-}
-
-.heroFooter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  font-size: 0.875rem;
-  color: var(--text-muted);
-}
-
-.heroText {
-  flex: 1;
-  text-align: left;
-}
-
-.year {
-  font-weight: 500;
 }
 
 /* Skills */
@@ -145,16 +96,6 @@
 /* Works - Full width edge-to-edge */
 .works {
   padding: 4rem 0 2rem;
-}
-
-.worksTitle {
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-align: center;
-  margin-bottom: 2rem;
-  padding: 0 2rem;
-  color: var(--text-muted);
 }
 
 .projectList {

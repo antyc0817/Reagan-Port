@@ -1,6 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
+import AnimatedName from "./components/AnimatedName";
 import Footer from "./components/Footer";
+import HeroBanner from "./components/HeroBanner";
+import HowICanHelp from "./components/HowICanHelp";
+import WorksMarquee from "./components/WorksMarquee";
 import styles from "./page.module.css";
 
 const projects = [
@@ -15,12 +18,7 @@ export default function Home() {
     <main className={styles.page}>
       {/* Hero Section - Full screen, image to be added */}
       <section id="home" className={styles.hero}>
-        <h1 className={styles.name}>
-          <span className={styles.nameIconWrapper}>
-            <Image src="/r-icon.png" alt="R" fill className={styles.nameIcon} sizes="20rem" />
-          </span>
-          <span className={styles.nameText}>eagan Lung</span>
-        </h1>
+        <AnimatedName />
         <div className={styles.heroBlock}>
           <div className={styles.heroImage}>
             {/* Add your full-screen image here: <Image src="..." fill className={styles.heroImg} /> */}
@@ -31,34 +29,14 @@ export default function Home() {
             <span className={styles.sliderDot} />
           </div>
         </div>
-        <div className={styles.heroFooter}>
-          <p className={styles.heroText}>Creative designer focused on branding, UI/UX, and digital experiences.</p>
-          <span className={styles.year}>2013</span>
-        </div>
+        <HeroBanner />
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className={styles.skills}>
-        <p className={styles.sectionLabel}>the creativity</p>
-        <div className={styles.skillList}>
-          <div className={styles.skillItem}>
-            <h3 className={styles.skillTitle}>Branding</h3>
-            <p className={styles.skillDesc}>Identity, logos, and visual systems that define brands.</p>
-          </div>
-          <div className={styles.skillItem}>
-            <h3 className={styles.skillTitle}>UI.UX</h3>
-            <p className={styles.skillDesc}>User-centered interfaces and experiences that delight.</p>
-          </div>
-          <div className={styles.skillItem}>
-            <h3 className={styles.skillTitle}>Digital</h3>
-            <p className={styles.skillDesc}>Web, motion, and interactive digital solutions.</p>
-          </div>
-        </div>
-      </section>
+      <HowICanHelp />
 
       {/* Works Section - Zigzag: image left/right alternating */}
       <section id="works" className={styles.works}>
-        <h2 className={styles.worksTitle}>Works x Works x Works x Works</h2>
+        <WorksMarquee />
         <div className={styles.projectList}>
           {projects.map((project, i) => (
             <Link

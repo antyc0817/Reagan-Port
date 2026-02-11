@@ -1,0 +1,51 @@
+.section {
+  padding: 5rem 2rem 6rem;
+  text-align: center;
+}
+
+.header {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--foreground);
+  margin-bottom: 4rem;
+  letter-spacing: 0.02em;
+}
+
+.serviceList {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.serviceItem {
+  margin-bottom: 4rem;
+}
+
+.serviceItem:last-child {
+  margin-bottom: 0;
+}
+
+.serviceTitle {
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 200;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  margin: 0 0 1rem;
+  line-height: 1;
+}
+
+.serviceSub {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--foreground);
+  margin: 0;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.serviceSubItem {
+  white-space: nowrap;
+}

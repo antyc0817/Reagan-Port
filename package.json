@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@fontsource/wix-madefor-text": "^5.2.8",
+    "gsap": "^3.14.2",
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3"

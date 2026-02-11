@@ -1,0 +1,28 @@
+.name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  font-size: clamp(5rem, 18vw, 12rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+  line-height: 1;
+}
+
+.nameIconWrapper {
+  position: relative;
+  display: inline-block;
+  width: 0.95em;
+  height: 1.1em;
+  margin-right: -0.08em;
+  transform: translateY(-8%);
+}
+
+.nameIcon {
+  object-fit: contain;
+}
+
+.nameText {
+  letter-spacing: -0.02em;
+}
