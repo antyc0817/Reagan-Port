@@ -10,8 +10,8 @@ export default function HeroBanner() {
         </p>
       <div className={styles.divider} />
         <div className={styles.links}>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">[LINKEDIN]</a>
-          <a href="mailto:hello@example.com">[EMAIL]</a>
+          <a href="https://www.linkedin.com/in/reaganlung" target="_blank" rel="noopener noreferrer">[LINKEDIN]</a>
+          <a href="mailto:reaganlung.digital@gmail.com">[EMAIL]</a>
           <a href="#" download>[RESUME]</a>
         </div>
       <div className={styles.blackBar} />
