@@ -6,9 +6,7 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <Link href="/" className={styles.logo}>
-        <span className={styles.logoCircle}>
-          <Image src="/icons/favicon.png" alt="Home" width={36} height={36} className={styles.logoIcon} unoptimized />
-        </span>
+        <Image src="/icons/r-icon.png" alt="Home" width={36} height={36} className={styles.logoIcon} unoptimized />
       </Link>
       <ul className={styles.links}>
         <li><Link href="/#home">HOME</Link></li>

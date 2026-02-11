@@ -11,7 +11,7 @@ export default function Footer() {
       <div className={styles.footerDivider} />
       <div className={styles.footerColumns}>
         <div className={styles.footerCol}>
-          <Image src="/icons/dragon.png" alt="Reagan" width={48} height={48} className={styles.dragonIcon} unoptimized />
+          <Image src="/icons/r-icon.png" alt="Reagan" width={48} height={48} className={styles.footerIcon} unoptimized />
         </div>
         <div className={styles.footerColDivider} />
         <div className={styles.footerCol}>

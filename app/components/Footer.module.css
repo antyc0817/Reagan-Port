@@ -58,9 +58,11 @@
   background: rgba(0, 0, 0, 0.12);
 }
 
-.dragonIcon {
-  border-radius: 50%;
-  object-fit: cover;
+.footerIcon {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
 }
 
 .footerLinks,

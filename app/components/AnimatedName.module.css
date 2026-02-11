@@ -25,4 +25,5 @@
 
 .nameText {
   letter-spacing: -0.02em;
+  transform: translateY(0.04em);
 }

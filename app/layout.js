@@ -8,7 +8,10 @@ export const metadata = {
   title: "Reagan",
   description: "Portfolio",
   icons: {
-    icon: "/icons/favicon.png",
+    icon: [
+      { url: "/icons/nicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/nicon.png", sizes: "16x16", type: "image/png" },
+    ],
   },
 };
 
