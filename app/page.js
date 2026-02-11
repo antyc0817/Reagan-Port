@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import AnimatedName from "./components/AnimatedName";
 import Footer from "./components/Footer";
@@ -13,6 +14,7 @@ const projects = [
     subtitle: "UI/UX CASE STUDY",
     date: "Sep - Dec 2025",
     description: "Built to bridge the gap between ambition and certification, Panday transforms the complexity of skilled trades into a clear, visual journey. This project utilized AI-driven guidance and career mapping to simplify the road to Red Seal, turning a daunting process into a structured path forward.",
+    cover: "/images/panday/cover.jpg",
   },
   {
     slug: "cuisine-clinic",
@@ -20,6 +22,7 @@ const projects = [
     subtitle: "Custom Packaging & Dieline",
     date: "Oct 2025",
     description: "Built to evoke the calm of a fresh start, Cuisine Clinic turns a medical remedy into a physical experience. This project involved crafting custom packaging dielines and mockups to bring a sense of order to the morning after.",
+    cover: "/images/cuisine-clinic/coverimg.png",
   },
   {
     slug: "whatsup",
@@ -27,6 +30,7 @@ const projects = [
     subtitle: "Redesign & Brand Identity",
     date: "Jan - May 2025",
     description: "Built to breathe new life into a digital legacy, WhatSUP transforms an outdated presence into a sharp, modern experience. This project centered on a complete visual overhaul and logo redesign, using sitemap restructuring and usability testing to create an intuitive\u00A0flow.",
+    cover: "/images/whatsup/cover.jpg",
   },
   {
     slug: "soul-of-south-korea",
@@ -34,6 +38,7 @@ const projects = [
     subtitle: "Travel Brochure & Publication",
     date: "Oct 2025",
     description: "Built to transport the curious traveler, Soul of South Korea turns a tour itinerary into a tactile journey. This project involved crafting a clean editorial layout and print-ready brochure designed to make an unfamiliar destination feel like home.",
+    cover: "/images/soul-of-south-korea/cover.jpg",
   },
 ];
 
@@ -69,7 +74,7 @@ export default function Home() {
               className={`${styles.projectRow} ${i % 2 === 1 ? styles.projectRowReverse : ""}`}
             >
               <div className={styles.projectImage}>
-                {/* Add project image: <Image src="..." fill /> */}
+                <Image src={project.cover} alt={project.title} fill className={styles.projectImg} sizes="50vw" unoptimized />
               </div>
               <div className={styles.projectInfo}>
                 <div className={`${styles.projectInfoHead} ${i % 2 === 1 ? styles.projectInfoHeadRight : styles.projectInfoHeadLeft}`}>
