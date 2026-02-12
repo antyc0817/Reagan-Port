@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import DesignSystemExpand from "./DesignSystemExpand";
 import styles from "../project.module.css";
 
 export const metadata = {
@@ -75,6 +76,10 @@ export default function CuisineClinicProject() {
             </p>
           </div>
         </div>
+      </section>
+      <section className={`${styles.projectSection} ${styles.designSystemSection}`}>
+        <h3 className={styles.projectSectionTitle}>[ Design System ]</h3>
+        <DesignSystemExpand />
       </section>
       <div className={styles.container}>
         <p className={styles.underConstruction}>Under construction</p>
