@@ -26,7 +26,7 @@ export default function CuisineClinicProject() {
           unoptimized
         />
         <p className={styles.heroCaption}>
-          Custom packing & Dieline | [<em>Oct 2025</em>]
+          Custom packing & Dieline | [ <em>Oct 2025</em> ]
         </p>
       </div>
       <section className={styles.projectIntro}>
@@ -48,6 +48,29 @@ export default function CuisineClinicProject() {
           <div className={styles.projectIntroItem}>
             <span className={styles.projectIntroLabel}>Focus</span>
             <span className={styles.projectIntroValue}>Branding & Identity</span>
+          </div>
+        </div>
+      </section>
+      <section className={styles.projectSection}>
+        <div className={styles.projectSectionGrid}>
+          <h3 className={styles.projectSectionTitle}>[ Objective ]</h3>
+          <div className={styles.projectSectionImage}>
+            <Image
+              src="/images/cuisine-clinic/S1.png"
+              alt="Cuisine Clinic"
+              width={480}
+              height={360}
+              className={styles.projectSectionImg}
+              unoptimized
+            />
+          </div>
+          <div className={styles.projectSectionText}>
+            <p>
+              Recovery shouldn&apos;t feel like a chore. The market was flooded with options, but most felt like a dull pharmacy visit or an overwhelming assault of loud graphics. There was a clear gap for a brand that understood the need for a genuine fresh start, not just a quick fix.
+            </p>
+            <p>
+              My mission was to bridge that gap by taking the concept of a medical remedy and transforming it into a premium experience. By clearing out the visual noise, I built a system that is clean, orderly, and effortless—providing total clarity right when the user needs it most.
+            </p>
           </div>
         </div>
       </section>

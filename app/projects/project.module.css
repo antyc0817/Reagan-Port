@@ -18,16 +18,19 @@
 
 .heroLogo {
   position: absolute;
-  top: 2.5rem;
-  left: 2.5rem;
+  top: clamp(1rem, 2.5vw, 2.5rem);
+  left: clamp(1rem, 2.5vw, 2.5rem);
+  width: clamp(80px, 18vw, 220px) !important;
+  height: clamp(80px, 18vw, 220px) !important;
+  object-fit: contain;
 }
 
 .heroCaption {
   position: absolute;
-  bottom: 2.5rem;
-  left: 2.5rem;
+  bottom: clamp(1rem, 2.5vw, 2.5rem);
+  left: clamp(1rem, 2.5vw, 2.5rem);
   margin: 0;
-  font-size: 1.4rem;
+  font-size: clamp(0.9rem, 2.2vw, 1.4rem);
   color: var(--foreground);
   letter-spacing: 0.02em;
 }
@@ -84,6 +87,89 @@
   height: 2.5rem;
   background: rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
+}
+
+.projectSection {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.projectSectionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0 2.5rem;
+  align-items: start;
+}
+
+.projectSectionTitle {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--foreground);
+  margin: 0 0 3rem;
+}
+
+.projectSectionImage {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  position: relative;
+  align-self: stretch;
+}
+
+.projectSectionImg {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 12px;
+}
+
+.projectSectionText {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.projectSectionText p {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+.projectSectionText p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .projectSectionGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .projectSectionTitle {
+    grid-column: 1;
+    grid-row: 1;
+    margin-bottom: 2rem;
+  }
+
+  .projectSectionImage {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .projectSectionImg {
+    min-height: 200px;
+  }
+
+  .projectSectionText {
+    grid-column: 1;
+    grid-row: 3;
+  }
 }
 
 .backBar {
