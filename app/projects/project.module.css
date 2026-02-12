@@ -175,6 +175,7 @@
   align-items: center;
   text-align: center;
   max-width: 1600px;
+  overflow: visible;
 }
 
 .designSystemSection .projectSectionTitle {
@@ -201,6 +202,7 @@
   width: 100%;
   max-width: 1600px;
   position: relative;
+  overflow: visible;
 }
 
 .designSystemLogoWrap {
@@ -408,6 +410,10 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  position: relative;
+  z-index: 5;
+  overflow: visible;
+  background: var(--background);
 }
 
 .typographySection .projectSectionTitle {
@@ -433,14 +439,15 @@
 
 .typographyCard {
   position: relative;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.7) 0%, rgba(141, 226, 145, 0.1) 50%, rgba(255, 255, 255, 0.5) 100%);
+  background: #fafafa;
   border-radius: 14px;
   padding: 1.25rem;
   text-align: left;
-  border: 1px solid rgba(141, 226, 145, 0.3);
+  border: 1px solid rgba(141, 226, 145, 0.4);
   border-left: 4px solid #8de291;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  color: var(--foreground);
 }
 
 .typographyCard:hover {
@@ -476,13 +483,13 @@
   font-size: 2rem;
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: var(--foreground);
+  color: #2d2d2d;
   margin: 0 0 0.75rem;
   line-height: 1.4;
   padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.7);
+  background: #fff;
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .typographySpecimenLine2 {
@@ -530,14 +537,182 @@
   margin: 0;
 }
 
-@media (max-width: 600px) {
-  .designSystemCards {
-    grid-template-columns: 1fr;
-  }
+/* Flavor Icons Section */
+.flavorIconsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .typographyCards {
-    grid-template-columns: 1fr;
-  }
+.flavorIconsSection.projectSection {
+  padding: 2rem 1.5rem;
+}
+
+.flavorIconsSection .projectSectionTitle {
+  text-align: center;
+}
+
+.flavorIconsIntro {
+  max-width: 700px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--foreground);
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.flavorIconsGrid {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  display: flex;
+  flex-direction: column;
+}
+
+.flavorIconRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.flavorIconRow:last-child {
+  border-bottom: none;
+}
+
+.flavorIconRowReverse .flavorIconLeft {
+  order: 2;
+  align-items: flex-end;
+}
+
+.flavorIconRowReverse .flavorIconRight {
+  order: 1;
+  align-items: flex-start;
+}
+
+.flavorIconLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: flex-start;
+}
+
+.flavorIconLeft .flavorIconImageWrap {
+  margin: 0;
+}
+
+.flavorIconLeft .flavorIconPaletteLabel {
+  margin: 0;
+  font-weight: 600;
+  text-align: left;
+}
+
+.flavorIconLeft .flavorIconSwatches {
+  justify-content: flex-start;
+}
+
+.flavorIconRight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding-top: 0;
+}
+
+.flavorIconName {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: white;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.flavorIconHeadline {
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+  margin: 0;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.flavorIconDetail {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--foreground);
+  margin: 0;
+  text-align: left;
+}
+
+.flavorIconPaletteLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--foreground);
+}
+
+.flavorIconSwatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.flavorIconSwatch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flavorIconSwatchCircle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.flavorIconSwatch code {
+  font-size: 0.85rem;
+  font-family: monospace;
+  color: var(--text-muted);
+}
+
+.flavorIconImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.flavorImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.flavorImagePlaceholder {
+  width: 400px;
+  height: 520px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
@@ -564,6 +739,37 @@
   .projectSectionText {
     grid-column: 1;
     grid-row: 3;
+  }
+
+  .flavorIconsGrid {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .flavorIconRow {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .flavorIconRowReverse .flavorIconLeft,
+  .flavorIconRowReverse .flavorIconRight {
+    order: unset;
+    align-items: flex-start;
+  }
+
+  .flavorIconRight {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .designSystemCards {
+    grid-template-columns: 1fr;
+  }
+
+  .typographyCards {
+    grid-template-columns: 1fr;
   }
 }
 

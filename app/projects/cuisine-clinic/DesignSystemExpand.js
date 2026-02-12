@@ -41,6 +41,9 @@ export default function DesignSystemExpand() {
   const logoDot1Ref = useRef(null);
   const logoDot2Ref = useRef(null);
   const logoDot3Ref = useRef(null);
+  const card1Ref = useRef(null);
+  const card2Ref = useRef(null);
+  const card3Ref = useRef(null);
   const cardDot1Ref = useRef(null);
   const cardDot2Ref = useRef(null);
   const cardDot3Ref = useRef(null);
@@ -48,74 +51,77 @@ export default function DesignSystemExpand() {
   const [wrapperSize, setWrapperSize] = useState({ w: 1, h: 1 });
 
   useEffect(() => {
+    const CARD_ANIMATION_OFFSET = 24;
+
+    const getPosRelativeTo = (el, container) => {
+      const elRect = el.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
+      return {
+        x: elRect.left + elRect.width / 2 - containerRect.left,
+        y: elRect.top + elRect.height / 2 - containerRect.top,
+      };
+    };
+
     const updateLines = () => {
       const wrapper = wrapperRef.current;
       const logoDots = [logoDot1Ref.current, logoDot2Ref.current, logoDot3Ref.current];
       const cardDots = [cardDot1Ref.current, cardDot2Ref.current, cardDot3Ref.current];
+      if (!wrapper || !logoDots.every((d) => d) || !cardDots.every((d) => d)) return;
 
-      if (!wrapper) return;
-      const validLogo = logoDots.every((d) => d);
-      const validCard = cardDots.every((d) => d);
-      if (!validLogo || !validCard) return;
-
-      const wrapperRect = wrapper.getBoundingClientRect();
-      const w = wrapperRect.width;
-      const h = wrapperRect.height;
-
-      const newLines = [0, 1, 2].map((i) => {
-        const logoRect = logoDots[i].getBoundingClientRect();
-        const cardRect = cardDots[i].getBoundingClientRect();
-        return {
-          x1: logoRect.left + logoRect.width / 2 - wrapperRect.left,
-          y1: logoRect.top + logoRect.height / 2 - wrapperRect.top,
-          x2: cardRect.left + cardRect.width / 2 - wrapperRect.left,
-          y2: cardRect.top + cardRect.height / 2 - wrapperRect.top,
-        };
-      });
-      setWrapperSize({ w, h });
-      setLines(newLines);
+      const wr = wrapper.getBoundingClientRect();
+      setWrapperSize({ w: wr.width, h: wr.height });
+      setLines(
+        [0, 1, 2].map((i) => {
+          const start = getPosRelativeTo(logoDots[i], wrapper);
+          const cardDotEl = cardDots[i];
+          const img = cardDotEl?.querySelector("img");
+          const endRect = img ? img.getBoundingClientRect() : cardDotEl.getBoundingClientRect();
+          const endCenter = {
+            x: endRect.left + endRect.width / 2 - wr.left,
+            y: endRect.top + endRect.height / 2 - wr.top,
+          };
+          return { x1: start.x, y1: start.y, x2: endCenter.x, y2: endCenter.y };
+        })
+      );
     };
 
-    const runAfterLayout = () => {
-      requestAnimationFrame(() => {
-        updateLines();
-        setTimeout(updateLines, 400);
-      });
-    };
+    updateLines();
+    requestAnimationFrame(() => {
+      updateLines();
+      const cards = cardsRef.current?.querySelectorAll(`.${styles.designSystemCard}`);
+      if (cards?.length) {
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: CARD_ANIMATION_OFFSET },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.12,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
+    });
 
-    runAfterLayout();
     window.addEventListener("resize", updateLines);
-    const ro = wrapperRef.current && typeof ResizeObserver !== "undefined"
-      ? new ResizeObserver(updateLines)
-      : null;
+    window.addEventListener("scroll", updateLines, { passive: true });
+    ScrollTrigger.addEventListener("refresh", updateLines);
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(updateLines) : null;
     if (ro && wrapperRef.current) ro.observe(wrapperRef.current);
     return () => {
       window.removeEventListener("resize", updateLines);
+      window.removeEventListener("scroll", updateLines);
+      ScrollTrigger.removeEventListener("refresh", updateLines);
       ro?.disconnect();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
   }, []);
-
-  useEffect(() => {
-    const cards = cardsRef.current?.querySelectorAll(`.${styles.designSystemCard}`);
-    if (!cards?.length) return;
-    gsap.fromTo(
-      cards,
-      { opacity: 0, y: 24 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: 0.12,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-  }, [lines.length]);
 
   return (
     <div className={styles.designSystemContent}>
@@ -145,17 +151,20 @@ export default function DesignSystemExpand() {
             preserveAspectRatio="none"
             width={wrapperSize.w}
             height={wrapperSize.h}
-            style={{ position: "absolute", top: 0, left: 0 }}
             aria-hidden
           >
             {lines.map((l, i) => (
-              <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="var(--turquoise)" strokeWidth="2" strokeOpacity="0.6" />
+              <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="var(--turquoise)" strokeWidth="2" strokeOpacity="0.6" strokeLinecap="butt" />
             ))}
           </svg>
         )}
         <div ref={cardsRef} className={styles.designSystemCards}>
           {CARDS.map((card, i) => (
-            <div key={card.id} className={styles.designSystemCard}>
+            <div
+              key={card.id}
+              ref={i === 0 ? card1Ref : i === 1 ? card2Ref : card3Ref}
+              className={styles.designSystemCard}
+            >
               <span
                 ref={i === 0 ? cardDot1Ref : i === 1 ? cardDot2Ref : cardDot3Ref}
                 className={styles.designSystemCardDot}

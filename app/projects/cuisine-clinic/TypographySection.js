@@ -1,12 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { Space_Grotesk, Comfortaa } from "next/font/google";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "../project.module.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 const comfortaa = Comfortaa({ subsets: ["latin"], variable: "--font-comfortaa" });
@@ -37,30 +32,6 @@ const TYPOGRAPHY_CARDS = [
 ];
 
 export default function TypographySection() {
-  const cardsRef = useRef(null);
-
-  useEffect(() => {
-    const cards = cardsRef.current?.querySelectorAll(`.${styles.typographyCard}`);
-    if (!cards?.length) return;
-    gsap.fromTo(
-      cards,
-      { opacity: 0, y: 24 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        stagger: 0.15,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-  }, []);
-
   return (
     <section
       className={`${styles.projectSection} ${styles.typographySection} ${spaceGrotesk.variable} ${comfortaa.variable}`}
@@ -70,7 +41,7 @@ export default function TypographySection() {
         A dual-font system balances clinical authority with approachable recovery. Sharp technical lines paired with organic
         curves keep the brand professional yet welcoming.
       </p>
-      <div ref={cardsRef} className={styles.typographyCards}>
+      <div className={styles.typographyCards}>
         {TYPOGRAPHY_CARDS.map((card) => (
           <div key={card.num} className={styles.typographyCard}>
             <div className={styles.typographyCardHeader}>

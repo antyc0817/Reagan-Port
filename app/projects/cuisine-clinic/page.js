@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DesignSystemExpand from "./DesignSystemExpand";
 import TypographySection from "./TypographySection";
+import FlavorIconsSection from "./FlavorIconsSection";
 import styles from "../project.module.css";
 
 export const metadata = {
@@ -83,6 +84,7 @@ export default function CuisineClinicProject() {
         <DesignSystemExpand />
       </section>
       <TypographySection />
+      <FlavorIconsSection />
       <div className={styles.container}>
         <p className={styles.underConstruction}>Under construction</p>
       </div>
