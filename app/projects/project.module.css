@@ -267,7 +267,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
-  margin-top: 2rem;
+  margin-top: 3.5rem;
   width: 100%;
   max-width: 1600px;
   position: relative;
@@ -288,10 +288,20 @@
 
 .designSystemCard {
   position: relative;
-  background: rgba(0, 0, 0, 0.04);
-  border-radius: 12px;
-  padding: 1.5rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.7) 0%, rgba(64, 180, 196, 0.08) 50%, rgba(255, 255, 255, 0.5) 100%);
+  border-radius: 14px;
+  padding: 1.25rem;
   text-align: left;
+  border: 1px solid rgba(64, 180, 196, 0.2);
+  border-left: 4px solid var(--turquoise);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.designSystemCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(64, 180, 196, 0.18);
+  border-color: rgba(64, 180, 196, 0.4);
 }
 
 .designSystemCardDot {
@@ -331,27 +341,50 @@
 
 .designSystemCardVisual {
   margin-bottom: 1rem;
-  min-height: 72px;
+  width: 104px;
+  height: 104px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .designSystemCardRevive {
-  font-size: 2rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: var(--foreground);
   text-decoration: underline;
   text-underline-offset: 4px;
+  line-height: 1.2;
 }
 
 .designSystemCardSeal {
   width: 88px !important;
   height: 88px !important;
+  object-fit: contain;
 }
 
 .designSystemCardCross {
   display: block;
+  width: 88px;
+  height: 88px;
+}
+
+.designSystemCardRow {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0.5rem;
+  align-items: start;
+  margin-bottom: 0.9rem;
+}
+
+.designSystemCardRow:last-of-type {
+  margin-bottom: 0;
 }
 
 .designSystemCardLabel {
@@ -359,22 +392,150 @@
   font-weight: 600;
   letter-spacing: 0.05em;
   color: var(--foreground);
-  margin: 0 0 0.35rem;
+  margin: 0;
 }
 
 .designSystemCardText {
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--foreground);
+  margin: 0;
+}
+
+/* Typography Section */
+.typographySection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.typographySection .projectSectionTitle {
+  text-align: center;
+}
+
+.typographyIntro {
+  max-width: 580px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--foreground);
+  margin: 0 auto 2rem;
+}
+
+.typographyCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.typographyCard {
+  position: relative;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.7) 0%, rgba(141, 226, 145, 0.1) 50%, rgba(255, 255, 255, 0.5) 100%);
+  border-radius: 14px;
+  padding: 1.25rem;
+  text-align: left;
+  border: 1px solid rgba(141, 226, 145, 0.3);
+  border-left: 4px solid #8de291;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.typographyCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(141, 226, 145, 0.2);
+  border-color: rgba(141, 226, 145, 0.5);
+}
+
+.typographyCardHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.typographyCardNum {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--turquoise);
+}
+
+.typographyCardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.typographySpecimen {
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--foreground);
+  margin: 0 0 0.75rem;
+  line-height: 1.4;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.typographySpecimenLine2 {
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+.typographyFontName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--foreground);
+  margin: 0 0 0.2rem;
+}
+
+.typographyRole {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
   margin: 0 0 0.9rem;
 }
 
-.designSystemCardText:last-of-type {
-  margin-bottom: 0;
+.typographyCardRow {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0.5rem;
+  align-items: start;
+  margin-top: 0.9rem;
+}
+
+.typographyLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.typographyCardText {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--foreground);
+  margin: 0;
 }
 
 @media (max-width: 600px) {
   .designSystemCards {
+    grid-template-columns: 1fr;
+  }
+
+  .typographyCards {
     grid-template-columns: 1fr;
   }
 }

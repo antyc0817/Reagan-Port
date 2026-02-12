@@ -2,7 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "../project.module.css";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const CARDS = [
   {
@@ -33,6 +37,7 @@ const CARDS = [
 
 export default function DesignSystemExpand() {
   const wrapperRef = useRef(null);
+  const cardsRef = useRef(null);
   const logoDot1Ref = useRef(null);
   const logoDot2Ref = useRef(null);
   const logoDot3Ref = useRef(null);
@@ -90,6 +95,28 @@ export default function DesignSystemExpand() {
     };
   }, []);
 
+  useEffect(() => {
+    const cards = cardsRef.current?.querySelectorAll(`.${styles.designSystemCard}`);
+    if (!cards?.length) return;
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.12,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: cardsRef.current,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+  }, [lines.length]);
+
   return (
     <div className={styles.designSystemContent}>
       <p className={styles.designSystemText}>
@@ -122,11 +149,11 @@ export default function DesignSystemExpand() {
             aria-hidden
           >
             {lines.map((l, i) => (
-              <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="#2d2d2d" strokeWidth="1" />
+              <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2} stroke="var(--turquoise)" strokeWidth="2" strokeOpacity="0.6" />
             ))}
           </svg>
         )}
-        <div className={styles.designSystemCards}>
+        <div ref={cardsRef} className={styles.designSystemCards}>
           {CARDS.map((card, i) => (
             <div key={card.id} className={styles.designSystemCard}>
               <span
@@ -149,19 +176,23 @@ export default function DesignSystemExpand() {
               <div className={styles.designSystemCardVisual}>
                 {card.visual === "revive" && <span className={styles.designSystemCardRevive}>revive</span>}
                 {card.visual === "seal" && (
-                  <Image src="/images/cuisine-clinic/cc%20logo.svg" alt="Cuisine Clinic seal" width={80} height={80} className={styles.designSystemCardSeal} unoptimized />
+                  <Image src="/images/cuisine-clinic/cc%20logo.svg" alt="Cuisine Clinic seal" width={88} height={88} className={styles.designSystemCardSeal} unoptimized />
                 )}
                 {card.visual === "cross" && (
-                  <svg className={styles.designSystemCardCross} viewBox="0 0 40 40" width={72} height={72}>
+                  <svg className={styles.designSystemCardCross} viewBox="0 0 40 40">
                     <rect x="15" y="5" width="10" height="30" fill="#8de291" />
                     <rect x="5" y="15" width="30" height="10" fill="#8de291" />
                   </svg>
                 )}
               </div>
-              <p className={styles.designSystemCardLabel}>Identity:</p>
-              <p className={styles.designSystemCardText}>{card.identity}</p>
-              <p className={styles.designSystemCardLabel}>Reason:</p>
-              <p className={styles.designSystemCardText}>{card.reason}</p>
+              <div className={styles.designSystemCardRow}>
+                <span className={styles.designSystemCardLabel}>Identity:</span>
+                <p className={styles.designSystemCardText}>{card.identity}</p>
+              </div>
+              <div className={styles.designSystemCardRow}>
+                <span className={styles.designSystemCardLabel}>Reason:</span>
+                <p className={styles.designSystemCardText}>{card.reason}</p>
+              </div>
             </div>
           ))}
         </div>
