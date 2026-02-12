@@ -40,21 +40,38 @@
   letter-spacing: 0.02em;
 }
 
+@media (max-width: 640px) {
+  .heroImageContainer {
+    min-height: 220px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .heroLogo {
+    width: clamp(60px, 22vw, 120px) !important;
+    height: clamp(60px, 22vw, 120px) !important;
+  }
+}
+
 @media (max-width: 480px) {
   .heroImg {
     object-fit: cover;
   }
 
+  .heroImageContainer {
+    min-height: 200px;
+    aspect-ratio: 1;
+  }
+
   .heroLogo {
-    top: 0.5rem;
-    left: 0.5rem;
-    width: 40px !important;
-    height: 40px !important;
+    top: 0.75rem;
+    left: 0.75rem;
+    width: 56px !important;
+    height: 56px !important;
   }
 
   .heroCaption {
     position: static;
-    padding: 0.2rem 1rem 0.5rem;
+    padding: 0.5rem 1rem 0.75rem;
     font-size: 0.95rem;
   }
 }
@@ -690,7 +707,71 @@
   color: var(--text-muted);
 }
 
+/* Gallery Section */
+.gallerySection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.gallerySection .projectSectionTitle {
+  text-align: center;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.galleryItem {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.galleryImg {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.galleryItem:hover .galleryImg {
+  transform: scale(1.03);
+}
+
 @media (max-width: 768px) {
+  .projectIntro {
+    padding: 2rem 1.5rem 1.5rem;
+  }
+
+  .projectIntroHeadline {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  .projectIntroDivider {
+    width: 100%;
+  }
+
+  .projectIntroDetails {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem 0;
+  }
+
+  .projectIntroDividerV {
+    display: none;
+  }
+
+  .projectSection {
+    padding: 2rem 1.5rem;
+  }
+
   .projectSectionGrid {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
@@ -752,17 +833,19 @@
 
   .flavorIconsRowReverse .flavorIconsTextBlock {
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 3;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .flavorIconsRowReverse .flavorIconsLogoBlock .flavorIconsLogoTitle {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 1;
   }
 
   .flavorIconsRowReverse .flavorIconsImgBlock {
     grid-column: 1;
-    grid-row: 3;
+    grid-row: 2;
   }
 
   .flavorIconsLogoImg {
@@ -792,9 +875,53 @@
   .typographySpecimenLine2 {
     font-size: 1rem;
   }
+
+  .designSystemSection.projectSection {
+    padding: 2rem 1.5rem;
+  }
+
+  .designSystemCards {
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .designSystemCard {
+    padding: 1rem;
+  }
+
+  .designSystemText {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .container {
+    padding: 3rem 1.5rem 4rem;
+  }
 }
 
 @media (max-width: 600px) {
+  .projectIntro {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .projectSection {
+    padding: 1.5rem 1rem;
+  }
+
+  .projectSectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .projectSectionImg {
+    min-height: 180px;
+  }
+
   .flavorIconsSection.projectSection {
     padding: 1.5rem 0.75rem;
   }
@@ -813,6 +940,11 @@
 
   .designSystemCards {
     grid-template-columns: 1fr;
+  }
+
+  .galleryGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .typographyCards {
@@ -844,29 +976,72 @@
     grid-template-columns: 1fr;
     gap: 0.25rem;
   }
-}
 
-.backBar {
-  padding: 1.5rem 2rem;
+  .designSystemSection.projectSection {
+    padding: 1.5rem 1rem;
+  }
+
+  .designSystemCards {
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .designSystemCard {
+    padding: 0.875rem;
+  }
+
+  .designSystemCardTitle {
+    font-size: 1.1rem;
+  }
+
+  .designSystemCardVisual {
+    width: 80px;
+    height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .designSystemCardSeal {
+    width: 64px !important;
+    height: 64px !important;
+  }
+
+  .designSystemCardCross {
+    width: 64px;
+    height: 64px;
+  }
+
+  .designSystemCardRow {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .designSystemCardRow .designSystemCardLabel {
+    margin-bottom: 0.15rem;
+  }
+
+  .designSystemLogoWrap {
+    padding: 0 0.5rem;
+  }
+
+  .designSystemText {
+    font-size: 0.95rem;
+  }
+
+  .container {
+    padding: 3rem 1rem 4rem;
+  }
+
+  .underConstruction {
+    font-size: 1.1rem;
+  }
 }
 
 .container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 4rem 2rem 6rem;
-}
-
-.back {
-  display: inline-block;
-}
-
-.back:hover {
-  opacity: 0.8;
-}
-
-.backArrow {
-  display: block;
-  transform: scaleX(-1);
 }
 
 .underConstruction {

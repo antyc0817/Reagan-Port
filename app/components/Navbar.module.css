@@ -18,6 +18,34 @@
   transform: translateY(-100%);
 }
 
+.navbarLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+  width: 36px;
+  height: 36px;
+}
+
+.back:hover {
+  opacity: 1;
+}
+
+.backArrow {
+  display: block;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  transform: scaleX(-1);
+}
+
 .logo {
   display: flex;
   align-items: center;

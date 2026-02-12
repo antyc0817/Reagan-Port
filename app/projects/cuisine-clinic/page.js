@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import DesignSystemExpand from "./DesignSystemExpand";
 import TypographySection from "./TypographySection";
 import FlavorIconsSection from "./FlavorIconsSection";
@@ -13,11 +12,6 @@ export const metadata = {
 export default function CuisineClinicProject() {
   return (
     <main className={styles.project}>
-      <div className={styles.backBar}>
-        <Link href="/#works" className={styles.back} aria-label="Back to Works">
-          <Image src="/icons/arrow.svg" alt="" width={32} height={32} className={styles.backArrow} />
-        </Link>
-      </div>
       <div className={styles.heroWrap}>
         <div className={styles.heroImageContainer}>
           <Image src="/images/cuisine-clinic/herocc.png" alt="Cuisine Clinic" fill className={styles.heroImg} sizes="100vw" unoptimized priority />
@@ -85,9 +79,10 @@ export default function CuisineClinicProject() {
       </section>
       <TypographySection />
       <FlavorIconsSection />
-      <div className={styles.container}>
-        <p className={styles.underConstruction}>Under construction</p>
-      </div>
+      <section className={`${styles.projectSection} ${styles.gallerySection}`}>
+        <h3 className={styles.projectSectionTitle}>[ Gallery ]</h3>
+        <div className={styles.galleryGrid} />
+      </section>
     </main>
   );
 }

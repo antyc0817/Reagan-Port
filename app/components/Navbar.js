@@ -28,11 +28,20 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const isHomepage = pathname === "/";
+
   return (
     <nav className={`${styles.navbar} ${!visible ? styles.navbarHidden : ""}`}>
-      <Link href="/" className={styles.logo}>
-        <Image src="/icons/r-icon.png" alt="Home" width={36} height={36} className={styles.logoIcon} unoptimized />
-      </Link>
+      <div className={styles.navbarLeft}>
+        <Link href="/" className={styles.logo}>
+          <Image src="/icons/r-icon.png" alt="Home" width={36} height={36} className={styles.logoIcon} unoptimized />
+        </Link>
+        {!isHomepage && (
+          <Link href="/#works" className={styles.back} aria-label="Back to Works">
+            <Image src="/icons/arrow.svg" alt="" width={36} height={36} className={styles.backArrow} unoptimized />
+          </Link>
+        )}
+      </div>
       <ul className={styles.links}>
         <li>
           <Link
