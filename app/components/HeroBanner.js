@@ -4,9 +4,7 @@ export default function HeroBanner() {
   return (
     <div className={styles.wrapper}>
         <p className={styles.description}>
-          Transforming messy workflows into seamless<br />
-          digital ecosystems by bridging functional<br />
-          structure and human connection.
+          Transforming messy workflows into seamless digital ecosystems by bridging functional structure and human connection.
         </p>
       <div className={styles.divider} />
         <div className={styles.links}>

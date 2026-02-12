@@ -12,7 +12,7 @@ export default function CuisineClinicProject() {
     <main className={styles.project}>
       <div className={styles.backBar}>
         <Link href="/#works" className={styles.back} aria-label="Back to Works">
-          <Image src="/icons/arrow.svg" alt="" width={20} height={20} className={styles.backArrow} />
+          <Image src="/icons/arrow.svg" alt="" width={32} height={32} className={styles.backArrow} />
         </Link>
       </div>
       <div className={styles.heroWrap}>

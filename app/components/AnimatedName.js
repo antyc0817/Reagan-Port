@@ -11,7 +11,6 @@ export default function AnimatedName() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // R icon: fancy entrance - scale + rotate + bounce
       gsap.fromTo(
         rRef.current,
         {
@@ -29,7 +28,6 @@ export default function AnimatedName() {
         }
       );
 
-      // Rest of name: simpler slide + fade, after R
       gsap.fromTo(
         textRef.current,
         {
@@ -51,12 +49,13 @@ export default function AnimatedName() {
 
   return (
     <h1 className={styles.name}>
-      <span ref={rRef} className={styles.nameIconWrapper}>
-        <Image src="/icons/r-icon.png" alt="R" fill className={styles.nameIcon} sizes="20rem" unoptimized />
+      <span className={styles.rAndEagan}>
+        <span ref={rRef} className={styles.nameIconWrapper}>
+          <Image src="/icons/r-icon.png" alt="R" fill className={styles.nameIcon} sizes="20rem" unoptimized />
+        </span>
+        <span ref={textRef} className={styles.nameEagan}>eagan</span>
       </span>
-      <span ref={textRef} className={styles.nameText}>
-        eagan Lung
-      </span>
+      <span className={styles.nameLung}>Lung</span>
     </h1>
   );
 }
