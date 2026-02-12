@@ -16,17 +16,19 @@ export default function CuisineClinicProject() {
         </Link>
       </div>
       <div className={styles.heroWrap}>
-        <Image src="/images/cuisine-clinic/herocc.png" alt="Cuisine Clinic" fill className={styles.heroImg} sizes="100vw" unoptimized priority />
-        <Image
-          src="/images/cuisine-clinic/cc%20logo.svg"
-          alt="Cuisine Clinic"
-          width={220}
-          height={220}
-          className={styles.heroLogo}
-          unoptimized
-        />
+        <div className={styles.heroImageContainer}>
+          <Image src="/images/cuisine-clinic/herocc.png" alt="Cuisine Clinic" fill className={styles.heroImg} sizes="100vw" unoptimized priority />
+          <Image
+            src="/images/cuisine-clinic/cc%20logo.svg"
+            alt="Cuisine Clinic"
+            width={220}
+            height={220}
+            className={styles.heroLogo}
+            unoptimized
+          />
+        </div>
         <p className={styles.heroCaption}>
-          Custom packing & Dieline | [ <em>Oct 2025</em> ]
+          Custom packaging & Dieline | [ <em>Oct 2025</em> ]
         </p>
       </div>
       <section className={styles.projectIntro}>

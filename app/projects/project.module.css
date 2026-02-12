@@ -8,6 +8,11 @@
   position: relative;
   width: 100vw;
   margin-left: calc(50% - 50vw);
+}
+
+.heroImageContainer {
+  position: relative;
+  width: 100%;
   aspect-ratio: 16 / 9;
   min-height: 300px;
 }
@@ -33,6 +38,25 @@
   font-size: clamp(0.9rem, 2.2vw, 1.4rem);
   color: var(--foreground);
   letter-spacing: 0.02em;
+}
+
+@media (max-width: 480px) {
+  .heroImg {
+    object-fit: cover;
+  }
+
+  .heroLogo {
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .heroCaption {
+    position: static;
+    padding: 0.2rem 1rem 0.5rem;
+    font-size: 0.95rem;
+  }
 }
 
 .projectIntro {

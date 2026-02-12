@@ -29,7 +29,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`${styles.navbar} ${visible ? styles.navbarVisible : styles.navbarHidden}`}>
+    <nav className={`${styles.navbar} ${!visible ? styles.navbarHidden : ""}`}>
       <Link href="/" className={styles.logo}>
         <Image src="/icons/r-icon.png" alt="Home" width={36} height={36} className={styles.logoIcon} unoptimized />
       </Link>

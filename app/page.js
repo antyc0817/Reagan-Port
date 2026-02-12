@@ -15,7 +15,7 @@ const projects = [
         date: "Sep - Dec 2025",
         description:
             "Built to bridge the gap between ambition and certification, Panday transforms the complexity of skilled trades into a clear, visual journey. This project utilized AI-driven guidance and career mapping to simplify the road to Red Seal, turning a daunting process into a structured path forward.",
-        cover: "/images/panday/cover.jpg",
+        cover: "/images/panday/cover.svg",
     },
     {
         slug: "cuisine-clinic",
