@@ -274,18 +274,6 @@
   max-width: 1600px;
   position: relative;
   z-index: 1;
-  animation: designSystemExpandIn 0.3s ease;
-}
-
-@keyframes designSystemExpandIn {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .designSystemCard {

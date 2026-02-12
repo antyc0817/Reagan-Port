@@ -65,22 +65,18 @@ export default function DesignSystemExpand() {
     const updateLines = () => {
       const wrapper = wrapperRef.current;
       const logoDots = [logoDot1Ref.current, logoDot2Ref.current, logoDot3Ref.current];
-      const cardDots = [cardDot1Ref.current, cardDot2Ref.current, cardDot3Ref.current];
-      if (!wrapper || !logoDots.every((d) => d) || !cardDots.every((d) => d)) return;
+      const cards = [card1Ref.current, card2Ref.current, card3Ref.current];
+      if (!wrapper || !logoDots.every((d) => d) || !cards.every((d) => d)) return;
 
       const wr = wrapper.getBoundingClientRect();
       setWrapperSize({ w: wr.width, h: wr.height });
       setLines(
         [0, 1, 2].map((i) => {
           const start = getPosRelativeTo(logoDots[i], wrapper);
-          const cardDotEl = cardDots[i];
-          const img = cardDotEl?.querySelector("img");
-          const endRect = img ? img.getBoundingClientRect() : cardDotEl.getBoundingClientRect();
-          const endCenter = {
-            x: endRect.left + endRect.width / 2 - wr.left,
-            y: endRect.top + endRect.height / 2 - wr.top,
-          };
-          return { x1: start.x, y1: start.y, x2: endCenter.x, y2: endCenter.y };
+          const cardRect = cards[i].getBoundingClientRect();
+          const endX = cardRect.left + cardRect.width / 2 - wr.left;
+          const endY = cardRect.top - wr.top;
+          return { x1: start.x, y1: start.y, x2: endX, y2: endY };
         })
       );
     };
@@ -99,6 +95,7 @@ export default function DesignSystemExpand() {
             duration: 0.5,
             stagger: 0.12,
             ease: "power2.out",
+            immediateRender: false,
             scrollTrigger: {
               trigger: cardsRef.current,
               start: "top 85%",
