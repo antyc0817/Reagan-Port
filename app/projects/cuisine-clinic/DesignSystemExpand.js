@@ -110,14 +110,10 @@ export default function DesignSystemExpand() {
     });
 
     window.addEventListener("resize", updateLines);
-    window.addEventListener("scroll", updateLines, { passive: true });
-    ScrollTrigger.addEventListener("refresh", updateLines);
     const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(updateLines) : null;
     if (ro && wrapperRef.current) ro.observe(wrapperRef.current);
     return () => {
       window.removeEventListener("resize", updateLines);
-      window.removeEventListener("scroll", updateLines);
-      ScrollTrigger.removeEventListener("refresh", updateLines);
       ro?.disconnect();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
