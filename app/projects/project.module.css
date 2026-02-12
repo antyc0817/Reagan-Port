@@ -16,6 +16,76 @@
   object-fit: contain;
 }
 
+.heroLogo {
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+}
+
+.heroCaption {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 2.5rem;
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--foreground);
+  letter-spacing: 0.02em;
+}
+
+.projectIntro {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+}
+
+.projectIntroHeadline {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0 0 1.5rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.projectIntroDivider {
+  width: 66%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.2);
+  margin-bottom: 1.5rem;
+}
+
+.projectIntroDetails {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 1.5rem;
+}
+
+.projectIntroItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.projectIntroLabel {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.projectIntroValue {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.projectIntroDividerV {
+  width: 1px;
+  height: 2.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
 .backBar {
   padding: 1.5rem 2rem;
 }
