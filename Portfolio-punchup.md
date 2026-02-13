@@ -19,3 +19,4 @@ I plan to use JavaScript or React for the game logic and interface. CSS and Fram
 Fears, Uncertainties, & Doubts
 
 One concern is making sure the game works correctly, even in unusual situations. For example, when a player reaches zero points, tries to cash out with a low score, or enters unexpected inputs. I also need to prevent inappropriate names or people trying to manipulate the leaderboard. The card outcomes should feel fair and random, like a real Blackjack game. Finally, making the game rules, animations, and point tracking work together smoothly will require careful attention.
+![alt text](LoFi.jpg)
