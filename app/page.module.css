@@ -1,5 +1,7 @@
 .page {
-    color: var(--foreground);
+  color: var(--foreground);
+  overflow-x: hidden;
+  min-width: 0;
 }
 
 .hero {
@@ -20,6 +22,12 @@
 @media (max-width: 480px) {
   .hero {
     padding: 2rem 1rem 1.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero {
+    padding: 1.5rem 0.75rem 1rem;
   }
 }
 
@@ -296,12 +304,46 @@
 }
 
 .contactTitle {
-  font-size: 160px;
+  font-size: clamp(3rem, 20vw, 160px);
   font-weight: 400;
   letter-spacing: -0.03em;
   color: var(--foreground);
   margin: 0 0 4rem;
   line-height: 0.95;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .contactPrompt {
+    font-size: 1.35rem;
+  }
+
+  .contactTitle {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 3rem 1rem 4rem;
+  }
+
+  .contactPrompt {
+    font-size: 1.2rem;
+  }
+
+  .contactTitle {
+    margin-bottom: 2rem;
+  }
+
+  .contactForm {
+    padding: 0 0.5rem;
+  }
 }
 
 .contactForm {
