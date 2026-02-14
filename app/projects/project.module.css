@@ -1,830 +1,847 @@
 .project {
-  padding: 0;
-  min-height: 80vh;
-  background: var(--background);
+    padding: 0;
+    min-height: 80vh;
+    background: var(--background);
 }
 
 .heroWrap {
-  position: relative;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
 }
 
 .heroImageContainer {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  min-height: 300px;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 300px;
 }
 
 .heroImg {
-  object-fit: contain;
+    object-fit: contain;
 }
 
 .heroLogo {
-  position: absolute;
-  top: clamp(1rem, 2.5vw, 2.5rem);
-  left: clamp(1rem, 2.5vw, 2.5rem);
-  width: clamp(80px, 18vw, 220px) !important;
-  height: clamp(80px, 18vw, 220px) !important;
-  object-fit: contain;
+    position: absolute;
+    top: clamp(1rem, 2.5vw, 2.5rem);
+    left: clamp(1rem, 2.5vw, 2.5rem);
+    width: clamp(80px, 18vw, 220px) !important;
+    height: clamp(80px, 18vw, 220px) !important;
+    object-fit: contain;
 }
 
 .heroCaption {
-  position: absolute;
-  bottom: clamp(1rem, 2.5vw, 2.5rem);
-  left: clamp(1rem, 2.5vw, 2.5rem);
-  margin: 0;
-  font-size: clamp(0.9rem, 2.2vw, 1.4rem);
-  color: var(--foreground);
-  letter-spacing: 0.02em;
+    position: absolute;
+    bottom: clamp(1rem, 2.5vw, 2.5rem);
+    left: clamp(1rem, 2.5vw, 2.5rem);
+    margin: 0;
+    font-size: clamp(0.9rem, 2.2vw, 1.4rem);
+    color: var(--foreground);
+    letter-spacing: 0.02em;
 }
 
 @media (max-width: 640px) {
-  .heroImageContainer {
-    min-height: 220px;
-    aspect-ratio: 4 / 3;
-  }
+    .heroImageContainer {
+        min-height: 220px;
+        aspect-ratio: 4 / 3;
+    }
 
-  .heroLogo {
-    width: clamp(60px, 22vw, 120px) !important;
-    height: clamp(60px, 22vw, 120px) !important;
-  }
+    .heroLogo {
+        width: clamp(60px, 22vw, 120px) !important;
+        height: clamp(60px, 22vw, 120px) !important;
+    }
 }
 
 @media (max-width: 480px) {
-  .heroImg {
-    object-fit: cover;
-  }
+    .heroImg {
+        object-fit: cover;
+    }
 
-  .heroImageContainer {
-    min-height: 200px;
-    aspect-ratio: 1;
-  }
+    .heroImageContainer {
+        min-height: 200px;
+        aspect-ratio: 1;
+    }
 
-  .heroLogo {
-    top: 0.75rem;
-    left: 0.75rem;
-    width: 56px !important;
-    height: 56px !important;
-  }
+    .heroLogo {
+        top: 0.75rem;
+        left: 0.75rem;
+        width: 56px !important;
+        height: 56px !important;
+    }
 
-  .heroCaption {
-    position: static;
-    padding: 0.5rem 1rem 0.75rem;
-    font-size: 0.95rem;
-  }
+    .heroCaption {
+        position: static;
+        padding: 0.5rem 1rem 0.75rem;
+        font-size: 0.95rem;
+    }
 }
 
 .projectIntro {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 3rem 2rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
 }
 
 .projectIntroHeadline {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  font-weight: 600;
-  color: var(--foreground);
-  margin: 0 0 1.5rem;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+    color: var(--foreground);
+    margin: 0 0 1.5rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
 }
 
 .projectIntroDivider {
-  width: 66%;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.2);
-  margin-bottom: 1.5rem;
+    width: 66%;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
 }
 
 .projectIntroDetails {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 1.5rem;
 }
 
 .projectIntroItem {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
 .projectIntroLabel {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
 }
 
 .projectIntroValue {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: var(--foreground);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--foreground);
 }
 
 .projectIntroDividerV {
-  width: 1px;
-  height: 2.5rem;
-  background: rgba(0, 0, 0, 0.2);
-  flex-shrink: 0;
+    width: 1px;
+    height: 2.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
 }
 
 .projectSection {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
 }
 
 .projectSectionGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 0 2.5rem;
-  align-items: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 0 2.5rem;
+    align-items: start;
 }
 
 .projectSectionTitle {
-  grid-column: 1;
-  grid-row: 1;
-  font-size: 2rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--foreground);
-  margin: 0 0 3rem;
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+    margin: 0 0 3rem;
 }
 
 .projectSectionImage {
-  grid-column: 2;
-  grid-row: 1 / -1;
-  position: relative;
-  align-self: stretch;
+    grid-column: 2;
+    grid-row: 1 / -1;
+    position: relative;
+    align-self: stretch;
 }
 
 .projectSectionImg {
-  width: 100%;
-  height: 100%;
-  min-height: 280px;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 12px;
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 12px;
 }
 
 .projectSectionText {
-  grid-column: 1;
-  grid-row: 2;
+    grid-column: 1;
+    grid-row: 2;
 }
 
 .projectSectionText p {
-  margin: 0 0 1rem;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--foreground);
+    margin: 0 0 1rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--foreground);
 }
 
 .projectSectionText p:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .designSystemSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 1600px;
-  overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 1600px;
+    overflow: visible;
 }
 
 .designSystemSection .projectSectionTitle {
-  text-align: center;
+    text-align: center;
 }
 
 .designSystemContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
 }
 
 .designSystemText {
-  max-width: 700px;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--foreground);
-  margin: 0 0 2rem;
+    max-width: 700px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--foreground);
+    margin: 0 0 2rem;
 }
 
 .designSystemWrapper {
-  width: 100%;
-  max-width: 1600px;
-  position: relative;
-  overflow: visible;
+    width: 100%;
+    max-width: 1600px;
+    position: relative;
+    overflow: visible;
 }
 
 .designSystemLogoWrap {
-  position: relative;
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .designSystemLogoDots {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
 }
 
 .designSystemLogoDot {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #40b4c4;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #40b4c4;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
 }
 
 /* Dot 1: near the R */
 .designSystemLogoDot1 {
-  left: 19%;
-  top: 82%;
+    left: 19%;
+    top: 82%;
 }
 
 /* Dot 2: on the left corner of the circle icon */
 .designSystemLogoDot2 {
-  left: 47%;
-  top: 58%;
+    left: 47%;
+    top: 58%;
 }
 
 /* Dot 3: near the green cross */
 .designSystemLogoDot3 {
-  left: 85%;
-  top: 50%;
+    left: 85%;
+    top: 50%;
 }
 
 .designSystemLogo {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 12px;
-  display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
 }
 
 .designSystemConnector {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-  z-index: 1;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .designSystemCards {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2rem;
-  margin-top: 3.5rem;
-  width: 100%;
-  max-width: 1600px;
-  position: relative;
-  z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3.5rem;
+    width: 100%;
+    max-width: 1600px;
+    position: relative;
+    z-index: 1;
 }
 
 .designSystemCard {
-  position: relative;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.7) 0%, rgba(64, 180, 196, 0.08) 50%, rgba(255, 255, 255, 0.5) 100%);
-  border-radius: 14px;
-  padding: 1.25rem;
-  text-align: left;
-  border: 1px solid rgba(64, 180, 196, 0.2);
-  border-left: 4px solid var(--turquoise);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    position: relative;
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.7) 0%,
+        rgba(64, 180, 196, 0.08) 50%,
+        rgba(255, 255, 255, 0.5) 100%
+    );
+    border-radius: 14px;
+    padding: 1.25rem;
+    text-align: left;
+    border: 1px solid rgba(64, 180, 196, 0.2);
+    border-left: 4px solid var(--turquoise);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
 .designSystemCard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(64, 180, 196, 0.18);
-  border-color: rgba(64, 180, 196, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(64, 180, 196, 0.18);
+    border-color: rgba(64, 180, 196, 0.4);
 }
 
 .designSystemCardDot {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
 }
 
 .designSystemCardHeader {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .designSystemCardNum {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--turquoise);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--turquoise);
 }
 
 .designSystemCardTitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--foreground);
-  margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+    margin: 0;
 }
 
 .designSystemCardVisual {
-  margin-bottom: 1rem;
-  width: 104px;
-  height: 104px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  margin-left: auto;
-  margin-right: auto;
+    margin-bottom: 1rem;
+    width: 104px;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .designSystemCardRevive {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--foreground);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  line-height: 1.2;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--foreground);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    line-height: 1.2;
 }
 
 .designSystemCardSeal {
-  width: 88px !important;
-  height: 88px !important;
-  object-fit: contain;
+    width: 88px !important;
+    height: 88px !important;
+    object-fit: contain;
 }
 
 .designSystemCardCross {
-  display: block;
-  width: 88px;
-  height: 88px;
+    display: block;
+    width: 88px;
+    height: 88px;
 }
 
 .designSystemCardRow {
-  display: grid;
-  grid-template-columns: 5.5rem 1fr;
-  gap: 0.5rem;
-  align-items: start;
-  margin-bottom: 0.9rem;
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0.5rem;
+    align-items: start;
+    margin-bottom: 0.9rem;
 }
 
 .designSystemCardRow:last-of-type {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .designSystemCardLabel {
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--foreground);
-  margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+    margin: 0;
 }
 
 .designSystemCardText {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--foreground);
-  margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--foreground);
+    margin: 0;
 }
 
 /* Typography Section */
 .typographySection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  z-index: 5;
-  overflow: visible;
-  background: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+    overflow: visible;
+    background: var(--background);
 }
 
 .typographySection .projectSectionTitle {
-  text-align: center;
+    text-align: center;
 }
 
 .typographyIntro {
-  max-width: 580px;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--foreground);
-  margin: 0 auto 2rem;
+    max-width: 580px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--foreground);
+    margin: 0 auto 2rem;
 }
 
 .typographyCards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .typographyCard {
-  position: relative;
-  background: #fafafa;
-  border-radius: 14px;
-  padding: 1.25rem;
-  text-align: left;
-  border: 1px solid rgba(141, 226, 145, 0.4);
-  border-left: 4px solid #8de291;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
-  color: var(--foreground);
+    position: relative;
+    background: #fafafa;
+    border-radius: 14px;
+    padding: 1.25rem;
+    text-align: left;
+    border: 1px solid rgba(141, 226, 145, 0.4);
+    border-left: 4px solid #8de291;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+    color: var(--foreground);
 }
 
 .typographyCard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(141, 226, 145, 0.2);
-  border-color: rgba(141, 226, 145, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(141, 226, 145, 0.2);
+    border-color: rgba(141, 226, 145, 0.5);
 }
 
 .typographyCardHeader {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .typographyCardNum {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--turquoise);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--turquoise);
 }
 
 .typographyCardTitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--foreground);
-  margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+    margin: 0;
 }
 
 .typographySpecimen {
-  font-size: 2rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: #2d2d2d;
-  margin: 0 0 0.75rem;
-  line-height: 1.4;
-  padding: 1.25rem;
-  background: #fff;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  overflow-wrap: break-word;
-  word-break: break-word;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: #2d2d2d;
+    margin: 0 0 0.75rem;
+    line-height: 1.4;
+    padding: 1.25rem;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .typographySpecimenLine2 {
-  font-size: 1.25rem;
-  margin-top: 0.5rem;
-  opacity: 0.9;
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
+    opacity: 0.9;
 }
 
 .typographyFontName {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--foreground);
-  margin: 0 0 0.2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+    margin: 0 0 0.2rem;
 }
 
 .typographyRole {
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin: 0 0 0.9rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 0.9rem;
 }
 
 .typographyCardRow {
-  display: grid;
-  grid-template-columns: 5.5rem 1fr;
-  gap: 0.5rem;
-  align-items: start;
-  margin-top: 0.9rem;
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0.5rem;
+    align-items: start;
+    margin-top: 0.9rem;
 }
 
 .typographyLabel {
-  font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--foreground);
-  margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+    margin: 0;
 }
 
 .typographyCardText {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--foreground);
-  margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--foreground);
+    margin: 0;
 }
 
 /* Flavor Icons Section */
 .flavorIconsSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .flavorIconsSection.projectSection {
-  padding: 2rem 1.5rem;
+    padding: 2rem 1.5rem;
 }
 
 .flavorIconsSection .projectSectionTitle {
-  text-align: center;
+    text-align: center;
 }
 
 .flavorIconsIntro {
-  max-width: 700px;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--foreground);
-  margin: 0 auto 2rem;
-  text-align: center;
+    max-width: 700px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--foreground);
+    margin: 0 auto 2rem;
+    text-align: center;
 }
 
 .flavorIconsContent {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .flavorIconsLogoTitle {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 700;
-  color: var(--foreground);
-  text-align: center;
-  margin: 0 0 0.75rem;
-  width: 100%;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--foreground);
+    text-align: center;
+    margin: 0 0 0.75rem;
+    width: 100%;
 }
 
 .flavorIconsRow {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto;
-  align-items: start;
-  gap: 0 clamp(2rem, 4vw, 3rem);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    align-items: start;
+    gap: 0 clamp(2rem, 4vw, 3rem);
 }
 
 .flavorIconsLogoBlock {
-  display: contents;
+    display: contents;
 }
 
 .flavorIconsRow .flavorIconsLogoBlock .flavorIconsLogoTitle {
-  grid-column: 1;
-  grid-row: 1;
+    grid-column: 1;
+    grid-row: 1;
 }
 
 .flavorIconsImgBlock {
-  grid-column: 1;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .flavorIconsTextBlock {
-  grid-column: 2;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .flavorIconsContent .flavorIconsRow + .flavorIconsRow {
-  margin-top: 3rem;
+    margin-top: 3rem;
 }
 
 .flavorIconsRowReverse {
-  grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto;
 }
 
 .flavorIconsRowReverse .flavorIconsTextBlock {
-  grid-column: 1;
-  grid-row: 2;
-  align-items: flex-end;
-  text-align: right;
+    grid-column: 1;
+    grid-row: 2;
+    align-items: flex-end;
+    text-align: right;
 }
 
 .flavorIconsRowReverse .flavorIconsLogoBlock .flavorIconsLogoTitle {
-  grid-column: 2;
-  grid-row: 1;
+    grid-column: 2;
+    grid-row: 1;
 }
 
 .flavorIconsRowReverse .flavorIconsImgBlock {
-  grid-column: 2;
-  grid-row: 2;
+    grid-column: 2;
+    grid-row: 2;
 }
 
 .flavorIconsHeadline {
-  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
-  font-weight: 700;
-  color: var(--foreground);
-  margin: 0;
-  line-height: 1.3;
+    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+    font-weight: 700;
+    color: var(--foreground);
+    margin: 0;
+    line-height: 1.3;
 }
 
 .flavorIconsDetail {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--foreground);
-  margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--foreground);
+    margin: 0;
 }
 
 .flavorIconsLogoImg {
-  width: auto;
-  height: clamp(200px, 28vw, 320px);
-  object-fit: contain;
-  border-radius: 16px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+    width: auto;
+    height: clamp(200px, 28vw, 320px);
+    object-fit: contain;
+    border-radius: 16px;
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.08);
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
 }
 
 .flavorIconsImgBlock:hover .flavorIconsLogoImg {
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 8px 20px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.15),
+        0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 
 .flavorIconsPaletteLabel {
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--foreground);
-  margin: 1rem 0 0.5rem;
-  text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--foreground);
+    margin: 1rem 0 0.5rem;
+    text-align: center;
 }
 
 .flavorIconsSwatches {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .flavorIconsSwatch {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .flavorIconsSwatchCircle {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
 }
 
 .flavorIconsSwatch code {
-  font-size: 0.85rem;
-  font-family: monospace;
-  color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: monospace;
+    color: var(--text-muted);
 }
 
 /* Gallery Section */
 .gallerySection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .gallerySection .projectSectionTitle {
-  text-align: center;
+    text-align: center;
 }
 
 .galleryGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .galleryItem {
-  position: relative;
-  aspect-ratio: 1;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #f0f0f0;
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f0f0f0;
 }
 
 .galleryImg {
-  object-fit: cover;
-  transition: transform 0.3s ease;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
 .galleryItem:hover .galleryImg {
-  transform: scale(1.03);
+    transform: scale(1.03);
 }
 
 @media (max-width: 768px) {
-  .projectIntro {
-    padding: 2rem 1.5rem 1.5rem;
-  }
+    .projectIntro {
+        padding: 2rem 1.5rem 1.5rem;
+    }
 
-  .projectIntroHeadline {
-    font-size: clamp(1.25rem, 4vw, 1.75rem);
-  }
+    .projectIntroHeadline {
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+    }
 
-  .projectIntroDivider {
-    width: 100%;
-  }
+    .projectIntroDivider {
+        width: 100%;
+    }
 
-  .projectIntroDetails {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem 0;
-  }
+    .projectIntroDetails {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem 0;
+    }
 
-  .projectIntroDividerV {
-    display: none;
-  }
+    .projectIntroDividerV {
+        display: none;
+    }
 
-  .projectSection {
-    padding: 2rem 1.5rem;
-  }
+    .projectSection {
+        padding: 2rem 1.5rem;
+    }
 
-  .projectSectionGrid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-  }
+    .projectSectionGrid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
 
-  .projectSectionTitle {
-    grid-column: 1;
-    grid-row: 1;
-    margin-bottom: 2rem;
-  }
+    .projectSectionTitle {
+        grid-column: 1;
+        grid-row: 1;
+        margin-bottom: 2rem;
+    }
 
-  .projectSectionImage {
-    grid-column: 1;
-    grid-row: 2;
-  }
+    .projectSectionImage {
+        grid-column: 1;
+        grid-row: 2;
+    }
 
-  .projectSectionImg {
-    min-height: 200px;
-  }
+    .projectSectionImg {
+        min-height: 200px;
+    }
 
-  .projectSectionText {
-    grid-column: 1;
-    grid-row: 3;
-  }
+    .projectSectionText {
+        grid-column: 1;
+        grid-row: 3;
+    }
 
-  .flavorIconsSection.projectSection {
-    padding: 2rem 1rem;
-  }
+    .flavorIconsSection.projectSection {
+        padding: 2rem 1rem;
+    }
 
-  .flavorIconsContent .flavorIconsRow + .flavorIconsRow {
-    margin-top: 2.5rem;
-  }
+    .flavorIconsContent .flavorIconsRow + .flavorIconsRow {
+        margin-top: 2.5rem;
+    }
 
-  .flavorIconsRow {
-    grid-template-columns: 1fr;
-    gap: 0.5rem 0;
-  }
+    .flavorIconsRow {
+        grid-template-columns: 1fr;
+        gap: 0.5rem 0;
+    }
 
-  .flavorIconsRow .flavorIconsLogoBlock .flavorIconsLogoTitle {
-    grid-column: 1;
-    grid-row: 1;
-  }
+    .flavorIconsRow .flavorIconsLogoBlock .flavorIconsLogoTitle {
+        grid-column: 1;
+        grid-row: 1;
+    }
 
-  .flavorIconsImgBlock {
-    grid-column: 1;
-    grid-row: 2;
-  }
+    .flavorIconsImgBlock {
+        grid-column: 1;
+        grid-row: 2;
+    }
 
   .flavorIconsTextBlock {
     grid-column: 1;
     grid-row: 3;
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
   }
 
   .flavorIconsRowReverse {
@@ -834,219 +851,219 @@
   .flavorIconsRowReverse .flavorIconsTextBlock {
     grid-column: 1;
     grid-row: 3;
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
   }
 
-  .flavorIconsRowReverse .flavorIconsLogoBlock .flavorIconsLogoTitle {
-    grid-column: 1;
-    grid-row: 1;
-  }
+    .flavorIconsRowReverse .flavorIconsLogoBlock .flavorIconsLogoTitle {
+        grid-column: 1;
+        grid-row: 1;
+    }
 
-  .flavorIconsRowReverse .flavorIconsImgBlock {
-    grid-column: 1;
-    grid-row: 2;
-  }
+    .flavorIconsRowReverse .flavorIconsImgBlock {
+        grid-column: 1;
+        grid-row: 2;
+    }
 
-  .flavorIconsLogoImg {
-    height: clamp(180px, 35vw, 280px);
-    border-radius: 12px;
-  }
+    .flavorIconsLogoImg {
+        height: clamp(180px, 35vw, 280px);
+        border-radius: 12px;
+    }
 
-  .typographyCards {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    max-width: 100%;
-  }
+    .typographyCards {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        max-width: 100%;
+    }
 
-  .typographySection.projectSection {
-    padding: 2rem 1.5rem;
-  }
+    .typographySection.projectSection {
+        padding: 2rem 1.5rem;
+    }
 
-  .typographyCard {
-    padding: 1rem;
-  }
+    .typographyCard {
+        padding: 1rem;
+    }
 
-  .typographySpecimen {
-    font-size: 1.5rem;
-    padding: 1rem;
-  }
+    .typographySpecimen {
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
 
-  .typographySpecimenLine2 {
-    font-size: 1rem;
-  }
+    .typographySpecimenLine2 {
+        font-size: 1rem;
+    }
 
-  .designSystemSection.projectSection {
-    padding: 2rem 1.5rem;
-  }
+    .designSystemSection.projectSection {
+        padding: 2rem 1.5rem;
+    }
 
-  .designSystemCards {
-    gap: 1.5rem;
-    margin-top: 2.5rem;
-  }
+    .designSystemCards {
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+    }
 
-  .designSystemCard {
-    padding: 1rem;
-  }
+    .designSystemCard {
+        padding: 1rem;
+    }
 
-  .designSystemText {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
+    .designSystemText {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
 
-  .galleryGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
+    .galleryGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
 
-  .container {
-    padding: 3rem 1.5rem 4rem;
-  }
+    .container {
+        padding: 3rem 1.5rem 4rem;
+    }
 }
 
 @media (max-width: 600px) {
-  .projectIntro {
-    padding: 1.5rem 1rem 1rem;
-  }
+    .projectIntro {
+        padding: 1.5rem 1rem 1rem;
+    }
 
-  .projectSection {
-    padding: 1.5rem 1rem;
-  }
+    .projectSection {
+        padding: 1.5rem 1rem;
+    }
 
-  .projectSectionTitle {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
+    .projectSectionTitle {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
 
-  .projectSectionImg {
-    min-height: 180px;
-  }
+    .projectSectionImg {
+        min-height: 180px;
+    }
 
-  .flavorIconsSection.projectSection {
-    padding: 1.5rem 0.75rem;
-  }
+    .flavorIconsSection.projectSection {
+        padding: 1.5rem 0.75rem;
+    }
 
-  .flavorIconsContent .flavorIconsRow + .flavorIconsRow {
-    margin-top: 2rem;
-  }
+    .flavorIconsContent .flavorIconsRow + .flavorIconsRow {
+        margin-top: 2rem;
+    }
 
-  .flavorIconsRow {
-    row-gap: 0.75rem;
-  }
+    .flavorIconsRow {
+        row-gap: 0.75rem;
+    }
 
-  .flavorIconsLogoImg {
-    height: clamp(160px, 40vw, 240px);
-  }
+    .flavorIconsLogoImg {
+        height: clamp(160px, 40vw, 240px);
+    }
 
-  .designSystemCards {
-    grid-template-columns: 1fr;
-  }
+    .designSystemCards {
+        grid-template-columns: 1fr;
+    }
 
-  .galleryGrid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
+    .galleryGrid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
 
-  .typographyCards {
-    gap: 1rem;
-  }
+    .typographyCards {
+        gap: 1rem;
+    }
 
-  .typographySection.projectSection {
-    padding: 1.5rem 1rem;
-  }
+    .typographySection.projectSection {
+        padding: 1.5rem 1rem;
+    }
 
-  .typographyCard {
-    padding: 0.875rem;
-  }
+    .typographyCard {
+        padding: 0.875rem;
+    }
 
-  .typographySpecimen {
-    font-size: 1.25rem;
-    padding: 0.875rem;
-  }
+    .typographySpecimen {
+        font-size: 1.25rem;
+        padding: 0.875rem;
+    }
 
-  .typographySpecimenLine2 {
-    font-size: 0.9rem;
-  }
+    .typographySpecimenLine2 {
+        font-size: 0.9rem;
+    }
 
-  .typographyFontName {
-    font-size: 1.25rem;
-  }
+    .typographyFontName {
+        font-size: 1.25rem;
+    }
 
-  .typographyCardRow {
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
-  }
+    .typographyCardRow {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
 
-  .designSystemSection.projectSection {
-    padding: 1.5rem 1rem;
-  }
+    .designSystemSection.projectSection {
+        padding: 1.5rem 1rem;
+    }
 
-  .designSystemCards {
-    gap: 1.25rem;
-    margin-top: 2rem;
-  }
+    .designSystemCards {
+        gap: 1.25rem;
+        margin-top: 2rem;
+    }
 
-  .designSystemCard {
-    padding: 0.875rem;
-  }
+    .designSystemCard {
+        padding: 0.875rem;
+    }
 
-  .designSystemCardTitle {
-    font-size: 1.1rem;
-  }
+    .designSystemCardTitle {
+        font-size: 1.1rem;
+    }
 
-  .designSystemCardVisual {
-    width: 80px;
-    height: 80px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+    .designSystemCardVisual {
+        width: 80px;
+        height: 80px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-  .designSystemCardSeal {
-    width: 64px !important;
-    height: 64px !important;
-  }
+    .designSystemCardSeal {
+        width: 64px !important;
+        height: 64px !important;
+    }
 
-  .designSystemCardCross {
-    width: 64px;
-    height: 64px;
-  }
+    .designSystemCardCross {
+        width: 64px;
+        height: 64px;
+    }
 
-  .designSystemCardRow {
-    grid-template-columns: 1fr;
-    gap: 0.25rem;
-    margin-bottom: 0.75rem;
-  }
+    .designSystemCardRow {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+        margin-bottom: 0.75rem;
+    }
 
-  .designSystemCardRow .designSystemCardLabel {
-    margin-bottom: 0.15rem;
-  }
+    .designSystemCardRow .designSystemCardLabel {
+        margin-bottom: 0.15rem;
+    }
 
-  .designSystemLogoWrap {
-    padding: 0 0.5rem;
-  }
+    .designSystemLogoWrap {
+        padding: 0 0.5rem;
+    }
 
-  .designSystemText {
-    font-size: 0.95rem;
-  }
+    .designSystemText {
+        font-size: 0.95rem;
+    }
 
-  .container {
-    padding: 3rem 1rem 4rem;
-  }
+    .container {
+        padding: 3rem 1rem 4rem;
+    }
 
-  .underConstruction {
-    font-size: 1.1rem;
-  }
+    .underConstruction {
+        font-size: 1.1rem;
+    }
 }
 
 .container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 4rem 2rem 6rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
 }
 
 .underConstruction {
-  font-size: 1.25rem;
-  color: var(--text-muted);
-  font-style: italic;
-  margin: 2rem 0 0;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin: 2rem 0 0;
 }
