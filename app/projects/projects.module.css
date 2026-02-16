@@ -17,8 +17,37 @@
     min-height: 300px;
 }
 
+.fullViewportHeroContainer {
+    min-height: calc(100vh - 4.5rem);
+    aspect-ratio: auto;
+    overflow: hidden;
+}
+
 .heroImg {
     object-fit: contain;
+}
+
+.fullViewportHeroImg {
+    object-fit: cover;
+    object-position: center;
+    filter: blur(1.5px) brightness(0.72);
+    transform: scale(1.04);
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.22);
+    pointer-events: none;
+}
+
+.heroCaption.heroCaptionOnImage {
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.heroCaption.heroCaptionOnImage em {
+    color: inherit;
 }
 
 .heroLogo {
@@ -60,6 +89,11 @@
     .heroImageContainer {
         min-height: 200px;
         aspect-ratio: 1;
+    }
+
+    .fullViewportHeroContainer {
+        min-height: calc(100svh - 4.5rem);
+        aspect-ratio: auto;
     }
 
     .heroLogo {
