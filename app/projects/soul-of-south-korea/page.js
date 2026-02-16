@@ -1,4 +1,4 @@
-import styles from "../project.module.css";
+import styles from "../projects.module.css";
 
 export const metadata = {
   title: "Soul of South Korea | Reagan",

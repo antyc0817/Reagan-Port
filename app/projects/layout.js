@@ -1,5 +1,5 @@
 import Footer from "../components/Footer";
-import ScrollToTop from "./ScrollToTop";
+import ScrollToTop from "./_components/ScrollToTop";
 
 export default function ProjectsLayout({ children }) {
   return (

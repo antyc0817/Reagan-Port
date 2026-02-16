@@ -2,7 +2,7 @@ import Image from "next/image";
 import DesignSystemExpand from "./DesignSystemExpand";
 import TypographySection from "./TypographySection";
 import FlavorIconsSection from "./FlavorIconsSection";
-import styles from "../project.module.css";
+import styles from "../projects.module.css";
 
 export const metadata = {
   title: "Cuisine Clinic | Reagan",

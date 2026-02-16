@@ -1,7 +1,7 @@
 "use client";
 
 import { Space_Grotesk, Comfortaa } from "next/font/google";
-import styles from "../project.module.css";
+import styles from "../projects.module.css";
 
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 const comfortaa = Comfortaa({ subsets: ["latin"], variable: "--font-comfortaa" });
