@@ -124,6 +124,7 @@
   position: relative;
   aspect-ratio: 1;
   background: var(--turquoise);
+  overflow: hidden;
 }
 
 .projectImage img,
@@ -133,6 +134,13 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  will-change: transform, filter;
+}
+
+.projectImage:hover .projectImg {
+  transform: scale(1.04);
+  filter: brightness(1.05) contrast(1.03);
 }
 
 .projectInfo {

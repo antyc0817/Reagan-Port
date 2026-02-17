@@ -55,9 +55,6 @@ export default function WhatsUpProject() {
                     Redesign & Brand Identity | [ <em>Jan - May 2025</em> ]
                 </p>
             </div>
-            <div className={styles.container}>
-                <p className={styles.underConstruction}>Under construction</p>
-            </div>
         </main>
     );
 }
