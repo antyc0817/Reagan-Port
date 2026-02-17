@@ -21,26 +21,31 @@ export default function SoulOfSouthKoreaProject() {
             priority
           />
         </div>
-        <p className={`${styles.heroCaption} ${styles.heroCaptionOnImage} ${styles.soulHeroCaption}`}>
+        <p className={`${styles.heroCaption} ${styles.heroCaptionOnImage}`}>
           Travel Brochure & Publication | [ <em>Oct 2025</em> ]
         </p>
       </div>
-      <section className={styles.soulInfoSection}>
-        <h2 className={styles.soulTagline}>
-          Capturing the duality between high-speed urban energy and ancient, quiet tradition.
+      <section className={styles.projectIntro}>
+        <h2 className={styles.projectIntroHeadline}>
+          Capturing the contrast between fast urban energy and ancient tradition.
         </h2>
-        <div className={styles.soulInfoGrid}>
-          <div className={styles.soulInfoCard}>
-            <span className={styles.soulInfoLabel}>Role</span>
-            <span className={styles.soulInfoValue}>Graphic Designer</span>
-          </div>
-          <div className={styles.soulInfoCard}>
-            <span className={styles.soulInfoLabel}>Tools</span>
-            <span className={styles.soulInfoValue}>Adobe InDesign, Photoshop, &amp; Illustrator</span>
-          </div>
-          <div className={styles.soulInfoCard}>
-            <span className={styles.soulInfoLabel}>Focus</span>
-            <span className={styles.soulInfoValue}>Editorial Design</span>
+        <div className={styles.projectIntroMeta}>
+          <div className={styles.projectIntroDivider} />
+          <div className={styles.projectIntroDetails}>
+            <div className={styles.projectIntroItem}>
+              <span className={styles.projectIntroLabel}>Role</span>
+              <span className={styles.projectIntroValue}>Graphic Designer</span>
+            </div>
+            <div className={styles.projectIntroDividerV} />
+            <div className={styles.projectIntroItem}>
+              <span className={styles.projectIntroLabel}>Tools</span>
+              <span className={styles.projectIntroValue}>Adobe InDesign, Photoshop, &amp; Illustrator</span>
+            </div>
+            <div className={styles.projectIntroDividerV} />
+            <div className={styles.projectIntroItem}>
+              <span className={styles.projectIntroLabel}>Focus</span>
+              <span className={styles.projectIntroValue}>Editorial Design</span>
+            </div>
           </div>
         </div>
       </section>
