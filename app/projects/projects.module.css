@@ -30,6 +30,9 @@
 .fullViewportHeroImg {
     object-fit: cover;
     object-position: center;
+}
+
+.whatsupHeroImgBlur {
     filter: blur(1.5px) brightness(0.72);
     transform: scale(1.04);
 }
@@ -128,6 +131,59 @@
     color: inherit;
 }
 
+.soulHeroCaption {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    backdrop-filter: blur(2px);
+}
+
+.soulInfoSection {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2.5rem;
+}
+
+.soulTagline {
+    margin: 0 0 1.5rem;
+    text-align: center;
+    font-size: clamp(1.1rem, 2.1vw, 1.7rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    color: var(--foreground);
+    white-space: nowrap;
+}
+
+.soulInfoGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.soulInfoCard {
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(64, 180, 196, 0.12));
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: 3px solid var(--turquoise);
+}
+
+.soulInfoLabel {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+}
+
+.soulInfoValue {
+    font-size: clamp(0.98rem, 1.35vw, 1.2rem);
+    line-height: 1.4;
+    color: var(--foreground);
+}
+
 .heroLogo {
     position: absolute;
     top: clamp(1rem, 2.5vw, 2.5rem);
@@ -218,6 +274,29 @@
         padding: 0.5rem 1rem 0.75rem;
         font-size: 0.95rem;
     }
+
+    .soulHeroCaption {
+        border-radius: 12px;
+    }
+
+    .soulInfoSection {
+        padding: 2rem 1rem 1.5rem;
+    }
+
+    .soulTagline {
+        white-space: normal;
+        font-size: clamp(1rem, 4.5vw, 1.2rem);
+        margin-bottom: 1rem;
+    }
+
+    .soulInfoGrid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .soulInfoCard {
+        padding: 0.9rem 1rem;
+    }
 }
 
 .projectIntro {
@@ -233,6 +312,8 @@
     margin: 0 0 1.5rem;
     line-height: 1.3;
     letter-spacing: -0.01em;
+    max-width: 66%;
+    white-space: normal;
 }
 
 .projectIntroDivider {
@@ -913,6 +994,7 @@
 
     .projectIntroHeadline {
         font-size: clamp(1.25rem, 4vw, 1.75rem);
+        white-space: normal;
     }
 
     .projectIntroDivider {

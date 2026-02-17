@@ -15,7 +15,7 @@ export default function WhatsUpProject() {
                         src='/images/whatsup/hero.jpg'
                         alt='WhatSUP hero'
                         fill
-                        className={`${styles.heroImg} ${styles.fullViewportHeroImg}`}
+                        className={`${styles.heroImg} ${styles.fullViewportHeroImg} ${styles.whatsupHeroImgBlur}`}
                         sizes='100vw'
                         unoptimized
                         priority
