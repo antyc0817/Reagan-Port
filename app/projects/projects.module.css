@@ -615,8 +615,8 @@
     border-radius: 14px;
     padding: 1.25rem;
     text-align: left;
-    border: 1px solid rgba(141, 226, 145, 0.4);
-    border-left: 4px solid #8de291;
+    border: 1px solid #0047a0;
+    border-left: 5px solid #0047a0;
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease,
@@ -627,8 +627,18 @@
 
 .typographyCard:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 32px rgba(141, 226, 145, 0.2);
-    border-color: rgba(141, 226, 145, 0.5);
+    box-shadow: 0 12px 32px rgba(0, 71, 160, 0.15);
+    border-color: #0047a0;
+}
+
+.typographyCard:nth-child(2) {
+    border-left-color: #cd2e3a;
+    border-color: #cd2e3a;
+}
+
+.typographyCard:nth-child(2):hover {
+    box-shadow: 0 12px 32px rgba(205, 46, 58, 0.15);
+    border-color: #cd2e3a;
 }
 
 .typographyCardHeader {
@@ -676,19 +686,20 @@
 }
 
 .typographyFontName {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: clamp(1.7rem, 2.2vw, 2rem);
+    font-weight: 700;
     letter-spacing: 0.05em;
     color: var(--foreground);
-    margin: 0 0 0.2rem;
+    margin: 0 0 0.15rem;
 }
 
 .typographyRole {
-    font-size: 0.8rem;
+    font-size: clamp(0.72rem, 0.95vw, 0.84rem);
+    font-weight: 500;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin: 0 0 0.9rem;
+    margin: 0 0 0.95rem;
 }
 
 .typographyCardRow {
@@ -1226,4 +1237,30 @@
     color: var(--text-muted);
     font-style: italic;
     margin: 2rem 0 0;
+}
+
+.soulTypographyCardAligned {
+    display: grid;
+    grid-template-rows: auto minmax(8.5rem, auto) auto auto 1fr;
+}
+
+.soulTypographySpecimen {
+    min-height: 8.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.soulTypographySection .typographyCards {
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+    .soulTypographyCardAligned {
+        grid-template-rows: auto minmax(7rem, auto) auto auto 1fr;
+    }
+
+    .soulTypographySpecimen {
+        min-height: 7rem;
+    }
 }

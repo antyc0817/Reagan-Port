@@ -1,3 +1,19 @@
+@font-face {
+  font-family: "Amanojaku";
+  src: url("/fonts/Amanojaku Demo.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Altone";
+  src: url("/fonts/AltoneTrial-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #e8e8e8;
   --foreground: #2d2d2d;
