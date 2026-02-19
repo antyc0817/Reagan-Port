@@ -1265,19 +1265,3 @@
     }
 }
 
-.soulFlipbookPlaceholder {
-    text-align: center;
-    padding-top: 1.25rem;
-}
-
-.soulFlipbookPlaceholder .projectSectionTitle {
-    margin-bottom: 0.9rem;
-}
-
-.soulFlipbookPrompt {
-    margin: 0;
-    font-size: clamp(1rem, 1.6vw, 1.25rem);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--foreground);
-}
