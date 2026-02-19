@@ -122,6 +122,10 @@ export default function SoulOfSouthKoreaProject() {
           </article>
         </div>
       </section>
+      <section className={`${styles.projectSection} ${styles.soulFlipbookPlaceholder}`}>
+        <h3 className={styles.projectSectionTitle}>[ Editorial Flipbook ]</h3>
+        <p className={styles.soulFlipbookPrompt}>Click to Read</p>
+      </section>
     </main>
   );
 }
