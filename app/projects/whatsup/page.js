@@ -21,7 +21,7 @@ export default function WhatsUpProject() {
                         priority
                     />
                     <Image
-                        src='/images/whatsup/whatsup1.png'
+                        src='/images/whatsup/logo.svg'
                         alt='WhatSUP logo option 1'
                         width={260}
                         height={260}
