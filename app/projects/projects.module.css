@@ -1183,6 +1183,14 @@
         height: 12px;
     }
 
+    .objectiveSection .projectSectionTitle {
+        text-align: center;
+    }
+
+    .objectiveSection .projectSectionText {
+        margin-top: 0.9rem;
+    }
+
     .flavorIconsSection.projectSection {
         padding: 1.5rem 0.75rem;
     }

@@ -66,7 +66,7 @@ export default function CuisineClinicProject() {
                     </div>
                 </div>
             </section>
-            <section className={styles.projectSection}>
+            <section className={`${styles.projectSection} ${styles.objectiveSection}`}>
                 <div className={styles.projectSectionGrid}>
                     <h3 className={styles.projectSectionTitle}>
                         [ Objective ]
