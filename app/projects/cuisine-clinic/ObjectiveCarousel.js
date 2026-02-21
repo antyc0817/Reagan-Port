@@ -18,6 +18,7 @@ const slides = [
         alt: "Cuisine Clinic packaging concept 3",
     },
 ];
+const AUTO_ROTATE_MS = 3000;
 
 export default function ObjectiveCarousel() {
     const [activeSlide, setActiveSlide] = useState(0);
@@ -25,17 +26,10 @@ export default function ObjectiveCarousel() {
     useEffect(() => {
         const timer = setInterval(() => {
             setActiveSlide((prevSlide) => (prevSlide + 1) % slides.length);
-        }, 3000);
+        }, AUTO_ROTATE_MS);
 
         return () => clearInterval(timer);
     }, []);
-
-    const getDotStateClass = (index) => {
-        if (index === activeSlide) {
-            return styles.objectiveCarouselDotActive;
-        }
-        return styles.objectiveCarouselDotInactive;
-    };
 
     return (
         <div className={styles.objectiveCarousel}>
@@ -49,9 +43,7 @@ export default function ObjectiveCarousel() {
                         width={480}
                         height={360}
                         className={`${styles.objectiveCarouselImage} ${
-                            index === activeSlide
-                                ? styles.objectiveCarouselImageActive
-                                : styles.objectiveCarouselImageInactive
+                            index === activeSlide ? styles.objectiveCarouselImageActive : ""
                         }`}
                         draggable={false}
                         unoptimized
@@ -64,7 +56,11 @@ export default function ObjectiveCarousel() {
                 {slides.map((slide, index) => (
                     <span
                         key={slide.src}
-                        className={`${styles.objectiveCarouselDot} ${getDotStateClass(index)}`}
+                        className={`${styles.objectiveCarouselDot} ${
+                            index === activeSlide
+                                ? styles.objectiveCarouselDotActive
+                                : styles.objectiveCarouselDotInactive
+                        }`}
                         aria-hidden='true'
                     />
                 ))}
