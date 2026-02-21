@@ -329,6 +329,71 @@
     border-radius: 12px;
 }
 
+.objectiveCarousel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.objectiveCarouselMedia {
+    position: relative;
+    width: min(100%, 420px);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+}
+
+.objectiveCarouselImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 240ms linear;
+    will-change: opacity;
+    pointer-events: none;
+    user-select: none;
+}
+
+.objectiveCarouselImageActive {
+    opacity: 1;
+}
+
+.objectiveCarouselImageInactive {
+    opacity: 0;
+}
+
+.objectiveCarouselDots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 0.7rem;
+    padding: 0.35rem 0.2rem;
+}
+
+.objectiveCarouselDot {
+    width: 14px;
+    height: 14px;
+    border: 0;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.28);
+    transform: scale(0.92);
+    transform-origin: center bottom;
+    transition: transform 220ms ease, background 220ms ease;
+}
+
+.objectiveCarouselDotInactive {
+    background: rgba(0, 0, 0, 0.32);
+}
+
+.objectiveCarouselDotActive {
+    background: rgba(0, 0, 0, 0.72);
+    transform: scale(1.28);
+}
+
 .projectSectionText {
     grid-column: 1;
     grid-row: 2;

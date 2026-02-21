@@ -1,0 +1,74 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import styles from "../projects.module.css";
+
+const slides = [
+    {
+        src: "/images/cuisine-clinic/S1.png",
+        alt: "Cuisine Clinic packaging concept 1",
+    },
+    {
+        src: "/images/cuisine-clinic/s2.png",
+        alt: "Cuisine Clinic packaging concept 2",
+    },
+    {
+        src: "/images/cuisine-clinic/s3.png",
+        alt: "Cuisine Clinic packaging concept 3",
+    },
+];
+
+export default function ObjectiveCarousel() {
+    const [activeSlide, setActiveSlide] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setActiveSlide((prevSlide) => (prevSlide + 1) % slides.length);
+        }, 3000);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    const getDotStateClass = (index) => {
+        if (index === activeSlide) {
+            return styles.objectiveCarouselDotActive;
+        }
+        return styles.objectiveCarouselDotInactive;
+    };
+
+    return (
+        <div className={styles.objectiveCarousel}>
+            <div className={styles.objectiveCarouselMedia}>
+                {slides.map((slide, index) => (
+                    <Image
+                        key={slide.src}
+                        src={slide.src}
+                        alt={index === activeSlide ? slide.alt : ""}
+                        aria-hidden={index !== activeSlide}
+                        width={480}
+                        height={360}
+                        className={`${styles.objectiveCarouselImage} ${
+                            index === activeSlide
+                                ? styles.objectiveCarouselImageActive
+                                : styles.objectiveCarouselImageInactive
+                        }`}
+                        draggable={false}
+                        unoptimized
+                        loading='eager'
+                        priority={index === 0}
+                    />
+                ))}
+            </div>
+            <div className={styles.objectiveCarouselDots} aria-label='Image indicators'>
+                {slides.map((slide, index) => (
+                    <span
+                        key={slide.src}
+                        className={`${styles.objectiveCarouselDot} ${getDotStateClass(index)}`}
+                        aria-hidden='true'
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}

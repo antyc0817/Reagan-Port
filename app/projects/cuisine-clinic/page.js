@@ -2,6 +2,7 @@ import Image from "next/image";
 import DesignSystemExpand from "./DesignSystemExpand";
 import TypographySection from "./TypographySection";
 import FlavorIconsSection from "./FlavorIconsSection";
+import ObjectiveCarousel from "./ObjectiveCarousel";
 import styles from "../projects.module.css";
 
 export const metadata = {
@@ -71,31 +72,28 @@ export default function CuisineClinicProject() {
                         [ Objective ]
                     </h3>
                     <div className={styles.projectSectionImage}>
-                        <Image
-                            src='/images/cuisine-clinic/S1.png'
-                            alt='Cuisine Clinic'
-                            width={480}
-                            height={360}
-                            className={styles.projectSectionImg}
-                            unoptimized
-                        />
+                        <ObjectiveCarousel />
                     </div>
                     <div className={styles.projectSectionText}>
                         <p>
-                            Recovery shouldn&apos;t feel like a chore. The
-                            market was flooded with options, but most felt like
-                            a dull pharmacy visit or an overwhelming assault of
-                            loud graphics. There was a clear gap for a brand
-                            that understood the need for a genuine fresh start,
-                            not just a quick fix.
+                            <strong>Recovery</strong> should never feel like a
+                            chore. While the market is flooded with options,
+                            most products feel like a dull pharmacy visit or an
+                            overwhelming assault of loud graphics. I recognized
+                            a clear gap for a brand that understands the need
+                            for a <strong>genuine fresh start</strong> rather
+                            than just a quick fix.
                         </p>
                         <p>
-                            My mission was to bridge that gap by taking the
-                            concept of a medical remedy and transforming it into
-                            a premium experience. By clearing out the visual
-                            noise, I built a system that is clean, orderly, and
-                            effortless—providing total clarity right when the
-                            user needs it most.
+                            My mission was to bridge that gap by transforming
+                            the concept of a medical remedy into a
+                            {" "}
+                            <strong>premium experience</strong>. By clearing
+                            out the visual noise, I built a system that is{" "}
+                            <strong>clean, orderly, and effortless</strong>. The
+                            result is a design that provides{" "}
+                            <strong>total clarity</strong> exactly when the user
+                            needs it most.
                         </p>
                     </div>
                 </div>
