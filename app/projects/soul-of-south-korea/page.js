@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "../projects.module.css";
+import EditorialFlipbook from "./EditorialFlipbook";
 
 export const metadata = {
   title: "Soul of South Korea | Reagan",
@@ -122,11 +123,10 @@ export default function SoulOfSouthKoreaProject() {
           </article>
         </div>
       </section>
-      <section className={styles.projectSection} style={{ textAlign: "center" }}>
+      <section className={`${styles.projectSection} ${styles.soulFlipbookSection}`}>
         <h3 className={styles.projectSectionTitle}>[ Editorial Flipbook ]</h3>
-        <p style={{ margin: 0, fontSize: "clamp(1rem, 1.5vw, 1.2rem)", letterSpacing: "0.1em", textTransform: "uppercase", opacity: 0.65 }}>
-          Click to Read
-        </p>
+        <p className={styles.soulFlipbookHint}>Click to read</p>
+        <EditorialFlipbook />
       </section>
     </main>
   );

@@ -1336,7 +1336,170 @@
     max-width: 100%;
 }
 
+/* ── Soul Flipbook ── */
+.soulFlipbookSection {
+    text-align: center;
+    max-width: 1200px;
+}
+
+.soulFlipbookSection .projectSectionTitle {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.soulFlipbookHint {
+    margin: 0.3rem 0 0.55rem;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.62;
+}
+
+.soulFlipbook {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+}
+
+.soulFlipbookStage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* subtle stage glow so the book sits in a clean "viewer" area */
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.35) 45%, rgba(255, 255, 255, 0) 80%);
+    border-radius: 14px;
+    /* keep top/sides roomy, collapse bottom so controls sit right under book */
+    padding: 2.5rem 2.5rem 0.1rem;
+    margin-top: -0.2rem;
+}
+
+/* react-pageflip sets backgroundColor: '#fff' via inline JS on its internal
+   elements during the flip animation. A wildcard with !important overrides
+   both class-level and inline-style sources. Safe because every real page
+   is filled 100% with an image — background-color is never visible through it. */
+.soulFlipbookBookWrap :global(*) {
+    background-color: transparent !important;
+}
+
+.soulFlipbookBookWrap {
+    transition: transform 300ms cubic-bezier(0.22, 0.7, 0.25, 1);
+    cursor: default;
+    user-select: none;
+    /* clip-path (set inline) clips the shadow too, so it follows the visible
+       cover or spread area automatically — no ghost on the empty half-slot */
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.32),
+        0 3px 10px rgba(0, 0, 0, 0.18);
+    border-radius: 6px;
+    position: relative;
+}
+
+.soulFlipbookPage {
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 6px;
+    /* paper edge + very light print sheen */
+    box-shadow:
+        inset 0 0 0 1px rgba(18, 18, 18, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.soulFlipbookPage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    border-radius: inherit;
+    /* tiny edge gradient makes pages feel less flat/square */
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 7%, rgba(0, 0, 0, 0) 93%, rgba(0, 0, 0, 0.08) 100%);
+}
+
+.soulFlipbookPageImg {
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Spread half rendering — double-width inner wrapper, clipped by page overflow:hidden */
+.soulFlipbookSpreadLeft,
+.soulFlipbookSpreadRight {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 200%;
+}
+
+.soulFlipbookSpreadLeft {
+    left: 0;
+}
+
+.soulFlipbookSpreadRight {
+    right: 0;
+}
+
+.soulFlipbookSpreadImg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.soulFlipbookControls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.soulFlipbookArrowBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 140ms ease, opacity 140ms ease;
+}
+
+.soulFlipbookArrowBtn:hover:not(:disabled) {
+    transform: scale(1.1);
+}
+
+.soulFlipbookArrowBtn:disabled {
+    opacity: 0.28;
+    cursor: not-allowed;
+}
+
+.soulFlipbookArrowIcon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.soulFlipbookArrowIconLeft {
+    transform: rotate(180deg);
+}
+
+.soulFlipbookCounter {
+    margin: 0;
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    min-width: 8ch;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
+    .soulFlipbookControls {
+        gap: 1rem;
+    }
+
     .soulTypographyCardAligned {
         grid-template-rows: auto minmax(7rem, auto) auto auto 1fr;
     }
