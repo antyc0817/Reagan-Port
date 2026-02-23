@@ -866,14 +866,26 @@
 
 .whatsupWireframeItem {
     display: grid;
-    grid-template-columns: minmax(260px, 0.95fr) minmax(0, 1.05fr);
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
     gap: clamp(1rem, 2.4vw, 2rem);
-    align-items: stretch;
+    align-items: start;
+}
+
+.whatsupWireframeItemReveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 520ms ease, transform 520ms ease;
+    will-change: opacity, transform;
+}
+
+.whatsupWireframeItemVisible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Supports upcoming items that alternate image sides. */
 .whatsupWireframeItem:nth-child(even) {
-    grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
 }
 
 .whatsupWireframeItem:nth-child(even) .whatsupWireframeMediaBlock {
@@ -885,25 +897,26 @@
     text-align: right;
 }
 
-.whatsupWireframeItem:nth-child(even) .whatsupWireframeNum {
-    margin-left: auto;
+.whatsupWireframeItem:nth-child(even) .whatsupWireframeDetailGroup {
+    text-align: right;
 }
 
 .whatsupWireframeMediaBlock {
     display: grid;
     grid-template-rows: auto auto;
     gap: 0.8rem;
-    justify-items: center;
+    justify-items: stretch;
+    min-width: 0;
 }
 
 .whatsupWireframeMedia {
-    width: min(100%, 520px);
-    margin: 0 auto;
+    width: 100%;
+    min-width: 0;
 }
 
 .whatsupWireframePlaceholder {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 3 / 2;
     border-radius: 14px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     background:
@@ -934,27 +947,26 @@
     text-align: left;
     display: grid;
     align-content: start;
-    gap: 0.35rem;
-    padding-top: 0.2rem;
+    gap: 0.65rem;
+    min-width: 0;
     margin-top: clamp(2.35rem, 3vw, 2.9rem);
 }
 
-.whatsupWireframeNum {
-    width: 2rem;
-    height: 2rem;
-    margin: 0 0 0.35rem;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.92rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    color: #fff;
-    background: linear-gradient(135deg, #3f8ec6, #22a6a8);
-    box-shadow:
-        0 6px 14px rgba(34, 166, 168, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.24);
+.whatsupWireframeDetailGroup {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.62);
+    padding: 0.72rem 0.85rem 0.8rem;
+}
+
+.whatsupWireframeDetailGroupSolution {
+    border-color: rgba(34, 197, 94, 0.3);
+    background: linear-gradient(180deg, rgba(34, 197, 94, 0.14), rgba(34, 197, 94, 0.06));
+}
+
+.whatsupWireframeDetailGroupReason {
+    border-color: rgba(37, 99, 235, 0.28);
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.14), rgba(37, 99, 235, 0.06));
 }
 
 .whatsupWireframeItemTitle {
@@ -967,25 +979,156 @@
 }
 
 .whatsupWireframeLabel {
-    margin: 0.2rem 0 0;
-    font-size: 1rem;
+    margin: 0 0 0.35rem;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.72);
+    background: rgba(34, 166, 168, 0.12);
+    border: 1px solid rgba(34, 166, 168, 0.25);
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem;
+}
+
+.whatsupWireframeLabelSolution {
+    color: rgba(5, 46, 22, 0.96);
+    background: rgba(22, 163, 74, 0.3);
+    border-color: rgba(22, 163, 74, 0.45);
+}
+
+.whatsupWireframeLabelReason {
+    color: rgba(30, 58, 138, 0.95);
+    background: rgba(37, 99, 235, 0.26);
+    border-color: rgba(37, 99, 235, 0.42);
 }
 
 .whatsupWireframeLine {
     margin: 0;
-    font-size: 1rem;
-    line-height: 1.65;
+    font-size: 0.98rem;
+    line-height: 1.62;
 }
 
 .whatsupWireframeLine:last-child {
     margin-bottom: 0;
 }
 
+.whatsupStyleguideSection {
+    text-align: center;
+}
+
+.whatsupStyleguideSection .projectSectionTitle {
+    margin-bottom: 1.4rem;
+}
+
+.whatsupStyleguideIntro {
+    margin: 0 auto;
+    max-width: 860px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--foreground);
+}
+
+.whatsupStyleguidePalette {
+    margin-top: 1.7rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+
+.whatsupStyleguideColorCard {
+    border: 0;
+    border-radius: 0;
+    padding: 0.25rem;
+    background: transparent;
+    text-align: center;
+    transition: transform 220ms ease;
+}
+
+.whatsupStyleguideColorCard:hover {
+    transform: translateY(-5px);
+}
+
+.whatsupStyleguideSwatch {
+    width: min(100%, 116px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, 0.08),
+        0 5px 14px rgba(0, 0, 0, 0.16);
+    margin: 0 auto 0.8rem;
+    animation: whatsupStyleguideFloat 3.1s ease-in-out infinite;
+    transition: transform 240ms ease, box-shadow 240ms ease, filter 240ms ease;
+}
+
+.whatsupStyleguideColorCard:nth-child(2) .whatsupStyleguideSwatch {
+    animation-delay: 0.12s;
+}
+
+.whatsupStyleguideColorCard:nth-child(3) .whatsupStyleguideSwatch {
+    animation-delay: 0.24s;
+}
+
+.whatsupStyleguideColorCard:nth-child(4) .whatsupStyleguideSwatch {
+    animation-delay: 0.36s;
+}
+
+.whatsupStyleguideColorCard:nth-child(5) .whatsupStyleguideSwatch {
+    animation-delay: 0.48s;
+}
+
+.whatsupStyleguideColorCard:hover .whatsupStyleguideSwatch {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow:
+        inset 0 0 0 1px rgba(0, 0, 0, 0.08),
+        0 14px 28px rgba(0, 0, 0, 0.22),
+        0 0 0 4px rgba(255, 255, 255, 0.45);
+    filter: saturate(1.08);
+}
+
+.whatsupStyleguideColorRole {
+    margin: 0 0 0.25rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.68;
+}
+
+.whatsupStyleguideColorHex {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+@keyframes whatsupStyleguideFloat {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    28% {
+        transform: translateY(-6px) scale(1.02);
+    }
+
+    56% {
+        transform: translateY(-2px) scale(1.008);
+    }
+
+    78% {
+        transform: translateY(-5px) scale(1.015);
+    }
+}
+
 @media (max-width: 1024px) {
     .whatsupIdeationGrid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .whatsupStyleguidePalette {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .whatsupPersonaCards {
@@ -2161,6 +2304,19 @@
     .whatsupWireframeItem:nth-child(even) .whatsupWireframeTextBlock {
         order: 2;
         margin-top: 0;
+    }
+
+    .whatsupWireframeMedia {
+        width: 100%;
+    }
+
+    .whatsupWireframePlaceholder {
+        aspect-ratio: 3 / 2;
+    }
+
+    .whatsupStyleguidePalette {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem;
     }
 
     .soulFlipbookControls {

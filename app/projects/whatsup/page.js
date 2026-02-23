@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "../projects.module.css";
 import PersonaInteractive from "./PersonaInteractive";
+import WireframeRevealList from "./WireframeRevealList";
 
 export const metadata = {
     title: "WhatSUP | Reagan",
@@ -135,77 +136,46 @@ export default function WhatsUpProject() {
                     hierarchy that prioritizes the user's time and confidence.
                 </p>
 
-                <div className={styles.whatsupWireframeList}>
-                    <article className={styles.whatsupWireframeItem}>
-                        <div className={styles.whatsupWireframeMediaBlock}>
-                            <h4 className={styles.whatsupWireframeItemTitle}>Scannable Selection (Visual Cards)</h4>
-                            <div className={styles.whatsupWireframeMedia}>
-                                <div className={styles.whatsupWireframePlaceholder} aria-hidden />
-                            </div>
-                        </div>
+                <WireframeRevealList />
+            </section>
 
-                        <div className={styles.whatsupWireframeTextBlock}>
-                            <p className={styles.whatsupWireframeNum}>1.</p>
-                            <p className={styles.whatsupWireframeLabel}>Solution:</p>
-                            <p className={styles.whatsupWireframeLine}>
-                                I replaced long, dense text blocks with clean, scannable cards.
-                            </p>
+            <section className={`${styles.projectSection} ${styles.whatsupStyleguideSection}`}>
+                <h3 className={styles.projectSectionTitle}>[ Styleguide ]</h3>
+                <p className={styles.whatsupStyleguideIntro}>
+                    To bring the WhatSUP spirit to life, I built a visual identity that feels as fresh and energetic
+                    as a day on the water. Every color and curve was chosen to ditch the dated feel of the old site
+                    and create an approachable, high-energy world for our community to dive into.
+                </p>
 
-                            <p className={styles.whatsupWireframeLabel}>Reason:</p>
-                            <p className={styles.whatsupWireframeLine}>
-                                Instead of making users read a manual to find a price, these cards highlight the
-                                essential info - pricing and a "Learn More" button - making the browsing experience
-                                effortless and visually engaging.
-                            </p>
-                        </div>
+                <div className={styles.whatsupStyleguidePalette}>
+                    <article className={styles.whatsupStyleguideColorCard}>
+                        <div className={styles.whatsupStyleguideSwatch} style={{ backgroundColor: "#E5771E" }} aria-hidden />
+                        <p className={styles.whatsupStyleguideColorRole}>Primary</p>
+                        <p className={styles.whatsupStyleguideColorHex}>#E5771E</p>
                     </article>
 
-                    <article className={styles.whatsupWireframeItem}>
-                        <div className={styles.whatsupWireframeMediaBlock}>
-                            <h4 className={styles.whatsupWireframeItemTitle}>Smart Navigation (Sidebar Filtering)</h4>
-                            <div className={styles.whatsupWireframeMedia}>
-                                <div className={styles.whatsupWireframePlaceholder} aria-hidden />
-                            </div>
-                        </div>
-
-                        <div className={styles.whatsupWireframeTextBlock}>
-                            <p className={styles.whatsupWireframeNum}>2.</p>
-                            <p className={styles.whatsupWireframeLabel}>Solution:</p>
-                            <p className={styles.whatsupWireframeLine}>
-                                I added a dedicated filter for age and skill level.
-                            </p>
-
-                            <p className={styles.whatsupWireframeLabel}>Reason:</p>
-                            <p className={styles.whatsupWireframeLine}>
-                                This stops the "scroll fatigue." By allowing users to filter for specific
-                                certifications or skill levels instantly, I ensured that the Local Pro and the Weekend
-                                Explorer both find exactly what they need in seconds.
-                            </p>
-                        </div>
+                    <article className={styles.whatsupStyleguideColorCard}>
+                        <div className={styles.whatsupStyleguideSwatch} style={{ backgroundColor: "#F4A127" }} aria-hidden />
+                        <p className={styles.whatsupStyleguideColorRole}>Secondary</p>
+                        <p className={styles.whatsupStyleguideColorHex}>#F4A127</p>
                     </article>
 
-                    <article className={styles.whatsupWireframeItem}>
-                        <div className={styles.whatsupWireframeMediaBlock}>
-                            <h4 className={styles.whatsupWireframeItemTitle}>The Safety Anchor (Live Updates)</h4>
-                            <div className={styles.whatsupWireframeMedia}>
-                                <div className={styles.whatsupWireframePlaceholder} aria-hidden />
-                            </div>
-                        </div>
+                    <article className={styles.whatsupStyleguideColorCard}>
+                        <div className={styles.whatsupStyleguideSwatch} style={{ backgroundColor: "#60402D" }} aria-hidden />
+                        <p className={styles.whatsupStyleguideColorRole}>Tertiary</p>
+                        <p className={styles.whatsupStyleguideColorHex}>#60402D</p>
+                    </article>
 
-                        <div className={styles.whatsupWireframeTextBlock}>
-                            <p className={styles.whatsupWireframeNum}>3.</p>
-                            <p className={styles.whatsupWireframeLabel}>Solution:</p>
-                            <p className={styles.whatsupWireframeLine}>
-                                I integrated a real-time weather widget and a Bowen Island map directly into the
-                                footer.
-                            </p>
+                    <article className={styles.whatsupStyleguideColorCard}>
+                        <div className={styles.whatsupStyleguideSwatch} style={{ backgroundColor: "#647828" }} aria-hidden />
+                        <p className={styles.whatsupStyleguideColorRole}>Quaternary</p>
+                        <p className={styles.whatsupStyleguideColorHex}>#647828</p>
+                    </article>
 
-                            <p className={styles.whatsupWireframeLabel}>Reason:</p>
-                            <p className={styles.whatsupWireframeLine}>
-                                Combining live weather with a local map ensures paddlers have both the conditions and
-                                the geography they need to plan a safe trip at a glance.
-                            </p>
-                        </div>
+                    <article className={styles.whatsupStyleguideColorCard}>
+                        <div className={styles.whatsupStyleguideSwatch} style={{ backgroundColor: "#90BED1" }} aria-hidden />
+                        <p className={styles.whatsupStyleguideColorRole}>Quinary</p>
+                        <p className={styles.whatsupStyleguideColorHex}>#90BED1</p>
                     </article>
                 </div>
             </section>
