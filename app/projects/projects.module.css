@@ -405,6 +405,26 @@
     margin-bottom: 0;
 }
 
+.whatsupObjectiveSection .projectSectionTitle {
+    margin-bottom: 2.2rem;
+}
+
+.whatsupObjectivePlaceholder {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    background:
+        linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.03)),
+        repeating-linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.35) 0px,
+            rgba(255, 255, 255, 0.35) 10px,
+            rgba(255, 255, 255, 0.18) 10px,
+            rgba(255, 255, 255, 0.18) 20px
+        );
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
 .whatsupIdeationSection {
     text-align: center;
 }
@@ -481,10 +501,149 @@
     color: var(--foreground);
 }
 
+.whatsupPersonaInteractive {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.whatsupPersonaTapHint {
+    margin: 0.75rem 0;
+    font-size: 0.86rem;
+    line-height: 1.2;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: rgba(0, 0, 0, 0.84);
+    font-weight: 500;
+    text-transform: lowercase;
+    text-align: center;
+}
+
+.whatsupPersonaPicker {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.7rem;
+    margin-bottom: 1rem;
+}
+
+.whatsupPersonaPickerBtn {
+    border: 0;
+    background: transparent;
+    padding: 0.2rem 0.35rem;
+    border-radius: 0;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    cursor: pointer;
+    transition: transform 180ms ease;
+}
+
+.whatsupPersonaPickerBtn:hover {
+    transform: translateY(-2px);
+}
+
+.whatsupPersonaPickerBtn:focus-visible {
+    outline: 2px solid rgba(34, 166, 168, 0.55);
+    outline-offset: 2px;
+}
+
+.whatsupPersonaPickerBtnActive {
+    transform: translateY(-2px);
+}
+
+.whatsupPersonaPickerBtnActive .whatsupPersonaAvatar {
+    box-shadow:
+        0 0 0 4px rgba(34, 166, 168, 0.2),
+        0 10px 24px rgba(34, 166, 168, 0.22);
+}
+
+.whatsupPersonaPickerMeta {
+    display: grid;
+    text-align: center;
+    gap: 0.08rem;
+}
+
+.whatsupPersonaPickerTitle {
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.whatsupPersonaHint {
+    margin: 0.45rem 0 0;
+    font-size: 0.95rem;
+    opacity: 0.65;
+}
+
+.whatsupPersonaPicker .whatsupPersonaAvatar {
+    width: 72px;
+    height: 72px;
+    font-size: 1.05rem;
+    animation: whatsupPersonaFloatLeft 3.1s ease-in-out infinite;
+    box-shadow: 0 8px 20px rgba(34, 166, 168, 0.2);
+}
+
+.whatsupPersonaPickerBtn:nth-child(2) .whatsupPersonaAvatar {
+    animation: whatsupPersonaFloatRight 3.1s ease-in-out infinite;
+    animation-delay: 0.18s;
+}
+
+@keyframes whatsupPersonaFloatLeft {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    25% {
+        transform: translateY(-6px) scale(1.02);
+    }
+
+    50% {
+        transform: translateY(-2px) scale(1.008);
+    }
+
+    75% {
+        transform: translateY(-5px) scale(1.015);
+    }
+}
+
+@keyframes whatsupPersonaFloatRight {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+
+    25% {
+        transform: translateY(-6px) scale(1.02);
+    }
+
+    50% {
+        transform: translateY(-2px) scale(1.008);
+    }
+
+    75% {
+        transform: translateY(-5px) scale(1.015);
+    }
+}
+
 .whatsupPersonaCards {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.15rem;
+}
+
+.whatsupPersonaCardSlot {
+    min-height: 0;
+}
+
+.whatsupPersonaCardSlotLeft {
+    grid-column: 1;
+}
+
+.whatsupPersonaCardSlotRight {
+    grid-column: 2;
 }
 
 .whatsupPersonaCard {
@@ -525,9 +684,11 @@
 
 .whatsupPersonaHeader {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.9rem;
+    gap: 0.55rem;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .whatsupPersonaAvatar {
@@ -670,6 +831,36 @@
 .whatsupPersonaCard:hover .whatsupPersonaQuote {
     border-left-color: rgba(34, 166, 168, 0.85);
     background: rgba(34, 166, 168, 0.14);
+}
+
+.whatsupWireframeSection {
+    text-align: center;
+}
+
+.whatsupWireframeSection .projectSectionTitle {
+    margin-bottom: 1.4rem;
+}
+
+.whatsupWireframeIntro {
+    margin: 0 auto;
+    max-width: 860px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--foreground);
+}
+
+@media (max-width: 1024px) {
+    .whatsupIdeationGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .whatsupPersonaCards {
+        gap: 1rem;
+    }
+
+    .whatsupPersonaCard {
+        padding: 1.05rem 1.1rem;
+    }
 }
 
 .designSystemSection {
@@ -1450,6 +1641,21 @@
         height: 12px;
     }
 
+    .whatsupPersonaTapHint {
+        font-size: 0.8rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .whatsupPersonaPicker .whatsupPersonaAvatar {
+        width: 64px;
+        height: 64px;
+        font-size: 0.96rem;
+    }
+
+    .whatsupObjectivePlaceholder {
+        max-width: 340px;
+    }
+
     .objectiveSection .projectSectionTitle {
         text-align: center;
     }
@@ -1767,16 +1973,43 @@
         grid-template-columns: 1fr;
     }
 
+    .whatsupObjectiveSection .projectSectionGrid {
+        gap: 0.9rem 0;
+    }
+
+    .whatsupObjectivePlaceholder {
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
     .whatsupPersonaCard {
         padding: 1rem;
+    }
+
+    .whatsupPersonaPickerBtn {
+        width: auto;
+        justify-content: center;
+    }
+
+    .whatsupPersonaPickerMeta {
+        text-align: center;
     }
 
     .whatsupPersonaCards {
         grid-template-columns: 1fr;
     }
 
+    .whatsupPersonaCardSlotLeft,
+    .whatsupPersonaCardSlotRight {
+        grid-column: 1;
+    }
+
     .whatsupPersonaColumns {
         grid-template-columns: 1fr;
+    }
+
+    .whatsupWireframeIntro {
+        max-width: 100%;
     }
 
     .soulFlipbookControls {

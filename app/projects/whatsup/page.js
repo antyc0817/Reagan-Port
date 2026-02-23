@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { ArrowRight, OctagonAlert, Target } from "lucide-react";
 import styles from "../projects.module.css";
+import PersonaInteractive from "./PersonaInteractive";
 
 export const metadata = {
     title: "WhatSUP | Reagan",
@@ -57,18 +57,23 @@ export default function WhatsUpProject() {
                 </p>
             </div>
 
-            <section className={styles.projectSection}>
-                <h3 className={styles.projectSectionTitle}>[ Objective ]</h3>
-                <div className={styles.projectSectionText}>
-                    <p>
-                        WhatSUP had a spirit that their old branding just was not catching. It is a brand built for the
-                        outdoor community and youthful energy, but the visuals felt <strong>dated and disconnected</strong>.
-                    </p>
-                    <p>
-                        My mission was to bridge that gap by refreshing the visual identity to feel
-                        <strong> modern and authentic</strong>, while ensuring the digital experience felt as smooth as a
-                        morning on the water.
-                    </p>
+            <section className={`${styles.projectSection} ${styles.whatsupObjectiveSection}`}>
+                <div className={styles.projectSectionGrid}>
+                    <h3 className={styles.projectSectionTitle}>[ Objective ]</h3>
+                    <div className={styles.projectSectionImage}>
+                        <div className={styles.whatsupObjectivePlaceholder} aria-hidden />
+                    </div>
+                    <div className={styles.projectSectionText}>
+                        <p>
+                            WhatSUP had a spirit that their old branding just was not catching. It is a brand built for
+                            the outdoor community and youthful energy, but the visuals felt <strong>dated and disconnected</strong>.
+                        </p>
+                        <p>
+                            My mission was to bridge that gap by refreshing the visual identity to feel
+                            <strong> modern and authentic</strong>, while ensuring the digital experience felt as smooth as a
+                            morning on the water.
+                        </p>
+                    </div>
                 </div>
             </section>
 
@@ -119,145 +124,16 @@ export default function WhatsUpProject() {
                     of paddlers. By understanding their specific needs, I could prioritize features that turn a curious
                     first-timer into a lifelong member of the pack.
                 </p>
+                <PersonaInteractive />
+            </section>
 
-                <div className={styles.whatsupPersonaCards}>
-                    <article className={styles.whatsupPersonaCard}>
-                        <header className={styles.whatsupPersonaHeader}>
-                            <div className={styles.whatsupPersonaAvatar} aria-hidden>
-                                WE
-                            </div>
-                            <div className={styles.whatsupPersonaHeaderText}>
-                                <p className={styles.whatsupPersonaLabel}>Primary Persona</p>
-                                <h4 className={styles.whatsupPersonaTitle}>Weekend Explorer</h4>
-                            </div>
-                        </header>
-
-                        <div className={styles.whatsupPersonaColumns}>
-                            <div className={`${styles.whatsupPersonaGroup} ${styles.whatsupPersonaGroupGoal}`}>
-                                <h5 className={styles.whatsupPersonaGroupTitle}>
-                                    <Target className={styles.whatsupPersonaHeadingIconGoal} aria-hidden />
-                                    Goals
-                                </h5>
-                                <ul className={styles.whatsupPersonaList}>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconGoal} aria-hidden />
-                                        <span>Find beginner-friendly locations and equipment.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconGoal} aria-hidden />
-                                        <span>Learn basic techniques and safety information.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconGoal} aria-hidden />
-                                        <span>Connect with local instructors or groups.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconGoal} aria-hidden />
-                                        <span>Understand what gear is needed to start.</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className={`${styles.whatsupPersonaGroup} ${styles.whatsupPersonaGroupFriction}`}>
-                                <h5 className={styles.whatsupPersonaGroupTitle}>
-                                    <OctagonAlert className={styles.whatsupPersonaHeadingIconFriction} aria-hidden />
-                                    Frustrations
-                                </h5>
-                                <ul className={styles.whatsupPersonaList}>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconFriction} aria-hidden />
-                                        <span>Overwhelmed by technical gear and jargon.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconFriction} aria-hidden />
-                                        <span>Difficult to find nearby rental options.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconFriction} aria-hidden />
-                                        <span>Intimidated by advanced paddling communities.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconFriction} aria-hidden />
-                                        <span>Unclear pricing and what is included in bookings.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <blockquote className={styles.whatsupPersonaQuote}>
-                            "I just want to know if it's a good day to be on the water without getting lost in the
-                            gear-speak."
-                        </blockquote>
-                    </article>
-
-                    <article className={styles.whatsupPersonaCard}>
-                        <header className={styles.whatsupPersonaHeader}>
-                            <div className={styles.whatsupPersonaAvatar} aria-hidden>
-                                LP
-                            </div>
-                            <div className={styles.whatsupPersonaHeaderText}>
-                                <p className={styles.whatsupPersonaLabel}>Secondary Persona</p>
-                                <h4 className={styles.whatsupPersonaTitle}>Local Pro</h4>
-                            </div>
-                        </header>
-
-                        <div className={styles.whatsupPersonaColumns}>
-                            <div className={`${styles.whatsupPersonaGroup} ${styles.whatsupPersonaGroupGoal}`}>
-                                <h5 className={styles.whatsupPersonaGroupTitle}>
-                                    <Target className={styles.whatsupPersonaHeadingIconGoal} aria-hidden />
-                                    Goals
-                                </h5>
-                                <ul className={styles.whatsupPersonaList}>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconGoal} aria-hidden />
-                                        <span>Access advanced techniques and challenges.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconGoal} aria-hidden />
-                                        <span>Get real-time water condition updates.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconGoal} aria-hidden />
-                                        <span>Connect with other experienced paddlers.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconGoal} aria-hidden />
-                                        <span>Discover new locations and routes.</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className={`${styles.whatsupPersonaGroup} ${styles.whatsupPersonaGroupFriction}`}>
-                                <h5 className={styles.whatsupPersonaGroupTitle}>
-                                    <OctagonAlert className={styles.whatsupPersonaHeadingIconFriction} aria-hidden />
-                                    Frustrations
-                                </h5>
-                                <ul className={styles.whatsupPersonaList}>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconFriction} aria-hidden />
-                                        <span>Outdated water condition information.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconFriction} aria-hidden />
-                                        <span>Too much beginner content in feeds.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconFriction} aria-hidden />
-                                        <span>Limited community features for meetups.</span>
-                                    </li>
-                                    <li>
-                                        <ArrowRight className={styles.whatsupPersonaListIconFriction} aria-hidden />
-                                        <span>No ability to filter by skill level.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <blockquote className={styles.whatsupPersonaQuote}>
-                            "I need the tide report fast so I can hit the water before work."
-                        </blockquote>
-                    </article>
-                </div>
+            <section className={`${styles.projectSection} ${styles.whatsupWireframeSection}`}>
+                <h3 className={styles.projectSectionTitle}>[ Wireframe ]</h3>
+                <p className={styles.whatsupWireframeIntro}>
+                    I focused on the Lesson and Tour pages to fix navigation issues and help users decide faster. By
+                    switching to a card-based system, I removed the clutter and organized information into a clean
+                    hierarchy that prioritizes the user's time and confidence.
+                </p>
             </section>
         </main>
     );
