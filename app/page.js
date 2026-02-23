@@ -75,7 +75,9 @@ export default function Home() {
                 className={styles.works}>
                 <WorksMarquee />
                 <div className={styles.projectList}>
-                    {projects.map((project, i) => (
+                    {projects
+                        .filter((project) => project.slug !== "panday")
+                        .map((project, i) => (
                         <Link
                             key={project.slug}
                             href={`/projects/${project.slug}`}
@@ -109,7 +111,7 @@ export default function Home() {
                                 </p>
                             </div>
                         </Link>
-                    ))}
+                        ))}
                 </div>
                 <div className={styles.comingSoon}>
                     <span className={styles.comingSoonText}>
