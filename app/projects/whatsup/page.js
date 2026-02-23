@@ -134,6 +134,80 @@ export default function WhatsUpProject() {
                     switching to a card-based system, I removed the clutter and organized information into a clean
                     hierarchy that prioritizes the user's time and confidence.
                 </p>
+
+                <div className={styles.whatsupWireframeList}>
+                    <article className={styles.whatsupWireframeItem}>
+                        <div className={styles.whatsupWireframeMediaBlock}>
+                            <h4 className={styles.whatsupWireframeItemTitle}>Scannable Selection (Visual Cards)</h4>
+                            <div className={styles.whatsupWireframeMedia}>
+                                <div className={styles.whatsupWireframePlaceholder} aria-hidden />
+                            </div>
+                        </div>
+
+                        <div className={styles.whatsupWireframeTextBlock}>
+                            <p className={styles.whatsupWireframeNum}>1.</p>
+                            <p className={styles.whatsupWireframeLabel}>Solution:</p>
+                            <p className={styles.whatsupWireframeLine}>
+                                I replaced long, dense text blocks with clean, scannable cards.
+                            </p>
+
+                            <p className={styles.whatsupWireframeLabel}>Reason:</p>
+                            <p className={styles.whatsupWireframeLine}>
+                                Instead of making users read a manual to find a price, these cards highlight the
+                                essential info - pricing and a "Learn More" button - making the browsing experience
+                                effortless and visually engaging.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article className={styles.whatsupWireframeItem}>
+                        <div className={styles.whatsupWireframeMediaBlock}>
+                            <h4 className={styles.whatsupWireframeItemTitle}>Smart Navigation (Sidebar Filtering)</h4>
+                            <div className={styles.whatsupWireframeMedia}>
+                                <div className={styles.whatsupWireframePlaceholder} aria-hidden />
+                            </div>
+                        </div>
+
+                        <div className={styles.whatsupWireframeTextBlock}>
+                            <p className={styles.whatsupWireframeNum}>2.</p>
+                            <p className={styles.whatsupWireframeLabel}>Solution:</p>
+                            <p className={styles.whatsupWireframeLine}>
+                                I added a dedicated filter for age and skill level.
+                            </p>
+
+                            <p className={styles.whatsupWireframeLabel}>Reason:</p>
+                            <p className={styles.whatsupWireframeLine}>
+                                This stops the "scroll fatigue." By allowing users to filter for specific
+                                certifications or skill levels instantly, I ensured that the Local Pro and the Weekend
+                                Explorer both find exactly what they need in seconds.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article className={styles.whatsupWireframeItem}>
+                        <div className={styles.whatsupWireframeMediaBlock}>
+                            <h4 className={styles.whatsupWireframeItemTitle}>The Safety Anchor (Live Updates)</h4>
+                            <div className={styles.whatsupWireframeMedia}>
+                                <div className={styles.whatsupWireframePlaceholder} aria-hidden />
+                            </div>
+                        </div>
+
+                        <div className={styles.whatsupWireframeTextBlock}>
+                            <p className={styles.whatsupWireframeNum}>3.</p>
+                            <p className={styles.whatsupWireframeLabel}>Solution:</p>
+                            <p className={styles.whatsupWireframeLine}>
+                                I integrated a real-time weather widget and a Bowen Island map directly into the
+                                footer.
+                            </p>
+
+                            <p className={styles.whatsupWireframeLabel}>Reason:</p>
+                            <p className={styles.whatsupWireframeLine}>
+                                Combining live weather with a local map ensures paddlers have both the conditions and
+                                the geography they need to plan a safe trip at a glance.
+                            </p>
+                        </div>
+                    </article>
+                </div>
             </section>
         </main>
     );

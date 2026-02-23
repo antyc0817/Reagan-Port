@@ -452,6 +452,15 @@
     border-radius: 12px;
     padding: 1rem;
     background: rgba(255, 255, 255, 0.7);
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.whatsupIdeationCard:hover {
+    transform: translateY(-4px);
+    border-color: rgba(34, 166, 168, 0.35);
+    box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(34, 166, 168, 0.12);
 }
 
 .whatsupIdeationPlaceholder {
@@ -849,6 +858,131 @@
     color: var(--foreground);
 }
 
+.whatsupWireframeList {
+    margin-top: 2rem;
+    display: grid;
+    gap: 1.6rem;
+}
+
+.whatsupWireframeItem {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(1rem, 2.4vw, 2rem);
+    align-items: stretch;
+}
+
+/* Supports upcoming items that alternate image sides. */
+.whatsupWireframeItem:nth-child(even) {
+    grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+}
+
+.whatsupWireframeItem:nth-child(even) .whatsupWireframeMediaBlock {
+    order: 2;
+}
+
+.whatsupWireframeItem:nth-child(even) .whatsupWireframeTextBlock {
+    order: 1;
+    text-align: right;
+}
+
+.whatsupWireframeItem:nth-child(even) .whatsupWireframeNum {
+    margin-left: auto;
+}
+
+.whatsupWireframeMediaBlock {
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 0.8rem;
+    justify-items: center;
+}
+
+.whatsupWireframeMedia {
+    width: min(100%, 520px);
+    margin: 0 auto;
+}
+
+.whatsupWireframePlaceholder {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background:
+        linear-gradient(145deg, rgba(63, 142, 198, 0.22), rgba(34, 166, 168, 0.18)),
+        repeating-linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.28) 0px,
+            rgba(255, 255, 255, 0.28) 10px,
+            rgba(255, 255, 255, 0.12) 10px,
+            rgba(255, 255, 255, 0.12) 20px
+        );
+    box-shadow:
+        0 12px 34px rgba(0, 0, 0, 0.12),
+        0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.whatsupWireframeMedia:hover .whatsupWireframePlaceholder {
+    transform: translateY(-4px);
+    border-color: rgba(34, 166, 168, 0.38);
+    box-shadow:
+        0 20px 42px rgba(0, 0, 0, 0.16),
+        0 8px 18px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(34, 166, 168, 0.14);
+}
+
+.whatsupWireframeTextBlock {
+    text-align: left;
+    display: grid;
+    align-content: start;
+    gap: 0.35rem;
+    padding-top: 0.2rem;
+    margin-top: clamp(2.35rem, 3vw, 2.9rem);
+}
+
+.whatsupWireframeNum {
+    width: 2rem;
+    height: 2rem;
+    margin: 0 0 0.35rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: #fff;
+    background: linear-gradient(135deg, #3f8ec6, #22a6a8);
+    box-shadow:
+        0 6px 14px rgba(34, 166, 168, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.whatsupWireframeItemTitle {
+    width: min(100%, 520px);
+    margin: 0 auto;
+    font-size: 1.18rem;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+}
+
+.whatsupWireframeLabel {
+    margin: 0.2rem 0 0;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.whatsupWireframeLine {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.whatsupWireframeLine:last-child {
+    margin-bottom: 0;
+}
+
 @media (max-width: 1024px) {
     .whatsupIdeationGrid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -861,6 +995,7 @@
     .whatsupPersonaCard {
         padding: 1.05rem 1.1rem;
     }
+
 }
 
 .designSystemSection {
@@ -2010,6 +2145,22 @@
 
     .whatsupWireframeIntro {
         max-width: 100%;
+    }
+
+    .whatsupWireframeItem,
+    .whatsupWireframeItem:nth-child(even) {
+        grid-template-columns: 1fr;
+    }
+
+    .whatsupWireframeMediaBlock,
+    .whatsupWireframeItem:nth-child(even) .whatsupWireframeMediaBlock {
+        order: 1;
+    }
+
+    .whatsupWireframeTextBlock,
+    .whatsupWireframeItem:nth-child(even) .whatsupWireframeTextBlock {
+        order: 2;
+        margin-top: 0;
     }
 
     .soulFlipbookControls {
