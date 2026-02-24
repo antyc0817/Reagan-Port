@@ -3,12 +3,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ArrowRight, OctagonAlert, Target } from "lucide-react";
+import Image from "next/image";
 import styles from "../projects.module.css";
 
 const PERSONAS = {
     weekend: {
         id: "weekend",
         initials: "WE",
+        avatarSrc: "/images/whatsup/p1.png",
         label: "Primary Persona",
         title: "Weekend Explorer",
         goals: [
@@ -28,6 +30,7 @@ const PERSONAS = {
     local: {
         id: "local",
         initials: "LP",
+        avatarSrc: "/images/whatsup/p2.png",
         label: "Secondary Persona",
         title: "Local Pro",
         goals: [
@@ -84,7 +87,7 @@ export default function PersonaInteractive() {
     };
 
     return (
-        <div className={styles.whatsupPersonaInteractive}>
+        <div className={`${styles.whatsupPersonaInteractive} ${openPersonaIds.length > 0 ? styles.whatsupPersonaInteractiveOpen : ""}`}>
             <p className={styles.whatsupPersonaTapHint}>Click a persona circle to expand and read details.</p>
             <div className={styles.whatsupPersonaPicker}>
                 {PERSONA_ORDER.map((persona) => {
@@ -98,7 +101,14 @@ export default function PersonaInteractive() {
                             aria-pressed={isActive}
                             aria-label={`Show ${persona.title} persona`}>
                             <span className={styles.whatsupPersonaAvatar} aria-hidden>
-                                {persona.initials}
+                                <Image
+                                    src={persona.avatarSrc}
+                                    alt=''
+                                    fill
+                                    className={styles.whatsupPersonaAvatarImg}
+                                    sizes='138px'
+                                    unoptimized
+                                />
                             </span>
                             <span className={styles.whatsupPersonaPickerMeta}>
                                 <span className={styles.whatsupPersonaLabel}>{persona.label}</span>
@@ -126,7 +136,14 @@ export default function PersonaInteractive() {
                                     className={styles.whatsupPersonaCard}>
                                     <header className={styles.whatsupPersonaHeader}>
                                         <div className={styles.whatsupPersonaAvatar} aria-hidden>
-                                            {persona.initials}
+                                    <Image
+                                        src={persona.avatarSrc}
+                                        alt=''
+                                        fill
+                                        className={styles.whatsupPersonaAvatarImg}
+                                        sizes='56px'
+                                        unoptimized
+                                    />
                                         </div>
                                         <div className={styles.whatsupPersonaHeaderText}>
                                             <p className={styles.whatsupPersonaLabel}>{persona.label}</p>

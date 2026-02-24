@@ -448,23 +448,42 @@
 }
 
 .whatsupIdeationCard {
+    position: relative;
+    overflow: hidden;
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 12px;
     padding: 1.15rem;
-    background: rgba(246, 248, 250, 0.88);
+    background:
+        radial-gradient(140% 95% at 0% 0%, rgba(244, 161, 39, 0.19), rgba(244, 161, 39, 0) 52%),
+        linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(255, 248, 236, 0.94));
     transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
     min-height: 100%;
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.whatsupIdeationCard::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(229, 119, 30, 0.85), rgba(244, 161, 39, 0.88));
+    opacity: 0.72;
 }
 
 .whatsupIdeationCard:hover {
-    transform: translateY(-4px);
-    border-color: rgba(34, 166, 168, 0.35);
+    transform: translateY(-6px);
+    border-color: rgba(229, 119, 30, 0.45);
     box-shadow:
-        0 14px 28px rgba(0, 0, 0, 0.12),
-        0 0 0 1px rgba(34, 166, 168, 0.12);
+        0 18px 36px rgba(0, 0, 0, 0.14),
+        0 0 0 1px rgba(229, 119, 30, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 
 .whatsupIdeationPlaceholder {
@@ -492,10 +511,22 @@
     object-position: center;
     border-radius: 10px;
     display: block;
-    background: #eef2f5;
-    border: 1px solid rgba(0, 0, 0, 0.14);
+    background: linear-gradient(180deg, #fff5e2, #ffedd0);
+    border: 1px solid rgba(0, 0, 0, 0.16);
     padding: 0.35rem;
     box-sizing: border-box;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+        0 8px 18px rgba(0, 0, 0, 0.12);
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.whatsupIdeationCard:hover .whatsupIdeationImage {
+    transform: translateY(-2px);
+    border-color: rgba(229, 119, 30, 0.34);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.45),
+        0 12px 24px rgba(0, 0, 0, 0.16);
 }
 
 .whatsupIdeationCardTitle {
@@ -511,6 +542,7 @@
     font-size: 0.96rem;
     line-height: 1.65;
     color: var(--foreground);
+    opacity: 0.9;
 }
 
 .whatsupPersonaSection {
@@ -606,11 +638,18 @@
 }
 
 .whatsupPersonaPicker .whatsupPersonaAvatar {
-    width: 72px;
-    height: 72px;
+    width: 138px;
+    height: 138px;
     font-size: 1.05rem;
     animation: whatsupPersonaFloatLeft 3.1s ease-in-out infinite;
     box-shadow: 0 8px 20px rgba(34, 166, 168, 0.2);
+    transition: width 260ms ease, height 260ms ease, box-shadow 260ms ease;
+}
+
+.whatsupPersonaInteractiveOpen .whatsupPersonaPicker .whatsupPersonaAvatar {
+    width: 248px;
+    height: 248px;
+    box-shadow: 0 14px 30px rgba(34, 166, 168, 0.26);
 }
 
 .whatsupPersonaPickerBtn:nth-child(2) .whatsupPersonaAvatar {
@@ -723,6 +762,9 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #60402D;
     display: grid;
     place-items: center;
     font-size: 0.9rem;
@@ -730,6 +772,19 @@
     letter-spacing: 0.05em;
     color: #fff;
     background: linear-gradient(135deg, #3f8ec6, #22a6a8);
+}
+
+.whatsupPersonaCard .whatsupPersonaAvatar {
+    transition: width 260ms ease, height 260ms ease;
+}
+
+.whatsupPersonaInteractiveOpen .whatsupPersonaCard .whatsupPersonaAvatar {
+    width: 92px;
+    height: 92px;
+}
+
+.whatsupPersonaAvatarImg {
+    object-fit: cover;
 }
 
 .whatsupPersonaLabel {
@@ -979,13 +1034,13 @@
 }
 
 .whatsupWireframeDetailGroupSolution {
-    border-color: rgba(34, 197, 94, 0.3);
-    background: linear-gradient(180deg, rgba(34, 197, 94, 0.14), rgba(34, 197, 94, 0.06));
+    border-color: rgba(126, 147, 66, 0.34);
+    background: linear-gradient(180deg, rgba(126, 147, 66, 0.18), rgba(126, 147, 66, 0.07));
 }
 
 .whatsupWireframeDetailGroupReason {
-    border-color: rgba(37, 99, 235, 0.28);
-    background: linear-gradient(180deg, rgba(37, 99, 235, 0.14), rgba(37, 99, 235, 0.06));
+    border-color: rgba(144, 190, 209, 0.55);
+    background: linear-gradient(180deg, rgba(144, 190, 209, 0.28), rgba(144, 190, 209, 0.12));
 }
 
 .whatsupWireframeItemTitle {
@@ -1013,15 +1068,15 @@
 }
 
 .whatsupWireframeLabelSolution {
-    color: rgba(5, 46, 22, 0.96);
-    background: rgba(22, 163, 74, 0.3);
-    border-color: rgba(22, 163, 74, 0.45);
+    color: rgba(58, 74, 18, 0.96);
+    background: rgba(126, 147, 66, 0.28);
+    border-color: rgba(126, 147, 66, 0.44);
 }
 
 .whatsupWireframeLabelReason {
-    color: rgba(30, 58, 138, 0.95);
-    background: rgba(37, 99, 235, 0.26);
-    border-color: rgba(37, 99, 235, 0.42);
+    color: rgba(27, 62, 79, 0.96);
+    background: rgba(144, 190, 209, 0.36);
+    border-color: rgba(108, 164, 188, 0.48);
 }
 
 .whatsupWireframeLine {
@@ -1944,9 +1999,19 @@
     }
 
     .whatsupPersonaPicker .whatsupPersonaAvatar {
-        width: 64px;
-        height: 64px;
+        width: 120px;
+        height: 120px;
         font-size: 0.96rem;
+    }
+
+    .whatsupPersonaInteractiveOpen .whatsupPersonaPicker .whatsupPersonaAvatar {
+        width: 180px;
+        height: 180px;
+    }
+
+    .whatsupPersonaInteractiveOpen .whatsupPersonaCard .whatsupPersonaAvatar {
+        width: 76px;
+        height: 76px;
     }
 
     .whatsupObjectivePlaceholder {
