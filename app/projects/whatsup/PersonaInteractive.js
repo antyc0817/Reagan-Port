@@ -10,7 +10,7 @@ const PERSONAS = {
     weekend: {
         id: "weekend",
         initials: "WE",
-        avatarSrc: "/images/whatsup/p1.png",
+        avatarSrc: "/images/whatsup/P1.png",
         label: "Primary Persona",
         title: "Weekend Explorer",
         goals: [
@@ -30,7 +30,7 @@ const PERSONAS = {
     local: {
         id: "local",
         initials: "LP",
-        avatarSrc: "/images/whatsup/p2.png",
+        avatarSrc: "/images/whatsup/P2.png",
         label: "Secondary Persona",
         title: "Local Pro",
         goals: [
