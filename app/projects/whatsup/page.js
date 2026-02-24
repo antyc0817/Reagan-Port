@@ -87,7 +87,14 @@ export default function WhatsUpProject() {
 
                 <div className={styles.whatsupIdeationGrid}>
                     <article className={styles.whatsupIdeationCard}>
-                        <div className={styles.whatsupIdeationPlaceholder} aria-hidden />
+                        <Image
+                            src='/images/whatsup/V1.jpg'
+                            alt='WhatSUP ideation visual refresh concept'
+                            width={1200}
+                            height={1200}
+                            className={styles.whatsupIdeationImage}
+                            unoptimized
+                        />
                         <h4 className={styles.whatsupIdeationCardTitle}>Visual Refresh</h4>
                         <p className={styles.whatsupIdeationCardText}>
                             I ditched the static, dated layout for an interface that actually moves. By using bold
@@ -97,7 +104,14 @@ export default function WhatsUpProject() {
                     </article>
 
                     <article className={styles.whatsupIdeationCard}>
-                        <div className={styles.whatsupIdeationPlaceholder} aria-hidden />
+                        <Image
+                            src='/images/whatsup/V2.jpg'
+                            alt='WhatSUP ideation seamless search concept'
+                            width={1200}
+                            height={1200}
+                            className={styles.whatsupIdeationImage}
+                            unoptimized
+                        />
                         <h4 className={styles.whatsupIdeationCardTitle}>Seamless Search</h4>
                         <p className={styles.whatsupIdeationCardText}>
                             Instead of fighting with complex menus, I focused on a navigation system that stays out of
@@ -107,7 +121,14 @@ export default function WhatsUpProject() {
                     </article>
 
                     <article className={styles.whatsupIdeationCard}>
-                        <div className={styles.whatsupIdeationPlaceholder} aria-hidden />
+                        <Image
+                            src='/images/whatsup/V3.jpg'
+                            alt='WhatSUP ideation real-time status concept'
+                            width={1200}
+                            height={1200}
+                            className={styles.whatsupIdeationImage}
+                            unoptimized
+                        />
                         <h4 className={styles.whatsupIdeationCardTitle}>Real-Time Status Bar</h4>
                         <p className={styles.whatsupIdeationCardText}>
                             To keep the community connected and safe, I added a real-time status bar at the bottom of
