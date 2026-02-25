@@ -3,6 +3,7 @@ import "@fontsource/wix-madefor-text/600.css";
 import "@fontsource/wix-madefor-text/700.css";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import PreloaderOverlay from "./components/PreloaderOverlay";
 
 export const metadata = {
   title: "Reagan",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <PreloaderOverlay />
         <Navbar />
         <div style={{ paddingTop: "4.5rem" }}>
           {children}
