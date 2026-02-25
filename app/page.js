@@ -54,16 +54,6 @@ export default function Home() {
                 id='home'
                 className={styles.hero}>
                 <AnimatedName />
-                <div className={styles.heroBlock}>
-                    <div className={styles.heroImage}>
-                        {/* Add your full-screen image here: <Image src="..." fill className={styles.heroImg} /> */}
-                    </div>
-                    <div className={styles.sliderStrip}>
-                        <span className={styles.sliderDot} />
-                        <span className={styles.sliderDot} />
-                        <span className={styles.sliderDot} />
-                    </div>
-                </div>
                 <HeroBanner />
             </section>
 
