@@ -1,0 +1,105 @@
+.contact {
+  padding: 5rem 2rem 6rem;
+  text-align: center;
+  background: var(--background);
+}
+
+.contactPrompt {
+  font-size: 28px;
+  color: var(--text-muted);
+  margin: 0 0 1.5rem;
+  font-weight: 400;
+}
+
+.contactTitle {
+  font-size: clamp(3rem, 20vw, 160px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+  margin: 0 0 4rem;
+  line-height: 0.95;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .contactPrompt {
+    font-size: 1.35rem;
+  }
+
+  .contactTitle {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 3rem 1rem 4rem;
+  }
+
+  .contactPrompt {
+    font-size: 1.2rem;
+  }
+
+  .contactTitle {
+    margin-bottom: 2rem;
+  }
+
+  .contactForm {
+    padding: 0 0.5rem;
+  }
+}
+
+.contactForm {
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.formInput,
+.formTextarea {
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: white;
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  font-size: 1rem;
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 280px;
+}
+
+.formButton {
+  padding: 1rem 2rem;
+  background: var(--foreground);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.2s;
+}
+
+.formButton:hover {
+  opacity: 0.9;
+}

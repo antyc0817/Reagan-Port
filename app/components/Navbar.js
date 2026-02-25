@@ -52,7 +52,7 @@ export default function Navbar() {
         <Link href="/game" className={`${styles.link} ${pathname === "/game" ? styles.linkActive : ""}`}>
           GAME
         </Link>
-        <Link href="/#contact" className={`${styles.link} ${pathname === "/" ? styles.linkActive : ""}`}>
+        <Link href="/contact" className={`${styles.link} ${pathname === "/contact" ? styles.linkActive : ""}`}>
           CONTACT
         </Link>
       </div>
