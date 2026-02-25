@@ -10,12 +10,7 @@
   padding: 1rem 2rem;
   background: var(--background);
   backdrop-filter: blur(8px);
-  transform: translateY(0);
-  transition: transform 0.3s ease;
-}
-
-.navbarHidden {
-  transform: translateY(-100%);
+  will-change: transform;
 }
 
 .navbarSection {

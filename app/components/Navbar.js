@@ -1,26 +1,58 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import gsap from "gsap";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [visible, setVisible] = useState(true);
+  const navRef = useRef(null);
   const lastScrollY = useRef(0);
+  const hidden = useRef(false);
 
   useEffect(() => {
+    if (!navRef.current) return;
+
+    gsap.set(navRef.current, { yPercent: 0 });
+    hidden.current = false;
+    lastScrollY.current = window.scrollY;
+
+    const showNav = () => {
+      if (!navRef.current || !hidden.current) return;
+      hidden.current = false;
+      gsap.to(navRef.current, {
+        yPercent: 0,
+        duration: 0.4,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+    };
+
+    const hideNav = () => {
+      if (!navRef.current || hidden.current) return;
+      hidden.current = true;
+      gsap.to(navRef.current, {
+        yPercent: -110,
+        duration: 0.35,
+        ease: "power3.out",
+        overwrite: "auto",
+      });
+    };
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY < 50) {
-        setVisible(true);
+
+      if (currentScrollY <= 50) {
+        showNav();
       } else if (currentScrollY > lastScrollY.current) {
-        setVisible(false);
+        hideNav();
       } else {
-        setVisible(true);
+        showNav();
       }
+
       lastScrollY.current = currentScrollY;
     };
 
@@ -28,8 +60,20 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!navRef.current) return;
+    hidden.current = false;
+    gsap.to(navRef.current, {
+      yPercent: 0,
+      duration: 0.3,
+      ease: "power3.out",
+      overwrite: "auto",
+    });
+    lastScrollY.current = window.scrollY;
+  }, [pathname]);
+
   return (
-    <nav className={`${styles.navbar} ${!visible ? styles.navbarHidden : ""}`}>
+    <nav ref={navRef} className={styles.navbar}>
       <div className={`${styles.navbarSection} ${styles.navbarLeft}`}>
         <Link
           href="/work"
