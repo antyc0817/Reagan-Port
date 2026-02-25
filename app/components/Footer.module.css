@@ -9,7 +9,11 @@
 
 .starIcon {
   display: block;
-  margin: 0 auto 1rem;
+}
+
+.starSpinTarget {
+  display: inline-block;
+  margin-bottom: 1rem;
 }
 
 .footerName {
@@ -58,16 +62,15 @@
   background: rgba(0, 0, 0, 0.12);
 }
 
-.footerIcon {
-  display: block;
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-}
-
 .footerLinks,
 .footerCopy {
   font-size: 0.85rem;
   color: var(--text-muted);
   letter-spacing: 0.03em;
+}
+
+.footerCat {
+  font-size: 1rem;
+  color: var(--foreground);
+  letter-spacing: 0.02em;
 }

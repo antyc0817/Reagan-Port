@@ -1,7 +1,7 @@
 .marquee {
   width: 100%;
   overflow: hidden;
-  padding: 1rem 0;
+  padding: 1.25rem 0;
   margin-bottom: 2rem;
   background: transparent;
 }
@@ -21,14 +21,16 @@
 .segment {
   display: inline-flex;
   align-items: center;
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  color: var(--text-muted);
+  font-size: clamp(1.7rem, 3.8vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--foreground);
 }
 
 .star {
-  margin: 0 0.6em;
+  margin: 0 0.5em;
+  width: clamp(24px, 2.4vw, 34px);
+  height: clamp(24px, 2.4vw, 34px);
   flex-shrink: 0;
 }
 

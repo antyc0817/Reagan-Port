@@ -7,7 +7,7 @@ function WorksSegment() {
   return (
     <span className={styles.segment}>
       Works{" "}
-      <Image src="/icons/a.png" alt="" width={18} height={18} className={styles.star} unoptimized />
+      <Image src="/icons/a.png" alt="" width={34} height={34} className={styles.star} unoptimized />
       {" "}
     </span>
   );

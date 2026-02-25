@@ -32,8 +32,8 @@ export default function Navbar() {
     <nav className={`${styles.navbar} ${!visible ? styles.navbarHidden : ""}`}>
       <div className={`${styles.navbarSection} ${styles.navbarLeft}`}>
         <Link
-          href="/#works"
-          className={`${styles.link} ${pathname === "/" || pathname?.startsWith("/projects") ? styles.linkActive : ""}`}
+          href="/work"
+          className={`${styles.link} ${pathname === "/work" || pathname?.startsWith("/projects") ? styles.linkActive : ""}`}
         >
           WORK
         </Link>

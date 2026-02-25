@@ -1,0 +1,246 @@
+.page {
+  color: var(--foreground);
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+.works {
+  padding: 2rem 0 2rem;
+}
+
+.projectList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.projectRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 0;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.projectRow + .projectRow {
+  margin-top: -4px;
+}
+
+.projectRow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  transform: translateX(-2px);
+  background: #000;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.projectRow:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.projectRowReverse .projectImage {
+  order: 2;
+}
+
+.projectRowReverse .projectInfo {
+  order: 1;
+}
+
+.projectImage {
+  position: relative;
+  aspect-ratio: 1;
+  background: #000;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 4px solid #000;
+  border-right: 0;
+}
+
+.projectImage img,
+.projectImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  will-change: transform, filter;
+}
+
+.projectImage:hover .projectImg {
+  transform: scale(1.04);
+  filter: brightness(1.05) contrast(1.03);
+}
+
+.projectInfo {
+  position: relative;
+  padding: 3rem 2.5rem;
+  background: var(--background);
+  color: var(--foreground);
+  box-sizing: border-box;
+  border: 4px solid #000;
+  border-left: 0;
+}
+
+.projectRowReverse .projectImage {
+  border-right: 4px solid #000;
+  border-left: 0;
+}
+
+.projectRowReverse .projectInfo {
+  border-left: 4px solid #000;
+  border-right: 0;
+}
+
+.projectRow:hover .projectImage,
+.projectRow:hover .projectInfo {
+  border-color: #000;
+}
+
+.projectInfoHead {
+  position: absolute;
+  top: 2.5rem;
+}
+
+.projectInfoHeadLeft {
+  left: 4%;
+  text-align: left;
+}
+
+.projectInfoHeadRight {
+  right: 4%;
+  text-align: right;
+}
+
+.projectTitle {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  margin: 0 0 0.5rem;
+  line-height: 1.1;
+}
+
+.projectSubtitle {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--foreground);
+  margin: 0 0 0.35rem;
+}
+
+.projectDate {
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.projectRow:hover .projectTitle,
+.projectRow:hover .projectSubtitle,
+.projectRow:hover .projectDate {
+  opacity: 0.9;
+}
+
+.projectDesc {
+  position: absolute;
+  bottom: 3rem;
+  width: 70%;
+  max-width: 480px;
+  font-size: 20px;
+  line-height: 1.65;
+  text-wrap: balance;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.projectDescRight {
+  right: 2.5rem;
+  text-align: right;
+}
+
+.projectDescLeft {
+  left: 2.5rem;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .projectList {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .projectRow {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .projectRow::before {
+    display: none;
+  }
+
+  .projectRowReverse .projectImage,
+  .projectRowReverse .projectInfo {
+    order: unset;
+  }
+
+  .projectImage {
+    aspect-ratio: 1;
+    order: 1;
+  }
+
+  .projectInfo {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    min-height: auto;
+    border-left: 4px solid #000;
+    border-right: 4px solid #000;
+  }
+
+  .projectInfoHead {
+    position: static;
+    left: auto;
+    right: auto;
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  .projectInfoHeadLeft,
+  .projectInfoHeadRight {
+    left: auto;
+    right: auto;
+    text-align: left;
+  }
+
+  .projectDesc {
+    position: static;
+    bottom: auto;
+    right: auto;
+    left: auto;
+    width: 100%;
+    max-width: none;
+    text-align: left;
+    margin-top: 0;
+  }
+
+  .projectDescLeft,
+  .projectDescRight {
+    right: auto;
+    left: auto;
+    text-align: left;
+  }
+}
