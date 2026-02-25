@@ -4,9 +4,9 @@
   left: 0;
   right: 0;
   z-index: 100;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   padding: 1rem 2rem;
   background: var(--background);
   backdrop-filter: blur(8px);
@@ -18,32 +18,25 @@
   transform: translateY(-100%);
 }
 
-.navbarLeft {
+.navbarSection {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 2rem;
 }
 
-.back {
+.navbarLeft {
+  justify-self: start;
+}
+
+.navbarCenter {
+  justify-self: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.9;
-  transition: opacity 0.2s ease;
-  width: 36px;
-  height: 36px;
 }
 
-.back:hover {
-  opacity: 1;
-}
-
-.backArrow {
-  display: block;
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  transform: scaleX(-1);
+.navbarRight {
+  justify-self: end;
 }
 
 .logo {
@@ -62,14 +55,6 @@
   object-fit: contain;
 }
 
-.links {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
-}
-
 .link {
   font-size: 1rem;
   font-weight: 500;
@@ -86,4 +71,33 @@
 
 .linkActive {
   border-bottom-color: var(--foreground);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    grid-template-columns: auto auto;
+    grid-template-areas:
+      "left right"
+      "center center";
+    row-gap: 0.75rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .navbarLeft {
+    grid-area: left;
+    gap: 1.25rem;
+  }
+
+  .navbarRight {
+    grid-area: right;
+  }
+
+  .navbarCenter {
+    grid-area: center;
+  }
+
+  .link {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+  }
 }

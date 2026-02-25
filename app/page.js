@@ -103,11 +103,6 @@ export default function Home() {
                         </Link>
                         ))}
                 </div>
-                <div className={styles.comingSoon}>
-                    <span className={styles.comingSoonText}>
-                        Game — Coming soon
-                    </span>
-                </div>
             </section>
 
             {/* Contact Section */}

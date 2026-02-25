@@ -28,40 +28,34 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isHomepage = pathname === "/";
-
   return (
     <nav className={`${styles.navbar} ${!visible ? styles.navbarHidden : ""}`}>
-      <div className={styles.navbarLeft}>
-        <Link href="/" className={styles.logo}>
+      <div className={`${styles.navbarSection} ${styles.navbarLeft}`}>
+        <Link
+          href="/#works"
+          className={`${styles.link} ${pathname === "/" || pathname?.startsWith("/projects") ? styles.linkActive : ""}`}
+        >
+          WORK
+        </Link>
+        <Link href="/about" className={`${styles.link} ${pathname === "/about" ? styles.linkActive : ""}`}>
+          ABOUT
+        </Link>
+      </div>
+
+      <div className={styles.navbarCenter}>
+        <Link href="/" className={styles.logo} aria-label="Home">
           <Image src="/icons/r-icon.png" alt="Home" width={36} height={36} className={styles.logoIcon} unoptimized />
         </Link>
-        {!isHomepage && (
-          <Link href="/#works" className={styles.back} aria-label="Back to Works">
-            <Image src="/icons/arrow.svg" alt="" width={36} height={36} className={styles.backArrow} unoptimized />
-          </Link>
-        )}
       </div>
-      <ul className={styles.links}>
-        <li>
-          <Link
-            href="/#works"
-            className={`${styles.link} ${pathname === "/" || pathname?.startsWith("/projects") ? styles.linkActive : ""}`}
-          >
-            WORK
-          </Link>
-        </li>
-        <li>
-          <Link href="/about" className={`${styles.link} ${pathname === "/about" ? styles.linkActive : ""}`}>
-            ABOUT
-          </Link>
-        </li>
-        <li>
-          <Link href="/#contact" className={styles.link}>
-            CONTACT
-          </Link>
-        </li>
-      </ul>
+
+      <div className={`${styles.navbarSection} ${styles.navbarRight}`}>
+        <Link href="/game" className={`${styles.link} ${pathname === "/game" ? styles.linkActive : ""}`}>
+          GAME
+        </Link>
+        <Link href="/#contact" className={`${styles.link} ${pathname === "/" ? styles.linkActive : ""}`}>
+          CONTACT
+        </Link>
+      </div>
     </nav>
   );
 }

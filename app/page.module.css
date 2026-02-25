@@ -272,21 +272,6 @@
     }
 }
 
-.comingSoon {
-    padding: 4rem 2rem;
-    text-align: center;
-    background: var(--background);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.comingSoonText {
-    font-size: 1.25rem;
-    font-weight: 500;
-    font-style: italic;
-    color: var(--text-muted);
-    letter-spacing: 0.02em;
-}
-
 .contact {
   padding: 5rem 2rem 6rem;
   text-align: center;
