@@ -235,9 +235,28 @@ export default function PreloaderOverlay() {
             scale: 1,
             duration: 2,
             ease: "power2.inOut",
-            onComplete: startDragonBreathing,
+            transformOrigin: "50% 50%",
           },
           "-=0.2"
+        )
+        .to(
+          dragonRef.current,
+          {
+            scale: 1.1,
+            duration: 0.2,
+            ease: "power2.out",
+            transformOrigin: "50% 50%",
+          }
+        )
+        .to(
+          dragonRef.current,
+          {
+            scale: 1,
+            duration: 0.6,
+            ease: "elastic.out(1, 0.3)",
+            transformOrigin: "50% 50%",
+            onComplete: startDragonBreathing,
+          }
         )
         .to({}, { duration: 0.5 });
     } else {
@@ -252,9 +271,28 @@ export default function PreloaderOverlay() {
           scale: 1,
           duration: 2,
           ease: "power2.inOut",
-          onComplete: startDragonBreathing,
+          transformOrigin: "50% 50%",
         }
       )
+        .to(
+          dragonRef.current,
+          {
+            scale: 1.1,
+            duration: 0.2,
+            ease: "power2.out",
+            transformOrigin: "50% 50%",
+          }
+        )
+        .to(
+          dragonRef.current,
+          {
+            scale: 1,
+            duration: 0.6,
+            ease: "elastic.out(1, 0.3)",
+            transformOrigin: "50% 50%",
+            onComplete: startDragonBreathing,
+          }
+        )
         .to({}, { duration: 0.5 });
     }
 

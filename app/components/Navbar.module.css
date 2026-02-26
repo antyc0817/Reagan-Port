@@ -70,10 +70,11 @@
 
 @media (max-width: 768px) {
   .navbar {
-    grid-template-columns: auto auto;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "left right"
       "center center";
+    grid-template-rows: auto auto;
     row-gap: 0.75rem;
     padding: 0.85rem 1rem;
   }
@@ -81,18 +82,40 @@
   .navbarLeft {
     grid-area: left;
     gap: 1.25rem;
+    justify-self: start;
   }
 
   .navbarRight {
     grid-area: right;
+    justify-self: end;
   }
 
   .navbarCenter {
     grid-area: center;
+    justify-self: center;
   }
 
   .link {
     font-size: 0.9rem;
     letter-spacing: 0.08em;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.75rem 0.75rem;
+  }
+
+  .navbarSection {
+    gap: 1rem;
+  }
+
+  .navbarLeft {
+    gap: 1rem;
+  }
+
+  .link {
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
   }
 }

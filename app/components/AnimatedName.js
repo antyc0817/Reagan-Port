@@ -10,26 +10,34 @@ const FULL_NAME = "Reagan Lung";
 export default function AnimatedName() {
   const { hasEntered } = useEnter();
   const containerRef = useRef(null);
+  const typingTimerRef = useRef(null);
   const [displayedChars, setDisplayedChars] = useState(0);
 
   useEffect(() => {
     if (!hasEntered) return;
 
+    const cursorFlashDelay = 2;
     const duration = 1.8;
     const charCount = FULL_NAME.length;
-    const interval = duration / charCount;
+    const intervalMs = (duration / charCount) * 1000;
 
-    const timer = setInterval(() => {
-      setDisplayedChars((prev) => {
-        if (prev >= charCount) {
-          clearInterval(timer);
-          return charCount;
-        }
-        return prev + 1;
-      });
-    }, interval * 1000);
+    const startTypingTimer = setTimeout(() => {
+      const timer = setInterval(() => {
+        setDisplayedChars((prev) => {
+          if (prev >= charCount) {
+            clearInterval(timer);
+            return charCount;
+          }
+          return prev + 1;
+        });
+      }, intervalMs);
+      typingTimerRef.current = timer;
+    }, cursorFlashDelay * 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearTimeout(startTypingTimer);
+      if (typingTimerRef.current) clearInterval(typingTimerRef.current);
+    };
   }, [hasEntered]);
 
   useEffect(() => {

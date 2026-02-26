@@ -1,23 +1,42 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import styles from "./Navbar.module.css";
+import { useEnter } from "../context/EnterContext";
+
+const MOBILE_BREAKPOINT = 768;
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { hasEntered } = useEnter();
   const navRef = useRef(null);
   const lastScrollY = useRef(0);
   const hidden = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     if (!navRef.current) return;
 
-    gsap.set(navRef.current, { yPercent: 0 });
-    hidden.current = false;
+    const shouldStartHidden = isMobile && hasEntered && pathname === "/";
+
+    if (shouldStartHidden) {
+      gsap.set(navRef.current, { yPercent: -110 });
+      hidden.current = true;
+    } else {
+      gsap.set(navRef.current, { yPercent: 0 });
+      hidden.current = false;
+    }
     lastScrollY.current = window.scrollY;
 
     const showNav = () => {
@@ -58,10 +77,15 @@ export default function Navbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [hasEntered, pathname, isMobile]);
 
   useEffect(() => {
     if (!navRef.current) return;
+    const shouldStayHidden = isMobile && hasEntered && pathname === "/";
+
+    if (shouldStayHidden && hidden.current) {
+      return;
+    }
     hidden.current = false;
     gsap.to(navRef.current, {
       yPercent: 0,
@@ -70,7 +94,7 @@ export default function Navbar() {
       overwrite: "auto",
     });
     lastScrollY.current = window.scrollY;
-  }, [pathname]);
+  }, [pathname, hasEntered, isMobile]);
 
   return (
     <nav ref={navRef} className={styles.navbar}>
