@@ -40,7 +40,7 @@ export default function AnimatedName() {
   return (
     <h1 ref={containerRef} className={styles.name}>
       {FULL_NAME.slice(0, displayedChars)}
-      {displayedChars < FULL_NAME.length && <span className={styles.cursor}>|</span>}
+      <span className={styles.cursor}>|</span>
     </h1>
   );
 }
