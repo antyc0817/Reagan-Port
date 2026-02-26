@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { useEnter } from "../context/EnterContext";
 import { Draggable } from "gsap/Draggable";
 import Image from "next/image";
 import styles from "./PreloaderOverlay.module.css";
@@ -9,6 +10,7 @@ import styles from "./PreloaderOverlay.module.css";
 gsap.registerPlugin(Draggable);
 
 export default function PreloaderOverlay() {
+  const { setHasEntered } = useEnter();
   const overlayRef = useRef(null);
   const textRef = useRef(null);
   const dragonButtonRef = useRef(null);
@@ -17,6 +19,30 @@ export default function PreloaderOverlay() {
   const enterTimelineRef = useRef(null);
   const draggableRef = useRef(null);
   const hasEnteredRef = useRef(false);
+  const scrollLockYRef = useRef(0);
+
+  const lockScroll = () => {
+    scrollLockYRef.current = window.scrollY;
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollLockYRef.current}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+  };
+
+  const unlockScroll = () => {
+    const y = scrollLockYRef.current;
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    window.scrollTo(0, y);
+  };
 
   const handleDragonEnter = () => {
     if (!overlayRef.current || !dragonRef.current || hasEnteredRef.current) return;
@@ -52,6 +78,8 @@ export default function PreloaderOverlay() {
             if (!overlayRef.current) return;
             overlayRef.current.style.display = "none";
             overlayRef.current.style.visibility = "hidden";
+            unlockScroll();
+            setHasEntered(true);
           },
         },
         0
@@ -79,6 +107,8 @@ export default function PreloaderOverlay() {
 
     const introMode = handleIntroSession();
     if (!introMode) return;
+
+    lockScroll();
 
     const fullName = "Reagan Lung";
     const chars = fullName.split("");
@@ -229,6 +259,7 @@ export default function PreloaderOverlay() {
     }
 
     return () => {
+      unlockScroll();
       tl.kill();
       if (dragonBreathTweenRef.current) {
         dragonBreathTweenRef.current.kill();
@@ -254,11 +285,15 @@ export default function PreloaderOverlay() {
     };
   }, []);
 
+  const preventScroll = (e) => e.preventDefault();
+
   return (
     <div
       ref={overlayRef}
       className={styles.overlay}
       style={{ display: "none", visibility: "hidden" }}
+      onWheel={preventScroll}
+      onTouchMove={preventScroll}
       role="status"
       aria-live="polite"
       aria-label="Loading"

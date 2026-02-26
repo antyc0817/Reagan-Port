@@ -3,15 +3,19 @@
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import styles from "./AnimatedName.module.css";
+import { useEnter } from "../context/EnterContext";
 
 const FULL_NAME = "Reagan Lung";
 
 export default function AnimatedName() {
+  const { hasEntered } = useEnter();
   const containerRef = useRef(null);
   const [displayedChars, setDisplayedChars] = useState(0);
 
   useEffect(() => {
-    const duration = 1.2;
+    if (!hasEntered) return;
+
+    const duration = 1.8;
     const charCount = FULL_NAME.length;
     const interval = duration / charCount;
 
@@ -26,16 +30,16 @@ export default function AnimatedName() {
     }, interval * 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [hasEntered]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !hasEntered) return;
     gsap.fromTo(
       containerRef.current,
       { opacity: 0 },
       { opacity: 1, duration: 0.5, ease: "power2.out" }
     );
-  }, []);
+  }, [hasEntered]);
 
   return (
     <h1 ref={containerRef} className={styles.name}>
