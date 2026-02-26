@@ -32,6 +32,7 @@ export default function HowICanHelp() {
           </div>
         ))}
       </div>
+      <div className={styles.blackBarBottom} />
     </section>
   );
 }

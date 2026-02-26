@@ -13,7 +13,7 @@ export default function SoulOfSouthKoreaProject() {
       <div className={styles.heroWrap}>
         <div className={`${styles.heroImageContainer} ${styles.fullViewportHeroContainer}`}>
           <Image
-            src="/images/soul-of-south-korea/hero.png"
+            src="/images/soul-of-south-korea/hero.webp"
             alt="Soul of South Korea hero"
             fill
             className={`${styles.heroImg} ${styles.fullViewportHeroImg}`}
@@ -55,7 +55,7 @@ export default function SoulOfSouthKoreaProject() {
           <h3 className={styles.projectSectionTitle}>[ Objective ]</h3>
           <div className={styles.projectSectionImage}>
             <Image
-              src="/images/soul-of-south-korea/s1.png"
+              src="/images/soul-of-south-korea/s1.webp"
               alt="Soul of South Korea objective visual"
               width={960}
               height={720}

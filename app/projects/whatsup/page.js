@@ -14,7 +14,7 @@ export default function WhatsUpProject() {
             <div className={styles.heroWrap}>
                 <div className={`${styles.heroImageContainer} ${styles.fullViewportHeroContainer}`}>
                     <Image
-                        src='/images/whatsup/hero.jpg'
+                        src='/images/whatsup/hero.webp'
                         alt='WhatSUP hero'
                         fill
                         className={`${styles.heroImg} ${styles.fullViewportHeroImg} ${styles.whatsupHeroImgBlur}`}
@@ -88,7 +88,7 @@ export default function WhatsUpProject() {
                 <div className={styles.whatsupIdeationGrid}>
                     <article className={styles.whatsupIdeationCard}>
                         <Image
-                            src='/images/whatsup/V1.jpg'
+                            src='/images/whatsup/V1.webp'
                             alt='WhatSUP ideation visual refresh concept'
                             width={1200}
                             height={1200}
@@ -105,7 +105,7 @@ export default function WhatsUpProject() {
 
                     <article className={styles.whatsupIdeationCard}>
                         <Image
-                            src='/images/whatsup/V2.jpg'
+                            src='/images/whatsup/V2.webp'
                             alt='WhatSUP ideation seamless search concept'
                             width={1200}
                             height={1200}
@@ -122,7 +122,7 @@ export default function WhatsUpProject() {
 
                     <article className={styles.whatsupIdeationCard}>
                         <Image
-                            src='/images/whatsup/V3.jpg'
+                            src='/images/whatsup/V3.webp'
                             alt='WhatSUP ideation real-time status concept'
                             width={1200}
                             height={1200}

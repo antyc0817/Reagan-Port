@@ -16,7 +16,7 @@ export default function CuisineClinicProject() {
             <div className={styles.heroWrap}>
                 <div className={styles.heroImageContainer}>
                     <Image
-                        src='/images/cuisine-clinic/hero.png'
+                        src='/images/cuisine-clinic/hero.webp'
                         alt='Cuisine Clinic'
                         fill
                         className={styles.heroImg}
