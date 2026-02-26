@@ -5,8 +5,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import PreloaderOverlay from "./components/PreloaderOverlay";
 
-// Set to true to re-enable the black screen + "Wake the Dragon" preloader
-const PRELOADER_ENABLED = false;
+// Set to true to re-enable the black screen + "Wake the Dragon" preloader (currently on for local dev)
+const PRELOADER_ENABLED = true;
 
 export const metadata = {
   title: "Reagan",
