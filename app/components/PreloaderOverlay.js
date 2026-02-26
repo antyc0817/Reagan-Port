@@ -323,15 +323,25 @@ export default function PreloaderOverlay() {
     };
   }, []);
 
-  const preventScroll = (e) => e.preventDefault();
+  useLayoutEffect(() => {
+    const el = overlayRef.current;
+    if (!el) return;
+
+    const preventScroll = (e) => e.preventDefault();
+    el.addEventListener("wheel", preventScroll, { passive: false });
+    el.addEventListener("touchmove", preventScroll, { passive: false });
+
+    return () => {
+      el.removeEventListener("wheel", preventScroll);
+      el.removeEventListener("touchmove", preventScroll);
+    };
+  }, []);
 
   return (
     <div
       ref={overlayRef}
       className={styles.overlay}
       style={{ display: "none", visibility: "hidden" }}
-      onWheel={preventScroll}
-      onTouchMove={preventScroll}
       role="status"
       aria-live="polite"
       aria-label="Loading"
