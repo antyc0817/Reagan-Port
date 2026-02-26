@@ -4,6 +4,13 @@
   text-align: center;
 }
 
+.blackBar {
+  width: 100%;
+  height: 4px;
+  background: #000000;
+  margin-bottom: var(--service-gap);
+}
+
 .header {
   font-size: 1.25rem;
   font-weight: 400;

@@ -18,6 +18,7 @@ const services = [
 export default function HowICanHelp() {
   return (
     <section id="skills" className={styles.section}>
+      <div className={styles.blackBar} />
       <p className={styles.header}>Here is how I can help</p>
       <div className={styles.serviceList}>
         {services.map((service) => (
