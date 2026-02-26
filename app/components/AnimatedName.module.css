@@ -1,39 +1,24 @@
 .name {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
-  gap: 0.18em;
   font-size: clamp(5rem, 18vw, 12rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   margin-bottom: 2rem;
   line-height: 1;
-  flex-wrap: wrap;
 }
 
-.rAndEagan {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0;
-}
-
-.nameIconWrapper {
-  position: relative;
+.cursor {
   display: inline-block;
-  width: 0.95em;
-  height: 1.05em;
-  margin-right: -0.08em;
-  flex-shrink: 0;
+  animation: blink 0.8s step-end infinite;
+  margin-left: 0.05em;
 }
 
-.nameIcon {
-  object-fit: contain;
-  object-position: bottom;
-}
-
-.nameEagan,
-.nameLung {
-  letter-spacing: -0.02em;
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1000px) {
@@ -48,7 +33,6 @@
   .name {
     font-size: clamp(2.75rem, 14vw, 5rem);
     margin-bottom: 1.5rem;
-    flex-wrap: nowrap;
   }
 }
 

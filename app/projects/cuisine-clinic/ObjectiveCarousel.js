@@ -6,15 +6,15 @@ import styles from "../projects.module.css";
 
 const slides = [
     {
-        src: "/images/cuisine-clinic/S1.png",
+        src: "/images/cuisine-clinic/s1.webp",
         alt: "Cuisine Clinic packaging concept 1",
     },
     {
-        src: "/images/cuisine-clinic/s2.png",
+        src: "/images/cuisine-clinic/s2.webp",
         alt: "Cuisine Clinic packaging concept 2",
     },
     {
-        src: "/images/cuisine-clinic/s3.png",
+        src: "/images/cuisine-clinic/s3.webp",
         alt: "Cuisine Clinic packaging concept 3",
     },
 ];

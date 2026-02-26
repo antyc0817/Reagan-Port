@@ -2,8 +2,11 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { Draggable } from "gsap/Draggable";
 import Image from "next/image";
 import styles from "./PreloaderOverlay.module.css";
+
+gsap.registerPlugin(Draggable);
 
 export default function PreloaderOverlay() {
   const overlayRef = useRef(null);
@@ -13,16 +16,32 @@ export default function PreloaderOverlay() {
   const enterTextRef = useRef(null);
   const dragonBreathTweenRef = useRef(null);
   const enterTextPulseTweenRef = useRef(null);
+  const dragonShiverTweenRef = useRef(null);
   const enterTimelineRef = useRef(null);
+  const dragonHoverTweenRef = useRef(null);
+  const draggableRef = useRef(null);
   const hasEnteredRef = useRef(false);
+  const hasUserInteractedRef = useRef(false);
 
-  const handleClearSession = () => {
-    sessionStorage.clear();
-    window.location.reload();
+  const stopDragonShiver = () => {
+    if (dragonShiverTweenRef.current) {
+      dragonShiverTweenRef.current.kill();
+      dragonShiverTweenRef.current = null;
+    }
+    if (dragonRef.current) {
+      gsap.set(dragonRef.current, { x: 0 });
+    }
+  };
+
+  const registerUserInteraction = () => {
+    if (hasUserInteractedRef.current) return;
+    hasUserInteractedRef.current = true;
+    stopDragonShiver();
   };
 
   const handleDragonEnter = () => {
     if (!overlayRef.current || !dragonRef.current || hasEnteredRef.current) return;
+    registerUserInteraction();
     hasEnteredRef.current = true;
 
     if (dragonBreathTweenRef.current) {
@@ -32,6 +51,14 @@ export default function PreloaderOverlay() {
     if (enterTextPulseTweenRef.current) {
       enterTextPulseTweenRef.current.kill();
       enterTextPulseTweenRef.current = null;
+    }
+    if (dragonHoverTweenRef.current) {
+      dragonHoverTweenRef.current.kill();
+      dragonHoverTweenRef.current = null;
+    }
+    stopDragonShiver();
+    if (draggableRef.current) {
+      draggableRef.current.disable();
     }
 
     enterTimelineRef.current = gsap.timeline();
@@ -63,25 +90,23 @@ export default function PreloaderOverlay() {
   };
 
   const handleDragonHoverIn = () => {
-    if (!dragonButtonRef.current || hasEnteredRef.current) return;
-    gsap.to(dragonButtonRef.current, {
-      scale: 1.05,
-      duration: 0.28,
-      ease: "power2.out",
-      transformOrigin: "50% 50%",
-      overwrite: "auto",
-    });
+    if (!dragonButtonRef.current || !dragonRef.current || !enterTextRef.current || hasEnteredRef.current) return;
+    if (dragonHoverTweenRef.current) {
+      dragonHoverTweenRef.current.kill();
+    }
+    dragonHoverTweenRef.current = gsap.timeline({ defaults: { duration: 0.28, ease: "power2.out", overwrite: "auto" } });
+    dragonHoverTweenRef.current
+      .to(dragonButtonRef.current, { scale: 1.05, transformOrigin: "50% 50%" }, 0);
   };
 
   const handleDragonHoverOut = () => {
-    if (!dragonButtonRef.current) return;
-    gsap.to(dragonButtonRef.current, {
-      scale: 1,
-      duration: 0.28,
-      ease: "power2.out",
-      transformOrigin: "50% 50%",
-      overwrite: "auto",
-    });
+    if (!dragonButtonRef.current || !dragonRef.current || !enterTextRef.current) return;
+    if (dragonHoverTweenRef.current) {
+      dragonHoverTweenRef.current.kill();
+    }
+    dragonHoverTweenRef.current = gsap.timeline({ defaults: { duration: 0.28, ease: "power2.out", overwrite: "auto" } });
+    dragonHoverTweenRef.current
+      .to(dragonButtonRef.current, { scale: 1, transformOrigin: "50% 50%" }, 0);
   };
 
   const handleIntroSession = () => {
@@ -109,7 +134,7 @@ export default function PreloaderOverlay() {
     const fullName = "Reagan Lung";
     const chars = fullName.split("");
     const typewriterStep = 0.15;
-    const enterPrompt = "CLICK TO ENTER";
+    const enterPrompt = "WAKE THE DRAGON";
     const enterPromptStep = 0.05;
     gsap.set(overlayRef.current, { yPercent: 0 });
     gsap.set(dragonRef.current, {
@@ -123,7 +148,47 @@ export default function PreloaderOverlay() {
     gsap.set(enterTextRef.current, { autoAlpha: 0, opacity: 0 });
     enterTextRef.current.textContent = "";
     gsap.set(dragonButtonRef.current, { pointerEvents: "none" });
+    gsap.set(dragonButtonRef.current, { x: 0, y: 0, scale: 1 });
     hasEnteredRef.current = false;
+    hasUserInteractedRef.current = false;
+    stopDragonShiver();
+
+    if (draggableRef.current) {
+      draggableRef.current.kill();
+      draggableRef.current = null;
+    }
+    draggableRef.current = Draggable.create(dragonButtonRef.current, {
+      type: "x,y",
+      onPress: () => {
+        registerUserInteraction();
+        if (!dragonButtonRef.current) return;
+        dragonButtonRef.current.style.cursor = "grabbing";
+      },
+      onRelease: () => {
+        if (!dragonButtonRef.current) return;
+        dragonButtonRef.current.style.cursor = "pointer";
+        gsap.to(dragonButtonRef.current, {
+          x: 0,
+          y: 0,
+          duration: 1.1,
+          ease: "elastic.out(1, 0.45)",
+          overwrite: "auto",
+        });
+      },
+    })[0];
+    draggableRef.current.disable();
+
+    const startDragonShiver = () => {
+      if (!dragonRef.current || hasUserInteractedRef.current) return;
+      stopDragonShiver();
+      dragonShiverTweenRef.current = gsap.timeline({ repeat: -1, repeatDelay: 4 });
+      dragonShiverTweenRef.current
+        .to(dragonRef.current, { x: -2, duration: 0.05, ease: "power1.inOut" })
+        .to(dragonRef.current, { x: 2, duration: 0.07, ease: "power1.inOut" })
+        .to(dragonRef.current, { x: -1.5, duration: 0.06, ease: "power1.inOut" })
+        .to(dragonRef.current, { x: 1.5, duration: 0.06, ease: "power1.inOut" })
+        .to(dragonRef.current, { x: 0, duration: 0.06, ease: "power1.out" });
+    };
 
     const startDragonBreathing = () => {
       if (!dragonRef.current) return;
@@ -142,6 +207,10 @@ export default function PreloaderOverlay() {
       if (dragonButtonRef.current) {
         gsap.set(dragonButtonRef.current, { pointerEvents: "auto" });
       }
+      if (draggableRef.current) {
+        draggableRef.current.enable();
+      }
+      startDragonShiver();
     };
 
     const startEnterTextPulse = () => {
@@ -159,21 +228,22 @@ export default function PreloaderOverlay() {
       });
     };
 
-    const addTypewriterToTimeline = (timeline, targetEl, text, stepSeconds) => {
+    const addTypewriterToTimeline = (timeline, targetEl, text, stepSeconds, preserveWidth = false) => {
       const segmentStart = timeline.duration();
       timeline.to({}, {
         duration: text.length * stepSeconds,
         ease: "none",
         onStart: () => {
           if (!targetEl) return;
-          targetEl.textContent = "";
+          targetEl.textContent = preserveWidth ? "\u00A0".repeat(text.length) : "";
           gsap.set(targetEl, { autoAlpha: 1, opacity: 1 });
         },
         onUpdate: () => {
           if (!targetEl) return;
           const elapsed = Math.max(0, timeline.time() - segmentStart);
           const progressCount = Math.min(text.length, Math.floor(elapsed / stepSeconds));
-          targetEl.textContent = text.slice(0, progressCount);
+          const typed = text.slice(0, progressCount);
+          targetEl.textContent = preserveWidth ? typed.padEnd(text.length, "\u00A0") : typed;
         },
         onComplete: () => {
           if (!targetEl) return;
@@ -232,7 +302,7 @@ export default function PreloaderOverlay() {
           "<"
         )
         .to({}, { duration: 0.5 });
-      addTypewriterToTimeline(tl, enterTextRef.current, enterPrompt, enterPromptStep);
+      addTypewriterToTimeline(tl, enterTextRef.current, enterPrompt, enterPromptStep, true);
       tl.call(startEnterTextPulse);
     } else {
       textRef.current.textContent = "";
@@ -245,7 +315,7 @@ export default function PreloaderOverlay() {
       })
         .call(startDragonBreathing)
         .to({}, { duration: 0.5 });
-      addTypewriterToTimeline(tl, enterTextRef.current, enterPrompt, enterPromptStep);
+      addTypewriterToTimeline(tl, enterTextRef.current, enterPrompt, enterPromptStep, true);
       tl.call(startEnterTextPulse);
     }
 
@@ -259,6 +329,13 @@ export default function PreloaderOverlay() {
       }
       if (enterTimelineRef.current) {
         enterTimelineRef.current.kill();
+      }
+      stopDragonShiver();
+      if (dragonHoverTweenRef.current) {
+        dragonHoverTweenRef.current.kill();
+      }
+      if (draggableRef.current) {
+        draggableRef.current.kill();
       }
       if (overlayRef.current) {
         gsap.killTweensOf(overlayRef.current);
@@ -311,14 +388,11 @@ export default function PreloaderOverlay() {
               unoptimized
             />
             <span ref={enterTextRef} className={styles.enterPrompt}>
-              CLICK TO ENTER
+              WAKE THE DRAGON
             </span>
           </div>
         </button>
       </div>
-      <button type="button" className={styles.clearSessionBtn} onClick={handleClearSession}>
-        Clear Session
-      </button>
     </div>
   );
 }

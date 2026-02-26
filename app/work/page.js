@@ -12,7 +12,7 @@ const projects = [
     date: "Oct 2025",
     description:
       "Built to evoke the calm of a fresh start, Cuisine Clinic turns a medical remedy into a physical experience. This project involved crafting custom packaging dielines and mockups to bring a sense of order to the morning after.",
-    cover: "/images/cuisine-clinic/coverimg.png",
+    cover: "/images/cuisine-clinic/coverimg.webp",
   },
   {
     slug: "whatsup",

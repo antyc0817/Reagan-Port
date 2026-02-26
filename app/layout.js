@@ -5,6 +5,9 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import PreloaderOverlay from "./components/PreloaderOverlay";
 
+// Set to true to re-enable the black screen + "Wake the Dragon" preloader
+const PRELOADER_ENABLED = false;
+
 export const metadata = {
   title: "Reagan",
   description: "Portfolio",
@@ -20,7 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <PreloaderOverlay />
+        {PRELOADER_ENABLED && <PreloaderOverlay />}
         <Navbar />
         <div style={{ paddingTop: "4.5rem" }}>
           {children}

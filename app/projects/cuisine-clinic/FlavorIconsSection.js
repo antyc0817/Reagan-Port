@@ -12,7 +12,7 @@ const FLAVORS = [
   {
     id: "blueberry",
     name: "Blueberry Bomb",
-    image: "/images/cuisine-clinic/Logo 1.png",
+    image: "/images/cuisine-clinic/Logo 1.webp",
     paletteLabel: "Concentrated explosion of flavor",
     colors: ["#2A73BC", "#E4FF71"],
     headline: "Classic bomb silhouette merged with a central blueberry.",
@@ -23,7 +23,7 @@ const FLAVORS = [
   {
     id: "apple",
     name: "Atomic Apple",
-    image: "/images/cuisine-clinic/Logo 2.png",
+    image: "/images/cuisine-clinic/Logo 2.webp",
     paletteLabel: "Fusion of energy and science",
     colors: ["#59F93D", "#FFFF00", "#FF6178"],
     headline: "Minimalist apple centered within a scientific atomic orbital.",
@@ -34,7 +34,7 @@ const FLAVORS = [
   {
     id: "melon",
     name: "Melon Missile",
-    image: "/images/cuisine-clinic/Logo 3.png",
+    image: "/images/cuisine-clinic/Logo 3.webp",
     paletteLabel: "Direct hit of hydration",
     colors: ["#FF5050", "#3ADB67"],
     headline: "Watermelon slice reimagined as a streamlined vertical rocket.",

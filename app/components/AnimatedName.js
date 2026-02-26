@@ -1,61 +1,46 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import Image from "next/image";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import styles from "./AnimatedName.module.css";
 
+const FULL_NAME = "Reagan Lung";
+
 export default function AnimatedName() {
-  const rRef = useRef(null);
-  const textRef = useRef(null);
+  const containerRef = useRef(null);
+  const [displayedChars, setDisplayedChars] = useState(0);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        rRef.current,
-        {
-          scale: 0,
-          rotation: -15,
-          opacity: 0,
-        },
-        {
-          scale: 1,
-          rotation: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: "back.out(1.4)",
-          delay: 0.2,
-        }
-      );
+    const duration = 1.2;
+    const charCount = FULL_NAME.length;
+    const interval = duration / charCount;
 
-      gsap.fromTo(
-        textRef.current,
-        {
-          x: 30,
-          opacity: 0,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
-          delay: 0.5,
+    const timer = setInterval(() => {
+      setDisplayedChars((prev) => {
+        if (prev >= charCount) {
+          clearInterval(timer);
+          return charCount;
         }
-      );
-    });
+        return prev + 1;
+      });
+    }, interval * 1000);
 
-    return () => ctx.revert();
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    gsap.fromTo(
+      containerRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: "power2.out" }
+    );
   }, []);
 
   return (
-    <h1 className={styles.name}>
-      <span className={styles.rAndEagan}>
-        <span ref={rRef} className={styles.nameIconWrapper}>
-          <Image src="/icons/r-icon.png" alt="R" fill className={styles.nameIcon} sizes="20rem" unoptimized />
-        </span>
-        <span ref={textRef} className={styles.nameEagan}>eagan</span>
-      </span>
-      <span className={styles.nameLung}>Lung</span>
+    <h1 ref={containerRef} className={styles.name}>
+      {FULL_NAME.slice(0, displayedChars)}
+      {displayedChars < FULL_NAME.length && <span className={styles.cursor}>|</span>}
     </h1>
   );
 }
