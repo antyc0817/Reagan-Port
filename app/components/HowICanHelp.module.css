@@ -1,4 +1,5 @@
 .section {
+  --service-gap: 2rem;
   padding: 2rem 2rem 6rem;
   text-align: center;
 }
@@ -7,12 +8,8 @@
   font-size: 1.25rem;
   font-weight: 400;
   color: var(--foreground);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--service-gap);
   letter-spacing: 0.02em;
-}
-
-.serviceItem:first-child .serviceTitle {
-  margin-bottom: 1.5rem;
 }
 
 .serviceList {
@@ -21,7 +18,7 @@
 }
 
 .serviceItem {
-  margin-bottom: 4rem;
+  margin-bottom: var(--service-gap);
 }
 
 .serviceItem:last-child {
@@ -33,12 +30,8 @@
   font-weight: 200;
   letter-spacing: -0.02em;
   color: var(--foreground);
-  margin: 0 0 1rem;
+  margin: 0 0 var(--service-gap);
   line-height: 1;
-}
-
-.serviceItem:last-child .serviceTitle {
-  margin-bottom: 1.75rem;
 }
 
 .serviceSub {
@@ -51,7 +44,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: var(--service-gap);
 }
 
 .serviceSubItem {
