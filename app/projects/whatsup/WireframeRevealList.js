@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import styles from "../projects.module.css";
+import WireframeCardCarousel from "./WireframeCardCarousel";
 
 const WIREFRAME_ITEMS = [
     {
@@ -60,26 +62,59 @@ export default function WireframeRevealList() {
                     ref={(el) => {
                         itemRefs.current[index] = el;
                     }}
-                    className={`${styles.whatsupWireframeItem} ${styles.whatsupWireframeItemReveal}`}
+                    className={`${styles.whatsupWireframeItem} ${index === 2 ? styles.whatsupWireframeItemFooter : ""} ${styles.whatsupWireframeItemReveal}`}
                     style={{ transitionDelay: `${index * 140}ms` }}>
-                    <div className={styles.whatsupWireframeMediaBlock}>
-                        <h4 className={styles.whatsupWireframeItemTitle}>{item.title}</h4>
-                        <div className={styles.whatsupWireframeMedia}>
-                            <div className={styles.whatsupWireframePlaceholder} aria-hidden />
-                        </div>
-                    </div>
-
-                    <div className={styles.whatsupWireframeTextBlock}>
-                        <div className={`${styles.whatsupWireframeDetailGroup} ${styles.whatsupWireframeDetailGroupSolution}`}>
-                            <p className={`${styles.whatsupWireframeLabel} ${styles.whatsupWireframeLabelSolution}`}>Solution</p>
-                            <p className={styles.whatsupWireframeLine}>{item.solution}</p>
-                        </div>
-
-                        <div className={`${styles.whatsupWireframeDetailGroup} ${styles.whatsupWireframeDetailGroupReason}`}>
-                            <p className={`${styles.whatsupWireframeLabel} ${styles.whatsupWireframeLabelReason}`}>Reason</p>
-                            <p className={styles.whatsupWireframeLine}>{item.reason}</p>
-                        </div>
-                    </div>
+                    {index === 2 ? (
+                        <>
+                            <h4 className={styles.whatsupWireframeItemTitle}>{item.title}</h4>
+                            <div className={styles.whatsupWireframeFooterImageWrap}>
+                                <Image
+                                    src="/images/whatsup/footer.webp"
+                                    alt="WhatSUP wireframe footer with weather and map"
+                                    width={1200}
+                                    height={675}
+                                    className={styles.whatsupWireframeCardImg}
+                                    sizes="(max-width: 768px) 100vw, 800px"
+                                    unoptimized
+                                />
+                            </div>
+                            <div className={styles.whatsupWireframeFooterTextBlock}>
+                                <div className={`${styles.whatsupWireframeDetailGroup} ${styles.whatsupWireframeDetailGroupSolution}`}>
+                                    <p className={`${styles.whatsupWireframeLabel} ${styles.whatsupWireframeLabelSolution}`}>Solution</p>
+                                    <p className={styles.whatsupWireframeLine}>{item.solution}</p>
+                                </div>
+                                <div className={`${styles.whatsupWireframeDetailGroup} ${styles.whatsupWireframeDetailGroupReason}`}>
+                                    <p className={`${styles.whatsupWireframeLabel} ${styles.whatsupWireframeLabelReason}`}>Reason</p>
+                                    <p className={styles.whatsupWireframeLine}>{item.reason}</p>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className={styles.whatsupWireframeMediaBlock}>
+                                <h4 className={styles.whatsupWireframeItemTitle}>{item.title}</h4>
+                                <div className={styles.whatsupWireframeMedia}>
+                                    {index === 0 ? (
+                                        <WireframeCardCarousel preset="cards" />
+                                    ) : index === 1 ? (
+                                        <WireframeCardCarousel preset="sidebar" />
+                                    ) : (
+                                        <div className={styles.whatsupWireframePlaceholder} aria-hidden />
+                                    )}
+                                </div>
+                            </div>
+                            <div className={styles.whatsupWireframeTextBlock}>
+                                <div className={`${styles.whatsupWireframeDetailGroup} ${styles.whatsupWireframeDetailGroupSolution}`}>
+                                    <p className={`${styles.whatsupWireframeLabel} ${styles.whatsupWireframeLabelSolution}`}>Solution</p>
+                                    <p className={styles.whatsupWireframeLine}>{item.solution}</p>
+                                </div>
+                                <div className={`${styles.whatsupWireframeDetailGroup} ${styles.whatsupWireframeDetailGroupReason}`}>
+                                    <p className={`${styles.whatsupWireframeLabel} ${styles.whatsupWireframeLabelReason}`}>Reason</p>
+                                    <p className={styles.whatsupWireframeLine}>{item.reason}</p>
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </article>
             ))}
         </div>
