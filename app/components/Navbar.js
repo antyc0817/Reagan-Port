@@ -112,7 +112,7 @@ export default function Navbar() {
 
       <div className={styles.navbarCenter}>
         <Link href="/" className={styles.logo} aria-label="Home">
-          <Image src="/icons/logo2.svg" alt="Home" width={36} height={36} className={styles.logoIcon} unoptimized />
+          <Image src="/icons/Logo2.svg" alt="Home" width={36} height={36} className={styles.logoIcon} unoptimized />
         </Link>
       </div>
 

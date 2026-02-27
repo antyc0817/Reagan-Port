@@ -14,7 +14,7 @@ export const metadata = {
   description: "Portfolio",
   icons: {
     icon: [
-      { url: "/icons/logo2.svg", type: "image/svg+xml" },
+      { url: "/icons/Logo2.svg", type: "image/svg+xml" },
     ],
   },
 };
