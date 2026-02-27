@@ -9,9 +9,9 @@ import styles from "./StackedCardReveal.module.css";
 gsap.registerPlugin(ScrollTrigger);
 
 const CARDS = [
-    { src: "/images/cuisine-clinic/s1.webp", alt: "Cuisine Clinic packaging concept 1" },
-    { src: "/images/cuisine-clinic/s2.webp", alt: "Cuisine Clinic packaging concept 2" },
-    { src: "/images/cuisine-clinic/s3.webp", alt: "Cuisine Clinic packaging concept 3" },
+    { src: "/images/cuisine-clinic/s1.webp", alt: "Cuisine Clinic packaging concept 1", flavor: "Melon Missile" },
+    { src: "/images/cuisine-clinic/s2.webp", alt: "Cuisine Clinic packaging concept 2", flavor: "Atomic Apple" },
+    { src: "/images/cuisine-clinic/s3.webp", alt: "Cuisine Clinic packaging concept 3", flavor: "Blueberry Bomb" },
 ];
 
 const ROTATION_OFFSETS = [-4, 2, -2];
@@ -35,59 +35,65 @@ export default function StackedCardReveal() {
             transformOrigin: "center center",
         });
 
-        cards.forEach((card, i) => {
-            gsap.set(card, {
+        cards.forEach((wrapper, i) => {
+            const label = wrapper.querySelector(`.${styles.cardLabel}`);
+            gsap.set(wrapper, {
                 rotateZ: ROTATION_OFFSETS[i] || 0,
                 scale: i === 0 ? 1 : 0.9 - i * 0.05,
                 filter: i === 0 ? "blur(0px)" : "blur(4px)",
                 zIndex: CARDS.length - i,
                 opacity: 1,
             });
+            if (label) gsap.set(label, { opacity: i === 0 ? 1 : 0 });
         });
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: container,
-                start: "bottom bottom",
-                end: "top 20%",
-                scrub: 1,
-                snap: 1 / 3,
-                invalidateOnRefresh: true,
-            },
-        });
+        const tl = gsap.timeline({ paused: true, repeat: 1 });
 
-        cards.forEach((card, i) => {
-            const nextCard = cards[(i + 1) % cards.length];
+        cards.forEach((wrapper, i) => {
+            const nextWrapper = cards[(i + 1) % cards.length];
+            const nextLabel = nextWrapper.querySelector(`.${styles.cardLabel}`);
 
-            tl.to(card, {
+            const currLabel = wrapper.querySelector(`.${styles.cardLabel}`);
+            tl.to(wrapper, {
                 x: "120%",
                 rotateZ: 15,
-                duration: 1,
-                ease: "power1.inOut",
-            })
-                // Step B: Instantly drop z-index when card is furthest out
-                .set(card, { zIndex: 0 })
-                // Step C: Slide card back into the bottom of the stack
-                .to(card, {
+                duration: 0.8,
+                ease: "power2.inOut",
+            });
+            if (currLabel) tl.to(currLabel, { opacity: 0, duration: 0.2 }, "<");
+            tl.set(wrapper, { zIndex: 0 })
+                .to(wrapper, {
                     x: "0%",
                     rotateZ: ROTATION_OFFSETS[i] || 0,
                     scale: 0.85,
                     filter: "blur(6px)",
-                    duration: 1,
-                    ease: "power1.inOut",
+                    duration: 0.8,
+                    ease: "power2.inOut",
                 })
                 .to(
-                    nextCard,
+                    nextWrapper,
                     {
                         scale: 1,
                         filter: "blur(0px)",
                         zIndex: 10,
                         rotateZ: 0,
-                        duration: 1,
-                        ease: "power1.inOut",
+                        duration: 0.8,
+                        ease: "power2.inOut",
                     },
                     "<"
                 );
+            if (nextLabel) {
+                tl.fromTo(nextLabel, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, "<");
+            }
+        });
+
+        const st = ScrollTrigger.create({
+            trigger: container,
+            start: "bottom bottom",
+            onEnter: () => tl.restart(),
+            onLeaveBack: () => tl.pause(),
+            onEnterBack: () => tl.restart(),
+            onLeave: () => tl.pause(),
         });
 
         const onResize = () => ScrollTrigger.refresh();
@@ -95,7 +101,7 @@ export default function StackedCardReveal() {
 
         return () => {
             window.removeEventListener("resize", onResize);
-            tl.scrollTrigger?.kill();
+            st.kill();
         };
     }, []);
 
@@ -108,16 +114,19 @@ export default function StackedCardReveal() {
                     <div
                         key={card.src}
                         ref={(el) => (cardsRef.current[i] = el)}
-                        className={styles.card}>
-                        <Image
-                            src={card.src}
-                            alt={card.alt}
-                            fill
-                            className={styles.cardImage}
-                            sizes='(max-width: 768px) 90vw, 480px'
-                            unoptimized
-                            draggable={false}
-                        />
+                        className={styles.cardWrapper}>
+                        <div className={styles.card}>
+                            <Image
+                                src={card.src}
+                                alt={card.alt}
+                                fill
+                                className={styles.cardImage}
+                                sizes='(max-width: 768px) 90vw, 480px'
+                                unoptimized
+                                draggable={false}
+                            />
+                        </div>
+                        <span className={styles.cardLabel}>{card.flavor}</span>
                     </div>
                 ))}
             </div>
