@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import AnimatedName from "./components/AnimatedName";
 import Footer from "./components/Footer";
 import HeroBanner from "./components/HeroBanner";

@@ -2,6 +2,7 @@ import Image from "next/image";
 import DesignSystemExpand from "./DesignSystemExpand";
 import TypographySection from "./TypographySection";
 import FlavorIconsSection from "./FlavorIconsSection";
+import GalleryCarousel from "./GalleryCarousel";
 import ObjectiveCarousel from "./ObjectiveCarousel";
 import styles from "../projects.module.css";
 
@@ -66,7 +67,8 @@ export default function CuisineClinicProject() {
                     </div>
                 </div>
             </section>
-            <section className={`${styles.projectSection} ${styles.objectiveSection}`}>
+            <section
+                className={`${styles.projectSection} ${styles.objectiveSection}`}>
                 <div className={styles.projectSectionGrid}>
                     <h3 className={styles.projectSectionTitle}>
                         [ Objective ]
@@ -86,10 +88,9 @@ export default function CuisineClinicProject() {
                         </p>
                         <p>
                             My mission was to bridge that gap by transforming
-                            the concept of a medical remedy into a
-                            {" "}
-                            <strong>premium experience</strong>. By clearing
-                            out the visual noise, I built a system that is{" "}
+                            the concept of a medical remedy into a{" "}
+                            <strong>premium experience</strong>. By clearing out
+                            the visual noise, I built a system that is{" "}
                             <strong>clean, orderly, and effortless</strong>. The
                             result is a design that provides{" "}
                             <strong>total clarity</strong> exactly when the user
@@ -110,7 +111,8 @@ export default function CuisineClinicProject() {
             <section
                 className={`${styles.projectSection} ${styles.gallerySection}`}>
                 <h3 className={styles.projectSectionTitle}>[ Gallery ]</h3>
-                <div className={styles.galleryGrid} />
+                <p className={styles.galleryHint}>Drag to spin</p>
+                <GalleryCarousel />
             </section>
         </main>
     );

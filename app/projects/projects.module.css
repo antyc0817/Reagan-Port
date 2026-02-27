@@ -1776,30 +1776,12 @@
     text-align: center;
 }
 
-.galleryGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.galleryItem {
-    position: relative;
-    aspect-ratio: 1;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #f0f0f0;
-}
-
-.galleryImg {
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.galleryItem:hover .galleryImg {
-    transform: scale(1.03);
+.galleryHint {
+    font-size: 1.4rem;
+    color: var(--text-muted, #666);
+    letter-spacing: 0.06em;
+    margin: -1.5rem 0 2rem;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -1956,11 +1938,6 @@
         margin-bottom: 1.5rem;
     }
 
-    .galleryGrid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-
     .container {
         padding: 3rem 1.5rem 4rem;
     }
@@ -2044,11 +2021,6 @@
 
     .designSystemCards {
         grid-template-columns: 1fr;
-    }
-
-    .galleryGrid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
     }
 
     .typographyCards {
