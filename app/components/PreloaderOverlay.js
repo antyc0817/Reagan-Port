@@ -118,9 +118,7 @@ export default function PreloaderOverlay() {
     gsap.set(dragonRef.current, {
       autoAlpha: 0,
       opacity: 0,
-      scale: 0.96,
-      y: 0,
-      clipPath: "inset(100% 0 0 0)",
+      scale: 0.94,
     });
     gsap.set(textRef.current, { autoAlpha: 1, opacity: 1, scale: 1 });
     gsap.set(dragonButtonRef.current, { pointerEvents: "none" });
@@ -190,9 +188,7 @@ export default function PreloaderOverlay() {
             gsap.set(dragonRef.current, {
               autoAlpha: 0,
               opacity: 0,
-              scale: 0.96,
-              y: 0,
-              clipPath: "inset(100% 0 0 0)",
+              scale: 0.94,
             });
           },
           onUpdate: () => {
@@ -231,10 +227,9 @@ export default function PreloaderOverlay() {
           {
             autoAlpha: 1,
             opacity: 1,
-            clipPath: "inset(0% 0 0 0)",
             scale: 1,
-            duration: 2,
-            ease: "power2.inOut",
+            duration: 2.4,
+            ease: "sine.inOut",
             transformOrigin: "50% 50%",
           },
           "-=0.2"
@@ -242,8 +237,8 @@ export default function PreloaderOverlay() {
         .to(
           dragonRef.current,
           {
-            scale: 1.1,
-            duration: 0.2,
+            scale: 1.08,
+            duration: 0.25,
             ease: "power2.out",
             transformOrigin: "50% 50%",
           }
@@ -267,18 +262,17 @@ export default function PreloaderOverlay() {
         {
           autoAlpha: 1,
           opacity: 1,
-          clipPath: "inset(0% 0 0 0)",
           scale: 1,
-          duration: 2,
-          ease: "power2.inOut",
+          duration: 2.4,
+          ease: "sine.inOut",
           transformOrigin: "50% 50%",
         }
       )
         .to(
           dragonRef.current,
           {
-            scale: 1.1,
-            duration: 0.2,
+            scale: 1.08,
+            duration: 0.25,
             ease: "power2.out",
             transformOrigin: "50% 50%",
           }
