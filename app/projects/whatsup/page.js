@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "../projects.module.css";
 import PersonaInteractive from "./PersonaInteractive";
 import WireframeRevealList from "./WireframeRevealList";
+import WhatsupGallery from "./WhatsupGallery";
 
 export const metadata = {
     title: "WhatSUP | Reagan",
@@ -62,7 +63,18 @@ export default function WhatsUpProject() {
                 <div className={styles.projectSectionGrid}>
                     <h3 className={styles.projectSectionTitle}>[ Objective ]</h3>
                     <div className={styles.projectSectionImage}>
-                        <div className={styles.whatsupObjectivePlaceholder} aria-hidden />
+                        <div className={styles.whatsupObjectivePlaceholder}>
+                            <Image
+                                src="/images/whatsup/Home.webp"
+                                alt="WhatSUP home screen"
+                                width={1000}
+                                height={3727}
+                                className={styles.whatsupObjectiveImage}
+                                sizes="(max-width: 600px) 92vw, (max-width: 1024px) 420px, 460px"
+                                unoptimized
+                            />
+                        </div>
+                        <p className={styles.whatsupObjectiveCaption}>Scroll to view</p>
                     </div>
                     <div className={styles.projectSectionText}>
                         <p>
@@ -199,6 +211,11 @@ export default function WhatsUpProject() {
                         <p className={styles.whatsupStyleguideColorHex}>#90BED1</p>
                     </article>
                 </div>
+            </section>
+
+            <section className={`${styles.projectSection} ${styles.whatsupGallerySection}`}>
+                <h3 className={styles.projectSectionTitle}>[ Gallery ]</h3>
+                <WhatsupGallery />
             </section>
         </main>
     );

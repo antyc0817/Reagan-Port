@@ -204,9 +204,9 @@
     }
 
     .heroProjectInfoTagline {
-        max-width: 32rem;
+        max-width: none;
         font-size: clamp(0.98rem, 3.8vw, 1.25rem);
-        white-space: normal;
+        white-space: nowrap;
     }
 
     .heroLogo {
@@ -216,7 +216,9 @@
         height: 56px !important;
     }
 
-    .heroCaption {
+    /* Move non-image captions below on very small screens, but keep
+       project-specific on-image captions (like WhatSUP) pinned on the hero. */
+    .heroCaption:not(.heroCaptionOnImage) {
         position: static;
         padding: 0.5rem 1rem 0.75rem;
         font-size: 0.95rem;
@@ -365,20 +367,90 @@
     margin-bottom: 2.2rem;
 }
 
+.whatsupObjectiveSection .projectSectionImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.whatsupObjectiveCaption {
+    margin: 1.5rem auto 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #ffffff;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #e5771e;
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.18),
+        0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+
 .whatsupObjectivePlaceholder {
+    position: relative;
     width: 100%;
+    max-width: 520px;
+    margin-inline: auto;
     aspect-ratio: 1 / 1;
     border-radius: 12px;
-    background:
-        linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.03)),
-        repeating-linear-gradient(
-            45deg,
-            rgba(255, 255, 255, 0.35) 0px,
-            rgba(255, 255, 255, 0.35) 10px,
-            rgba(255, 255, 255, 0.18) 10px,
-            rgba(255, 255, 255, 0.18) 20px
-        );
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow:
+        0 16px 38px rgba(0, 0, 0, 0.14),
+        0 6px 14px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    transition: box-shadow 220ms ease, transform 220ms ease, border-color 220ms ease;
+    will-change: transform;
+}
+
+.whatsupObjectivePlaceholder::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 38%);
+    opacity: 0.9;
+    z-index: 1;
+}
+
+.whatsupObjectiveImage {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+}
+
+/* Scroll the tall Home.webp inside the square only on hover */
+.whatsupObjectivePlaceholder:hover {
+    overflow-y: auto;
+    transform: translateY(-3px);
+    border-color: rgba(0, 0, 0, 0.24);
+    box-shadow:
+        0 22px 54px rgba(0, 0, 0, 0.16),
+        0 10px 22px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.whatsupObjectivePlaceholder {
+    scrollbar-width: none; /* Firefox */
+}
+
+.whatsupObjectivePlaceholder::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+@media (hover: none) {
+    /* Allow touch users to swipe-scroll the image */
+    .whatsupObjectivePlaceholder {
+        overflow-y: auto;
+    }
 }
 
 .whatsupIdeationSection {
@@ -1251,6 +1323,117 @@
     margin-bottom: 1.4rem;
 }
 
+.whatsupGallerySection {
+    text-align: center;
+}
+
+.whatsupGalleryRoot {
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 1.4rem;
+    justify-items: center;
+}
+
+.whatsupGalleryFrame {
+    position: relative;
+    width: min(520px, 100%);
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    box-shadow:
+        0 18px 46px rgba(0, 0, 0, 0.16),
+        0 6px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    overflow: hidden;
+}
+
+.whatsupGallerySlide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.whatsupGalleryScrollable {
+    width: 100%;
+    overflow: hidden;
+}
+
+.whatsupGalleryScrollable:hover {
+    overflow-y: auto;
+}
+
+.whatsupGalleryScrollable {
+    scrollbar-width: none;
+}
+
+.whatsupGalleryScrollable::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.whatsupGalleryImage {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+}
+
+.whatsupGalleryNav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+}
+
+.whatsupGalleryNavItem {
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 0.35rem 0.75rem;
+    background: rgba(255, 255, 255, 0.7);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
+}
+
+.whatsupGalleryNavItem:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.whatsupGalleryNavItemActive {
+    background: rgba(229, 119, 30, 0.12);
+    border-color: rgba(229, 119, 30, 0.7);
+    color: var(--foreground);
+}
+
+.whatsupGalleryNavIndex {
+    font-weight: 600;
+}
+
+.whatsupGalleryNavLabel {
+    opacity: 0.8;
+}
+
+@media (hover: none) {
+    .whatsupGalleryScrollable {
+        overflow-y: auto;
+    }
+}
+
 .whatsupStyleguideIntro {
     margin: 0 auto;
     max-width: 860px;
@@ -2003,6 +2186,16 @@
         margin-bottom: 2rem;
     }
 
+    /* Center the Objective heading on small screens */
+    .whatsupObjectiveSection .projectSectionTitle {
+        text-align: center;
+    }
+
+    /* Add extra breathing room between image/caption and body copy */
+    .whatsupObjectiveSection .projectSectionText {
+        margin-top: 1.5rem;
+    }
+
     .projectSectionImage {
         grid-column: 1;
         grid-row: 2;
@@ -2178,6 +2371,12 @@
 
     .designSystemCards {
         grid-template-columns: 1fr;
+    }
+
+    /* Hide connector lines in Cuisine Clinic design system on small screens
+       so the layout stays clean in a single-column stack. */
+    .designSystemConnector {
+        display: none;
     }
 
     .typographyCards {

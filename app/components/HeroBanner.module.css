@@ -20,7 +20,6 @@
   padding: 1rem 2rem 1rem 0;
   text-align: left;
   max-width: min(48ch, 100%);
-  text-wrap: balance;
   min-width: 0;
   overflow-wrap: break-word;
   word-break: break-word;
