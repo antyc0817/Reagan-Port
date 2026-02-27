@@ -6,8 +6,8 @@ import Navbar from "./components/Navbar";
 import PreloaderOverlay from "./components/PreloaderOverlay";
 import { EnterProvider } from "./context/EnterContext";
 
-// Set to true to re-enable the black screen + "Wake the Dragon" preloader (currently on for local dev)
-const PRELOADER_ENABLED = true;
+// Set to true to re-enable the dragon preloader
+const PRELOADER_ENABLED = false;
 
 export const metadata = {
   title: "Reagan",

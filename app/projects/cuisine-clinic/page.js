@@ -3,7 +3,7 @@ import DesignSystemExpand from "./DesignSystemExpand";
 import TypographySection from "./TypographySection";
 import FlavorIconsSection from "./FlavorIconsSection";
 import GalleryCarousel from "./GalleryCarousel";
-import ObjectiveCarousel from "./ObjectiveCarousel";
+import StackedCardReveal from "./StackedCardReveal";
 import styles from "../projects.module.css";
 
 export const metadata = {
@@ -74,7 +74,9 @@ export default function CuisineClinicProject() {
                         [ Objective ]
                     </h3>
                     <div className={styles.projectSectionImage}>
-                        <ObjectiveCarousel />
+                        <div className={styles.objectiveCarouselMedia}>
+                            <StackedCardReveal />
+                        </div>
                     </div>
                     <div className={styles.projectSectionText}>
                         <p>
