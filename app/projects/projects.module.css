@@ -1368,6 +1368,25 @@
         padding: 1.25rem 1rem;
     }
 
+    /* Stack the first wireframe (Scannable Selection) on tablets: image above, text below */
+    .whatsupWireframeItem:first-child {
+        grid-template-columns: 1fr;
+    }
+
+    .whatsupWireframeItem:first-child .whatsupWireframeMediaBlock {
+        order: 1;
+    }
+
+    .whatsupWireframeItem:first-child .whatsupWireframeTextBlock {
+        order: 2;
+        margin-top: 1.5rem;
+        align-self: stretch;
+    }
+
+    .whatsupWireframeItem:first-child .whatsupWireframeMedia {
+        max-width: 520px;
+        margin: 0 auto;
+    }
 }
 
 .designSystemSection {
@@ -2489,6 +2508,11 @@
     .whatsupWireframeItem:nth-child(even) .whatsupWireframeTextBlock {
         order: 2;
         margin-top: 0;
+    }
+
+    /* Remove extra top margin on first wireframe text on small screens */
+    .whatsupWireframeItem:first-child .whatsupWireframeTextBlock {
+        margin-top: 1.25rem;
     }
 
     .whatsupWireframeMedia {
