@@ -40,8 +40,8 @@
 }
 
 .serviceTitle {
-  font-size: clamp(4rem, 12vw, 8rem);
-  font-weight: 200;
+  font-size: clamp(4.25rem, 13vw, 8.5rem);
+  font-weight: 300;
   letter-spacing: -0.02em;
   color: var(--foreground);
   margin: 0 0 var(--service-gap);
@@ -63,4 +63,8 @@
 
 .serviceSubItem {
   white-space: nowrap;
+}
+
+:global(#branding-text .char) {
+  display: inline-block;
 }
