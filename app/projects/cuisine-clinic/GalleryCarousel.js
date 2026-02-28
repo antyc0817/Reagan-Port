@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { gsap } from "gsap";
 import styles from "./GalleryCarousel.module.css";
 
@@ -228,7 +227,15 @@ export default function GalleryCarousel() {
                         className={styles.arrowBtn}
                         onClick={goToPrev}
                         aria-label="Previous image">
-                        <ChevronLeft className={styles.arrowIcon} />
+                        <Image
+                            src="/icons/arrow.svg"
+                            alt=""
+                            width={28}
+                            height={28}
+                            className={`${styles.arrowIcon} ${styles.arrowIconLeft}`}
+                            unoptimized
+                            aria-hidden
+                        />
                     </button>
                     <p className={styles.counter}>
                         {activeIndex + 1} / {IMAGE_COUNT}
@@ -238,7 +245,15 @@ export default function GalleryCarousel() {
                         className={styles.arrowBtn}
                         onClick={goToNext}
                         aria-label="Next image">
-                        <ChevronRight className={styles.arrowIcon} />
+                        <Image
+                            src="/icons/arrow.svg"
+                            alt=""
+                            width={28}
+                            height={28}
+                            className={styles.arrowIcon}
+                            unoptimized
+                            aria-hidden
+                        />
                     </button>
                 </div>
             </div>

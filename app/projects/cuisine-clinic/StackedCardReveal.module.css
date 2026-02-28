@@ -49,6 +49,53 @@
     text-align: center;
 }
 
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+}
+
+.arrowBtn {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.arrowBtn:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.arrowBtn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.arrowIcon {
+    display: block;
+    width: 28px;
+    height: 28px;
+}
+
+.arrowIconLeft {
+    transform: scaleX(-1);
+}
+
+.counter {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--foreground);
+    letter-spacing: 0.03em;
+}
+
 @media (max-width: 768px) {
     .cardWrapper {
         max-width: 280px;
@@ -57,5 +104,24 @@
 
     .cardLabel {
         font-size: 1.4rem;
+    }
+
+    .controls {
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .arrowBtn {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    .arrowIcon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .counter {
+        font-size: 0.88rem;
     }
 }
