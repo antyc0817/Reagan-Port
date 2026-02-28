@@ -204,9 +204,9 @@
     }
 
     .heroProjectInfoTagline {
-        max-width: none;
+        max-width: 32rem;
         font-size: clamp(0.98rem, 3.8vw, 1.25rem);
-        white-space: nowrap;
+        white-space: normal;
     }
 
     .heroLogo {
