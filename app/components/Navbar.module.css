@@ -70,29 +70,27 @@
 
 @media (max-width: 768px) {
   .navbar {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "left right"
-      "center center";
-    grid-template-rows: auto auto;
-    row-gap: 0.75rem;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto;
     padding: 0.85rem 1rem;
   }
 
   .navbarLeft {
-    grid-area: left;
     gap: 1.25rem;
     justify-self: start;
   }
 
   .navbarRight {
-    grid-area: right;
     justify-self: end;
   }
 
   .navbarCenter {
-    grid-area: center;
     justify-self: center;
+  }
+
+  .logoIcon {
+    width: 32px;
+    height: 32px;
   }
 
   .link {
@@ -117,5 +115,10 @@
   .link {
     font-size: 0.85rem;
     letter-spacing: 0.06em;
+  }
+
+  .logoIcon {
+    width: 28px;
+    height: 28px;
   }
 }
