@@ -23,6 +23,23 @@
   min-width: 0;
   overflow-wrap: break-word;
   word-break: break-word;
+  perspective: 900px;
+}
+
+.descriptionHidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.descriptionVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.descriptionWord {
+  display: inline-block;
+  backface-visibility: hidden;
+  will-change: transform, opacity, filter, clip-path;
 }
 
 .links {

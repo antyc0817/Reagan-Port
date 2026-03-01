@@ -11,12 +11,17 @@ export default function AnimatedName() {
   const { hasEntered } = useEnter();
   const containerRef = useRef(null);
   const typingTimerRef = useRef(null);
+  const nameDoneEmittedRef = useRef(false);
   const [displayedChars, setDisplayedChars] = useState(0);
 
   useEffect(() => {
     if (!hasEntered) return;
+    nameDoneEmittedRef.current = false;
+    if (typeof window !== "undefined") {
+      window.__reaganNameDone = false;
+    }
 
-    const cursorFlashDelay = 2;
+    const cursorFlashDelay = 0.7;
     const duration = 1.8;
     const charCount = FULL_NAME.length;
     const intervalMs = (duration / charCount) * 1000;
@@ -39,6 +44,15 @@ export default function AnimatedName() {
       if (typingTimerRef.current) clearInterval(typingTimerRef.current);
     };
   }, [hasEntered]);
+
+  useEffect(() => {
+    if (!hasEntered || displayedChars < FULL_NAME.length || nameDoneEmittedRef.current) return;
+    nameDoneEmittedRef.current = true;
+    if (typeof window !== "undefined") {
+      window.__reaganNameDone = true;
+      window.dispatchEvent(new Event("reagan-name:done"));
+    }
+  }, [displayedChars, hasEntered]);
 
   useEffect(() => {
     if (!containerRef.current || !hasEntered) return;

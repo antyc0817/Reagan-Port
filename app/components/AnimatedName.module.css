@@ -11,7 +11,7 @@
 
 .cursor {
   display: inline-block;
-  animation: blink 1.1s step-end infinite;
+  animation: blink 0.7s step-end 1;
   margin-left: 0.05em;
 }
 
