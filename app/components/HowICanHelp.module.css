@@ -65,6 +65,18 @@
   white-space: nowrap;
 }
 
+.subItemBracket {
+  display: inline-block;
+}
+
+.brandingFlipText {
+  display: inline-block;
+}
+
+:global(.branding-flip-item .branding-char) {
+  display: inline-block;
+}
+
 :global(#branding-text .char) {
   display: inline-block;
 }

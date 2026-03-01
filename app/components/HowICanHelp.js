@@ -22,6 +22,7 @@ const services = [
 export default function HowICanHelp() {
   useEffect(() => {
     const brandingContainer = document.getElementById('branding-text');
+    const brandingFlipItems = Array.from(document.querySelectorAll('.branding-flip-item'));
     const uiuxContainer = document.getElementById('uiux-text');
     const digitalContainer = document.getElementById('digital-text');
     if (!brandingContainer) return;
@@ -91,6 +92,50 @@ export default function HowICanHelp() {
       el.addEventListener('mouseleave', onLeave);
 
       return { el, onEnter, onLeave };
+    });
+
+    // Branding sub-items: identical left-to-right flip + bounce, brackets stay static.
+    const brandingFlipCleanup = [];
+    brandingFlipItems.forEach((itemEl) => {
+      const itemChars = Array.from(itemEl.querySelectorAll('.branding-char'));
+      if (!itemChars.length) return;
+
+      gsap.set(itemChars, {
+        display: 'inline-block',
+        transformOrigin: '50% 60%',
+      });
+
+      let isHovering = false;
+
+      const onEnter = () => {
+        if (isHovering) return;
+        isHovering = true;
+        gsap.killTweensOf(itemChars);
+        gsap.set(itemChars, { rotationX: 0, y: 0 });
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            isHovering = false;
+          },
+        });
+
+        // Left-to-right single flip to mimic a digital clock card turn.
+        tl.to(itemChars, {
+          rotationX: -360,
+          y: -2,
+          duration: 0.5,
+          stagger: 0.045,
+          ease: 'power2.inOut',
+        }).to(itemChars, {
+          y: 0,
+          duration: 0.18,
+          stagger: 0.045,
+          ease: 'power1.out',
+        });
+      };
+
+      itemEl.addEventListener('mouseenter', onEnter);
+      brandingFlipCleanup.push(() => itemEl.removeEventListener('mouseenter', onEnter));
     });
 
     if (uiuxContainer || digitalContainer) {
@@ -241,6 +286,7 @@ export default function HowICanHelp() {
           el.removeEventListener('mouseenter', onEnter);
           el.removeEventListener('mouseleave', onLeave);
         });
+        brandingFlipCleanup.forEach((cleanup) => cleanup());
         if (uiuxHandlersCleanup) uiuxHandlersCleanup();
         if (digitalHandlersCleanup) digitalHandlersCleanup();
       };
@@ -251,6 +297,7 @@ export default function HowICanHelp() {
         el.removeEventListener('mouseenter', onEnter);
         el.removeEventListener('mouseleave', onLeave);
       });
+      brandingFlipCleanup.forEach((cleanup) => cleanup());
     };
   }, []);
 
@@ -284,7 +331,21 @@ export default function HowICanHelp() {
             </h3>
             <p className={styles.serviceSub}>
               {service.items.map((item) => (
-                <span key={item} className={styles.serviceSubItem}>[{item}]</span>
+                service.title === 'Branding' ? (
+                  <span key={item} className={`${styles.serviceSubItem} branding-flip-item`}>
+                    <span className={styles.subItemBracket}>[</span>
+                    <span className={styles.brandingFlipText}>
+                      {item.split('').map((ch, index) => (
+                        <span key={`${item}-${index}`} className="branding-char">
+                          {ch === ' ' ? '\u00A0' : ch}
+                        </span>
+                      ))}
+                    </span>
+                    <span className={styles.subItemBracket}>]</span>
+                  </span>
+                ) : (
+                  <span key={item} className={styles.serviceSubItem}>[{item}]</span>
+                )
               ))}
             </p>
           </div>
