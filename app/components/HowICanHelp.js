@@ -19,10 +19,26 @@ const services = [
   },
 ];
 
+const uiuxSubAnimations = {
+  "WIREFRAMING": "grid-snap",
+  "PROTOTYPING": "grid-snap",
+  "INTERFACE DESIGN": "grid-snap",
+};
+
+// Kept for later if you want to revisit this concept quickly:
+// PROTOTYPING => "blueprint-draw"
+const digitalSubAnimations = {
+  "SEO STRATEGY": "blueprint-draw",
+  "WEB DEVELOPMENT": "blueprint-draw",
+  "CONTENT MANAGEMENT": "blueprint-draw",
+};
+
 export default function HowICanHelp() {
   useEffect(() => {
     const brandingContainer = document.getElementById('branding-text');
     const brandingFlipItems = Array.from(document.querySelectorAll('.branding-flip-item'));
+    const uiuxAnimatedItems = Array.from(document.querySelectorAll('.uiux-anim-item'));
+    const digitalAnimatedItems = Array.from(document.querySelectorAll('.digital-anim-item'));
     const uiuxContainer = document.getElementById('uiux-text');
     const digitalContainer = document.getElementById('digital-text');
     if (!brandingContainer) return;
@@ -136,6 +152,262 @@ export default function HowICanHelp() {
 
       itemEl.addEventListener('mouseenter', onEnter);
       brandingFlipCleanup.push(() => itemEl.removeEventListener('mouseenter', onEnter));
+    });
+
+    // UI/UX sub-items: three distinct hover demos, brackets stay static.
+    const uiuxSubCleanup = [];
+    uiuxAnimatedItems.forEach((itemEl) => {
+      const itemChars = Array.from(itemEl.querySelectorAll('.uiux-char'));
+      if (!itemChars.length) return;
+
+      gsap.set(itemChars, {
+        display: 'inline-block',
+        transformOrigin: '50% 60%',
+      });
+
+      let isAnimating = false;
+      const animationType = itemEl.getAttribute('data-uiux-animation');
+      const baseColor = window.getComputedStyle(itemEl).color;
+
+      const onEnter = () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        gsap.killTweensOf(itemChars);
+        gsap.set(itemChars, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          rotationX: 0,
+          opacity: 1,
+          color: baseColor,
+          webkitTextStrokeWidth: 0,
+        });
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            isAnimating = false;
+          },
+        });
+
+        if (animationType === 'grid-snap') {
+          // WIREFRAMING: briefly deconstruct, then snap back to clean alignment.
+          tl.to(itemChars, {
+            x: (i) => (i % 2 === 0 ? -8 : 8),
+            y: (i) => (i % 3 === 0 ? -4 : 4),
+            rotation: (i) => (i % 2 === 0 ? -7 : 7),
+            duration: 0.14,
+            stagger: 0.018,
+            ease: 'power1.out',
+          }).to(itemChars, {
+            x: 0,
+            y: 0,
+            rotation: 0,
+            duration: 0.32,
+            stagger: 0.02,
+            ease: 'expo.out',
+          });
+        } else if (animationType === 'blueprint-draw') {
+          // PROTOTYPING: technical draft-in then fill to solid.
+          gsap.set(itemChars, {
+            opacity: 0.25,
+            y: 6,
+            rotationX: -85,
+            color: 'transparent',
+            webkitTextStrokeWidth: 1,
+            webkitTextStrokeColor: baseColor,
+          });
+
+          tl.to(itemChars, {
+            opacity: 1,
+            y: 0,
+            rotationX: 0,
+            duration: 0.35,
+            stagger: 0.035,
+            ease: 'power2.out',
+          }).to(
+            itemChars,
+            {
+              color: baseColor,
+              webkitTextStrokeWidth: 0,
+              duration: 0.22,
+              stagger: 0.03,
+              ease: 'power1.out',
+            },
+            '-=0.1'
+          );
+        } else {
+          // INTERFACE DESIGN: anchor-point pop and settle.
+          tl.to(itemChars, {
+            scale: (i) => (i % 3 === 0 ? 1.16 : 1.08),
+            y: (i) => (i % 2 === 0 ? -3 : -1),
+            rotation: (i) => (i % 2 === 0 ? -4 : 4),
+            duration: 0.2,
+            stagger: 0.025,
+            ease: 'back.out(2.2)',
+          }).to(itemChars, {
+            scale: 1,
+            y: 0,
+            rotation: 0,
+            duration: 0.28,
+            stagger: 0.02,
+            ease: 'elastic.out(1, 0.45)',
+          });
+        }
+      };
+
+      itemEl.addEventListener('mouseenter', onEnter);
+      uiuxSubCleanup.push(() => itemEl.removeEventListener('mouseenter', onEnter));
+    });
+
+    // Digital sub-items: three different hover demos for comparison.
+    const digitalSubCleanup = [];
+    digitalAnimatedItems.forEach((itemEl) => {
+      const itemChars = Array.from(itemEl.querySelectorAll('.digital-char'));
+      if (!itemChars.length) return;
+
+      gsap.set(itemChars, {
+        display: 'inline-block',
+        transformOrigin: '50% 60%',
+      });
+
+      let isAnimating = false;
+      const animationType = itemEl.getAttribute('data-digital-animation');
+      const baseColor = window.getComputedStyle(itemEl).color;
+      const scanlineShadow =
+        '0 -1px 0 rgba(255,255,255,0.35), 0 1px 0 rgba(0,0,0,0.35), -3px 0 0 rgba(239,68,68,0.72), 3px 0 0 rgba(59,130,246,0.72)';
+
+      const onEnter = () => {
+        if (isAnimating) return;
+        isAnimating = true;
+        gsap.killTweensOf(itemChars);
+        gsap.set(itemChars, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          rotationX: 0,
+          opacity: 1,
+          color: baseColor,
+          textShadow: 'none',
+        });
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            isAnimating = false;
+            gsap.set(itemChars, { textShadow: 'none' });
+          },
+        });
+
+        if (animationType === 'scanline-glitch') {
+          // SEO STRATEGY: subtle digital scan + chromatic jitter sweep.
+          tl.to(itemChars, {
+            textShadow: scanlineShadow,
+            x: (i) => (i % 2 === 0 ? -1.5 : 1.5),
+            duration: 0.05,
+            stagger: 0.02,
+            yoyo: true,
+            repeat: 1,
+            ease: 'power1.inOut',
+          }).to(itemChars, {
+            x: 0,
+            textShadow: 'none',
+            duration: 0.16,
+            stagger: 0.02,
+            ease: 'power2.out',
+          });
+        } else if (animationType === 'blueprint-draw') {
+          // SEO STRATEGY test: prototype-style draft-in then fill to solid.
+          gsap.set(itemChars, {
+            opacity: 0.25,
+            y: 6,
+            rotationX: -85,
+            color: 'transparent',
+            webkitTextStrokeWidth: 1,
+            webkitTextStrokeColor: baseColor,
+            textShadow: 'none',
+          });
+
+          tl.to(itemChars, {
+            opacity: 1,
+            y: 0,
+            rotationX: 0,
+            duration: 0.35,
+            stagger: 0.035,
+            ease: 'power2.out',
+          }).to(
+            itemChars,
+            {
+              color: baseColor,
+              webkitTextStrokeWidth: 0,
+              duration: 0.22,
+              stagger: 0.03,
+              ease: 'power1.out',
+            },
+            '-=0.1'
+          );
+        } else if (animationType === 'type-build') {
+          // WEB DEVELOPMENT: code-like build where letters type in sequence.
+          gsap.set(itemChars, { opacity: 0.25, y: 3, scale: 0.98 });
+          tl.to(itemChars, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.11,
+            stagger: 0.045,
+            ease: 'steps(1)',
+          }).to(itemChars, {
+            y: -1,
+            duration: 0.12,
+            stagger: 0.025,
+            yoyo: true,
+            repeat: 1,
+            ease: 'power1.inOut',
+          });
+        } else {
+          // CONTENT MANAGEMENT: quick data-shuffle scramble resolving to clean text.
+          const glyphPool = ['#', '%', '&', '*', '+', '=', '?', '!', '/', '~'];
+          const originalChars = itemChars.map((char) => char.textContent || '');
+
+          itemChars.forEach((char, i) => {
+            const seq = [
+              glyphPool[(i + 1) % glyphPool.length],
+              glyphPool[(i + 4) % glyphPool.length],
+              originalChars[i],
+            ];
+            const charTl = gsap.timeline();
+            charTl
+              .call(() => {
+                char.textContent = seq[0];
+              })
+              .to({}, { duration: 0.08 })
+              .call(() => {
+                char.textContent = seq[1];
+              })
+              .to({}, { duration: 0.08 })
+              .call(() => {
+                char.textContent = seq[2];
+              });
+          });
+
+          tl.to(itemChars, {
+            y: (i) => (i % 2 === 0 ? -2 : 2),
+            duration: 0.09,
+            stagger: 0.02,
+            yoyo: true,
+            repeat: 1,
+            ease: 'power1.inOut',
+          }).to(itemChars, {
+            y: 0,
+            duration: 0.16,
+            stagger: 0.02,
+            ease: 'power2.out',
+          });
+        }
+      };
+
+      itemEl.addEventListener('mouseenter', onEnter);
+      digitalSubCleanup.push(() => itemEl.removeEventListener('mouseenter', onEnter));
     });
 
     if (uiuxContainer || digitalContainer) {
@@ -287,6 +559,8 @@ export default function HowICanHelp() {
           el.removeEventListener('mouseleave', onLeave);
         });
         brandingFlipCleanup.forEach((cleanup) => cleanup());
+        uiuxSubCleanup.forEach((cleanup) => cleanup());
+        digitalSubCleanup.forEach((cleanup) => cleanup());
         if (uiuxHandlersCleanup) uiuxHandlersCleanup();
         if (digitalHandlersCleanup) digitalHandlersCleanup();
       };
@@ -298,6 +572,8 @@ export default function HowICanHelp() {
         el.removeEventListener('mouseleave', onLeave);
       });
       brandingFlipCleanup.forEach((cleanup) => cleanup());
+      uiuxSubCleanup.forEach((cleanup) => cleanup());
+      digitalSubCleanup.forEach((cleanup) => cleanup());
     };
   }, []);
 
@@ -337,6 +613,38 @@ export default function HowICanHelp() {
                     <span className={styles.brandingFlipText}>
                       {item.split('').map((ch, index) => (
                         <span key={`${item}-${index}`} className="branding-char">
+                          {ch === ' ' ? '\u00A0' : ch}
+                        </span>
+                      ))}
+                    </span>
+                    <span className={styles.subItemBracket}>]</span>
+                  </span>
+                ) : service.title === 'UI.UX' ? (
+                  <span
+                    key={item}
+                    className={`${styles.serviceSubItem} uiux-anim-item`}
+                    data-uiux-animation={uiuxSubAnimations[item]}
+                  >
+                    <span className={styles.subItemBracket}>[</span>
+                    <span className={styles.uiuxAnimText}>
+                      {item.split('').map((ch, index) => (
+                        <span key={`${item}-${index}`} className="uiux-char">
+                          {ch === ' ' ? '\u00A0' : ch}
+                        </span>
+                      ))}
+                    </span>
+                    <span className={styles.subItemBracket}>]</span>
+                  </span>
+                ) : service.title === 'Digital' ? (
+                  <span
+                    key={item}
+                    className={`${styles.serviceSubItem} digital-anim-item`}
+                    data-digital-animation={digitalSubAnimations[item]}
+                  >
+                    <span className={styles.subItemBracket}>[</span>
+                    <span className={styles.digitalAnimText}>
+                      {item.split('').map((ch, index) => (
+                        <span key={`${item}-${index}`} className="digital-char">
                           {ch === ' ' ? '\u00A0' : ch}
                         </span>
                       ))}

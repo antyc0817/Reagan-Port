@@ -77,6 +77,22 @@
   display: inline-block;
 }
 
+.uiuxAnimText {
+  display: inline-block;
+}
+
+:global(.uiux-anim-item .uiux-char) {
+  display: inline-block;
+}
+
+.digitalAnimText {
+  display: inline-block;
+}
+
+:global(.digital-anim-item .digital-char) {
+  display: inline-block;
+}
+
 :global(#branding-text .char) {
   display: inline-block;
 }
