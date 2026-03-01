@@ -68,3 +68,24 @@
 :global(#branding-text .char) {
   display: inline-block;
 }
+
+.uiuxText {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+}
+
+.uiuxText::before {
+  content: '';
+  position: absolute;
+  inset: -8px -14px;
+  border-radius: 999px;
+}
+
+.uiuxLabel {
+  display: inline-block;
+}
+
+.digitalText {
+  display: inline-block;
+}
