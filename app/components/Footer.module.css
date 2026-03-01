@@ -1,5 +1,5 @@
 .footer {
-  padding: 4rem 2rem 3rem;
+  padding: 3.25rem 2rem 3rem;
 }
 
 .footerTop {
@@ -77,4 +77,49 @@
   cursor: pointer;
   user-select: none;
   white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 3rem 1.25rem 2.5rem;
+  }
+
+  .footerColumns {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    justify-items: center;
+  }
+
+  .footerCol {
+    padding: 0;
+  }
+
+  .footerCol:first-child,
+  .footerCol:last-child {
+    justify-content: center;
+  }
+
+  .footerColDivider {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2.25rem 0.9rem 2rem;
+  }
+
+  .footerTop {
+    margin-bottom: 1.5rem;
+  }
+
+  .footerName {
+    font-size: 1.2rem;
+  }
+
+  .footerLinks,
+  .footerCopy {
+    font-size: 0.78rem;
+    text-align: center;
+  }
 }
