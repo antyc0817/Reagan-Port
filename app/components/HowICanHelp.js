@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { gsap } from 'gsap';
 import styles from './HowICanHelp.module.css';
 
@@ -608,7 +609,11 @@ export default function HowICanHelp() {
             <p className={styles.serviceSub}>
               {service.items.map((item) => (
                 service.title === 'Branding' ? (
-                  <span key={item} className={`${styles.serviceSubItem} branding-flip-item`}>
+                  <Link
+                    key={item}
+                    href="/work"
+                    className={`${styles.serviceSubItem} ${styles.serviceSubItemLink} branding-flip-item`}
+                  >
                     <span className={styles.subItemBracket}>[</span>
                     <span className={styles.brandingFlipText}>
                       {item.split('').map((ch, index) => (
@@ -618,11 +623,12 @@ export default function HowICanHelp() {
                       ))}
                     </span>
                     <span className={styles.subItemBracket}>]</span>
-                  </span>
+                  </Link>
                 ) : service.title === 'UI.UX' ? (
-                  <span
+                  <Link
                     key={item}
-                    className={`${styles.serviceSubItem} uiux-anim-item`}
+                    href="/work"
+                    className={`${styles.serviceSubItem} ${styles.serviceSubItemLink} uiux-anim-item`}
                     data-uiux-animation={uiuxSubAnimations[item]}
                   >
                     <span className={styles.subItemBracket}>[</span>
@@ -634,11 +640,12 @@ export default function HowICanHelp() {
                       ))}
                     </span>
                     <span className={styles.subItemBracket}>]</span>
-                  </span>
+                  </Link>
                 ) : service.title === 'Digital' ? (
-                  <span
+                  <Link
                     key={item}
-                    className={`${styles.serviceSubItem} digital-anim-item`}
+                    href="/work"
+                    className={`${styles.serviceSubItem} ${styles.serviceSubItemLink} digital-anim-item`}
                     data-digital-animation={digitalSubAnimations[item]}
                   >
                     <span className={styles.subItemBracket}>[</span>
@@ -650,9 +657,11 @@ export default function HowICanHelp() {
                       ))}
                     </span>
                     <span className={styles.subItemBracket}>]</span>
-                  </span>
+                  </Link>
                 ) : (
-                  <span key={item} className={styles.serviceSubItem}>[{item}]</span>
+                  <Link key={item} href="/work" className={`${styles.serviceSubItem} ${styles.serviceSubItemLink}`}>
+                    [{item}]
+                  </Link>
                 )
               ))}
             </p>
