@@ -97,7 +97,7 @@ export default function HeroBanner() {
       </p>
       <div className={styles.links}>
         <a href="https://www.linkedin.com/in/reaganlung" target="_blank" rel="noopener noreferrer">[LINKEDIN]</a>
-        <span className={styles.linkPlaceholder}>[EMAIL]</span>
+        <a href="mailto:reaganlung.digital@gmail.com">[EMAIL]</a>
         <a href="/Reagan%20Resume.pdf" target="_blank" rel="noopener noreferrer">[RESUME]</a>
       </div>
     </div>
