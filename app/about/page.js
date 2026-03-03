@@ -40,34 +40,48 @@ export default function AboutPage() {
 
     const cleanups = [];
     pills.forEach((pill) => {
-      const fill = pill.querySelector(`.${styles.pillFill}`);
+      const fill = pill.querySelector(`.${styles.btnFill}`);
+      const text = pill.querySelector(`.${styles.pillText}`);
       if (!fill) return;
-
-      const positionFill = (x, y) => {
-        gsap.set(fill, {
-          left: x,
-          top: y,
-          xPercent: -50,
-          yPercent: -50,
-        });
-      };
 
       const handleEnter = (event) => {
         const { left, top } = pill.getBoundingClientRect();
         const x = event.clientX - left;
         const y = event.clientY - top;
         gsap.killTweensOf(fill);
-        positionFill(x, y);
+        if (text) gsap.killTweensOf(text);
+
         gsap.set(fill, {
-          scale: 0,
-          opacity: 0.12,
+          x,
+          y,
+          xPercent: -50,
+          yPercent: -50,
+          width: 0,
+          height: 0,
+          opacity: 1,
         });
-        gsap.to(fill, {
-          scale: 2.6,
-          duration: 0.55,
-          ease: "power3.out",
-          opacity: 0.4,
-        });
+
+        const fillEnterTl = gsap.timeline();
+        fillEnterTl
+          .to(fill, {
+            width: "70%",
+            height: "70%",
+            duration: 0.08,
+            ease: "power2.in",
+          })
+          .to(fill, {
+            width: "400%",
+            height: "400%",
+            duration: 0.52,
+            ease: "back.out(1.2)",
+          });
+        if (text) {
+          gsap.to(text, {
+            color: "#ffffff",
+            duration: 0.25,
+            ease: "power1.out",
+          });
+        }
       };
 
       const handleLeave = (event) => {
@@ -75,13 +89,21 @@ export default function AboutPage() {
         const x = event.clientX - left;
         const y = event.clientY - top;
         gsap.killTweensOf(fill);
-        positionFill(x, y);
         gsap.to(fill, {
-          scale: 0,
+          x,
+          y,
+          width: 0,
+          height: 0,
           duration: 0.35,
           ease: "power2.in",
-          opacity: 0,
         });
+        if (text) {
+          gsap.to(text, {
+            color: "#111",
+            duration: 0.22,
+            ease: "power1.out",
+          });
+        }
       };
 
       pill.addEventListener("mouseenter", handleEnter);
@@ -172,13 +194,17 @@ export default function AboutPage() {
             {tags.map((tag, index) => (
               <li
                 key={tag}
-                ref={(el) => {
-                  pillRefs.current[index] = el;
-                }}
-                className={styles.pill}
+                className={styles.pillItem}
               >
-                <span className={styles.pillFill} />
-                {tag}
+                <div
+                  ref={(el) => {
+                    pillRefs.current[index] = el;
+                  }}
+                  className={styles.pill}
+                >
+                  <span className={styles.pillText}>{tag}</span>
+                  <div className={styles.btnFill} />
+                </div>
               </li>
             ))}
           </ul>

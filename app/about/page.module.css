@@ -79,6 +79,10 @@
   max-width: min(var(--hero-text-width, 36ch), 100%);
 }
 
+.pillItem {
+  list-style: none;
+}
+
 .pill {
   border-radius: 999px;
   border: 1px solid rgba(45, 45, 45, 0.18);
@@ -90,25 +94,29 @@
   color: #111;
   position: relative;
   overflow: hidden;
-  cursor: pointer;
-  transition: color 0.3s ease;
+  cursor: default;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.pill:hover {
-  color: #0d1735;
+.pillText {
+  position: relative;
+  z-index: 2;
 }
 
-.pillFill {
+.btnFill {
   position: absolute;
-  width: 170%;
-  height: 170%;
+  width: 0;
+  height: 0;
   border-radius: 50%;
   background: rgba(9, 47, 91, 0.95);
   pointer-events: none;
   left: 0;
   top: 0;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0);
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .right {
