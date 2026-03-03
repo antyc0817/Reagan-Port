@@ -12,8 +12,9 @@ export default function AboutPage() {
   const leftContentRefs = useRef([]);
   const pillRefs = useRef([]);
   const headingRef = useRef(null);
-  const [textWidth, setTextWidth] = useState(null);
   const tags = SKILL_TAGS;
+  const [textWidth, setTextWidth] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const items = leftContentRefs.current.filter(Boolean);
@@ -96,25 +97,31 @@ export default function AboutPage() {
   }, []);
 
   useEffect(() => {
-    const measureHeading = () => {
-      if (!headingRef.current) return;
-      const width = Math.round(headingRef.current.getBoundingClientRect().width);
-      if (width && width !== textWidth) {
-        setTextWidth(width);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 900);
+      if (headingRef.current) {
+        const width = Math.round(headingRef.current.getBoundingClientRect().width);
+        if (width) setTextWidth(width);
       }
     };
 
-    measureHeading();
-    window.addEventListener("resize", measureHeading);
-    return () => window.removeEventListener("resize", measureHeading);
-  }, [textWidth]);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
         <div
           className={styles.left}
-          style={{ "--hero-text-width": textWidth ? `${textWidth}px` : undefined }}
+          style={{
+            "--hero-text-width": isMobile
+              ? "min(92vw, 520px)"
+              : textWidth
+                ? `${textWidth}px`
+                : undefined,
+          }}
         >
           <p
             ref={(el) => {
@@ -179,7 +186,7 @@ export default function AboutPage() {
 
         <div className={styles.right}>
           <Image
-            src="/images/about/1.webp"
+            src="/images/about/about1.webp"
             alt="Portrait of Reagan Lung"
             fill
             className={styles.photo}
