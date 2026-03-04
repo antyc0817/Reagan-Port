@@ -54,7 +54,9 @@ const PERSONA_ORDER = [PERSONAS.weekend, PERSONAS.local];
 const EASE = "expo.inOut";
 
 const getCollapsedSize = () =>
-    typeof window !== "undefined" && window.innerWidth <= 768 ? { radius: 60, avatar: 120 } : { radius: 69, avatar: 138 };
+    typeof window !== "undefined" && window.innerWidth <= 768
+        ? { radius: 60, avatar: 120 }
+        : { radius: 69, avatar: 138 };
 
 export default function PersonaInteractive() {
     const [openPersonaIds, setOpenPersonaIds] = useState([]);
@@ -114,7 +116,7 @@ export default function PersonaInteractive() {
                         scale: 1,
                         duration: 0.55,
                         ease: EASE,
-                    }
+                    },
                 );
             } else {
                 gsap.to(hintRef.current, {
@@ -134,7 +136,12 @@ export default function PersonaInteractive() {
             if (!card) return;
 
             const textTargets = refs
-                ? [refs.header, refs.goals, refs.frustrations, refs.quote].filter(Boolean)
+                ? [
+                      refs.header,
+                      refs.goals,
+                      refs.frustrations,
+                      refs.quote,
+                  ].filter(Boolean)
                 : [];
 
             gsap.set(textTargets, { opacity: 0, y: 12 });
@@ -156,7 +163,7 @@ export default function PersonaInteractive() {
                         duration: 0.5,
                         ease: EASE,
                     },
-                    "-=0.5"
+                    "-=0.5",
                 );
             }
             if (avatar) {
@@ -168,7 +175,7 @@ export default function PersonaInteractive() {
                         duration: 0.5,
                         ease: EASE,
                     },
-                    "-=0.5"
+                    "-=0.5",
                 );
             }
             tl.to(
@@ -180,12 +187,16 @@ export default function PersonaInteractive() {
                     stagger: 0.06,
                     ease: EASE,
                 },
-                "-=0.35"
+                "-=0.35",
             );
 
             const primaryWrapper = wrapperRefs.current[id];
             if (primaryWrapper) {
-                gsap.to(primaryWrapper, { scale: 1, duration: 0.5, ease: EASE });
+                gsap.to(primaryWrapper, {
+                    scale: 1,
+                    duration: 0.5,
+                    ease: EASE,
+                });
             }
             otherIds(id).forEach((otherId) => {
                 const wrapper = wrapperRefs.current[otherId];
@@ -200,7 +211,12 @@ export default function PersonaInteractive() {
         });
 
         // When both open and user clicks one to switch primary (nothing opened/closed)
-        if (opened.length === 0 && closed.length === 0 && nowOpen.length >= 2 && primaryPersonaId) {
+        if (
+            opened.length === 0 &&
+            closed.length === 0 &&
+            nowOpen.length >= 2 &&
+            primaryPersonaId
+        ) {
             const primaryId = primaryPersonaId;
             otherIds(primaryId).forEach((otherId) => {
                 const wrapper = wrapperRefs.current[otherId];
@@ -228,7 +244,12 @@ export default function PersonaInteractive() {
             const avatar = avatarRefs.current[id];
             const refs = staggerRefs.current[id];
             const textTargets = refs
-                ? [refs.header, refs.goals, refs.frustrations, refs.quote].filter(Boolean)
+                ? [
+                      refs.header,
+                      refs.goals,
+                      refs.frustrations,
+                      refs.quote,
+                  ].filter(Boolean)
                 : [];
 
             if (card) card.setAttribute("data-closing", "true");
@@ -252,7 +273,7 @@ export default function PersonaInteractive() {
                         duration: 0.5,
                         ease: EASE,
                     },
-                    "-=0.2"
+                    "-=0.2",
                 );
             }
             const { radius, avatar: avatarSize } = getCollapsedSize();
@@ -265,7 +286,7 @@ export default function PersonaInteractive() {
                         duration: 0.5,
                         ease: EASE,
                     },
-                    "-=0.2"
+                    "-=0.2",
                 );
             }
             tl.to(
@@ -276,12 +297,15 @@ export default function PersonaInteractive() {
                     ease: EASE,
                     clearProps: "clipPath",
                 },
-                "-=0.5"
+                "-=0.5",
             );
 
             tl.add(() => {
                 if (card) card.removeAttribute("data-closing");
-                setCardBobbingKeys((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
+                setCardBobbingKeys((prev) => ({
+                    ...prev,
+                    [id]: (prev[id] || 0) + 1,
+                }));
             });
 
             if (nowOpen.length === 0) {
@@ -296,7 +320,8 @@ export default function PersonaInteractive() {
                     }
                 });
             } else {
-                const primaryId = primaryPersonaId || nowOpen[nowOpen.length - 1];
+                const primaryId =
+                    primaryPersonaId || nowOpen[nowOpen.length - 1];
                 otherIds(primaryId).forEach((otherId) => {
                     const wrapper = wrapperRefs.current[otherId];
                     if (wrapper) {
@@ -325,155 +350,241 @@ export default function PersonaInteractive() {
                 <p
                     ref={hintRef}
                     className={styles.whatsupPersonaHint}
-                    aria-live="polite"
+                    aria-live='polite'
                     aria-hidden={openPersonaIds.length > 0}>
                     Click to read
                 </p>
-            <div className={styles.whatsupPersonaMorphGrid}>
-                {PERSONA_ORDER.map((persona) => {
-                    const isOpen = openPersonaIds.includes(persona.id);
-                    return (
-                        <div key={persona.id} className={styles.whatsupPersonaMorphSlot}>
+                <div className={styles.whatsupPersonaMorphGrid}>
+                    {PERSONA_ORDER.map((persona) => {
+                        const isOpen = openPersonaIds.includes(persona.id);
+                        return (
                             <div
-                                ref={(el) => {
-                                    wrapperRefs.current[persona.id] = el;
-                                }}
-                                role="button"
-                                tabIndex={0}
-                                className={`${styles.personaWrapper} ${styles.whatsupPersonaMorph}`}
-                                onClick={() => handleTogglePersona(persona.id)}
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter" || e.key === " ") {
-                                        e.preventDefault();
-                                        handleTogglePersona(persona.id);
-                                    }
-                                }}
-                                aria-pressed={isOpen}
-                                aria-label={`${isOpen ? "Collapse" : "Expand"} ${persona.title} persona`}>
+                                key={persona.id}
+                                className={styles.whatsupPersonaMorphSlot}>
                                 <div
-                                    key={`${persona.id}-${cardBobbingKeys[persona.id] || 0}`}
                                     ref={(el) => {
-                                        cardRefs.current[persona.id] = el;
+                                        wrapperRefs.current[persona.id] = el;
                                     }}
-                                    className={`${styles.personaCard} ${isOpen ? styles.personaCardExpanded : ""}`}>
+                                    role='button'
+                                    tabIndex={0}
+                                    className={`${styles.personaWrapper} ${styles.whatsupPersonaMorph}`}
+                                    onClick={() =>
+                                        handleTogglePersona(persona.id)
+                                    }
+                                    onKeyDown={(e) => {
+                                        if (
+                                            e.key === "Enter" ||
+                                            e.key === " "
+                                        ) {
+                                            e.preventDefault();
+                                            handleTogglePersona(persona.id);
+                                        }
+                                    }}
+                                    aria-pressed={isOpen}
+                                    aria-label={`${isOpen ? "Collapse" : "Expand"} ${persona.title} persona`}>
                                     <div
+                                        key={`${persona.id}-${cardBobbingKeys[persona.id] || 0}`}
                                         ref={(el) => {
-                                            avatarCenterRefs.current[persona.id] = el;
+                                            cardRefs.current[persona.id] = el;
                                         }}
-                                        className={styles.personaCardCenter}>
+                                        className={`${styles.personaCard} ${isOpen ? styles.personaCardExpanded : ""}`}>
                                         <div
                                             ref={(el) => {
-                                                avatarRefs.current[persona.id] = el;
+                                                avatarCenterRefs.current[
+                                                    persona.id
+                                                ] = el;
                                             }}
-                                            className={styles.whatsupPersonaAvatar}
-                                            aria-hidden>
-                                            <Image
-                                                src={persona.avatarSrc}
-                                                alt=""
-                                                fill
-                                                className={styles.whatsupPersonaAvatarImg}
-                                                sizes="138px"
-                                                unoptimized
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className={styles.personaCardContent}>
-                                        <div
-                                            ref={(el) => {
-                                                if (!staggerRefs.current[persona.id])
-                                                    staggerRefs.current[persona.id] = {};
-                                                staggerRefs.current[persona.id].header = el;
-                                            }}
-                                            className={`${styles.whatsupPersonaHeaderText} ${styles.personaCardText}`}>
-                                            <p className={styles.whatsupPersonaLabel}>
-                                                {persona.label}
-                                            </p>
-                                            <h4 className={styles.whatsupPersonaTitle}>
-                                                {persona.title}
-                                            </h4>
-                                        </div>
-
-                                    <div
-                                        ref={(el) => {
-                                            if (!staggerRefs.current[persona.id])
-                                                staggerRefs.current[persona.id] = {};
-                                            staggerRefs.current[persona.id].goals = el;
-                                        }}
-                                        className={`${styles.personaCardBio} ${styles.whatsupPersonaColumns}`}>
-                                        <div
-                                            className={`${styles.whatsupPersonaGroup} ${styles.whatsupPersonaGroupGoal}`}>
-                                            <h5 className={styles.whatsupPersonaGroupTitle}>
-                                                <Target
+                                            className={
+                                                styles.personaCardCenter
+                                            }>
+                                            <div
+                                                ref={(el) => {
+                                                    avatarRefs.current[
+                                                        persona.id
+                                                    ] = el;
+                                                }}
+                                                className={
+                                                    styles.whatsupPersonaAvatar
+                                                }
+                                                aria-hidden>
+                                                <Image
+                                                    src={persona.avatarSrc}
+                                                    alt=''
+                                                    fill
                                                     className={
-                                                        styles.whatsupPersonaHeadingIconGoal
+                                                        styles.whatsupPersonaAvatarImg
                                                     }
-                                                    aria-hidden
+                                                    sizes='138px'
+                                                    unoptimized
                                                 />
-                                                Goals
-                                            </h5>
-                                            <ul className={styles.whatsupPersonaList}>
-                                                {persona.goals.map((goal) => (
-                                                    <li key={goal}>
-                                                        <ArrowRight
+                                            </div>
+                                        </div>
+                                        <div
+                                            className={
+                                                styles.personaCardContent
+                                            }>
+                                            <div
+                                                ref={(el) => {
+                                                    if (
+                                                        !staggerRefs.current[
+                                                            persona.id
+                                                        ]
+                                                    )
+                                                        staggerRefs.current[
+                                                            persona.id
+                                                        ] = {};
+                                                    staggerRefs.current[
+                                                        persona.id
+                                                    ].header = el;
+                                                }}
+                                                className={`${styles.whatsupPersonaHeaderText} ${styles.personaCardText}`}>
+                                                <p
+                                                    className={
+                                                        styles.whatsupPersonaLabel
+                                                    }>
+                                                    {persona.label}
+                                                </p>
+                                                <h4
+                                                    className={
+                                                        styles.whatsupPersonaTitle
+                                                    }>
+                                                    {persona.title}
+                                                </h4>
+                                            </div>
+
+                                            <div
+                                                ref={(el) => {
+                                                    if (
+                                                        !staggerRefs.current[
+                                                            persona.id
+                                                        ]
+                                                    )
+                                                        staggerRefs.current[
+                                                            persona.id
+                                                        ] = {};
+                                                    staggerRefs.current[
+                                                        persona.id
+                                                    ].goals = el;
+                                                }}
+                                                className={`${styles.personaCardBio} ${styles.whatsupPersonaColumns}`}>
+                                                <div
+                                                    className={`${styles.whatsupPersonaGroup} ${styles.whatsupPersonaGroupGoal}`}>
+                                                    <h5
+                                                        className={
+                                                            styles.whatsupPersonaGroupTitle
+                                                        }>
+                                                        <Target
                                                             className={
-                                                                styles.whatsupPersonaListIconGoal
+                                                                styles.whatsupPersonaHeadingIconGoal
                                                             }
                                                             aria-hidden
                                                         />
-                                                        <span>{goal}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
+                                                        Goals
+                                                    </h5>
+                                                    <ul
+                                                        className={
+                                                            styles.whatsupPersonaList
+                                                        }>
+                                                        {persona.goals.map(
+                                                            (goal) => (
+                                                                <li key={goal}>
+                                                                    <ArrowRight
+                                                                        className={
+                                                                            styles.whatsupPersonaListIconGoal
+                                                                        }
+                                                                        aria-hidden
+                                                                    />
+                                                                    <span>
+                                                                        {goal}
+                                                                    </span>
+                                                                </li>
+                                                            ),
+                                                        )}
+                                                    </ul>
+                                                </div>
 
-                                        <div
-                                            ref={(el) => {
-                                                if (!staggerRefs.current[persona.id])
-                                                    staggerRefs.current[persona.id] = {};
-                                                staggerRefs.current[persona.id].frustrations = el;
-                                            }}
-                                            className={`${styles.whatsupPersonaGroup} ${styles.whatsupPersonaGroupFriction}`}>
-                                            <h5 className={styles.whatsupPersonaGroupTitle}>
-                                                <OctagonAlert
-                                                    className={
-                                                        styles.whatsupPersonaHeadingIconFriction
-                                                    }
-                                                    aria-hidden
-                                                />
-                                                Frustrations
-                                            </h5>
-                                            <ul className={styles.whatsupPersonaList}>
-                                                {persona.frustrations.map((frustration) => (
-                                                    <li key={frustration}>
-                                                        <ArrowRight
+                                                <div
+                                                    ref={(el) => {
+                                                        if (
+                                                            !staggerRefs
+                                                                .current[
+                                                                persona.id
+                                                            ]
+                                                        )
+                                                            staggerRefs.current[
+                                                                persona.id
+                                                            ] = {};
+                                                        staggerRefs.current[
+                                                            persona.id
+                                                        ].frustrations = el;
+                                                    }}
+                                                    className={`${styles.whatsupPersonaGroup} ${styles.whatsupPersonaGroupFriction}`}>
+                                                    <h5
+                                                        className={
+                                                            styles.whatsupPersonaGroupTitle
+                                                        }>
+                                                        <OctagonAlert
                                                             className={
-                                                                styles.whatsupPersonaListIconFriction
+                                                                styles.whatsupPersonaHeadingIconFriction
                                                             }
                                                             aria-hidden
                                                         />
-                                                        <span>{frustration}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    </div>
+                                                        Frustrations
+                                                    </h5>
+                                                    <ul
+                                                        className={
+                                                            styles.whatsupPersonaList
+                                                        }>
+                                                        {persona.frustrations.map(
+                                                            (frustration) => (
+                                                                <li
+                                                                    key={
+                                                                        frustration
+                                                                    }>
+                                                                    <ArrowRight
+                                                                        className={
+                                                                            styles.whatsupPersonaListIconFriction
+                                                                        }
+                                                                        aria-hidden
+                                                                    />
+                                                                    <span>
+                                                                        {
+                                                                            frustration
+                                                                        }
+                                                                    </span>
+                                                                </li>
+                                                            ),
+                                                        )}
+                                                    </ul>
+                                                </div>
+                                            </div>
 
-                                    <blockquote
-                                        ref={(el) => {
-                                            if (!staggerRefs.current[persona.id])
-                                                staggerRefs.current[persona.id] = {};
-                                            staggerRefs.current[persona.id].quote = el;
-                                        }}
-                                        className={styles.whatsupPersonaQuote}>
-                                        "{persona.quote}"
-                                        </blockquote>
+                                            <blockquote
+                                                ref={(el) => {
+                                                    if (
+                                                        !staggerRefs.current[
+                                                            persona.id
+                                                        ]
+                                                    )
+                                                        staggerRefs.current[
+                                                            persona.id
+                                                        ] = {};
+                                                    staggerRefs.current[
+                                                        persona.id
+                                                    ].quote = el;
+                                                }}
+                                                className={
+                                                    styles.whatsupPersonaQuote
+                                                }>
+                                                "{persona.quote}"
+                                            </blockquote>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
-            </div>
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );

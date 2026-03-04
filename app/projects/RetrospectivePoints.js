@@ -95,7 +95,7 @@ export default function RetrospectivePoints({ points }) {
           observer.disconnect();
         }
       },
-      { threshold: 0 }
+      { threshold: 1 }
     );
 
     observer.observe(projectNav);
