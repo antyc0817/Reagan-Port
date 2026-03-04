@@ -2161,6 +2161,34 @@
     color: var(--foreground);
 }
 
+/* Project nav – end-of-page links */
+.projectNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+}
+
+.projectNavLink {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: color-mix(in srgb, var(--foreground) 70%, var(--turquoise) 30%);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.projectNavLink:hover {
+    color: var(--turquoise);
+    border-bottom-color: var(--turquoise);
+}
+
 /* Retrospective timeline – matches about page origin story exactly */
 .retroTimeline {
     width: 100%;
@@ -2413,6 +2441,10 @@
         padding-bottom: 2.25rem;
     }
 
+    .projectNav {
+        padding: 2.5rem 1.5rem 3rem;
+    }
+
   .flavorIconsTextBlock {
     grid-column: 1;
     grid-row: 3;
@@ -2607,6 +2639,17 @@
     .retroTimelineDot {
         width: 12px;
         height: 12px;
+    }
+
+    .projectNav {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 2rem 1rem 2.5rem;
+        gap: 1rem;
+    }
+
+    .projectNavLink {
+        text-align: center;
     }
 
     /* Hide connector lines in Cuisine Clinic design system on small screens

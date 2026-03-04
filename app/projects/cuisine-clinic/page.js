@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import DesignSystemExpand from "./DesignSystemExpand";
 import TypographySection from "./TypographySection";
 import FlavorIconsSection from "./FlavorIconsSection";
@@ -127,6 +128,14 @@ export default function CuisineClinicProject() {
                 </p>
                 <RetrospectivePoints />
             </section>
+            <nav className={styles.projectNav} aria-label="Project navigation">
+                <Link href="/work" className={styles.projectNavLink}>
+                    View All Work
+                </Link>
+                <Link href="/projects/whatsup" className={styles.projectNavLink}>
+                    Next: WhatSUP
+                </Link>
+            </nav>
         </main>
     );
 }
