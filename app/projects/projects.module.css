@@ -2140,6 +2140,165 @@
     text-align: center;
 }
 
+/* Retrospective Section */
+.retrospectiveSection {
+    padding-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.retrospectiveSection .projectSectionTitle {
+    text-align: center;
+}
+
+.retrospectiveMainText {
+    max-width: 65ch;
+    margin: 0 auto 3rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--foreground);
+}
+
+/* Retrospective timeline – matches about page origin story exactly */
+.retroTimeline {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: clamp(3rem, 6vw, 4.75rem);
+    max-width: 720px;
+}
+
+.retroTimelineItem {
+    display: flex;
+    gap: 1.2rem;
+}
+
+.retroTimelineLine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.retroTimelineDotWrap {
+    min-height: 28px;
+    min-width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.retroTimelineDot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(45, 45, 45, 0.14);
+    border: 1px solid color-mix(in srgb, var(--foreground) 70%, var(--turquoise) 30%);
+    position: relative;
+    overflow: hidden;
+}
+
+.retroTimelineConnector {
+    width: 1px;
+    flex: 1;
+    min-height: 2rem;
+    margin: 4px 0;
+    background: rgba(45, 45, 45, 0.16);
+    transform-origin: 50% 0%;
+}
+
+.retroTimelineDotFill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: color-mix(in srgb, var(--foreground) 70%, var(--turquoise) 30%);
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+}
+
+.retroTimelineDotFilled {
+    animation: retroDotGlow 2.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .retroTimelineDotFilled {
+        animation: none;
+        box-shadow: 0 0 6px 3px rgba(64, 180, 196, 0.25);
+    }
+}
+
+.retroTimelineDotWrap:hover .retroTimelineDotFilled {
+    animation: none;
+    box-shadow: 0 0 12px 4px rgba(64, 180, 196, 0.45);
+    transform: scale(1.15);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+@keyframes retroDotGlow {
+    0%,
+    100% {
+        box-shadow: 0 0 4px 2px rgba(64, 180, 196, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 10px 4px rgba(64, 180, 196, 0.4);
+    }
+}
+
+.retroTimelineContent {
+    flex: 1;
+    min-width: 0;
+    padding-bottom: 2.5rem;
+    text-align: left;
+}
+
+.retroTimelineItem:last-child .retroTimelineContent {
+    padding-bottom: 0;
+}
+
+.retroTimelineHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 28px;
+}
+
+.retroTimelineIconWrap {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: color-mix(in srgb, var(--foreground) 70%, var(--turquoise) 30%);
+}
+
+.retroTimelineIcon {
+    width: 20px;
+    height: 20px;
+}
+
+.retroTimelineTitle {
+    font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--foreground);
+    margin: 0;
+}
+
+.retroTimelineText {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    font-weight: 400;
+    color: var(--foreground);
+    margin: 0.5rem 0 0;
+    padding-left: calc(24px + 0.75rem);
+}
+
 @media (max-width: 768px) {
     .projectIntro {
         padding: 2rem 1.5rem 1.5rem;
@@ -2230,6 +2389,28 @@
     .flavorIconsImgBlock {
         grid-column: 1;
         grid-row: 2;
+    }
+
+    .retrospectiveSection {
+        padding-top: 2.5rem;
+    }
+
+    .retrospectiveMainText {
+        margin-bottom: 2rem;
+        padding: 0 0.5rem;
+    }
+
+    .retroTimeline {
+        padding-top: clamp(2rem, 5vw, 3rem);
+        max-width: 100%;
+    }
+
+    .retroTimelineItem {
+        gap: 1rem;
+    }
+
+    .retroTimelineContent {
+        padding-bottom: 2.25rem;
     }
 
   .flavorIconsTextBlock {
@@ -2370,6 +2551,62 @@
 
     .designSystemCards {
         grid-template-columns: 1fr;
+    }
+
+    .retrospectiveSection {
+        padding-top: 2rem;
+    }
+
+    .retrospectiveMainText {
+        margin-bottom: 1.75rem;
+        font-size: 1.05rem;
+        padding: 0 0.25rem;
+    }
+
+    .retroTimeline {
+        padding-top: clamp(1.75rem, 4vw, 2.5rem);
+        max-width: 100%;
+    }
+
+    .retroTimelineItem {
+        gap: 0.85rem;
+    }
+
+    .retroTimelineContent {
+        padding-bottom: 2rem;
+    }
+
+    .retroTimelineHeader {
+        min-height: 24px;
+    }
+
+    .retroTimelineIconWrap {
+        width: 22px;
+        height: 22px;
+    }
+
+    .retroTimelineIcon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .retroTimelineTitle {
+        font-size: clamp(1rem, 4vw, 1.2rem);
+    }
+
+    .retroTimelineText {
+        font-size: 1.05rem;
+        padding-left: calc(22px + 0.6rem);
+    }
+
+    .retroTimelineDotWrap {
+        min-height: 24px;
+        min-width: 24px;
+    }
+
+    .retroTimelineDot {
+        width: 12px;
+        height: 12px;
     }
 
     /* Hide connector lines in Cuisine Clinic design system on small screens

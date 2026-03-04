@@ -52,7 +52,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className={styles.footer}>
+        <footer className={styles.footer} data-section="footer">
             <div className={styles.footerTop}>
                 <span
                     ref={starRef}

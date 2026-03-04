@@ -4,6 +4,7 @@ import TypographySection from "./TypographySection";
 import FlavorIconsSection from "./FlavorIconsSection";
 import GalleryCarousel from "./GalleryCarousel";
 import StackedCardReveal from "./StackedCardReveal";
+import RetrospectivePoints from "./RetrospectivePoints";
 import styles from "../projects.module.css";
 
 export const metadata = {
@@ -115,6 +116,16 @@ export default function CuisineClinicProject() {
                 <h3 className={styles.projectSectionTitle}>[ Gallery ]</h3>
                 <p className={styles.galleryHint}>Drag to spin</p>
                 <GalleryCarousel />
+            </section>
+            <section
+                className={`${styles.projectSection} ${styles.retrospectiveSection}`}>
+                <h3 className={styles.projectSectionTitle}>[ Retrospective ]</h3>
+                <p className={styles.retrospectiveMainText}>
+                    Clarity is harder to design than complexity.{" "}
+                    <strong>Anyone can add.</strong> Knowing what to take away
+                    takes a lot more conviction.
+                </p>
+                <RetrospectivePoints />
             </section>
         </main>
     );
