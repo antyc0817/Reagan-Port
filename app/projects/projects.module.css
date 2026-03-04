@@ -2155,7 +2155,7 @@
 
 .retrospectiveMainText {
     max-width: 65ch;
-    margin: 0 auto 3rem;
+    margin: 0 auto 1.25rem;
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--foreground);
@@ -2195,7 +2195,7 @@
     display: flex;
     flex-direction: column;
     gap: 0;
-    padding-top: clamp(3rem, 6vw, 4.75rem);
+    padding-top: clamp(1rem, 3vw, 1.5rem);
     max-width: 720px;
 }
 
@@ -2424,12 +2424,12 @@
     }
 
     .retrospectiveMainText {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         padding: 0 0.5rem;
     }
 
     .retroTimeline {
-        padding-top: clamp(2rem, 5vw, 3rem);
+        padding-top: clamp(1rem, 3vw, 1.25rem);
         max-width: 100%;
     }
 
@@ -2590,13 +2590,13 @@
     }
 
     .retrospectiveMainText {
-        margin-bottom: 1.75rem;
+        margin-bottom: 0.875rem;
         font-size: 1.05rem;
         padding: 0 0.25rem;
     }
 
     .retroTimeline {
-        padding-top: clamp(1.75rem, 4vw, 2.5rem);
+        padding-top: clamp(0.875rem, 2.5vw, 1.25rem);
         max-width: 100%;
     }
 

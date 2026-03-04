@@ -2,38 +2,19 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { Eraser, Link2, Sparkles } from "lucide-react";
-import styles from "../projects.module.css";
+import { Eraser, Link2, Sparkles, Users, Palette, Zap, FolderCode } from "lucide-react";
+import styles from "./projects.module.css";
 
-const POINTS = [
-  {
-    num: 1,
-    title: "Trust in Simplicity",
-    Icon: Eraser,
-    text: "Every early version had more going on. More color, more texture, more noise. At some point I stopped adding and started editing, and that's when the brand actually started to feel like something. The restraint wasn't a limitation, it was the whole point.",
-  },
-  {
-    num: 2,
-    title: "Technical Bridging",
-    Icon: Link2,
-    text: "There's a moment when a flat design meets a real surface and you find out if it actually holds up. Moving between Illustrator and Photoshop mockups taught me to think about the physical form from the very first line. The concept and the construction stopped being two separate things.",
-  },
-  {
-    num: 3,
-    title: "Visual Efficiency",
-    Icon: Sparkles,
-    text: "The icons needed to work before the brain had time to think. No text, no context, just shape and color doing all the talking. Getting each one to that point meant going through a lot of versions that were close but not quite there yet.",
-  },
-];
+const ICON_MAP = { Eraser, Link2, Sparkles, Users, Palette, Zap, FolderCode };
 
-export default function RetrospectivePoints() {
+export default function RetrospectivePoints({ points }) {
   const sectionRef = useRef(null);
   const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const footer = typeof document !== "undefined" ? document.querySelector('[data-section="footer"]') : null;
-    if (!section || !footer) return;
+    const projectNav = typeof document !== "undefined" ? document.querySelector('[data-section="project-nav"]') : null;
+    if (!section || !projectNav) return;
 
     const playTimeline = () => {
       if (hasAnimatedRef.current) return;
@@ -60,7 +41,6 @@ export default function RetrospectivePoints() {
         const connector = item.querySelector(`.${styles.retroTimelineConnector}`);
         const isSecondOrThird = index >= 1;
 
-        /* 1. Dot fills */
         if (dotFill && dot) {
           tl.to(dotFill, {
             scaleY: 1,
@@ -96,7 +76,6 @@ export default function RetrospectivePoints() {
             });
         }
 
-        /* 2. Line drops (connector extends downward) */
         if (connector) {
           tl.to(connector, {
             scaleY: 1,
@@ -119,14 +98,16 @@ export default function RetrospectivePoints() {
       { threshold: 0 }
     );
 
-    observer.observe(footer);
+    observer.observe(projectNav);
     return () => observer.disconnect();
   }, []);
 
+  if (!points?.length) return null;
+
   return (
     <div ref={sectionRef} className={styles.retroTimeline}>
-      {POINTS.map((point, i) => {
-        const Icon = point.Icon;
+      {points.map((point, i) => {
+        const Icon = ICON_MAP[point.icon] ?? Sparkles;
         return (
           <article key={point.num} className={styles.retroTimelineItem}>
             <div className={styles.retroTimelineLine}>
@@ -135,7 +116,7 @@ export default function RetrospectivePoints() {
                   <span className={styles.retroTimelineDotFill} />
                 </div>
               </div>
-              {i < POINTS.length - 1 ? <div className={styles.retroTimelineConnector} /> : null}
+              {i < points.length - 1 ? <div className={styles.retroTimelineConnector} /> : null}
             </div>
             <div className={styles.retroTimelineContent}>
               <div className={styles.retroTimelineHeader}>

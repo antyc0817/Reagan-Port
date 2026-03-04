@@ -1,5 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../projects.module.css";
+import RetrospectivePoints from "../RetrospectivePoints";
+import { RETROSPECTIVE_POINTS } from "./retrospectiveData";
 import PersonaInteractive from "./PersonaInteractive";
 import WireframeRevealList from "./WireframeRevealList";
 import WhatsupGallery from "./WhatsupGallery";
@@ -217,6 +220,24 @@ export default function WhatsUpProject() {
                 <h3 className={styles.projectSectionTitle}>[ Gallery ]</h3>
                 <WhatsupGallery />
             </section>
+
+            <section
+                className={`${styles.projectSection} ${styles.retrospectiveSection}`}>
+                <h3 className={styles.projectSectionTitle}>[ Retrospective ]</h3>
+                <p className={styles.retrospectiveMainText}>
+                    WhatSUP already had the energy. <strong>The experience didn&apos;t.</strong> The job was to build a digital space that actually matched the brand and made people feel confident enough to show up.
+                </p>
+                <RetrospectivePoints points={RETROSPECTIVE_POINTS} />
+            </section>
+
+            <nav className={styles.projectNav} aria-label="Project navigation" data-section="project-nav">
+                <Link href="/work" className={styles.projectNavLink}>
+                    View All Work
+                </Link>
+                <Link href="/projects/soul-of-south-korea" className={styles.projectNavLink}>
+                    Next: Soul of South Korea
+                </Link>
+            </nav>
         </main>
     );
 }

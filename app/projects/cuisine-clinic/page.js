@@ -5,7 +5,8 @@ import TypographySection from "./TypographySection";
 import FlavorIconsSection from "./FlavorIconsSection";
 import GalleryCarousel from "./GalleryCarousel";
 import StackedCardReveal from "./StackedCardReveal";
-import RetrospectivePoints from "./RetrospectivePoints";
+import RetrospectivePoints from "../RetrospectivePoints";
+import { RETROSPECTIVE_POINTS } from "./retrospectiveData";
 import styles from "../projects.module.css";
 
 export const metadata = {
@@ -126,9 +127,9 @@ export default function CuisineClinicProject() {
                     <strong>Anyone can add.</strong> Knowing what to take away
                     takes a lot more conviction.
                 </p>
-                <RetrospectivePoints />
+                <RetrospectivePoints points={RETROSPECTIVE_POINTS} />
             </section>
-            <nav className={styles.projectNav} aria-label="Project navigation">
+            <nav className={styles.projectNav} aria-label="Project navigation" data-section="project-nav">
                 <Link href="/work" className={styles.projectNavLink}>
                     View All Work
                 </Link>
