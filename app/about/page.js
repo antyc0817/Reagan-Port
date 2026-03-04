@@ -7,6 +7,13 @@ import Footer from "../components/Footer";
 import styles from "./page.module.css";
 
 const SKILL_TAGS = ["Product Design", "UX/UI", "Brand Identity", "Figma", "HTML & CSS", "Bilingual"];
+const BEYOND_ITEMS = [
+  { name: "Niagara Falls", date: "08/05/2024", image: "/images/about/g1.webp" },
+  { name: "Pickleball", date: "07/20/2025", image: "/images/about/g2.webp" },
+  { name: "Cooking", date: "10/14/2024", image: "/images/about/g3.webp" },
+  { name: "Fishing", date: "07/15/2025", image: "/images/about/g4.webp" },
+  { name: "Motorcycle", date: "06/02/2022", image: "/images/about/g5.webp" },
+];
 
 export default function AboutPage() {
   const leftContentRefs = useRef([]);
@@ -415,6 +422,37 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className={styles.beyond}>
+        <p className={styles.beyondEyebrow}>Beyond the Work</p>
+        <h2 className={styles.beyondTitle}>
+          A life lived
+          <br />
+          <em>outside the screen.</em>
+        </h2>
+        <p className={styles.beyondSubtitle}>
+          People forget the details. They never forget the <em>experience.</em>
+        </p>
+
+        <div className={styles.polaroidGrid}>
+          {BEYOND_ITEMS.map((item) => (
+            <article key={item.name} className={styles.polaroid}>
+              <div className={styles.polaroidImg}>
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  fill
+                  className={styles.polaroidPhoto}
+                  sizes="(max-width: 480px) 48vw, (max-width: 900px) 160px, 190px"
+                  unoptimized
+                />
+              </div>
+              <p className={styles.polaroidName}>{item.name}</p>
+              <p className={styles.polaroidDate}>{item.date}</p>
+            </article>
+          ))}
         </div>
       </section>
       <Footer />
