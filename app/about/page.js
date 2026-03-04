@@ -12,6 +12,8 @@ export default function AboutPage() {
   const leftContentRefs = useRef([]);
   const pillRefs = useRef([]);
   const headingRef = useRef(null);
+  const originSectionRef = useRef(null);
+  const originHasAnimatedRef = useRef(false);
   const tags = SKILL_TAGS;
   const [textWidth, setTextWidth] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -132,6 +134,84 @@ export default function AboutPage() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const section = originSectionRef.current;
+    if (!section) return;
+
+    const playOriginTimeline = () => {
+      if (originHasAnimatedRef.current) return;
+      originHasAnimatedRef.current = true;
+
+      const items = Array.from(section.querySelectorAll(`.${styles.timelineItem}`));
+      if (!items.length) return;
+
+      const allConnectors = items
+        .map((item) => item.querySelector(`.${styles.timelineConnector}`))
+        .filter(Boolean);
+      const allDotFills = items
+        .map((item) => item.querySelector(`.${styles.timelineDotFill}`))
+        .filter(Boolean);
+
+      gsap.set(allConnectors, { scaleY: 0, transformOrigin: "50% 0%" });
+      gsap.set(allDotFills, { scaleY: 0, transformOrigin: "50% 100%" });
+
+      const tl = gsap.timeline();
+
+      items.forEach((item) => {
+        const dot = item.querySelector(`.${styles.timelineDot}`);
+        const dotFill = item.querySelector(`.${styles.timelineDotFill}`);
+        const connector = item.querySelector(`.${styles.timelineConnector}`);
+
+        if (dotFill) {
+          tl.to(dotFill, {
+            scaleY: 1,
+            duration: 0.32,
+            ease: "power2.out",
+          }).to(
+            dot,
+            {
+              boxShadow: "0 0 0 7px rgba(64, 180, 196, 0.25)",
+              duration: 0.18,
+              ease: "sine.out",
+            },
+            "<"
+          ).to(dot, {
+            boxShadow: "0 0 0 0 rgba(64, 180, 196, 0)",
+            duration: 0.2,
+            ease: "sine.in",
+          });
+        }
+
+        if (connector) {
+          tl.to(
+            connector,
+            {
+              scaleY: 1,
+              backgroundColor: "rgba(64, 180, 196, 0.7)",
+              duration: 0.55,
+              ease: "power2.inOut",
+            },
+            "-=0.06"
+          );
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry?.isIntersecting) {
+          playOriginTimeline();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [styles.timelineConnector, styles.timelineDot, styles.timelineDotFill, styles.timelineItem]);
+
   return (
     <main className={styles.page}>
       <section className={styles.hero}>
@@ -171,7 +251,7 @@ export default function AboutPage() {
             }}
             className={styles.subheading}
           >
-            I design experiences that feel like they were made for you.
+            Chasing the moment everything clicks.
           </p>
 
           <p
@@ -224,6 +304,116 @@ export default function AboutPage() {
           <div className={styles.dragonCard}>
             <span className={styles.dragonCharacter}>龍</span>
             <span className={styles.dragonCaption}>Lung · Dragon · 2000</span>
+          </div>
+        </div>
+      </section>
+
+      <section ref={originSectionRef} className={styles.originStory}>
+        <div className={styles.originLeft}>
+          <p className={styles.originEyebrow}>Origin Story</p>
+          <h2 className={styles.originTitle}>
+            Born in the year of the
+            <br />
+            <em>Dragon.</em>
+          </h2>
+          <div className={styles.originDivider} />
+          <div className={styles.originBody}>
+            <p>
+              I was born in 2000, the year of the Millennium Dragon. My last name, Lung, also happens to mean dragon
+              in Chinese. Call it fate, call it coincidence - either way, it fits.
+            </p>
+            <p>
+              I grew up in Taiwan until I was six, then my family moved to Vancouver. Growing up between two languages
+              and two cultures allowed me to develop an insight and perspective that most people just don&apos;t have.
+            </p>
+            <p>
+              In 2022 I got my first motorcycle. Learning to ride was genuinely overwhelming with so many controls, so
+              many rules, so much happening at once. But the moment it all clicked, everything felt effortless. That
+              feeling stuck with me. Good experiences shouldn&apos;t have to be earned through confusion. That&apos;s what drew
+              me to design.
+            </p>
+          </div>
+        </div>
+
+        <div className={styles.originRight}>
+          <div className={styles.timeline}>
+            <div className={styles.timelineItem}>
+              <div className={styles.timelineLine}>
+                <div className={styles.timelineDot}>
+                  <span className={styles.timelineDotFill} />
+                </div>
+                <div className={styles.timelineConnector} />
+              </div>
+              <div className={styles.timelineContent}>
+                <p className={styles.timelineYear}>2000 · Taipei, Taiwan</p>
+                <p className={styles.timelineText}>
+                  <strong>I was born in the year of the Millennium Dragon.</strong> And yes, Lung (龍) really does mean
+                  dragon in Chinese.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.timelineItem}>
+              <div className={styles.timelineLine}>
+                <div className={styles.timelineDot}>
+                  <span className={styles.timelineDotFill} />
+                </div>
+                <div className={styles.timelineConnector} />
+              </div>
+              <div className={styles.timelineContent}>
+                <p className={styles.timelineYear}>2006 · Vancouver, Canada</p>
+                <p className={styles.timelineText}>
+                  <strong>I moved to Vancouver at six.</strong> Growing up between two languages and two cultures allowed
+                  me to develop an insight and perspective that most people just don&apos;t have.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.timelineItem}>
+              <div className={styles.timelineLine}>
+                <div className={styles.timelineDot}>
+                  <span className={styles.timelineDotFill} />
+                </div>
+                <div className={styles.timelineConnector} />
+              </div>
+              <div className={styles.timelineContent}>
+                <p className={styles.timelineYear}>2022 · The Spark</p>
+                <p className={styles.timelineText}>
+                  <strong>I got my first motorcycle.</strong> Steep learning curve, a lot of frustration, and the moment
+                  that changed everything.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.timelineItem}>
+              <div className={styles.timelineLine}>
+                <div className={styles.timelineDot}>
+                  <span className={styles.timelineDotFill} />
+                </div>
+                <div className={styles.timelineConnector} />
+              </div>
+              <div className={styles.timelineContent}>
+                <p className={styles.timelineYear}>2024 · BCIT</p>
+                <p className={styles.timelineText}>
+                  <strong>I enrolled at BCIT.</strong> Decided it was time to turn that spark into something real.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.timelineItem}>
+              <div className={styles.timelineLine}>
+                <div className={styles.timelineDot}>
+                  <span className={styles.timelineDotFill} />
+                </div>
+              </div>
+              <div className={styles.timelineContent}>
+                <p className={styles.timelineYear}>Now</p>
+                <p className={styles.timelineText}>
+                  <strong>Designing with one goal in mind.</strong> Take what&apos;s complex and make it feel simple,
+                  intuitive, and human.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

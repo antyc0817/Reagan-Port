@@ -7,10 +7,10 @@
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(0.6rem, 1.2vw, 1rem);
+  gap: clamp(1.75rem, 3vw, 2.8rem);
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 clamp(1.25rem, 2.4vw, 2rem);
+  padding: 0 clamp(1.5rem, 3.2vw, 2.6rem);
   background: var(--background);
   align-items: center;
 }
@@ -19,12 +19,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1.35rem;
+  gap: 1.55rem;
   padding: clamp(2rem, 4vw, 4rem) 0;
   width: min(var(--hero-text-width, 36ch), 100%);
   max-width: 100%;
   margin: 0;
-  justify-self: start;
+  justify-self: end;
   text-align: left;
 }
 
@@ -54,16 +54,17 @@
 }
 
 .subheading {
-  font-size: clamp(1.05rem, 1.4vw, 1.45rem);
-  line-height: 1.45;
+  font-size: clamp(1.2rem, 1.75vw, 1.75rem);
+  line-height: 1.4;
   font-style: italic;
   color: var(--foreground);
   max-width: min(var(--hero-text-width, 36ch), 100%);
+  margin-top: 0.2rem;
 }
 
 .body {
-  font-size: clamp(0.98rem, 1.1vw, 1.18rem);
-  line-height: 1.7;
+  font-size: clamp(1.06rem, 1.2vw, 1.3rem);
+  line-height: 1.75;
   color: var(--foreground);
   max-width: min(var(--hero-text-width, 36ch), 100%);
 }
@@ -123,7 +124,7 @@
   position: relative;
   width: min(100%, 500px);
   min-height: 620px;
-  justify-self: end;
+  justify-self: start;
   align-self: center;
   overflow: hidden;
   border-radius: 1.5rem;
@@ -166,6 +167,148 @@
   color: rgba(17, 17, 17, 0.9);
 }
 
+.originStory {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(4.5rem, 7vw, 7rem) clamp(2rem, 4vw, 5rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 4.5vw, 5rem);
+  align-items: start;
+}
+
+.originLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.originEyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 70%, var(--turquoise) 30%);
+  margin-bottom: 0.8rem;
+}
+
+.originTitle {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  line-height: 1.15;
+  font-weight: 400;
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+}
+
+.originTitle em {
+  font-style: italic;
+  color: color-mix(in srgb, var(--foreground) 84%, var(--background) 16%);
+}
+
+.originDivider {
+  width: 36px;
+  height: 1px;
+  background: color-mix(in srgb, var(--foreground) 60%, var(--turquoise) 40%);
+  margin-bottom: 1.8rem;
+}
+
+.originBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 520px;
+}
+
+.originBody p {
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--foreground);
+}
+
+.originRight {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 0;
+}
+
+.timeline {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: auto;
+  padding-top: clamp(3rem, 6vw, 4.75rem);
+}
+
+.timelineItem {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.timelineLine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timelineDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(45, 45, 45, 0.14);
+  border: 1px solid color-mix(in srgb, var(--foreground) 70%, var(--turquoise) 30%);
+  margin-top: 0.3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.timelineConnector {
+  width: 1px;
+  flex: 1;
+  min-height: 2rem;
+  margin: 4px 0;
+  background: rgba(45, 45, 45, 0.16);
+  transform-origin: 50% 0%;
+}
+
+.timelineDotFill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: color-mix(in srgb, var(--foreground) 70%, var(--turquoise) 30%);
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+}
+
+.timelineContent {
+  padding-bottom: 1.35rem;
+}
+
+.timelineItem:last-child .timelineContent {
+  padding-bottom: 0;
+}
+
+.timelineYear {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 70%, var(--turquoise) 30%);
+  margin-bottom: 0.25rem;
+}
+
+.timelineText {
+  font-size: 0.88rem;
+  line-height: 1.75;
+  font-weight: 400;
+  color: var(--foreground);
+}
+
+.timelineText strong {
+  font-weight: 600;
+  color: color-mix(in srgb, var(--foreground) 90%, black 10%);
+}
+
 @media (max-width: 900px) {
   .hero {
     min-height: auto;
@@ -191,6 +334,25 @@
     justify-self: center;
     border-radius: 1.5rem;
     margin: 0 auto;
+  }
+
+  .originStory {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 5rem 2.5rem;
+  }
+
+  .originRight {
+    padding-top: 0;
+  }
+
+  .timeline {
+    height: auto;
+    padding-top: 0;
+  }
+
+  .originTitle {
+    font-size: clamp(1.7rem, 7vw, 2.5rem);
   }
 }
 
@@ -218,5 +380,22 @@
     left: 0.85rem;
     bottom: 0.85rem;
     padding: 0.5rem 0.65rem;
+  }
+
+  .originStory {
+    padding: 3.25rem 1.1rem 2.25rem;
+  }
+
+  .timelineItem {
+    gap: 0.9rem;
+  }
+
+  .timelineYear {
+    font-size: 0.74rem;
+  }
+
+  .timelineText {
+    font-size: 0.95rem;
+    line-height: 1.65;
   }
 }
