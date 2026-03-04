@@ -21,7 +21,6 @@ export default function AboutPage() {
   const headingRef = useRef(null);
   const originSectionRef = useRef(null);
   const originHasAnimatedRef = useRef(false);
-  const tags = SKILL_TAGS;
   const [textWidth, setTextWidth] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -278,7 +277,7 @@ export default function AboutPage() {
             className={styles.tags}
             aria-label="Skills"
           >
-            {tags.map((tag, index) => (
+            {SKILL_TAGS.map((tag, index) => (
               <li
                 key={tag}
                 className={styles.pillItem}
@@ -314,6 +313,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <div className={styles.sectionDivider} aria-hidden="true" />
 
       <section ref={originSectionRef} className={styles.originStory}>
         <div className={styles.originLeft}>
@@ -424,6 +424,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <div className={styles.sectionDivider} aria-hidden="true" />
 
       <section className={styles.beyond}>
         <p className={styles.beyondEyebrow}>Beyond the Work</p>
@@ -445,7 +446,7 @@ export default function AboutPage() {
                   alt={item.name}
                   fill
                   className={styles.polaroidPhoto}
-                  sizes="(max-width: 480px) 48vw, (max-width: 900px) 160px, 190px"
+                  sizes="(max-width: 480px) 280px, (max-width: 900px) 170px, 240px"
                   unoptimized
                 />
               </div>
