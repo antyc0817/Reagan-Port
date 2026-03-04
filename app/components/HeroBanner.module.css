@@ -82,7 +82,9 @@
     grid-column: 1;
     padding: 1rem 0;
     font-size: 1.4rem;
-    max-width: none;
+    max-width: 34ch;
+    margin-inline: auto;
+    text-align: center;
   }
 
   .links {
