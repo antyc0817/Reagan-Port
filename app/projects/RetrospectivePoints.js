@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { Eraser, Link2, Sparkles, Users, Palette, Zap, FolderCode } from "lucide-react";
+import { Eraser, Link2, Sparkles, Users, Palette, Zap, FolderCode, Layout, Type, Maximize2, Printer } from "lucide-react";
 import styles from "./projects.module.css";
 
-const ICON_MAP = { Eraser, Link2, Sparkles, Users, Palette, Zap, FolderCode };
+const ICON_MAP = { Eraser, Link2, Sparkles, Users, Palette, Zap, FolderCode, Layout, Type, Maximize2, Printer };
 
 export default function RetrospectivePoints({ points }) {
   const sectionRef = useRef(null);

@@ -1,6 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../projects.module.css";
 import EditorialFlipbook from "./EditorialFlipbook";
+import RetrospectivePoints from "../RetrospectivePoints";
+import { RETROSPECTIVE_POINTS } from "./retrospectiveData";
 
 export const metadata = {
   title: "Soul of South Korea | Reagan",
@@ -128,6 +131,23 @@ export default function SoulOfSouthKoreaProject() {
         <p className={styles.soulFlipbookHint}>Click to read</p>
         <EditorialFlipbook />
       </section>
+
+      <section className={`${styles.projectSection} ${styles.retrospectiveSection}`}>
+        <h3 className={styles.projectSectionTitle}>[ Retrospective ]</h3>
+        <p className={styles.retrospectiveMainText}>
+          A brochure lives in someone&apos;s hands. <strong>The page has to do all the work.</strong> No hover states, no animations, just layout, type, and image earning every second of attention.
+        </p>
+        <RetrospectivePoints points={RETROSPECTIVE_POINTS} />
+      </section>
+
+      <nav className={styles.projectNav} aria-label="Project navigation" data-section="project-nav">
+        <Link href="/work" className={styles.projectNavLink}>
+          View All Work
+        </Link>
+        <Link href="/projects/cuisine-clinic" className={styles.projectNavLink}>
+          Next: Cuisine Clinic
+        </Link>
+      </nav>
     </main>
   );
 }

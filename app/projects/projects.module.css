@@ -2631,6 +2631,20 @@
         padding-left: calc(22px + 0.6rem);
     }
 
+    .soulFlipbookControls {
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+    }
+
+    .soulFlipbookCounter {
+        font-size: 0.8rem;
+    }
+
+    .soulFlipbookArrowBtn {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
     .retroTimelineDotWrap {
         min-height: 24px;
         min-width: 24px;
@@ -2814,6 +2828,74 @@
     /* keep top/sides roomy, collapse bottom so controls sit right under book */
     padding: 2.5rem 2.5rem 0.1rem;
     margin-top: -0.2rem;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.soulFlipbookScaleWrap {
+    width: 840px;
+    max-width: min(840px, calc(100vw - 3rem));
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.soulFlipbookScaleInner {
+    width: 840px;
+    flex-shrink: 0;
+    transform-origin: center top;
+}
+
+/* Responsive scaling: book is 840×560, scale down to fit viewport */
+@media (max-width: 900px) {
+    .soulFlipbookScaleInner {
+        transform: scale(0.95);
+    }
+}
+
+@media (max-width: 768px) {
+    .soulFlipbookStage {
+        padding: 1.5rem 1rem 0.1rem;
+    }
+
+    .soulFlipbookScaleInner {
+        transform: scale(0.85);
+    }
+}
+
+@media (max-width: 600px) {
+    .soulFlipbookStage {
+        padding: 1rem 0.75rem 0.1rem;
+    }
+
+    .soulFlipbookScaleInner {
+        transform: scale(0.68);
+    }
+}
+
+@media (max-width: 480px) {
+    .soulFlipbookStage {
+        padding: 0.75rem 0.5rem 0.1rem;
+    }
+
+    .soulFlipbookScaleInner {
+        transform: scale(0.55);
+    }
+
+    .soulFlipbookControls {
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .soulFlipbookCounter {
+        font-size: 0.75rem;
+    }
+
+    .soulFlipbookArrowBtn {
+        width: 2rem;
+        height: 2rem;
+    }
 }
 
 /* react-pageflip sets backgroundColor: '#fff' via inline JS on its internal
@@ -2828,6 +2910,7 @@
     transition: transform 300ms cubic-bezier(0.22, 0.7, 0.25, 1);
     cursor: default;
     user-select: none;
+    flex-shrink: 0;
     /* clip-path (set inline) clips the shadow too, so it follows the visible
        cover or spread area automatically — no ghost on the empty half-slot */
     box-shadow:
@@ -3008,6 +3091,11 @@
 
     .soulFlipbookControls {
         gap: 1rem;
+        margin-top: 0.75rem;
+    }
+
+    .soulFlipbookCounter {
+        font-size: 0.85rem;
     }
 
     .soulTypographyCardAligned {

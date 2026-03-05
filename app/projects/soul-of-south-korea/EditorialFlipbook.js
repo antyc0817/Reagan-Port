@@ -88,9 +88,11 @@ export default function EditorialFlipbook() {
     return (
         <div className={styles.soulFlipbook}>
             <div className={styles.soulFlipbookStage}>
-                <div
-                    className={styles.soulFlipbookBookWrap}
-                    style={{ transform: `translateX(${animOffset}px)`, clipPath: coverClip }}>
+                <div className={styles.soulFlipbookScaleWrap}>
+                    <div className={styles.soulFlipbookScaleInner}>
+                        <div
+                            className={styles.soulFlipbookBookWrap}
+                            style={{ transform: `translateX(${animOffset}px)`, clipPath: coverClip }}>
                     <HTMLFlipBook
                         ref={bookRef}
                         width={420}
@@ -186,6 +188,8 @@ export default function EditorialFlipbook() {
                             <Image src='/books/soul-of-south-korea/a7.jpg' alt='Soul of South Korea back cover' fill className={styles.soulFlipbookPageImg} sizes='420px' unoptimized />
                         </div>
                     </HTMLFlipBook>
+                        </div>
+                    </div>
                 </div>
             </div>
 
