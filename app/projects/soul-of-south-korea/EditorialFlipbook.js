@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import HTMLFlipBook from "react-pageflip";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import styles from "../projects.module.css";
 // Front cover lives on the RIGHT half of the 840px book container → translateX(-210) centres it.
 // Back cover lives on the LEFT half → translateX(+210) centres it.
 const COVER_OFFSET = 210;
+const BOOK_BASE_WIDTH = 840;
 const totalPages = 7;
 const BOUNDARY_UNCLIP_DELAY = 140;
 
@@ -24,8 +25,10 @@ const pageMap = {
 
 export default function EditorialFlipbook() {
     const bookRef = useRef(null);
+    const scaleWrapRef = useRef(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [animOffset, setAnimOffset] = useState(-COVER_OFFSET);
+    const [bookScale, setBookScale] = useState(1);
     // Separate from currentPage so we can remove the clip *before* a flip starts
     const [isClipped, setIsClipped] = useState(true);
 
@@ -85,10 +88,30 @@ export default function EditorialFlipbook() {
         }
     };
 
+    useEffect(() => {
+        const scaleWrap = scaleWrapRef.current;
+        if (!scaleWrap) return undefined;
+
+        const updateScale = () => {
+            const availableWidth = scaleWrap.clientWidth;
+            if (!availableWidth) return;
+            const nextScale = Math.min(1, availableWidth / BOOK_BASE_WIDTH);
+            setBookScale(nextScale);
+        };
+
+        updateScale();
+        const observer = new ResizeObserver(updateScale);
+        observer.observe(scaleWrap);
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <div className={styles.soulFlipbook}>
             <div className={styles.soulFlipbookStage}>
-                <div className={styles.soulFlipbookScaleWrap}>
+                <div
+                    ref={scaleWrapRef}
+                    className={styles.soulFlipbookScaleWrap}
+                    style={{ "--book-scale": bookScale }}>
                     <div className={styles.soulFlipbookScaleInner}>
                         <div
                             className={styles.soulFlipbookBookWrap}

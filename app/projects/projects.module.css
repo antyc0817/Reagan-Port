@@ -2829,38 +2829,30 @@
     padding: 2.5rem 2.5rem 0.1rem;
     margin-top: -0.2rem;
     max-width: 100%;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .soulFlipbookScaleWrap {
-    width: 840px;
-    max-width: min(840px, calc(100vw - 3rem));
+    --book-scale: 1;
+    width: min(840px, 100%);
+    height: calc(560px * var(--book-scale));
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 }
 
 .soulFlipbookScaleInner {
     width: 840px;
     flex-shrink: 0;
     transform-origin: center top;
-}
-
-/* Responsive scaling: book is 840×560, scale down to fit viewport */
-@media (max-width: 900px) {
-    .soulFlipbookScaleInner {
-        transform: scale(0.95);
-    }
+    transform: scale(var(--book-scale));
 }
 
 @media (max-width: 768px) {
     .soulFlipbookStage {
         padding: 1.5rem 1rem 0.1rem;
-    }
-
-    .soulFlipbookScaleInner {
-        transform: scale(0.85);
     }
 }
 
@@ -2868,19 +2860,11 @@
     .soulFlipbookStage {
         padding: 1rem 0.75rem 0.1rem;
     }
-
-    .soulFlipbookScaleInner {
-        transform: scale(0.68);
-    }
 }
 
 @media (max-width: 480px) {
     .soulFlipbookStage {
         padding: 0.75rem 0.5rem 0.1rem;
-    }
-
-    .soulFlipbookScaleInner {
-        transform: scale(0.55);
     }
 
     .soulFlipbookControls {
@@ -3090,12 +3074,12 @@
     }
 
     .soulFlipbookControls {
-        gap: 1rem;
-        margin-top: 0.75rem;
+        gap: 0.85rem;
+        margin-top: 0.35rem;
     }
 
     .soulFlipbookCounter {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .soulTypographyCardAligned {
