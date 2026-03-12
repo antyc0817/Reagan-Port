@@ -7,7 +7,7 @@ import styles from "./page.module.css";
 
 const STARTING_BALANCE = 1000;
 const TOTAL_BUY_INS = 3;
-const CHIP_VALUES = [100, 200, 500] as const;
+const CHIP_VALUES = [50, 100, 200, 500] as const;
 
 type BetSide = "Player" | "Banker";
 
@@ -76,16 +76,20 @@ function getBeadClass(outcome: RoundOutcome | null): string {
   return styles.beadEmpty;
 }
 
-function getChipClass(chipValue: number): string {
+function getChipImagePath(chipValue: number): string {
+  if (chipValue === 50) {
+    return "/images/coins/50-chip.png";
+  }
+
   if (chipValue === 100) {
-    return styles.chip100;
+    return "/images/coins/100-chip.png";
   }
 
   if (chipValue === 200) {
-    return styles.chip200;
+    return "/images/coins/200-chip.png";
   }
 
-  return styles.chip500;
+  return "/images/coins/500-chip.png";
 }
 
 export default function BaccaratPage() {
@@ -257,21 +261,27 @@ export default function BaccaratPage() {
             <section className={styles.feltArea}>
               <button
                 type="button"
-                onClick={() => setSelectedSide("Player")}
+                onClick={() => setSelectedSide((current) => (current === "Player" ? null : "Player"))}
                 disabled={!canSelectBet}
                 className={`${styles.betZone} ${styles.playerZone} ${selectedSide === "Player" ? styles.betZoneSelected : ""}`}
               >
-                {selectedSide === "Player" && (
-                  <Image
-                    src="/images/bet-chip.png"
-                    alt="Bet placed on Player"
-                    width={74}
-                    height={74}
-                    className={styles.betMarkerImage}
-                  />
-                )}
-                <span className={styles.betZoneLabel}>Player</span>
-                <span className={styles.betZoneSubtext}>{selectedSide === "Player" ? "Bet Placed" : "Tap To Bet"}</span>
+                <span className={styles.betZoneHeader}>
+                  <span className={styles.betZoneLabel}>Player</span>
+                  <span className={styles.betZoneSubtext}>
+                    {selectedSide === "Player" && selectedChip !== null ? "Tap To Remove" : "Tap To Bet"}
+                  </span>
+                </span>
+                <span className={styles.betMarkerSlot}>
+                  {selectedSide === "Player" && selectedChip !== null && (
+                    <Image
+                      src={getChipImagePath(selectedChip)}
+                      alt="Bet placed on Player"
+                      width={126}
+                      height={126}
+                      className={styles.betMarkerImage}
+                    />
+                  )}
+                </span>
               </button>
 
               <section className={styles.cardDisplay}>
@@ -340,21 +350,27 @@ export default function BaccaratPage() {
 
               <button
                 type="button"
-                onClick={() => setSelectedSide("Banker")}
+                onClick={() => setSelectedSide((current) => (current === "Banker" ? null : "Banker"))}
                 disabled={!canSelectBet}
                 className={`${styles.betZone} ${styles.bankerZone} ${selectedSide === "Banker" ? styles.betZoneSelected : ""}`}
               >
-                {selectedSide === "Banker" && (
-                  <Image
-                    src="/images/bet-chip.png"
-                    alt="Bet placed on Banker"
-                    width={74}
-                    height={74}
-                    className={styles.betMarkerImage}
-                  />
-                )}
-                <span className={styles.betZoneLabel}>Banker</span>
-                <span className={styles.betZoneSubtext}>{selectedSide === "Banker" ? "Bet Placed" : "Tap To Bet"}</span>
+                <span className={styles.betZoneHeader}>
+                  <span className={styles.betZoneLabel}>Banker</span>
+                  <span className={styles.betZoneSubtext}>
+                    {selectedSide === "Banker" && selectedChip !== null ? "Tap To Remove" : "Tap To Bet"}
+                  </span>
+                </span>
+                <span className={styles.betMarkerSlot}>
+                  {selectedSide === "Banker" && selectedChip !== null && (
+                    <Image
+                      src={getChipImagePath(selectedChip)}
+                      alt="Bet placed on Banker"
+                      width={126}
+                      height={126}
+                      className={styles.betMarkerImage}
+                    />
+                  )}
+                </span>
               </button>
             </section>
 
@@ -382,38 +398,60 @@ export default function BaccaratPage() {
 
             <section className={styles.bottomBar}>
               <div className={styles.bottomBalance}>
-                <p className={styles.bottomLabel}>Balance</p>
-                <p className={styles.bottomValue}>${balance}</p>
-                <p className={styles.bottomMeta}>
+                <p className={styles.balanceLabel}>Balance</p>
+                <p className={styles.balanceValue}>${balance}</p>
+                <p className={styles.balanceMeta}>
                   Buy Ins: {buyInsRemaining}/{TOTAL_BUY_INS}
                 </p>
               </div>
 
               <div className={styles.bottomChips}>
-                {CHIP_VALUES.map((chipValue) => {
-                  const isTooExpensive = chipValue > balance;
-                  const isSelected = selectedChip === chipValue;
+                <div className={styles.chipsRow}>
+                  {CHIP_VALUES.map((chipValue, index) => {
+                    const isTooExpensive = chipValue > balance;
+                    const isSelected = selectedChip === chipValue;
 
-                  return (
-                    <button
-                      key={chipValue}
-                      type="button"
-                      onClick={() => setSelectedChip(chipValue)}
-                      disabled={!canSelectBet || isTooExpensive}
-                      aria-pressed={isSelected}
-                      className={`${styles.chipButton} ${getChipClass(chipValue)} ${isSelected ? styles.chipSelected : ""} ${isTooExpensive ? styles.chipDisabled : ""}`}
-                    >
-                      ${chipValue}
-                    </button>
-                  );
-                })}
-                <div className={styles.wagerBox}>
-                  <span className={styles.bottomLabel}>Wager</span>
-                  <span className={styles.bottomValue}>${wagerAmount}</span>
+                    return (
+                      <div key={chipValue} className={styles.chipSlot}>
+                        <button
+                          type="button"
+                          onClick={() => setSelectedChip((current) => (current === chipValue ? null : chipValue))}
+                          disabled={!canSelectBet || isTooExpensive}
+                          aria-pressed={isSelected}
+                          className={`${styles.chipButton} ${isSelected ? styles.chipSelected : ""} ${isTooExpensive ? styles.chipDisabled : ""}`}
+                        >
+                          <span className={styles.chipImageWrap}>
+                            <Image
+                              src={getChipImagePath(chipValue)}
+                              alt={`$${chipValue} chip`}
+                              width={72}
+                              height={72}
+                              className={styles.chipImage}
+                            />
+                          </span>
+                        </button>
+
+                        {index === 1 && (
+                          <div className={styles.wagerBox}>
+                            <span className={styles.bottomLabel}>Wager</span>
+                            <span className={styles.bottomValue}>${wagerAmount}</span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
               <div className={styles.bottomActions}>
+                <button
+                  type="button"
+                  disabled={!canPlay}
+                  onClick={handlePlay}
+                  className={`${styles.playButton} ${canPlay ? styles.playButtonActive : styles.playButtonDisabled}`}
+                >
+                  {isPlaying ? "Dealing..." : "Deal"}
+                </button>
                 <button
                   type="button"
                   onClick={handleClearBet}
@@ -422,14 +460,6 @@ export default function BaccaratPage() {
                   tabIndex={hasAnyBet ? 0 : -1}
                 >
                   Clear
-                </button>
-                <button
-                  type="button"
-                  disabled={!canPlay}
-                  onClick={handlePlay}
-                  className={`${styles.playButton} ${canPlay ? styles.playButtonActive : styles.playButtonDisabled}`}
-                >
-                  {isPlaying ? "Dealing..." : "Deal"}
                 </button>
               </div>
             </section>
