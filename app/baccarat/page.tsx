@@ -27,12 +27,36 @@ type PlayRoundResponse = {
   roundResult: RoundResult;
 };
 
-function formatHand(hand: BaccaratCard[]): string {
-  if (hand.length === 0) {
-    return "No cards";
+function getSuitSymbol(suit: BaccaratCard["suit"]): string {
+  if (suit === "Hearts") {
+    return "♥";
   }
 
-  return hand.map((card) => `${card.rank}${card.suit[0]}`).join(" ");
+  if (suit === "Diamonds") {
+    return "♦";
+  }
+
+  if (suit === "Clubs") {
+    return "♣";
+  }
+
+  return "♠";
+}
+
+function isRedSuit(suit: BaccaratCard["suit"]): boolean {
+  return suit === "Hearts" || suit === "Diamonds";
+}
+
+function getRoundHeadline(roundResult: RoundResult | null): string {
+  if (!roundResult) {
+    return "Awaiting Next Round";
+  }
+
+  if (roundResult.outcome === "Tie") {
+    return "Tie";
+  }
+
+  return `${roundResult.outcome} Wins`;
 }
 
 function getChipClass(chipValue: number): string {
@@ -185,6 +209,70 @@ export default function BaccaratPage() {
               </div>
             </section>
 
+            <section className={styles.cardDisplay}>
+              <div className={styles.handColumn}>
+                <h2 className={styles.sectionTitle}>Player Hand</h2>
+                <div className={styles.cardsRow}>
+                  {[0, 1, 2].map((index) => {
+                    const card = lastRoundResult?.playerHand[index] ?? null;
+
+                    if (!card) {
+                      return <div key={`player-placeholder-${index}`} className={styles.cardPlaceholder} />;
+                    }
+
+                    const suitSymbol = getSuitSymbol(card.suit);
+                    const isRed = isRedSuit(card.suit);
+
+                    return (
+                      <article
+                        key={`player-card-${index}-${card.rank}-${card.suit}`}
+                        className={`${styles.playingCard} ${isRed ? styles.redCard : styles.blackCard}`}
+                      >
+                        <span className={styles.cardCorner}>{card.rank}</span>
+                        <span className={styles.cardSuit}>{suitSymbol}</span>
+                      </article>
+                    );
+                  })}
+                </div>
+                <p className={styles.handTotal}>
+                  Total: <span className={styles.highlight}>{lastRoundResult?.playerValue ?? "--"}</span>
+                </p>
+              </div>
+
+              <div className={styles.roundCenter}>
+                <p className={styles.resultText}>{getRoundHeadline(lastRoundResult)}</p>
+              </div>
+
+              <div className={styles.handColumn}>
+                <h2 className={styles.sectionTitle}>Banker Hand</h2>
+                <div className={styles.cardsRow}>
+                  {[0, 1, 2].map((index) => {
+                    const card = lastRoundResult?.bankerHand[index] ?? null;
+
+                    if (!card) {
+                      return <div key={`banker-placeholder-${index}`} className={styles.cardPlaceholder} />;
+                    }
+
+                    const suitSymbol = getSuitSymbol(card.suit);
+                    const isRed = isRedSuit(card.suit);
+
+                    return (
+                      <article
+                        key={`banker-card-${index}-${card.rank}-${card.suit}`}
+                        className={`${styles.playingCard} ${isRed ? styles.redCard : styles.blackCard}`}
+                      >
+                        <span className={styles.cardCorner}>{card.rank}</span>
+                        <span className={styles.cardSuit}>{suitSymbol}</span>
+                      </article>
+                    );
+                  })}
+                </div>
+                <p className={styles.handTotal}>
+                  Total: <span className={styles.highlight}>{lastRoundResult?.bankerValue ?? "--"}</span>
+                </p>
+              </div>
+            </section>
+
             <section className={styles.playerCard}>
               <h2 className={styles.sectionTitle}>Player</h2>
               <div className={styles.playerStatsRow}>
@@ -282,20 +370,6 @@ export default function BaccaratPage() {
               </section>
             )}
 
-            {lastRoundResult && (
-              <section className={styles.card}>
-                <h2 className={styles.sectionTitle}>Last Round</h2>
-                <p className={styles.statusText}>
-                  Winner: <span className={styles.highlight}>{lastRoundResult.outcome}</span>
-                </p>
-                <p className={styles.statusText}>
-                  Player Hand: {formatHand(lastRoundResult.playerHand)} (Value: {lastRoundResult.playerValue})
-                </p>
-                <p className={styles.statusText}>
-                  Banker Hand: {formatHand(lastRoundResult.bankerHand)} (Value: {lastRoundResult.bankerValue})
-                </p>
-              </section>
-            )}
           </>
         )}
       </div>
