@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { BaccaratGameState } from "../../lib/gameState";
+import type { BaccaratCard, BaccaratGameState, RoundOutcome } from "../../lib/gameState";
 
 const STARTING_BALANCE = 1000;
 const TOTAL_BUY_INS = 3;
@@ -9,12 +9,39 @@ const CHIP_VALUES = [100, 200, 500] as const;
 
 type BetSide = "Player" | "Banker";
 
+type RoundResult = {
+  outcome: RoundOutcome;
+  playerHand: BaccaratCard[];
+  bankerHand: BaccaratCard[];
+  playerValue: number;
+  bankerValue: number;
+  wasNatural: boolean;
+  playerDrewThirdCard: boolean;
+  bankerDrewThirdCard: boolean;
+  shoeReset: boolean;
+};
+
+type PlayRoundResponse = {
+  gameState: BaccaratGameState;
+  roundResult: RoundResult;
+};
+
+function formatHand(hand: BaccaratCard[]): string {
+  if (hand.length === 0) {
+    return "No cards";
+  }
+
+  return hand.map((card) => `${card.rank}${card.suit[0]}`).join(" ");
+}
+
 export default function BaccaratPage() {
   const [gameState, setGameState] = useState<BaccaratGameState | null>(null);
-  const [balance] = useState<number>(STARTING_BALANCE);
+  const [balance, setBalance] = useState<number>(STARTING_BALANCE);
   const [buyInsRemaining] = useState<number>(TOTAL_BUY_INS);
   const [selectedSide, setSelectedSide] = useState<BetSide | null>(null);
   const [selectedChip, setSelectedChip] = useState<number | null>(null);
+  const [lastRoundResult, setLastRoundResult] = useState<RoundResult | null>(null);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -42,7 +69,51 @@ export default function BaccaratPage() {
     fetchGameState();
   }, []);
 
-  const canPlay = selectedSide !== null && selectedChip !== null;
+  const canPlay = selectedSide !== null && selectedChip !== null && !isPlaying;
+
+  async function handlePlay() {
+    if (!selectedSide || !selectedChip || isPlaying) {
+      return;
+    }
+
+    setIsPlaying(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/baccarat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          side: selectedSide,
+          chip: selectedChip,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to play round.");
+      }
+
+      const data = (await response.json()) as PlayRoundResponse;
+      setGameState(data.gameState);
+      setLastRoundResult(data.roundResult);
+
+      if (data.roundResult.outcome === "Tie") {
+        // Push: balance does not change on ties.
+      } else if (data.roundResult.outcome === selectedSide) {
+        setBalance((currentBalance) => currentBalance + selectedChip);
+      } else {
+        setBalance((currentBalance) => currentBalance - selectedChip);
+      }
+    } catch (playError) {
+      setError(playError instanceof Error ? playError.message : "Unknown error");
+    } finally {
+      setSelectedSide(null);
+      setSelectedChip(null);
+      setIsPlaying(false);
+    }
+  }
 
   return (
     <main>
@@ -111,10 +182,23 @@ export default function BaccaratPage() {
           </section>
 
           <section>
-            <button type="button" disabled={!canPlay}>
-              Play
+            <button type="button" disabled={!canPlay} onClick={handlePlay}>
+              {isPlaying ? "Playing..." : "Play"}
             </button>
           </section>
+
+          {lastRoundResult && (
+            <section>
+              <h2>Last Round</h2>
+              <p>Winner: {lastRoundResult.outcome}</p>
+              <p>
+                Player Hand: {formatHand(lastRoundResult.playerHand)} (Value: {lastRoundResult.playerValue})
+              </p>
+              <p>
+                Banker Hand: {formatHand(lastRoundResult.bankerHand)} (Value: {lastRoundResult.bankerValue})
+              </p>
+            </section>
+          )}
         </>
       )}
     </main>
