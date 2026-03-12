@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import type { BaccaratCard, BaccaratGameState, RoundOutcome } from "../../lib/gameState";
+import Footer from "../components/Footer";
 import styles from "./page.module.css";
 
 const STARTING_BALANCE = 1000;
@@ -50,7 +51,7 @@ function isRedSuit(suit: BaccaratCard["suit"]): boolean {
 
 function getRoundHeadline(roundResult: RoundResult | null): string {
   if (!roundResult) {
-    return "Awaiting Next Round";
+    return "Awaiting\nNext Round";
   }
 
   if (roundResult.outcome === "Tie") {
@@ -315,7 +316,19 @@ export default function BaccaratPage() {
                 </div>
 
                 <div className={styles.roundCenter}>
-                  <p className={styles.resultText}>{getRoundHeadline(lastRoundResult)}</p>
+                  <p
+                    className={`${styles.resultText} ${
+                      lastRoundResult?.outcome === "Player"
+                        ? styles.resultTextPlayer
+                        : lastRoundResult?.outcome === "Banker"
+                          ? styles.resultTextBanker
+                          : lastRoundResult?.outcome === "Tie"
+                            ? styles.resultTextTie
+                            : ""
+                    }`}
+                  >
+                    {getRoundHeadline(lastRoundResult)}
+                  </p>
                 </div>
 
                 <div className={styles.handColumn}>
@@ -407,7 +420,7 @@ export default function BaccaratPage() {
 
               <div className={styles.bottomChips}>
                 <div className={styles.chipsRow}>
-                  {CHIP_VALUES.map((chipValue, index) => {
+                  {CHIP_VALUES.map((chipValue) => {
                     const isTooExpensive = chipValue > balance;
                     const isSelected = selectedChip === chipValue;
 
@@ -431,15 +444,13 @@ export default function BaccaratPage() {
                           </span>
                         </button>
 
-                        {index === 1 && (
-                          <div className={styles.wagerBox}>
-                            <span className={styles.bottomLabel}>Wager</span>
-                            <span className={styles.bottomValue}>${wagerAmount}</span>
-                          </div>
-                        )}
                       </div>
                     );
                   })}
+                </div>
+                <div className={styles.wagerBox}>
+                  <span className={styles.bottomLabel}>Wager</span>
+                  <span className={styles.bottomValue}>${wagerAmount}</span>
                 </div>
               </div>
 
@@ -450,7 +461,7 @@ export default function BaccaratPage() {
                   onClick={handlePlay}
                   className={`${styles.playButton} ${canPlay ? styles.playButtonActive : styles.playButtonDisabled}`}
                 >
-                  {isPlaying ? "Dealing..." : "Deal"}
+                  <span className={styles.playButtonText}>{isPlaying ? "Dealing" : "Deal"}</span>
                 </button>
                 <button
                   type="button"
@@ -466,6 +477,7 @@ export default function BaccaratPage() {
           </>
         )}
       </div>
+      <Footer />
     </main>
   );
 }
