@@ -117,7 +117,7 @@ export default function Navbar() {
       </div>
 
       <div className={`${styles.navbarSection} ${styles.navbarRight}`}>
-        <Link href="/game" className={`${styles.link} ${pathname === "/game" ? styles.linkActive : ""}`}>
+        <Link href="/baccarat" className={`${styles.link} ${pathname === "/baccarat" ? styles.linkActive : ""}`}>
           GAME
         </Link>
         <Link href="/contact" className={`${styles.link} ${pathname === "/contact" ? styles.linkActive : ""}`}>
