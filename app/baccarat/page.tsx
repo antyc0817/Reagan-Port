@@ -59,6 +59,22 @@ function getRoundHeadline(roundResult: RoundResult | null): string {
   return `${roundResult.outcome} Wins`;
 }
 
+function getBeadClass(outcome: RoundOutcome | null): string {
+  if (outcome === "Player") {
+    return styles.beadPlayer;
+  }
+
+  if (outcome === "Banker") {
+    return styles.beadBanker;
+  }
+
+  if (outcome === "Tie") {
+    return styles.beadTie;
+  }
+
+  return styles.beadEmpty;
+}
+
 function getChipClass(chipValue: number): string {
   if (chipValue === 100) {
     return styles.chip100;
@@ -192,20 +208,55 @@ export default function BaccaratPage() {
         {!loading && !error && gameState && (
           <>
             <section className={styles.scoreboardCard}>
-              <h2 className={styles.sectionTitle}>Global Scoreboard</h2>
-              <div className={styles.scoreboardGrid}>
-                <div className={styles.scoreboardItem}>
-                  <span className={styles.scoreboardLabel}>Player Wins</span>
-                  <span className={styles.scoreboardValue}>{gameState.scoreboard.playerWins}</span>
-                </div>
-                <div className={styles.scoreboardItem}>
-                  <span className={styles.scoreboardLabel}>Banker Wins</span>
-                  <span className={styles.scoreboardValue}>{gameState.scoreboard.bankerWins}</span>
-                </div>
-                <div className={styles.scoreboardItem}>
-                  <span className={styles.scoreboardLabel}>Ties</span>
-                  <span className={styles.scoreboardValue}>{gameState.scoreboard.ties}</span>
-                </div>
+              <h2 className={styles.sectionTitle}>Bead Plate</h2>
+              {(() => {
+                const rows = 6;
+                const history = gameState.scoreboardHistory;
+                const columns = Math.max(1, Math.ceil(history.length / rows));
+                const totalSpots = columns * rows;
+
+                return (
+                  <>
+                    <div className={styles.beadPlate} style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
+                      {Array.from({ length: totalSpots }, (_, index) => {
+                        const outcome = history[index] ?? null;
+
+                        return (
+                          <div key={`bead-${index}`} className={styles.beadCell}>
+                            <span className={`${styles.bead} ${getBeadClass(outcome)}`} />
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <div className={styles.scoreboardSummary}>
+                      <p className={styles.summaryItem}>
+                        Player: <span className={styles.summaryValue}>{gameState.scoreboard.playerWins}</span>
+                      </p>
+                      <p className={styles.summaryItem}>
+                        Banker: <span className={styles.summaryValue}>{gameState.scoreboard.bankerWins}</span>
+                      </p>
+                      <p className={styles.summaryItem}>
+                        Tie: <span className={styles.summaryValue}>{gameState.scoreboard.ties}</span>
+                      </p>
+                    </div>
+                  </>
+                );
+              })()}
+            </section>
+
+            <section className={styles.playerCard}>
+              <h2 className={styles.sectionTitle}>Player</h2>
+              <div className={styles.playerStatsRow}>
+                <p className={styles.playerStat}>
+                  Current Balance: <span className={styles.highlight}>${balance}</span>
+                </p>
+                <p className={styles.playerStat}>
+                  Buy Ins Remaining:{" "}
+                  <span className={styles.highlight}>
+                    {buyInsRemaining} / {TOTAL_BUY_INS}
+                  </span>
+                </p>
               </div>
             </section>
 
@@ -269,21 +320,6 @@ export default function BaccaratPage() {
                 </div>
                 <p className={styles.handTotal}>
                   Total: <span className={styles.highlight}>{lastRoundResult?.bankerValue ?? "--"}</span>
-                </p>
-              </div>
-            </section>
-
-            <section className={styles.playerCard}>
-              <h2 className={styles.sectionTitle}>Player</h2>
-              <div className={styles.playerStatsRow}>
-                <p className={styles.playerStat}>
-                  Current Balance: <span className={styles.highlight}>${balance}</span>
-                </p>
-                <p className={styles.playerStat}>
-                  Buy Ins Remaining:{" "}
-                  <span className={styles.highlight}>
-                    {buyInsRemaining} / {TOTAL_BUY_INS}
-                  </span>
                 </p>
               </div>
             </section>
