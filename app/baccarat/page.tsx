@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import type { BaccaratCard, BaccaratGameState, RoundOutcome } from "../../lib/gameState";
 import styles from "./page.module.css";
 
@@ -260,6 +261,15 @@ export default function BaccaratPage() {
                 disabled={!canSelectBet}
                 className={`${styles.betZone} ${styles.playerZone} ${selectedSide === "Player" ? styles.betZoneSelected : ""}`}
               >
+                {selectedSide === "Player" && (
+                  <Image
+                    src="/images/bet-chip.png"
+                    alt="Bet placed on Player"
+                    width={74}
+                    height={74}
+                    className={styles.betMarkerImage}
+                  />
+                )}
                 <span className={styles.betZoneLabel}>Player</span>
                 <span className={styles.betZoneSubtext}>{selectedSide === "Player" ? "Bet Placed" : "Tap To Bet"}</span>
               </button>
@@ -334,6 +344,15 @@ export default function BaccaratPage() {
                 disabled={!canSelectBet}
                 className={`${styles.betZone} ${styles.bankerZone} ${selectedSide === "Banker" ? styles.betZoneSelected : ""}`}
               >
+                {selectedSide === "Banker" && (
+                  <Image
+                    src="/images/bet-chip.png"
+                    alt="Bet placed on Banker"
+                    width={74}
+                    height={74}
+                    className={styles.betMarkerImage}
+                  />
+                )}
                 <span className={styles.betZoneLabel}>Banker</span>
                 <span className={styles.betZoneSubtext}>{selectedSide === "Banker" ? "Bet Placed" : "Tap To Bet"}</span>
               </button>
@@ -395,11 +414,15 @@ export default function BaccaratPage() {
               </div>
 
               <div className={styles.bottomActions}>
-                {hasAnyBet && (
-                  <button type="button" onClick={handleClearBet} className={styles.clearButton}>
-                    Clear
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={handleClearBet}
+                  className={`${styles.clearButton} ${hasAnyBet ? "" : styles.clearButtonHidden}`}
+                  aria-hidden={!hasAnyBet}
+                  tabIndex={hasAnyBet ? 0 : -1}
+                >
+                  Clear
+                </button>
                 <button
                   type="button"
                   disabled={!canPlay}
