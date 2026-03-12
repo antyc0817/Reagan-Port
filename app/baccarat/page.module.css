@@ -10,7 +10,7 @@
 .table {
   width: min(1100px, 100%);
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 8.25rem;
   border: 1px solid rgba(229, 189, 92, 0.65);
   border-radius: 18px;
   background:
@@ -154,15 +154,69 @@
 }
 
 .cardDisplay {
-  margin-bottom: 1rem;
   padding: 1rem;
-  border: 1px solid rgba(214, 179, 79, 0.45);
+  border: 1px solid rgba(229, 189, 92, 0.52);
   border-radius: 12px;
-  background: rgba(4, 24, 16, 0.55);
+  background: rgba(66, 6, 16, 0.72);
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr;
   gap: 0.9rem;
   align-items: center;
+}
+
+.feltArea {
+  display: grid;
+  grid-template-columns: minmax(145px, 0.9fr) 2.2fr minmax(145px, 0.9fr);
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+  align-items: stretch;
+}
+
+.betZone {
+  border: 1px solid rgba(229, 189, 92, 0.48);
+  border-radius: 14px;
+  background: radial-gradient(circle at top, rgba(137, 19, 34, 0.75), rgba(85, 10, 21, 0.95));
+  color: #f8ebd3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.75rem;
+  cursor: pointer;
+  min-height: 220px;
+}
+
+.betZone:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.betZoneSelected {
+  border-color: #f3d07e;
+  box-shadow: 0 0 0 2px rgba(243, 208, 126, 0.32), inset 0 0 0 1px rgba(243, 208, 126, 0.45);
+}
+
+.betZoneLabel {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #f1cb79;
+  font-weight: 700;
+}
+
+.betZoneSubtext {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.playerZone {
+  background: radial-gradient(circle at top, rgba(121, 18, 32, 0.78), rgba(77, 9, 20, 0.96));
+}
+
+.bankerZone {
+  background: radial-gradient(circle at top, rgba(153, 21, 37, 0.78), rgba(94, 9, 23, 0.96));
 }
 
 .handColumn {
@@ -328,8 +382,87 @@
   margin: 0.75rem 0 1.25rem;
 }
 
+.bottomBar {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1.05fr 2fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.8rem;
+  border-radius: 12px;
+  border: 1px solid rgba(229, 189, 92, 0.6);
+  background: linear-gradient(180deg, rgba(101, 12, 24, 0.97), rgba(66, 7, 16, 0.98));
+  box-shadow: 0 -8px 18px rgba(31, 1, 7, 0.5);
+  z-index: 5;
+}
+
+.bottomBalance {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.bottomChips {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.wagerBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 86px;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
+  border: 1px solid rgba(229, 189, 92, 0.44);
+  background: rgba(53, 4, 13, 0.74);
+}
+
+.bottomLabel {
+  margin: 0;
+  color: #f0d49a;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.bottomValue {
+  margin: 0;
+  color: #f6d88d;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.bottomMeta {
+  margin: 0;
+  color: #f5deb2;
+  font-size: 0.74rem;
+}
+
+.bottomActions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.clearButton {
+  border: 1px solid rgba(239, 204, 120, 0.65);
+  border-radius: 9px;
+  padding: 0.65rem 0.8rem;
+  background: rgba(81, 13, 22, 0.85);
+  color: #f6d88d;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+
 .playButton {
   width: 100%;
+  min-width: 120px;
   max-width: 300px;
   border-radius: 10px;
   padding: 0.85rem 1.1rem;
@@ -370,7 +503,7 @@
   }
 
   .table {
-    padding: 1rem;
+    padding: 1rem 1rem 9.5rem;
   }
 
   .scoreboardGrid {
@@ -396,10 +529,6 @@
     grid-template-columns: 1fr;
   }
 
-  .cardDisplay {
-    grid-template-columns: 1fr;
-  }
-
   .cardsRow {
     justify-content: center;
     min-height: auto;
@@ -407,6 +536,18 @@
 
   .roundCenter {
     min-width: 0;
+  }
+
+  .feltArea {
+    grid-template-columns: 1fr;
+  }
+
+  .betZone {
+    min-height: 88px;
+  }
+
+  .cardDisplay {
+    order: 1;
   }
 
   .sideButtons {
@@ -426,5 +567,24 @@
 
   .playButton {
     max-width: 100%;
+    min-width: 0;
+  }
+
+  .bottomBar {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .bottomActions {
+    width: 100%;
+  }
+
+  .bottomActions .playButton,
+  .bottomActions .clearButton {
+    flex: 1;
+  }
+
+  .wagerBox {
+    min-width: 78px;
   }
 }

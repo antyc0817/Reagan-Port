@@ -127,6 +127,9 @@ export default function BaccaratPage() {
 
   const isBroke = balance <= 0;
   const isGameOver = isBroke && buyInsRemaining === 0;
+  const canSelectBet = !isBroke && !isGameOver && !isPlaying;
+  const wagerAmount = selectedChip ?? 0;
+  const hasAnyBet = selectedSide !== null || selectedChip !== null;
   const canPlay =
     selectedSide !== null &&
     selectedChip !== null &&
@@ -145,6 +148,11 @@ export default function BaccaratPage() {
     setSelectedSide(null);
     setSelectedChip(null);
     setError(null);
+  }
+
+  function handleClearBet() {
+    setSelectedSide(null);
+    setSelectedChip(null);
   }
 
   async function handlePlay() {
@@ -245,144 +253,91 @@ export default function BaccaratPage() {
               })()}
             </section>
 
-            <section className={styles.playerCard}>
-              <h2 className={styles.sectionTitle}>Player</h2>
-              <div className={styles.playerStatsRow}>
-                <p className={styles.playerStat}>
-                  Current Balance: <span className={styles.highlight}>${balance}</span>
-                </p>
-                <p className={styles.playerStat}>
-                  Buy Ins Remaining:{" "}
-                  <span className={styles.highlight}>
-                    {buyInsRemaining} / {TOTAL_BUY_INS}
-                  </span>
-                </p>
-              </div>
-            </section>
+            <section className={styles.feltArea}>
+              <button
+                type="button"
+                onClick={() => setSelectedSide("Player")}
+                disabled={!canSelectBet}
+                className={`${styles.betZone} ${styles.playerZone} ${selectedSide === "Player" ? styles.betZoneSelected : ""}`}
+              >
+                <span className={styles.betZoneLabel}>Player</span>
+                <span className={styles.betZoneSubtext}>{selectedSide === "Player" ? "Bet Placed" : "Tap To Bet"}</span>
+              </button>
 
-            <section className={styles.cardDisplay}>
-              <div className={styles.handColumn}>
-                <h2 className={styles.sectionTitle}>Player Hand</h2>
-                <div className={styles.cardsRow}>
-                  {[0, 1, 2].map((index) => {
-                    const card = lastRoundResult?.playerHand[index] ?? null;
+              <section className={styles.cardDisplay}>
+                <div className={styles.handColumn}>
+                  <h2 className={styles.sectionTitle}>Player Hand</h2>
+                  <div className={styles.cardsRow}>
+                    {[0, 1, 2].map((index) => {
+                      const card = lastRoundResult?.playerHand[index] ?? null;
 
-                    if (!card) {
-                      return <div key={`player-placeholder-${index}`} className={styles.cardPlaceholder} />;
-                    }
+                      if (!card) {
+                        return <div key={`player-placeholder-${index}`} className={styles.cardPlaceholder} />;
+                      }
 
-                    const suitSymbol = getSuitSymbol(card.suit);
-                    const isRed = isRedSuit(card.suit);
-
-                    return (
-                      <article
-                        key={`player-card-${index}-${card.rank}-${card.suit}`}
-                        className={`${styles.playingCard} ${isRed ? styles.redCard : styles.blackCard}`}
-                      >
-                        <span className={styles.cardCorner}>{card.rank}</span>
-                        <span className={styles.cardSuit}>{suitSymbol}</span>
-                      </article>
-                    );
-                  })}
-                </div>
-                <p className={styles.handTotal}>
-                  Total: <span className={styles.highlight}>{lastRoundResult?.playerValue ?? "--"}</span>
-                </p>
-              </div>
-
-              <div className={styles.roundCenter}>
-                <p className={styles.resultText}>{getRoundHeadline(lastRoundResult)}</p>
-              </div>
-
-              <div className={styles.handColumn}>
-                <h2 className={styles.sectionTitle}>Banker Hand</h2>
-                <div className={styles.cardsRow}>
-                  {[0, 1, 2].map((index) => {
-                    const card = lastRoundResult?.bankerHand[index] ?? null;
-
-                    if (!card) {
-                      return <div key={`banker-placeholder-${index}`} className={styles.cardPlaceholder} />;
-                    }
-
-                    const suitSymbol = getSuitSymbol(card.suit);
-                    const isRed = isRedSuit(card.suit);
-
-                    return (
-                      <article
-                        key={`banker-card-${index}-${card.rank}-${card.suit}`}
-                        className={`${styles.playingCard} ${isRed ? styles.redCard : styles.blackCard}`}
-                      >
-                        <span className={styles.cardCorner}>{card.rank}</span>
-                        <span className={styles.cardSuit}>{suitSymbol}</span>
-                      </article>
-                    );
-                  })}
-                </div>
-                <p className={styles.handTotal}>
-                  Total: <span className={styles.highlight}>{lastRoundResult?.bankerValue ?? "--"}</span>
-                </p>
-              </div>
-            </section>
-
-            {!isBroke && (
-              <>
-                <section className={styles.card}>
-                  <h2 className={styles.sectionTitle}>Select Side</h2>
-                  <div className={styles.sideButtons}>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedSide("Player")}
-                      aria-pressed={selectedSide === "Player"}
-                      className={`${styles.sideButton} ${selectedSide === "Player" ? styles.sideButtonSelected : ""}`}
-                    >
-                      Player
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedSide("Banker")}
-                      aria-pressed={selectedSide === "Banker"}
-                      className={`${styles.sideButton} ${selectedSide === "Banker" ? styles.sideButtonSelected : ""}`}
-                    >
-                      Banker
-                    </button>
-                  </div>
-                </section>
-
-                <section className={styles.card}>
-                  <h2 className={styles.sectionTitle}>Select Chip</h2>
-                  <div className={styles.chipRow}>
-                    {CHIP_VALUES.map((chipValue) => {
-                      const isTooExpensive = chipValue > balance;
-                      const isSelected = selectedChip === chipValue;
+                      const suitSymbol = getSuitSymbol(card.suit);
+                      const isRed = isRedSuit(card.suit);
 
                       return (
-                        <button
-                          key={chipValue}
-                          type="button"
-                          onClick={() => setSelectedChip(chipValue)}
-                          disabled={isTooExpensive}
-                          aria-pressed={isSelected}
-                          className={`${styles.chipButton} ${getChipClass(chipValue)} ${isSelected ? styles.chipSelected : ""} ${isTooExpensive ? styles.chipDisabled : ""}`}
+                        <article
+                          key={`player-card-${index}-${card.rank}-${card.suit}`}
+                          className={`${styles.playingCard} ${isRed ? styles.redCard : styles.blackCard}`}
                         >
-                          ${chipValue}
-                        </button>
+                          <span className={styles.cardCorner}>{card.rank}</span>
+                          <span className={styles.cardSuit}>{suitSymbol}</span>
+                        </article>
                       );
                     })}
                   </div>
-                </section>
+                  <p className={styles.handTotal}>
+                    Total: <span className={styles.highlight}>{lastRoundResult?.playerValue ?? "--"}</span>
+                  </p>
+                </div>
 
-                <section className={styles.playRow}>
-                  <button
-                    type="button"
-                    disabled={!canPlay}
-                    onClick={handlePlay}
-                    className={`${styles.playButton} ${canPlay ? styles.playButtonActive : styles.playButtonDisabled}`}
-                  >
-                    {isPlaying ? "Playing..." : "Play"}
-                  </button>
-                </section>
-              </>
-            )}
+                <div className={styles.roundCenter}>
+                  <p className={styles.resultText}>{getRoundHeadline(lastRoundResult)}</p>
+                </div>
+
+                <div className={styles.handColumn}>
+                  <h2 className={styles.sectionTitle}>Banker Hand</h2>
+                  <div className={styles.cardsRow}>
+                    {[0, 1, 2].map((index) => {
+                      const card = lastRoundResult?.bankerHand[index] ?? null;
+
+                      if (!card) {
+                        return <div key={`banker-placeholder-${index}`} className={styles.cardPlaceholder} />;
+                      }
+
+                      const suitSymbol = getSuitSymbol(card.suit);
+                      const isRed = isRedSuit(card.suit);
+
+                      return (
+                        <article
+                          key={`banker-card-${index}-${card.rank}-${card.suit}`}
+                          className={`${styles.playingCard} ${isRed ? styles.redCard : styles.blackCard}`}
+                        >
+                          <span className={styles.cardCorner}>{card.rank}</span>
+                          <span className={styles.cardSuit}>{suitSymbol}</span>
+                        </article>
+                      );
+                    })}
+                  </div>
+                  <p className={styles.handTotal}>
+                    Total: <span className={styles.highlight}>{lastRoundResult?.bankerValue ?? "--"}</span>
+                  </p>
+                </div>
+              </section>
+
+              <button
+                type="button"
+                onClick={() => setSelectedSide("Banker")}
+                disabled={!canSelectBet}
+                className={`${styles.betZone} ${styles.bankerZone} ${selectedSide === "Banker" ? styles.betZoneSelected : ""}`}
+              >
+                <span className={styles.betZoneLabel}>Banker</span>
+                <span className={styles.betZoneSubtext}>{selectedSide === "Banker" ? "Bet Placed" : "Tap To Bet"}</span>
+              </button>
+            </section>
 
             {isBroke && !isGameOver && (
               <section className={styles.card}>
@@ -406,6 +361,55 @@ export default function BaccaratPage() {
               </section>
             )}
 
+            <section className={styles.bottomBar}>
+              <div className={styles.bottomBalance}>
+                <p className={styles.bottomLabel}>Balance</p>
+                <p className={styles.bottomValue}>${balance}</p>
+                <p className={styles.bottomMeta}>
+                  Buy Ins: {buyInsRemaining}/{TOTAL_BUY_INS}
+                </p>
+              </div>
+
+              <div className={styles.bottomChips}>
+                {CHIP_VALUES.map((chipValue) => {
+                  const isTooExpensive = chipValue > balance;
+                  const isSelected = selectedChip === chipValue;
+
+                  return (
+                    <button
+                      key={chipValue}
+                      type="button"
+                      onClick={() => setSelectedChip(chipValue)}
+                      disabled={!canSelectBet || isTooExpensive}
+                      aria-pressed={isSelected}
+                      className={`${styles.chipButton} ${getChipClass(chipValue)} ${isSelected ? styles.chipSelected : ""} ${isTooExpensive ? styles.chipDisabled : ""}`}
+                    >
+                      ${chipValue}
+                    </button>
+                  );
+                })}
+                <div className={styles.wagerBox}>
+                  <span className={styles.bottomLabel}>Wager</span>
+                  <span className={styles.bottomValue}>${wagerAmount}</span>
+                </div>
+              </div>
+
+              <div className={styles.bottomActions}>
+                {hasAnyBet && (
+                  <button type="button" onClick={handleClearBet} className={styles.clearButton}>
+                    Clear
+                  </button>
+                )}
+                <button
+                  type="button"
+                  disabled={!canPlay}
+                  onClick={handlePlay}
+                  className={`${styles.playButton} ${canPlay ? styles.playButtonActive : styles.playButtonDisabled}`}
+                >
+                  {isPlaying ? "Dealing..." : "Deal"}
+                </button>
+              </div>
+            </section>
           </>
         )}
       </div>
