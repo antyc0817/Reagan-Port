@@ -5,11 +5,16 @@ import type { BaccaratGameState } from "../../lib/gameState";
 
 const STARTING_BALANCE = 1000;
 const TOTAL_BUY_INS = 3;
+const CHIP_VALUES = [100, 200, 500] as const;
+
+type BetSide = "Player" | "Banker";
 
 export default function BaccaratPage() {
   const [gameState, setGameState] = useState<BaccaratGameState | null>(null);
   const [balance] = useState<number>(STARTING_BALANCE);
   const [buyInsRemaining] = useState<number>(TOTAL_BUY_INS);
+  const [selectedSide, setSelectedSide] = useState<BetSide | null>(null);
+  const [selectedChip, setSelectedChip] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -37,6 +42,8 @@ export default function BaccaratPage() {
     fetchGameState();
   }, []);
 
+  const canPlay = selectedSide !== null && selectedChip !== null;
+
   return (
     <main>
       <h1>Baccarat</h1>
@@ -59,6 +66,54 @@ export default function BaccaratPage() {
             <p>
               Buy Ins Remaining: {buyInsRemaining} / {TOTAL_BUY_INS}
             </p>
+          </section>
+
+          <section>
+            <h2>Select Side</h2>
+            <button
+              type="button"
+              onClick={() => setSelectedSide("Player")}
+              aria-pressed={selectedSide === "Player"}
+            >
+              Player {selectedSide === "Player" ? "(Selected)" : ""}
+            </button>
+            <button
+              type="button"
+              onClick={() => setSelectedSide("Banker")}
+              aria-pressed={selectedSide === "Banker"}
+            >
+              Banker {selectedSide === "Banker" ? "(Selected)" : ""}
+            </button>
+          </section>
+
+          <section>
+            <h2>Select Chip</h2>
+            {CHIP_VALUES.map((chipValue) => {
+              const isTooExpensive = chipValue > balance;
+              const isSelected = selectedChip === chipValue;
+
+              return (
+                <button
+                  key={chipValue}
+                  type="button"
+                  onClick={() => setSelectedChip(chipValue)}
+                  disabled={isTooExpensive}
+                  aria-pressed={isSelected}
+                  style={{
+                    opacity: isTooExpensive ? 0.5 : 1,
+                    cursor: isTooExpensive ? "not-allowed" : "pointer",
+                  }}
+                >
+                  ${chipValue} {isSelected ? "(Selected)" : ""}
+                </button>
+              );
+            })}
+          </section>
+
+          <section>
+            <button type="button" disabled={!canPlay}>
+              Play
+            </button>
           </section>
         </>
       )}
