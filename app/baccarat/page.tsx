@@ -42,6 +42,29 @@ const EMPTY_ANIMATED_SLOT: AnimatedSlot = {
   card: null,
 };
 
+function getCardPoint(card: BaccaratCard): number {
+  if (card.rank === "A") {
+    return 1;
+  }
+
+  if (card.rank === "10" || card.rank === "J" || card.rank === "Q" || card.rank === "K") {
+    return 0;
+  }
+
+  return Number(card.rank);
+}
+
+function getRevealedHandTotal(slots: AnimatedSlot[]): number {
+  const revealedSum = slots.reduce((sum, slot) => {
+    if (!slot.revealed || !slot.card) {
+      return sum;
+    }
+    return sum + getCardPoint(slot.card);
+  }, 0);
+
+  return revealedSum % 10;
+}
+
 function getSuitSymbol(suit: BaccaratCard["suit"]): string {
   if (suit === "Hearts") {
     return "♥";
@@ -160,6 +183,8 @@ export default function BaccaratPage() {
 
   const isBroke = balance <= 0;
   const isGameOver = isBroke && buyInsRemaining === 0;
+  const playerLiveTotal = getRevealedHandTotal(playerAnimatedSlots);
+  const bankerLiveTotal = getRevealedHandTotal(bankerAnimatedSlots);
   const canSelectBet = !isBroke && !isGameOver && !isPlaying;
   const wagerAmount = selectedChip ?? 0;
   const hasAnyBet = selectedSide !== null || selectedChip !== null;
@@ -170,6 +195,13 @@ export default function BaccaratPage() {
     !isPlaying &&
     !isBroke &&
     !isGameOver;
+  const shouldShowResultBox =
+    !isRevealSequenceActive && resultPopupOutcome === null && lastRoundResult !== null;
+  const middleDisplayText = isRevealSequenceActive
+    ? "DEALING..."
+    : lastRoundResult
+      ? getRoundHeadline(lastRoundResult)
+      : "AWAITING\nNEXT ROUND";
 
   function handleBuyInAgain() {
     if (!isBroke || buyInsRemaining <= 0) {
@@ -291,7 +323,10 @@ export default function BaccaratPage() {
     );
   }
 
-  async function runDealAnimation(roundResult: RoundResult) {
+  async function runDealAnimation(
+    roundResult: RoundResult,
+    onPopupShown?: () => void
+  ) {
     const playerCards = roundResult.playerHand;
     const bankerCards = roundResult.bankerHand;
     const initialOrder: Array<{ side: "player" | "banker"; index: number; card: BaccaratCard; key: string }> = [
@@ -333,6 +368,7 @@ export default function BaccaratPage() {
 
     await wait(450);
     setResultPopupOutcome(roundResult.outcome);
+    onPopupShown?.();
     await wait(3000);
     setResultPopupOutcome(null);
     setIsRevealSequenceActive(false);
@@ -369,9 +405,10 @@ export default function BaccaratPage() {
       }
 
       const data = (await response.json()) as PlayRoundResponse;
-      setGameState(data.gameState);
       setLastRoundResult(data.roundResult);
-      await runDealAnimation(data.roundResult);
+      await runDealAnimation(data.roundResult, () => {
+        setGameState(data.gameState);
+      });
       setTotalRoundsPlayed((rounds) => rounds + 1);
 
       if (data.roundResult.outcome === "Tie") {
@@ -506,28 +543,33 @@ export default function BaccaratPage() {
                       );
                     })}
                   </div>
-                  {!isRevealSequenceActive && (
-                    <p className={styles.handTotal}>
-                      Total: <span className={styles.highlight}>{lastRoundResult?.playerValue ?? "--"}</span>
-                    </p>
-                  )}
+                  <p className={styles.handTotal}>
+                    Total: <span className={styles.highlight}>{playerLiveTotal}</span>
+                  </p>
                 </div>
 
-                <div className={styles.roundCenter}>
+                <div
+                  className={`${styles.roundCenter} ${
+                    shouldShowResultBox ? styles.roundCenterSummary : styles.roundCenterPlain
+                  }`}
+                >
                   {!isRevealSequenceActive && (
                     <p
                       className={`${styles.resultText} ${
-                        lastRoundResult?.outcome === "Player"
+                        shouldShowResultBox && lastRoundResult?.outcome === "Player"
                           ? styles.resultTextPlayer
-                          : lastRoundResult?.outcome === "Banker"
+                          : shouldShowResultBox && lastRoundResult?.outcome === "Banker"
                             ? styles.resultTextBanker
-                            : lastRoundResult?.outcome === "Tie"
+                            : shouldShowResultBox && lastRoundResult?.outcome === "Tie"
                               ? styles.resultTextTie
                               : ""
                       }`}
                     >
-                      {getRoundHeadline(lastRoundResult)}
+                      {middleDisplayText}
                     </p>
+                  )}
+                  {isRevealSequenceActive && resultPopupOutcome === null && (
+                    <p className={styles.resultText}>{middleDisplayText}</p>
                   )}
                 </div>
 
@@ -569,11 +611,9 @@ export default function BaccaratPage() {
                       );
                     })}
                   </div>
-                  {!isRevealSequenceActive && (
-                    <p className={styles.handTotal}>
-                      Total: <span className={styles.highlight}>{lastRoundResult?.bankerValue ?? "--"}</span>
-                    </p>
-                  )}
+                  <p className={styles.handTotal}>
+                    Total: <span className={styles.highlight}>{bankerLiveTotal}</span>
+                  </p>
                 </div>
 
                 {resultPopupOutcome && (

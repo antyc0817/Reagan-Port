@@ -361,11 +361,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+.roundCenterPlain {
+  border: none;
+  background: transparent;
+}
+
+.roundCenterSummary {
   padding: 0.75rem;
   border-radius: 10px;
   border: 1px solid rgba(229, 189, 92, 0.42);
   background: rgba(12, 17, 28, 0.76);
-  overflow: hidden;
 }
 
 .resultPopup {
