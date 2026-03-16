@@ -161,6 +161,8 @@
   gap: 1rem;
   align-items: center;
   min-width: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .feltArea {
@@ -272,9 +274,48 @@
 }
 
 .playingCard {
+  position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  perspective: 1000px;
+  overflow: visible;
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.cardRevealed {
+  /* kept for semantic state hooks */
+}
+
+.cardFace {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+
+.cardBack {
+  border: 1px solid rgba(241, 203, 121, 0.65);
+  background:
+    linear-gradient(135deg, rgba(140, 12, 30, 0.95), rgba(72, 5, 16, 0.96)),
+    repeating-linear-gradient(
+      45deg,
+      rgba(240, 213, 144, 0.2) 0 6px,
+      rgba(240, 213, 144, 0.05) 6px 12px
+    );
+  box-shadow: inset 0 0 0 1px rgba(255, 223, 153, 0.2);
+}
+
+.cardFront {
   background: linear-gradient(180deg, #fffef8, #efe9d9);
   border: 1px solid rgba(76, 63, 43, 0.45);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -325,6 +366,37 @@
   border: 1px solid rgba(229, 189, 92, 0.42);
   background: rgba(12, 17, 28, 0.76);
   overflow: hidden;
+}
+
+.resultPopup {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 8;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+.resultPopupPlayer {
+  background: rgba(34, 87, 166, 0.9);
+  color: #d9edff;
+}
+
+.resultPopupBanker {
+  background: rgba(156, 36, 49, 0.9);
+  color: #ffe0e2;
+}
+
+.resultPopupTie {
+  background: rgba(167, 126, 45, 0.9);
+  color: #fff1cf;
 }
 
 .resultText {
@@ -777,6 +849,7 @@
   .bottomActions {
     width: 100%;
     min-width: 0;
+  position: relative;
   }
 
   .bottomActions .playButton,

@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 import type { BaccaratCard, BaccaratGameState, RoundOutcome } from "../../lib/gameState";
 import Footer from "../components/Footer";
 import styles from "./page.module.css";
@@ -27,6 +28,18 @@ type RoundResult = {
 type PlayRoundResponse = {
   gameState: BaccaratGameState;
   roundResult: RoundResult;
+};
+
+type AnimatedSlot = {
+  dealt: boolean;
+  revealed: boolean;
+  card: BaccaratCard | null;
+};
+
+const EMPTY_ANIMATED_SLOT: AnimatedSlot = {
+  dealt: false,
+  revealed: false,
+  card: null,
 };
 
 function getSuitSymbol(suit: BaccaratCard["suit"]): string {
@@ -100,12 +113,26 @@ export default function BaccaratPage() {
   const [selectedSide, setSelectedSide] = useState<BetSide | null>(null);
   const [selectedChip, setSelectedChip] = useState<number | null>(null);
   const [lastRoundResult, setLastRoundResult] = useState<RoundResult | null>(null);
+  const [playerAnimatedSlots, setPlayerAnimatedSlots] = useState<AnimatedSlot[]>([
+    EMPTY_ANIMATED_SLOT,
+    EMPTY_ANIMATED_SLOT,
+    EMPTY_ANIMATED_SLOT,
+  ]);
+  const [bankerAnimatedSlots, setBankerAnimatedSlots] = useState<AnimatedSlot[]>([
+    EMPTY_ANIMATED_SLOT,
+    EMPTY_ANIMATED_SLOT,
+    EMPTY_ANIMATED_SLOT,
+  ]);
+  const [resultPopupOutcome, setResultPopupOutcome] = useState<RoundOutcome | null>(null);
+  const [isRevealSequenceActive, setIsRevealSequenceActive] = useState<boolean>(false);
   const [totalRoundsPlayed, setTotalRoundsPlayed] = useState<number>(0);
   const [correctBets, setCorrectBets] = useState<number>(0);
   const [wrongBets, setWrongBets] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const cardSlotRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const cardInnerRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     async function fetchGameState() {
@@ -161,6 +188,156 @@ export default function BaccaratPage() {
     setSelectedChip(null);
   }
 
+  function resetAnimatedSlots() {
+    setPlayerAnimatedSlots([EMPTY_ANIMATED_SLOT, EMPTY_ANIMATED_SLOT, EMPTY_ANIMATED_SLOT]);
+    setBankerAnimatedSlots([EMPTY_ANIMATED_SLOT, EMPTY_ANIMATED_SLOT, EMPTY_ANIMATED_SLOT]);
+  }
+
+  function wait(ms: number) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
+  async function waitForElement(
+    refs: { current: Record<string, HTMLDivElement | null> },
+    key: string
+  ): Promise<HTMLDivElement | null> {
+    for (let attempts = 0; attempts < 12; attempts += 1) {
+      const element = refs.current[key];
+      if (element) {
+        return element;
+      }
+      await wait(16);
+    }
+    return null;
+  }
+
+  async function animateDealCard(key: string) {
+    const slot = await waitForElement(cardSlotRefs, key);
+    if (!slot) return;
+    const inner = await waitForElement(cardInnerRefs, key);
+    if (inner) {
+      gsap.set(inner, { rotateY: 0 });
+    }
+
+    await new Promise<void>((resolve) => {
+      gsap.fromTo(
+        slot,
+        { y: 70, opacity: 0, scale: 0.88 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out",
+          onComplete: resolve,
+        }
+      );
+    });
+  }
+
+  async function animateFlipCard(
+    key: string,
+    side: "player" | "banker",
+    index: number
+  ) {
+    const inner = await waitForElement(cardInnerRefs, key);
+    if (!inner) return;
+
+    await new Promise<void>((resolve) => {
+      gsap.to(inner, {
+        rotateY: 180,
+        duration: 0.34,
+        ease: "power2.inOut",
+        onComplete: () => {
+          if (side === "player") {
+            setPlayerAnimatedSlots((previous) =>
+              previous.map((slot, slotIndex) =>
+                slotIndex === index ? { ...slot, revealed: true } : slot
+              )
+            );
+          } else {
+            setBankerAnimatedSlots((previous) =>
+              previous.map((slot, slotIndex) =>
+                slotIndex === index ? { ...slot, revealed: true } : slot
+              )
+            );
+          }
+          resolve();
+        },
+      });
+    });
+  }
+
+  function setAnimatedCard(
+    side: "player" | "banker",
+    index: number,
+    card: BaccaratCard
+  ) {
+    if (side === "player") {
+      setPlayerAnimatedSlots((previous) =>
+        previous.map((slot, slotIndex) =>
+          slotIndex === index ? { dealt: true, revealed: false, card } : slot
+        )
+      );
+      return;
+    }
+
+    setBankerAnimatedSlots((previous) =>
+      previous.map((slot, slotIndex) =>
+        slotIndex === index ? { dealt: true, revealed: false, card } : slot
+      )
+    );
+  }
+
+  async function runDealAnimation(roundResult: RoundResult) {
+    const playerCards = roundResult.playerHand;
+    const bankerCards = roundResult.bankerHand;
+    const initialOrder: Array<{ side: "player" | "banker"; index: number; card: BaccaratCard; key: string }> = [
+      { side: "player", index: 0, card: playerCards[0], key: "player-0" },
+      { side: "banker", index: 0, card: bankerCards[0], key: "banker-0" },
+      { side: "player", index: 1, card: playerCards[1], key: "player-1" },
+      { side: "banker", index: 1, card: bankerCards[1], key: "banker-1" },
+    ];
+
+    for (const step of initialOrder) {
+      setAnimatedCard(step.side, step.index, step.card);
+      await wait(30);
+      await animateDealCard(step.key);
+      await wait(120);
+    }
+
+    for (const step of initialOrder) {
+      await animateFlipCard(step.key, step.side, step.index);
+      await wait(120);
+    }
+
+    if (playerCards.length > 2) {
+      setAnimatedCard("player", 2, playerCards[2]);
+      await wait(30);
+      await animateDealCard("player-2");
+      await wait(120);
+      await animateFlipCard("player-2", "player", 2);
+      await wait(120);
+    }
+
+    if (bankerCards.length > 2) {
+      setAnimatedCard("banker", 2, bankerCards[2]);
+      await wait(30);
+      await animateDealCard("banker-2");
+      await wait(120);
+      await animateFlipCard("banker-2", "banker", 2);
+      await wait(120);
+    }
+
+    await wait(450);
+    setResultPopupOutcome(roundResult.outcome);
+    await wait(3000);
+    setResultPopupOutcome(null);
+    setIsRevealSequenceActive(false);
+  }
+
   async function handlePlay() {
     if (!selectedSide || !selectedChip || isPlaying) {
       return;
@@ -171,6 +348,9 @@ export default function BaccaratPage() {
 
     setIsPlaying(true);
     setError(null);
+    setResultPopupOutcome(null);
+    setIsRevealSequenceActive(true);
+    resetAnimatedSlots();
 
     try {
       const response = await fetch("/api/baccarat", {
@@ -191,6 +371,7 @@ export default function BaccaratPage() {
       const data = (await response.json()) as PlayRoundResponse;
       setGameState(data.gameState);
       setLastRoundResult(data.roundResult);
+      await runDealAnimation(data.roundResult);
       setTotalRoundsPlayed((rounds) => rounds + 1);
 
       if (data.roundResult.outcome === "Tie") {
@@ -204,6 +385,7 @@ export default function BaccaratPage() {
       }
     } catch (playError) {
       setError(playError instanceof Error ? playError.message : "Unknown error");
+      setIsRevealSequenceActive(false);
     } finally {
       setSelectedSide(null);
       setSelectedChip(null);
@@ -290,9 +472,10 @@ export default function BaccaratPage() {
                   <h2 className={styles.sectionTitle}>Player Hand</h2>
                   <div className={styles.cardsRow}>
                     {[0, 1, 2].map((index) => {
-                      const card = lastRoundResult?.playerHand[index] ?? null;
+                      const slot = playerAnimatedSlots[index];
+                      const card = slot.card;
 
-                      if (!card) {
+                      if (!slot.dealt || !card) {
                         return <div key={`player-placeholder-${index}`} className={styles.cardPlaceholder} />;
                       }
 
@@ -302,42 +485,60 @@ export default function BaccaratPage() {
                       return (
                         <article
                           key={`player-card-${index}-${card.rank}-${card.suit}`}
-                          className={`${styles.playingCard} ${isRed ? styles.redCard : styles.blackCard}`}
+                          ref={(element) => {
+                            cardSlotRefs.current[`player-${index}`] = element;
+                          }}
+                          className={styles.playingCard}
                         >
-                          <span className={styles.cardCorner}>{card.rank}</span>
-                          <span className={styles.cardSuit}>{suitSymbol}</span>
+                          <div
+                            ref={(element) => {
+                              cardInnerRefs.current[`player-${index}`] = element;
+                            }}
+                            className={`${styles.cardInner} ${slot.revealed ? styles.cardRevealed : ""}`}
+                          >
+                            <div className={`${styles.cardFace} ${styles.cardBack}`} />
+                            <div className={`${styles.cardFace} ${styles.cardFront} ${isRed ? styles.redCard : styles.blackCard}`}>
+                              <span className={styles.cardCorner}>{card.rank}</span>
+                              <span className={styles.cardSuit}>{suitSymbol}</span>
+                            </div>
+                          </div>
                         </article>
                       );
                     })}
                   </div>
-                  <p className={styles.handTotal}>
-                    Total: <span className={styles.highlight}>{lastRoundResult?.playerValue ?? "--"}</span>
-                  </p>
+                  {!isRevealSequenceActive && (
+                    <p className={styles.handTotal}>
+                      Total: <span className={styles.highlight}>{lastRoundResult?.playerValue ?? "--"}</span>
+                    </p>
+                  )}
                 </div>
 
                 <div className={styles.roundCenter}>
-                  <p
-                    className={`${styles.resultText} ${
-                      lastRoundResult?.outcome === "Player"
-                        ? styles.resultTextPlayer
-                        : lastRoundResult?.outcome === "Banker"
-                          ? styles.resultTextBanker
-                          : lastRoundResult?.outcome === "Tie"
-                            ? styles.resultTextTie
-                            : ""
-                    }`}
-                  >
-                    {getRoundHeadline(lastRoundResult)}
-                  </p>
+                  {!isRevealSequenceActive && (
+                    <p
+                      className={`${styles.resultText} ${
+                        lastRoundResult?.outcome === "Player"
+                          ? styles.resultTextPlayer
+                          : lastRoundResult?.outcome === "Banker"
+                            ? styles.resultTextBanker
+                            : lastRoundResult?.outcome === "Tie"
+                              ? styles.resultTextTie
+                              : ""
+                      }`}
+                    >
+                      {getRoundHeadline(lastRoundResult)}
+                    </p>
+                  )}
                 </div>
 
                 <div className={styles.handColumn}>
                   <h2 className={styles.sectionTitle}>Banker Hand</h2>
                   <div className={styles.cardsRow}>
                     {[0, 1, 2].map((index) => {
-                      const card = lastRoundResult?.bankerHand[index] ?? null;
+                      const slot = bankerAnimatedSlots[index];
+                      const card = slot.card;
 
-                      if (!card) {
+                      if (!slot.dealt || !card) {
                         return <div key={`banker-placeholder-${index}`} className={styles.cardPlaceholder} />;
                       }
 
@@ -347,18 +548,47 @@ export default function BaccaratPage() {
                       return (
                         <article
                           key={`banker-card-${index}-${card.rank}-${card.suit}`}
-                          className={`${styles.playingCard} ${isRed ? styles.redCard : styles.blackCard}`}
+                          ref={(element) => {
+                            cardSlotRefs.current[`banker-${index}`] = element;
+                          }}
+                          className={styles.playingCard}
                         >
-                          <span className={styles.cardCorner}>{card.rank}</span>
-                          <span className={styles.cardSuit}>{suitSymbol}</span>
+                          <div
+                            ref={(element) => {
+                              cardInnerRefs.current[`banker-${index}`] = element;
+                            }}
+                            className={`${styles.cardInner} ${slot.revealed ? styles.cardRevealed : ""}`}
+                          >
+                            <div className={`${styles.cardFace} ${styles.cardBack}`} />
+                            <div className={`${styles.cardFace} ${styles.cardFront} ${isRed ? styles.redCard : styles.blackCard}`}>
+                              <span className={styles.cardCorner}>{card.rank}</span>
+                              <span className={styles.cardSuit}>{suitSymbol}</span>
+                            </div>
+                          </div>
                         </article>
                       );
                     })}
                   </div>
-                  <p className={styles.handTotal}>
-                    Total: <span className={styles.highlight}>{lastRoundResult?.bankerValue ?? "--"}</span>
-                  </p>
+                  {!isRevealSequenceActive && (
+                    <p className={styles.handTotal}>
+                      Total: <span className={styles.highlight}>{lastRoundResult?.bankerValue ?? "--"}</span>
+                    </p>
+                  )}
                 </div>
+
+                {resultPopupOutcome && (
+                  <div
+                    className={`${styles.resultPopup} ${
+                      resultPopupOutcome === "Player"
+                        ? styles.resultPopupPlayer
+                        : resultPopupOutcome === "Banker"
+                          ? styles.resultPopupBanker
+                          : styles.resultPopupTie
+                    }`}
+                  >
+                    {resultPopupOutcome === "Tie" ? "Tie" : `${resultPopupOutcome} Wins`}
+                  </div>
+                )}
               </section>
 
               <button
