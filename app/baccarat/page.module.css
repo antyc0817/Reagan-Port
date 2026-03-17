@@ -151,6 +151,56 @@
   color: #f7dc92;
 }
 
+.bigRoadViewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.3rem;
+}
+
+.bigRoadBoard {
+  display: grid;
+  grid-template-columns: repeat(80, 20px);
+  grid-template-rows: repeat(6, 20px);
+  gap: 2px;
+  width: max-content;
+}
+
+.bigRoadCell {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bigRoadBead {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+.bigRoadPlayer {
+  border-color: #4a97ff;
+}
+
+.bigRoadBanker {
+  border-color: #df505a;
+}
+
+.bigRoadTieMark {
+  position: absolute;
+  right: -2px;
+  top: -2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #45c476;
+}
+
 .cardDisplay {
   padding: 1rem;
   border: 1px solid rgba(229, 189, 92, 0.52);

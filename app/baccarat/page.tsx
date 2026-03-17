@@ -30,6 +30,11 @@ type PlayRoundResponse = {
   roundResult: RoundResult;
 };
 
+type BigRoadCell = {
+  outcome: Exclude<RoundOutcome, "Tie">;
+  tieCount: number;
+} | null;
+
 type AnimatedSlot = {
   dealt: boolean;
   revealed: boolean;
@@ -97,20 +102,62 @@ function getRoundHeadline(roundResult: RoundResult | null): string {
   return `${roundResult.outcome} Wins`;
 }
 
-function getBeadClass(outcome: RoundOutcome | null): string {
-  if (outcome === "Player") {
-    return styles.beadPlayer;
+function buildBigRoad(history: RoundOutcome[], rows = 6, columns = 80): BigRoadCell[][] {
+  const grid: BigRoadCell[][] = Array.from({ length: rows }, () =>
+    Array.from({ length: columns }, () => null as BigRoadCell)
+  );
+
+  let currentColumn = 0;
+  let currentRow = 0;
+  let lastNonTieOutcome: Exclude<RoundOutcome, "Tie"> | null = null;
+
+  for (const outcome of history) {
+    if (outcome === "Tie") {
+      if (lastNonTieOutcome !== null && grid[currentRow][currentColumn]) {
+        grid[currentRow][currentColumn] = {
+          outcome: grid[currentRow][currentColumn]!.outcome,
+          tieCount: grid[currentRow][currentColumn]!.tieCount + 1,
+        };
+      }
+      continue;
+    }
+
+    const normalizedOutcome = outcome as Exclude<RoundOutcome, "Tie">;
+
+    if (lastNonTieOutcome === null) {
+      currentColumn = 0;
+      currentRow = 0;
+    } else if (normalizedOutcome === lastNonTieOutcome) {
+      const canGoDown = currentRow < rows - 1 && grid[currentRow + 1][currentColumn] === null;
+      if (canGoDown) {
+        currentRow += 1;
+      } else {
+        currentColumn += 1;
+      }
+    } else {
+      currentColumn += 1;
+      currentRow = 0;
+    }
+
+    while (
+      currentColumn < columns &&
+      grid[currentRow][currentColumn] !== null
+    ) {
+      currentColumn += 1;
+    }
+
+    if (currentColumn >= columns) {
+      break;
+    }
+
+    grid[currentRow][currentColumn] = {
+      outcome: normalizedOutcome,
+      tieCount: 0,
+    };
+    lastNonTieOutcome = normalizedOutcome;
   }
 
-  if (outcome === "Banker") {
-    return styles.beadBanker;
-  }
-
-  if (outcome === "Tie") {
-    return styles.beadTie;
-  }
-
-  return styles.beadEmpty;
+  return grid;
 }
 
 function getChipImagePath(chipValue: number): string {
@@ -183,6 +230,7 @@ export default function BaccaratPage() {
 
   const isBroke = balance <= 0;
   const isGameOver = isBroke && buyInsRemaining === 0;
+  const bigRoadGrid = gameState ? buildBigRoad(gameState.scoreboardHistory) : [];
   const playerLiveTotal = getRevealedHandTotal(playerAnimatedSlots);
   const bankerLiveTotal = getRevealedHandTotal(bankerAnimatedSlots);
   const canSelectBet = !isBroke && !isGameOver && !isPlaying;
@@ -441,41 +489,38 @@ export default function BaccaratPage() {
         {!loading && !error && gameState && (
           <>
             <section className={styles.scoreboardCard}>
-              <h2 className={styles.sectionTitle}>Bead Plate</h2>
-              {(() => {
-                const rows = 6;
-                const history = gameState.scoreboardHistory;
-                const columns = Math.max(1, Math.ceil(history.length / rows));
-                const totalSpots = columns * rows;
+              <h2 className={styles.sectionTitle}>Big Road</h2>
+              <div className={styles.bigRoadViewport}>
+                <div className={styles.bigRoadBoard}>
+                  {bigRoadGrid.map((row, rowIndex) =>
+                    row.map((cell, columnIndex) => (
+                      <div key={`big-road-${rowIndex}-${columnIndex}`} className={styles.bigRoadCell}>
+                        {cell && (
+                          <span
+                            className={`${styles.bigRoadBead} ${
+                              cell.outcome === "Player" ? styles.bigRoadPlayer : styles.bigRoadBanker
+                            }`}
+                          >
+                            {cell.tieCount > 0 && <span className={styles.bigRoadTieMark} />}
+                          </span>
+                        )}
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
 
-                return (
-                  <>
-                    <div className={styles.beadPlate} style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
-                      {Array.from({ length: totalSpots }, (_, index) => {
-                        const outcome = history[index] ?? null;
-
-                        return (
-                          <div key={`bead-${index}`} className={styles.beadCell}>
-                            <span className={`${styles.bead} ${getBeadClass(outcome)}`} />
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    <div className={styles.scoreboardSummary}>
-                      <p className={styles.summaryItem}>
-                        Player: <span className={styles.summaryValue}>{gameState.scoreboard.playerWins}</span>
-                      </p>
-                      <p className={styles.summaryItem}>
-                        Banker: <span className={styles.summaryValue}>{gameState.scoreboard.bankerWins}</span>
-                      </p>
-                      <p className={styles.summaryItem}>
-                        Tie: <span className={styles.summaryValue}>{gameState.scoreboard.ties}</span>
-                      </p>
-                    </div>
-                  </>
-                );
-              })()}
+              <div className={styles.scoreboardSummary}>
+                <p className={styles.summaryItem}>
+                  Player: <span className={styles.summaryValue}>{gameState.scoreboard.playerWins}</span>
+                </p>
+                <p className={styles.summaryItem}>
+                  Banker: <span className={styles.summaryValue}>{gameState.scoreboard.bankerWins}</span>
+                </p>
+                <p className={styles.summaryItem}>
+                  Tie: <span className={styles.summaryValue}>{gameState.scoreboard.ties}</span>
+                </p>
+              </div>
             </section>
 
             <section className={styles.feltArea}>
