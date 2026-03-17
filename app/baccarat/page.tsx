@@ -213,7 +213,7 @@ export default function BaccaratPage() {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const cardSlotRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const cardSlotRefs = useRef<Record<string, HTMLElement | null>>({});
   const cardInnerRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
