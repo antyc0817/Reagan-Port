@@ -193,10 +193,16 @@
 
 .bigRoadPlayer {
   border-color: #0f59ff;
+  color: #0f59ff;
 }
 
 .bigRoadBanker {
   border-color: #d91b2b;
+  color: #d91b2b;
+}
+
+.bigRoadBeadNatural {
+  background: currentColor;
 }
 
 .bigRoadTieMark {

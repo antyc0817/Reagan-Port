@@ -15,6 +15,8 @@ type RoundResult = {
   playerValue: number;
   bankerValue: number;
   wasNatural: boolean;
+  playerNatural: boolean;
+  bankerNatural: boolean;
   playerDrewThirdCard: boolean;
   bankerDrewThirdCard: boolean;
   shoeReset: boolean;
@@ -81,6 +83,8 @@ async function playRound(): Promise<{
         playerValue: 0,
         bankerValue: 0,
         wasNatural: false,
+        playerNatural: false,
+        bankerNatural: false,
         playerDrewThirdCard: false,
         bankerDrewThirdCard: false,
         shoeReset: true,
@@ -89,6 +93,8 @@ async function playRound(): Promise<{
   }
 
   const { playerHand, bankerHand } = dealInitialHands(state);
+  const playerNatural = [8, 9].includes(getHandValue(playerHand));
+  const bankerNatural = [8, 9].includes(getHandValue(bankerHand));
 
   let playerThirdCard: BaccaratCard | null = null;
   let bankerDrewThirdCard = false;
@@ -127,6 +133,8 @@ async function playRound(): Promise<{
         playerValue: getHandValue(playerHand),
         bankerValue: getHandValue(bankerHand),
         wasNatural,
+        playerNatural,
+        bankerNatural,
         playerDrewThirdCard: playerThirdCard !== null,
         bankerDrewThirdCard,
         shoeReset: true,
@@ -145,6 +153,8 @@ async function playRound(): Promise<{
       playerValue: getHandValue(playerHand),
       bankerValue: getHandValue(bankerHand),
       wasNatural,
+      playerNatural,
+      bankerNatural,
       playerDrewThirdCard: playerThirdCard !== null,
       bankerDrewThirdCard,
       shoeReset: false,

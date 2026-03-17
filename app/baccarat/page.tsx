@@ -20,6 +20,8 @@ type RoundResult = {
   playerValue: number;
   bankerValue: number;
   wasNatural: boolean;
+  playerNatural: boolean;
+  bankerNatural: boolean;
   playerDrewThirdCard: boolean;
   bankerDrewThirdCard: boolean;
   shoeReset: boolean;
@@ -33,6 +35,7 @@ type PlayRoundResponse = {
 type BigRoadCell = {
   outcome: Exclude<RoundOutcome, "Tie">;
   tieCount: number;
+  naturalWin: boolean;
 } | null;
 
 type AnimatedSlot = {
@@ -102,7 +105,12 @@ function getRoundHeadline(roundResult: RoundResult | null): string {
   return `${roundResult.outcome} Wins`;
 }
 
-function buildBigRoad(history: RoundOutcome[], rows = 6, columns = 80): BigRoadCell[][] {
+function buildBigRoad(
+  history: RoundOutcome[],
+  naturalWinByHistoryIndex: Record<number, boolean>,
+  rows = 6,
+  columns = 80
+): BigRoadCell[][] {
   const grid: BigRoadCell[][] = Array.from({ length: rows }, () =>
     Array.from({ length: columns }, () => null as BigRoadCell)
   );
@@ -111,12 +119,14 @@ function buildBigRoad(history: RoundOutcome[], rows = 6, columns = 80): BigRoadC
   let currentRow = 0;
   let lastNonTieOutcome: Exclude<RoundOutcome, "Tie"> | null = null;
 
-  for (const outcome of history) {
+  for (let historyIndex = 0; historyIndex < history.length; historyIndex += 1) {
+    const outcome = history[historyIndex];
     if (outcome === "Tie") {
       if (lastNonTieOutcome !== null && grid[currentRow][currentColumn]) {
         grid[currentRow][currentColumn] = {
           outcome: grid[currentRow][currentColumn]!.outcome,
           tieCount: grid[currentRow][currentColumn]!.tieCount + 1,
+          naturalWin: grid[currentRow][currentColumn]!.naturalWin,
         };
       }
       continue;
@@ -153,6 +163,7 @@ function buildBigRoad(history: RoundOutcome[], rows = 6, columns = 80): BigRoadC
     grid[currentRow][currentColumn] = {
       outcome: normalizedOutcome,
       tieCount: 0,
+      naturalWin: Boolean(naturalWinByHistoryIndex[historyIndex]),
     };
     lastNonTieOutcome = normalizedOutcome;
   }
@@ -194,6 +205,7 @@ export default function BaccaratPage() {
     EMPTY_ANIMATED_SLOT,
   ]);
   const [resultPopupOutcome, setResultPopupOutcome] = useState<RoundOutcome | null>(null);
+  const [naturalWinByHistoryIndex, setNaturalWinByHistoryIndex] = useState<Record<number, boolean>>({});
   const [isRevealSequenceActive, setIsRevealSequenceActive] = useState<boolean>(false);
   const [totalRoundsPlayed, setTotalRoundsPlayed] = useState<number>(0);
   const [correctBets, setCorrectBets] = useState<number>(0);
@@ -230,7 +242,9 @@ export default function BaccaratPage() {
 
   const isBroke = balance <= 0;
   const isGameOver = isBroke && buyInsRemaining === 0;
-  const bigRoadGrid = gameState ? buildBigRoad(gameState.scoreboardHistory) : [];
+  const bigRoadGrid = gameState
+    ? buildBigRoad(gameState.scoreboardHistory, naturalWinByHistoryIndex)
+    : [];
   const playerLiveTotal = getRevealedHandTotal(playerAnimatedSlots);
   const bankerLiveTotal = getRevealedHandTotal(bankerAnimatedSlots);
   const canSelectBet = !isBroke && !isGameOver && !isPlaying;
@@ -455,6 +469,30 @@ export default function BaccaratPage() {
       const data = (await response.json()) as PlayRoundResponse;
       setLastRoundResult(data.roundResult);
       await runDealAnimation(data.roundResult, () => {
+        const updatedHistory = data.gameState.scoreboardHistory;
+        const latestRoundIndex = updatedHistory.length - 1;
+
+        if (latestRoundIndex >= 0) {
+          const latestOutcome = updatedHistory[latestRoundIndex];
+          const naturalWin =
+            latestOutcome === "Player"
+              ? data.roundResult.playerNatural
+              : latestOutcome === "Banker"
+                ? data.roundResult.bankerNatural
+                : false;
+
+          if (latestOutcome !== "Tie") {
+            setNaturalWinByHistoryIndex((previous) => ({
+              ...previous,
+              [latestRoundIndex]: naturalWin,
+            }));
+          }
+        }
+
+        if (updatedHistory.length === 0) {
+          setNaturalWinByHistoryIndex({});
+        }
+
         setGameState(data.gameState);
       });
       setTotalRoundsPlayed((rounds) => rounds + 1);
@@ -499,7 +537,7 @@ export default function BaccaratPage() {
                           <span
                             className={`${styles.bigRoadBead} ${
                               cell.outcome === "Player" ? styles.bigRoadPlayer : styles.bigRoadBanker
-                            }`}
+                            } ${cell.naturalWin ? styles.bigRoadBeadNatural : ""}`}
                           >
                             {cell.tieCount > 0 && <span className={styles.bigRoadTieMark} />}
                           </span>
