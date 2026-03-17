@@ -214,7 +214,7 @@ export default function BaccaratPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const cardSlotRefs = useRef<Record<string, HTMLElement | null>>({});
-  const cardInnerRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const cardInnerRefs = useRef<Record<string, HTMLElement | null>>({});
 
   useEffect(() => {
     async function fetchGameState() {
@@ -294,9 +294,9 @@ export default function BaccaratPage() {
   }
 
   async function waitForElement(
-    refs: { current: Record<string, HTMLDivElement | null> },
+    refs: { current: Record<string, HTMLElement | null> },
     key: string
-  ): Promise<HTMLDivElement | null> {
+  ): Promise<HTMLElement | null> {
     for (let attempts = 0; attempts < 12; attempts += 1) {
       const element = refs.current[key];
       if (element) {
