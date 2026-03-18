@@ -718,17 +718,17 @@
 }
 
 .clearButton {
-  width: 100%;
-  min-width: 86px;
+  min-width: 152px;
+  max-width: 300px;
   border: 1px solid rgba(163, 169, 187, 0.55);
   border-radius: 9px;
-  padding: 0.55rem 0.8rem;
+  padding: 0.86rem 1.1rem;
   background: rgba(18, 24, 39, 0.75);
   color: #d7deec;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   cursor: pointer;
 }
 
@@ -816,6 +816,53 @@
 
   .betZone {
     min-height: 112px;
+  }
+}
+
+@media (max-width: 980px) {
+  .bottomBar {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .bottomBalance {
+    width: 100%;
+  }
+
+  .bottomChips {
+    grid-column: auto;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .chipsRow {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .chipSlot {
+    flex: 0 0 auto;
+  }
+
+  .wagerBox {
+    margin-top: 0.5rem;
+  }
+
+  .bottomActions {
+    width: 100%;
+    min-width: 0;
+    justify-self: stretch;
+    flex-direction: row;
+    gap: 0.55rem;
+  }
+
+  .bottomActions .playButton,
+  .bottomActions .clearButton {
+    min-width: 0;
+    flex: 1 1 0;
+    width: 100%;
+    max-width: none;
   }
 }
 
@@ -928,7 +975,9 @@
 
   .bottomActions .playButton,
   .bottomActions .clearButton {
-    flex: initial;
+    flex: 1 1 0;
+    width: 100%;
+    max-width: none;
   }
 
   .wagerBox {
