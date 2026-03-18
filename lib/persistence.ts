@@ -1,5 +1,11 @@
 import redis from "./redis";
-import type { BaccaratCard, BaccaratGameState, GameStatus, RoundOutcome } from "./gameState";
+import type {
+  BaccaratCard,
+  BaccaratGameState,
+  GameStatus,
+  RoundOutcome,
+  ScoreboardHistoryEntry,
+} from "./gameState";
 import { burnCards, createShoe, shuffleShoe } from "./shoe";
 
 const GAME_STATE_KEY = "baccarat:gameState";
@@ -23,9 +29,36 @@ function isValidCard(value: unknown): value is BaccaratCard {
   );
 }
 
-function isValidGameState(value: unknown): value is BaccaratGameState {
+function normalizeScoreboardHistoryEntry(value: unknown): ScoreboardHistoryEntry | null {
+  if (typeof value === "string" && VALID_OUTCOMES.has(value as RoundOutcome)) {
+    return {
+      outcome: value as RoundOutcome,
+      natural: false,
+    };
+  }
+
   if (!value || typeof value !== "object") {
-    return false;
+    return null;
+  }
+
+  const entry = value as {
+    outcome?: unknown;
+    natural?: unknown;
+  };
+
+  if (typeof entry.outcome !== "string" || !VALID_OUTCOMES.has(entry.outcome as RoundOutcome)) {
+    return null;
+  }
+
+  return {
+    outcome: entry.outcome as RoundOutcome,
+    natural: typeof entry.natural === "boolean" ? entry.natural : false,
+  };
+}
+
+function normalizeGameState(value: unknown): BaccaratGameState | null {
+  if (!value || typeof value !== "object") {
+    return null;
   }
 
   const state = value as {
@@ -37,24 +70,23 @@ function isValidGameState(value: unknown): value is BaccaratGameState {
   };
 
   if (!Array.isArray(state.shoe) || !state.shoe.every(isValidCard)) {
-    return false;
+    return null;
   }
 
   if (!Array.isArray(state.discardPile) || !state.discardPile.every(isValidCard)) {
-    return false;
+    return null;
   }
 
-  if (
-    !Array.isArray(state.scoreboardHistory) ||
-    !state.scoreboardHistory.every(
-      (entry) => typeof entry === "string" && VALID_OUTCOMES.has(entry as RoundOutcome)
-    )
-  ) {
-    return false;
+  if (!Array.isArray(state.scoreboardHistory)) {
+    return null;
   }
+
+  const normalizedHistory = state.scoreboardHistory
+    .map(normalizeScoreboardHistoryEntry)
+    .filter((entry): entry is ScoreboardHistoryEntry => entry !== null);
 
   if (!state.scoreboard || typeof state.scoreboard !== "object") {
-    return false;
+    return null;
   }
 
   const scoreboard = state.scoreboard as {
@@ -68,14 +100,24 @@ function isValidGameState(value: unknown): value is BaccaratGameState {
     typeof scoreboard.bankerWins !== "number" ||
     typeof scoreboard.ties !== "number"
   ) {
-    return false;
+    return null;
   }
 
   if (typeof state.status !== "string" || !VALID_STATUSES.has(state.status as GameStatus)) {
-    return false;
+    return null;
   }
 
-  return true;
+  return {
+    shoe: state.shoe,
+    discardPile: state.discardPile,
+    scoreboardHistory: normalizedHistory,
+    scoreboard: {
+      playerWins: scoreboard.playerWins,
+      bankerWins: scoreboard.bankerWins,
+      ties: scoreboard.ties,
+    },
+    status: state.status as GameStatus,
+  };
 }
 
 function createFreshState(): BaccaratGameState {
@@ -97,9 +139,11 @@ function createFreshState(): BaccaratGameState {
 export async function loadGameState(): Promise<BaccaratGameState> {
   try {
     const storedState = await redis.get<unknown>(GAME_STATE_KEY);
+    const normalizedState = normalizeGameState(storedState);
 
-    if (isValidGameState(storedState)) {
-      return storedState;
+    if (normalizedState) {
+      await saveGameState(normalizedState);
+      return normalizedState;
     }
   } catch {
     // If Redis read fails, fall through to fresh state initialization.
