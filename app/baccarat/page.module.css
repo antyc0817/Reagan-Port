@@ -17,6 +17,7 @@
   box-shadow:
     inset 0 0 0 1px rgba(229, 189, 92, 0.3),
     0 16px 40px rgba(2, 5, 10, 0.58);
+  position: relative;
 }
 
 .title {
@@ -27,6 +28,21 @@
   font-size: clamp(1.8rem, 3.2vw, 2.5rem);
   text-align: center;
   text-shadow: 0 1px 0 rgba(85, 9, 18, 0.8);
+}
+
+.helpButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: transparent;
+  color: #f1cb79;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 .card,

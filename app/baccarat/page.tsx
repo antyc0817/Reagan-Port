@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
+import { CircleHelp } from "lucide-react";
 import type {
   BaccaratCard,
   BaccaratGameState,
@@ -210,6 +211,7 @@ export default function BaccaratPage() {
     EMPTY_ANIMATED_SLOT,
   ]);
   const [resultPopupOutcome, setResultPopupOutcome] = useState<RoundOutcome | null>(null);
+  const [isRulesOpen, setIsRulesOpen] = useState<boolean>(false);
   const [isRevealSequenceActive, setIsRevealSequenceActive] = useState<boolean>(false);
   const [totalRoundsPlayed, setTotalRoundsPlayed] = useState<number>(0);
   const [correctBets, setCorrectBets] = useState<number>(0);
@@ -497,6 +499,15 @@ export default function BaccaratPage() {
   return (
     <main className={styles.page}>
       <div className={styles.table}>
+        <button
+          type="button"
+          aria-label="Toggle Baccarat rules"
+          aria-pressed={isRulesOpen}
+          onClick={() => setIsRulesOpen((open) => !open)}
+          className={styles.helpButton}
+        >
+          <CircleHelp size={30} strokeWidth={2.2} />
+        </button>
         <h1 className={styles.title}>Baccarat</h1>
 
         {loading && <p className={styles.statusText}>Loading game state...</p>}
