@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
-import { CircleHelp } from "lucide-react";
+import { CircleHelp, X } from "lucide-react";
 import type {
   BaccaratCard,
   BaccaratGameState,
@@ -508,6 +508,53 @@ export default function BaccaratPage() {
         >
           <CircleHelp size={30} strokeWidth={2.2} />
         </button>
+
+        {isRulesOpen && (
+          <div className={styles.rulesOverlay}>
+            <div className={styles.rulesModal}>
+              <button
+                type="button"
+                aria-label="Close rules modal"
+                onClick={() => setIsRulesOpen(false)}
+                className={styles.rulesCloseButton}
+              >
+                <X size={22} />
+              </button>
+
+              <div className={styles.rulesTabs}>
+                <button type="button" className={`${styles.rulesTab} ${styles.rulesTabActive}`}>
+                  Basic Rules
+                </button>
+                <button type="button" className={styles.rulesTab} onClick={() => {}}>
+                  Third Card Rule
+                </button>
+              </div>
+
+              <div className={styles.rulesContent}>
+                <h2 className={styles.rulesTitle}>Basic Rules</h2>
+                <ul className={styles.rulesList}>
+                  <li>
+                    The goal is to bet on which hand gets closest to 9, either Player or Banker
+                  </li>
+                  <li>Cards 2 through 9 are worth their face value</li>
+                  <li>10, Jack, Queen, and King are all worth 0</li>
+                  <li>Ace is worth 1</li>
+                  <li>
+                    Only the last digit of the total counts. For example, 7 + 6 = 13 so the score is 3
+                  </li>
+                  <li>
+                    If either hand totals 8 or 9 on the first two cards it is called a Natural. No
+                    more cards are drawn and the higher hand wins
+                  </li>
+                  <li>
+                    If both hands end with the same total it is a Tie. Your bet is returned as a
+                    push, no win no loss
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
         <h1 className={styles.title}>Baccarat</h1>
 
         {loading && <p className={styles.statusText}>Loading game state...</p>}
