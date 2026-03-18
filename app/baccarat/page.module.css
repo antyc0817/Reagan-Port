@@ -17,6 +17,7 @@
   box-shadow:
     inset 0 0 0 1px rgba(229, 189, 92, 0.3),
     0 16px 40px rgba(2, 5, 10, 0.58);
+  position: relative;
 }
 
 .title {
@@ -27,6 +28,198 @@
   font-size: clamp(1.8rem, 3.2vw, 2.5rem);
   text-align: center;
   text-shadow: 0 1px 0 rgba(85, 9, 18, 0.8);
+}
+
+.helpButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: transparent;
+  color: #f1cb79;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.rulesOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 14, 0.68);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem;
+  overflow: hidden;
+  z-index: 220;
+}
+
+.rulesModal {
+  width: min(760px, 100%);
+  max-height: min(90dvh, 820px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: auto;
+  background: linear-gradient(180deg, rgba(14, 24, 43, 0.98), rgba(9, 16, 29, 0.98));
+  border: 1px solid rgba(229, 189, 92, 0.62);
+  border-radius: 14px;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.48);
+  padding: 1rem 1rem 1.1rem;
+  position: relative;
+}
+
+.rulesCloseButton {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  border: 1px solid rgba(229, 189, 92, 0.55);
+  background: rgba(20, 31, 53, 0.88);
+  color: #f1cb79;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.rulesTabs {
+  display: flex;
+  gap: 0.55rem;
+  margin-bottom: 0.9rem;
+  padding-right: 2.7rem;
+}
+
+.rulesTab {
+  border: 1px solid rgba(229, 189, 92, 0.35);
+  border-radius: 8px;
+  background: rgba(21, 31, 52, 0.72);
+  color: #d9cfb0;
+  padding: 0.48rem 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease, box-shadow 140ms ease;
+}
+
+.rulesTab:hover {
+  border-color: rgba(241, 205, 118, 0.55);
+  color: #f4dfaa;
+}
+
+.rulesTab:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(241, 205, 118, 0.45);
+}
+
+.rulesTabActive {
+  border-color: #f1cb79;
+  color: #f7e6b8;
+  background: rgba(43, 59, 93, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(241, 203, 121, 0.36), 0 2px 9px rgba(9, 14, 24, 0.38);
+}
+
+.rulesContent {
+  border: 1px solid rgba(229, 189, 92, 0.28);
+  border-radius: 10px;
+  background: rgba(11, 18, 31, 0.7);
+  padding: 0.95rem;
+}
+
+.rulesTitle {
+  margin: 0 0 0.7rem;
+  color: #f1cb79;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1rem;
+}
+
+.rulesList {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.42rem;
+  color: #f3e8cb;
+}
+
+.rulesIntroLine {
+  margin: 0 0 0.8rem;
+  color: #e8d8b2;
+}
+
+.rulesSectionHeading {
+  margin: 1rem 0 0.55rem;
+  color: #f3e8cb;
+  font-size: 0.98rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+}
+
+.rulesSectionHeadingPlayer {
+  color: #2c6bff;
+}
+
+.rulesSectionHeadingBanker {
+  color: #dc2a3a;
+}
+
+.rulesSectionSubnote {
+  margin: -0.15rem 0 0.5rem;
+  color: #d8cbad;
+  font-size: 0.78rem;
+}
+
+.rulesTable {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgba(229, 189, 92, 0.22);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(12, 20, 36, 0.9);
+  margin-bottom: 0.9rem;
+}
+
+.rulesTable th {
+  padding: 0.7rem 0.7rem;
+  border-bottom: 1px solid rgba(206, 176, 105, 0.32);
+  color: #f3e8cb;
+  text-align: left;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+}
+
+.rulesTable td {
+  padding: 0.58rem 0.7rem;
+  border-bottom: 1px solid rgba(206, 176, 105, 0.22);
+  color: #f3e8cb;
+  font-size: 0.78rem;
+}
+
+.rulesTable tr:last-child td {
+  border-bottom: none;
+}
+
+.rulesTable th:first-child,
+.rulesTable td:first-child {
+  width: 40%;
+}
+
+.rulesTable td:first-child {
+  color: #f3e8cb;
+  font-weight: 700;
+}
+
+.rulesNote {
+  margin: 0.25rem 0 0;
+  color: #d8cbad;
+  font-size: 0.86rem;
 }
 
 .card,
@@ -718,17 +911,17 @@
 }
 
 .clearButton {
-  width: 100%;
-  min-width: 86px;
+  min-width: 152px;
+  max-width: 300px;
   border: 1px solid rgba(163, 169, 187, 0.55);
   border-radius: 9px;
-  padding: 0.55rem 0.8rem;
+  padding: 0.86rem 1.1rem;
   background: rgba(18, 24, 39, 0.75);
   color: #d7deec;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   cursor: pointer;
 }
 
@@ -819,6 +1012,82 @@
   }
 }
 
+@media (max-width: 1200px) and (min-width: 981px) {
+  .bottomBar {
+    grid-template-columns: minmax(130px, 0.75fr) minmax(0, 3.3fr) minmax(130px, 0.75fr);
+  }
+
+  .bottomChips {
+    width: 100%;
+  }
+
+  .chipsRow {
+    justify-content: space-evenly;
+    gap: 0.25rem;
+  }
+
+  .chipSlot {
+    flex: 1 1 0;
+  }
+
+  .chipButton {
+    width: 104px;
+    height: 104px;
+  }
+}
+
+@media (max-width: 980px) {
+  .bottomBar {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .bottomBalance {
+    width: 100%;
+  }
+
+  .bottomChips {
+    grid-column: auto;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .chipsRow {
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    gap: 0.35rem;
+  }
+
+  .chipSlot {
+    flex: 1 1 0;
+  }
+
+  .chipButton {
+    width: 94px;
+    height: 94px;
+  }
+
+  .wagerBox {
+    margin-top: 0.5rem;
+  }
+
+  .bottomActions {
+    width: 100%;
+    min-width: 0;
+    justify-self: stretch;
+    flex-direction: row;
+    gap: 0.55rem;
+  }
+
+  .bottomActions .playButton,
+  .bottomActions .clearButton {
+    min-width: 0;
+    flex: 1 1 0;
+    width: 100%;
+    max-width: none;
+  }
+}
+
 @media (max-width: 768px) {
   .page {
     padding: 1.25rem 0.75rem 2rem;
@@ -885,17 +1154,18 @@
   }
 
   .chipButton {
-    width: 96px;
-    height: 96px;
+    width: 78px;
+    height: 78px;
   }
 
   .chipsRow {
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    gap: 0.3rem;
   }
 
   .chipSlot {
-    flex: initial;
+    flex: 1 1 0;
   }
 
   .bottomChips {
@@ -928,7 +1198,9 @@
 
   .bottomActions .playButton,
   .bottomActions .clearButton {
-    flex: initial;
+    flex: 1 1 0;
+    width: 100%;
+    max-width: none;
   }
 
   .wagerBox {
