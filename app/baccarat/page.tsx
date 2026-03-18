@@ -168,7 +168,7 @@ function buildBigRoad(
     grid[currentRow][currentColumn] = {
       outcome: normalizedOutcome,
       tieCount: 0,
-      naturalWin: outcome === "Tie" ? false : entry.natural,
+      naturalWin: entry.natural,
     };
     lastNonTieOutcome = normalizedOutcome;
   }
