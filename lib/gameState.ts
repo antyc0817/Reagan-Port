@@ -22,6 +22,11 @@ export interface BaccaratCard {
 
 export type RoundOutcome = "Player" | "Banker" | "Tie";
 
+export interface ScoreboardHistoryEntry {
+  outcome: RoundOutcome;
+  natural: boolean;
+}
+
 export interface ScoreboardTotals {
   playerWins: number;
   bankerWins: number;
@@ -33,7 +38,7 @@ export type GameStatus = "ready" | "inRound" | "resetting";
 export interface BaccaratGameState {
   shoe: BaccaratCard[];
   discardPile: BaccaratCard[];
-  scoreboardHistory: RoundOutcome[];
+  scoreboardHistory: ScoreboardHistoryEntry[];
   scoreboard: ScoreboardTotals;
   status: GameStatus;
 }

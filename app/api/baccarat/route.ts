@@ -42,8 +42,12 @@ function dealInitialHands(state: BaccaratGameState): {
   return { playerHand, bankerHand };
 }
 
-function updateScoreboard(state: BaccaratGameState, outcome: RoundOutcome): void {
-  state.scoreboardHistory.push(outcome);
+function updateScoreboard(
+  state: BaccaratGameState,
+  outcome: RoundOutcome,
+  natural: boolean
+): void {
+  state.scoreboardHistory.push({ outcome, natural });
 
   if (outcome === "Player") {
     state.scoreboard.playerWins += 1;
@@ -114,7 +118,7 @@ async function playRound(): Promise<{
   }
 
   const outcome = resolveHand(playerHand, bankerHand);
-  updateScoreboard(state, outcome);
+  updateScoreboard(state, outcome, playerNatural || bankerNatural);
 
   state.discardPile.push(...playerHand, ...bankerHand);
   state.status = "ready";
