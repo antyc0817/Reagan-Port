@@ -819,6 +819,30 @@
   }
 }
 
+@media (max-width: 1200px) and (min-width: 981px) {
+  .bottomBar {
+    grid-template-columns: minmax(130px, 0.75fr) minmax(0, 3.3fr) minmax(130px, 0.75fr);
+  }
+
+  .bottomChips {
+    width: 100%;
+  }
+
+  .chipsRow {
+    justify-content: space-evenly;
+    gap: 0.25rem;
+  }
+
+  .chipSlot {
+    flex: 1 1 0;
+  }
+
+  .chipButton {
+    width: 104px;
+    height: 104px;
+  }
+}
+
 @media (max-width: 980px) {
   .bottomBar {
     grid-template-columns: 1fr;
@@ -836,13 +860,18 @@
   }
 
   .chipsRow {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    gap: 0.35rem;
   }
 
   .chipSlot {
-    flex: 0 0 auto;
+    flex: 1 1 0;
+  }
+
+  .chipButton {
+    width: 94px;
+    height: 94px;
   }
 
   .wagerBox {
@@ -932,17 +961,18 @@
   }
 
   .chipButton {
-    width: 96px;
-    height: 96px;
+    width: 78px;
+    height: 78px;
   }
 
   .chipsRow {
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    gap: 0.3rem;
   }
 
   .chipSlot {
-    flex: initial;
+    flex: 1 1 0;
   }
 
   .bottomChips {
