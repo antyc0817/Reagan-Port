@@ -18,6 +18,7 @@ const TOTAL_BUY_INS = 3;
 const CHIP_VALUES = [50, 100, 200, 500] as const;
 
 type BetSide = "Player" | "Banker";
+type RulesTab = "basic" | "third";
 
 type RoundResult = {
   outcome: RoundOutcome;
@@ -212,6 +213,7 @@ export default function BaccaratPage() {
   ]);
   const [resultPopupOutcome, setResultPopupOutcome] = useState<RoundOutcome | null>(null);
   const [isRulesOpen, setIsRulesOpen] = useState<boolean>(false);
+  const [activeRulesTab, setActiveRulesTab] = useState<RulesTab>("basic");
   const [isRevealSequenceActive, setIsRevealSequenceActive] = useState<boolean>(false);
   const [totalRoundsPlayed, setTotalRoundsPlayed] = useState<number>(0);
   const [correctBets, setCorrectBets] = useState<number>(0);
@@ -268,6 +270,24 @@ export default function BaccaratPage() {
     : lastRoundResult
       ? getRoundHeadline(lastRoundResult)
       : "AWAITING\nNEXT ROUND";
+
+  useEffect(() => {
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const originalBodyTouchAction = document.body.style.touchAction;
+
+    if (isRulesOpen) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    }
+
+    return () => {
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.body.style.touchAction = originalBodyTouchAction;
+    };
+  }, [isRulesOpen]);
 
   function handleBuyInAgain() {
     if (!isBroke || buyInsRemaining <= 0) {
@@ -503,7 +523,10 @@ export default function BaccaratPage() {
           type="button"
           aria-label="Toggle Baccarat rules"
           aria-pressed={isRulesOpen}
-          onClick={() => setIsRulesOpen((open) => !open)}
+          onClick={() => {
+            setIsRulesOpen((open) => !open);
+            setActiveRulesTab("basic");
+          }}
           className={styles.helpButton}
         >
           <CircleHelp size={30} strokeWidth={2.2} />
@@ -522,35 +545,131 @@ export default function BaccaratPage() {
               </button>
 
               <div className={styles.rulesTabs}>
-                <button type="button" className={`${styles.rulesTab} ${styles.rulesTabActive}`}>
+                <button
+                  type="button"
+                  className={`${styles.rulesTab} ${activeRulesTab === "basic" ? styles.rulesTabActive : ""}`}
+                  onClick={() => setActiveRulesTab("basic")}
+                >
                   Basic Rules
                 </button>
-                <button type="button" className={styles.rulesTab} onClick={() => {}}>
+                <button
+                  type="button"
+                  className={`${styles.rulesTab} ${activeRulesTab === "third" ? styles.rulesTabActive : ""}`}
+                  onClick={() => setActiveRulesTab("third")}
+                >
                   Third Card Rule
                 </button>
               </div>
 
               <div className={styles.rulesContent}>
-                <h2 className={styles.rulesTitle}>Basic Rules</h2>
-                <ul className={styles.rulesList}>
-                  <li>
-                    The goal is to bet on which hand gets closest to 9, either Player or Banker
-                  </li>
-                  <li>Cards 2 through 9 are worth their face value</li>
-                  <li>10, Jack, Queen, and King are all worth 0</li>
-                  <li>Ace is worth 1</li>
-                  <li>
-                    Only the last digit of the total counts. For example, 7 + 6 = 13 so the score is 3
-                  </li>
-                  <li>
-                    If either hand totals 8 or 9 on the first two cards it is called a Natural. No
-                    more cards are drawn and the higher hand wins
-                  </li>
-                  <li>
-                    If both hands end with the same total it is a Tie. Your bet is returned as a
-                    push, no win no loss
-                  </li>
-                </ul>
+                {activeRulesTab === "basic" && (
+                  <>
+                    <h2 className={styles.rulesTitle}>Basic Rules</h2>
+                    <ul className={styles.rulesList}>
+                      <li>
+                        The goal is to bet on which hand gets closest to 9, either Player or Banker
+                      </li>
+                      <li>Cards 2 through 9 are worth their face value</li>
+                      <li>10, Jack, Queen, and King are all worth 0</li>
+                      <li>Ace is worth 1</li>
+                      <li>
+                        Only the last digit of the total counts. For example, 7 + 6 = 13 so the score is 3
+                      </li>
+                      <li>
+                        If either hand totals 8 or 9 on the first two cards it is called a Natural. No
+                        more cards are drawn and the higher hand wins
+                      </li>
+                      <li>
+                        If both hands end with the same total it is a Tie. Your bet is returned as a
+                        push, no win no loss
+                      </li>
+                    </ul>
+                  </>
+                )}
+
+                {activeRulesTab === "third" && (
+                  <>
+                    <h2 className={styles.rulesTitle}>Third Card Rule</h2>
+                    <p className={styles.rulesIntroLine}>
+                      The third card is drawn automatically. You never have to decide.
+                    </p>
+
+                    <h3
+                      className={`${styles.rulesSectionHeading} ${styles.rulesSectionHeadingPlayer}`}
+                    >
+                      Player
+                    </h3>
+                    <table className={styles.rulesTable}>
+                      <thead>
+                        <tr>
+                          <th>Player Total</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>0 to 5</td>
+                          <td>Draws</td>
+                        </tr>
+                        <tr>
+                          <td>6 or 7</td>
+                          <td>Stands</td>
+                        </tr>
+                        <tr>
+                          <td>8 or 9</td>
+                          <td>Natural, no draw</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <h3
+                      className={`${styles.rulesSectionHeading} ${styles.rulesSectionHeadingBanker}`}
+                    >
+                      Banker
+                    </h3>
+                    <p className={styles.rulesSectionSubnote}>
+                      Banker draws depending on Player&apos;s third card.
+                    </p>
+                    <table className={styles.rulesTable}>
+                      <thead>
+                        <tr>
+                          <th>Banker Total</th>
+                          <th>Player&apos;s 3rd Card</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>0, 1, 2</td>
+                          <td>Always draws</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Any card except 8</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>2, 3, 4, 5, 6, 7</td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>4, 5, 6, 7</td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>6, 7</td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>Always stands</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <p className={styles.rulesNote}>
+                      If Player did not draw, Banker draws on 0 to 5 and stands on 6 or 7
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
