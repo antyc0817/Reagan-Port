@@ -45,6 +45,115 @@
     z-index: 1;
 }
 
+.pandayHeroImgTone {
+    filter: blur(1px) brightness(0.82);
+    transform: scale(1.01);
+}
+
+.pandayHeroContainer {
+    overflow: hidden;
+}
+
+.pandayHeroOverlay {
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    z-index: 1;
+    background: rgba(4, 18, 68, 0.68);
+}
+
+.pandayHeroBrandStack {
+    position: absolute;
+    top: 29%;
+    left: 47%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.pandayHeroLogo {
+    position: static;
+    width: clamp(270px, 35vw, 500px) !important;
+    height: auto !important;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
+}
+
+.pandayHeroInfo {
+    position: absolute;
+    top: 45.5%;
+    left: 52%;
+    transform: translateX(-50%);
+    width: min(76vw, 700px);
+    z-index: 3;
+    display: grid;
+    gap: 0.85rem;
+}
+
+.pandayHeroTagline {
+    margin: 0;
+    text-align: center;
+    color: #ffffff;
+    font-size: clamp(1.06rem, 2vw, 1.52rem);
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+    max-width: 42rem;
+    margin-inline: auto;
+    transform: translateX(18px);
+}
+
+.pandayMetaBar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem 0.95rem;
+    width: min(100%, 640px);
+    margin-inline: auto;
+}
+
+.pandayMetaItem {
+    position: relative;
+    padding: 0.58rem 0.45rem 0.62rem 1.75rem;
+    text-align: left;
+    color: #fff;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+.pandayMetaItem:nth-child(even) {
+    margin-left: -0.3rem;
+}
+
+.pandayMetaItem::before {
+    content: "";
+    position: absolute;
+    top: 0.46rem;
+    bottom: 0.46rem;
+    left: 0.78rem;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+}
+
+.pandayMetaLabel {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: clamp(0.68rem, 0.95vw, 0.78rem);
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    opacity: 0.88;
+}
+
+.pandayMetaValue {
+    display: block;
+    font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+}
+
 .heroCompareLogo {
     position: absolute;
     top: 30%;
@@ -180,6 +289,38 @@
     .heroCompareLogo {
         width: clamp(170px, 50vw, 300px) !important;
         top: 30%;
+    }
+
+    .pandayHeroLogo {
+        width: clamp(220px, 62vw, 360px) !important;
+    }
+
+    .pandayHeroBrandStack {
+        top: 25%;
+        left: 46%;
+    }
+
+    .pandayHeroInfo {
+        top: 43%;
+        left: 50%;
+        width: min(90vw, 520px);
+        gap: 0.7rem;
+    }
+
+    .pandayHeroTagline {
+        font-size: clamp(0.95rem, 3.9vw, 1.2rem);
+        white-space: normal;
+        transform: translateX(10px);
+    }
+
+    .pandayMetaBar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: min(90vw, 460px);
+        gap: 0.6rem 0.8rem;
+    }
+
+    .pandayMetaItem:nth-child(even) {
+        margin-left: -0.2rem;
     }
 
     .heroProjectInfo {
