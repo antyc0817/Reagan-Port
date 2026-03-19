@@ -56,6 +56,9 @@ export default function PandayProject() {
           </div>
         </div>
       </div>
+      <section className={styles.pandaySectionHead}>
+        <h3 className={styles.pandaySectionHeadTitle}>[ Objective ]</h3>
+      </section>
     </main>
   );
 }

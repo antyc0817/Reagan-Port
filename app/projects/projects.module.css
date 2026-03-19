@@ -154,6 +154,20 @@
     letter-spacing: 0.02em;
 }
 
+.pandaySectionHead {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem 0;
+}
+
+.pandaySectionHeadTitle {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--foreground);
+}
+
 .heroCompareLogo {
     position: absolute;
     top: 30%;
@@ -317,6 +331,14 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
         width: min(90vw, 460px);
         gap: 0.6rem 0.8rem;
+    }
+
+    .pandaySectionHead {
+        padding: 2rem 1.5rem 0;
+    }
+
+    .pandaySectionHeadTitle {
+        font-size: 1.7rem;
     }
 
     .pandayMetaItem:nth-child(even) {
