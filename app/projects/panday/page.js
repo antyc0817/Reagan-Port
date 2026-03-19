@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "../projects.module.css";
+import PandayObjectiveSection from "./PandayObjectiveSection";
 
 export const metadata = {
   title: "Panday | Reagan",
@@ -56,9 +57,7 @@ export default function PandayProject() {
           </div>
         </div>
       </div>
-      <section className={styles.pandaySectionHead}>
-        <h3 className={styles.pandaySectionHeadTitle}>[ Objective ]</h3>
-      </section>
+      <PandayObjectiveSection />
     </main>
   );
 }
