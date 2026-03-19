@@ -6,6 +6,15 @@ import styles from "./page.module.css";
 
 const projects = [
   {
+    slug: "panday",
+    title: "Panday",
+    subtitle: "UI/UX Case Study",
+    date: "Sep - Dec 2025",
+    description:
+      "Built to make the road to Red Seal feel less overwhelming, Panday turns a fragmented and confusing certification process into a single, structured experience. This project centered on giving trades students the clarity and direction the existing system never provided.",
+    cover: "/images/panday/cover.svg",
+  },
+  {
     slug: "cuisine-clinic",
     title: "Cuisine Clinic",
     subtitle: "Custom Packaging & Dieline",
