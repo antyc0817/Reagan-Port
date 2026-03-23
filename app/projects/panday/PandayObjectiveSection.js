@@ -10,7 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function PandayObjectiveSection() {
   const sectionRef = useRef(null);
-  const statsRowRef = useRef(null);
   const fill85Ref = useRef(null);
   const fill6Ref = useRef(null);
   const pie70Ref = useRef(null);
@@ -39,13 +38,7 @@ export default function PandayObjectiveSection() {
       const STEP_DELAY = 0.2;
       const ANIM_DURATION = 2.8;
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: closingRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
+      const tl = gsap.timeline({ paused: true });
 
       const count85 = { value: 0 };
       const count70 = { value: 0 };
@@ -134,46 +127,54 @@ export default function PandayObjectiveSection() {
         },
         BASE_DELAY + STEP_DELAY * 2
       );
+
+      ScrollTrigger.create({
+        trigger: closingRef.current,
+        start: "top 85%",
+        once: true,
+        onEnter: () => tl.play(0),
+      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} className={styles.pandaySectionHead}>
-      <h3 className={styles.pandaySectionHeadTitle}>[ Objective ]</h3>
+    <section
+      ref={sectionRef}
+      className={`${styles.projectSection} ${styles.pandayObjectiveSection}`}
+    >
+      <h3 className={styles.projectSectionTitle}>[ Objective ]</h3>
       <h2 className={styles.pandayObjectiveTitle}>
         The path to Red Seal shouldn&apos;t feel like a maze.
       </h2>
-      <div className={styles.pandayObjectiveTop}>
-        <div className={styles.pandayObjectiveBody}>
-          <p>
-            British Columbia is facing a serious skilled trades shortage, and the
-            problem isn&apos;t a lack of willing workers. It&apos;s that the system
-            built to guide them was never designed with people in mind. Aspiring
-            tradespeople are met with scattered government PDFs, outdated ITA BC
-            pages, and no clear indication of where to even begin. The information
-            exists but it&apos;s buried, fragmented, and overwhelming.
-          </p>
-          <p>
-            By the time someone figures out what they actually need to do, many have
-            already given up. The numbers reflect that.
-          </p>
-        </div>
-        <div className={styles.pandayObjectiveVisual}>
-          <Image
-            src="/images/panday/red.webp"
-            alt="Red Seal challenge visual"
-            width={900}
-            height={900}
-            className={styles.pandayObjectiveVisualImg}
-            sizes="(max-width: 900px) 80vw, 340px"
-            unoptimized
-          />
-        </div>
+      <div className={styles.pandayObjectiveVisual}>
+        <Image
+          src="/images/panday/red.webp"
+          alt="Red Seal challenge visual"
+          width={900}
+          height={900}
+          className={styles.pandayObjectiveVisualImg}
+          sizes="(max-width: 900px) 74vw, 430px"
+          unoptimized
+        />
+      </div>
+      <div className={styles.pandayObjectiveBody}>
+        <p>
+          British Columbia is facing a serious skilled trades shortage, and the
+          problem isn&apos;t a lack of willing workers. It&apos;s that the system
+          built to guide them was never designed with people in mind. Aspiring
+          tradespeople are met with scattered government PDFs, outdated ITA BC
+          pages, and no clear indication of where to even begin. The information
+          exists but it&apos;s buried, fragmented, and overwhelming.
+        </p>
+        <p>
+          By the time someone figures out what they actually need to do, many have
+          already given up. The numbers reflect that.
+        </p>
       </div>
 
-      <div ref={statsRowRef} className={styles.pandayStatsGrid}>
+      <div className={styles.pandayStatsGrid}>
         <article className={styles.pandayStatCard}>
           <div className={`${styles.pandayStatCircle} ${styles.pandayStatCircleOrange}`}>
             <span ref={fill85Ref} className={`${styles.pandayStatFill} ${styles.pandayStatFillOrange}`} />

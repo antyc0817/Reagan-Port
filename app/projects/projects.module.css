@@ -154,13 +154,21 @@
     letter-spacing: 0.02em;
 }
 
-.pandaySectionHead {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 3rem 2rem 0;
+.pandayObjectiveSection {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
+    grid-template-areas:
+        "label visual"
+        "title visual"
+        "body visual"
+        "stats stats"
+        "closing closing";
+    gap: 1rem 2rem;
+    align-items: start;
 }
 
-.pandaySectionHeadTitle {
+.pandayObjectiveSection .projectSectionTitle {
+    grid-area: label;
     margin: 0;
     font-size: 2rem;
     font-weight: 600;
@@ -169,40 +177,60 @@
 }
 
 .pandayObjectiveTitle {
-    margin: 1rem 0 0;
-    max-width: 24ch;
-    font-size: clamp(1.6rem, 3vw, 2.35rem);
+    grid-area: title;
+    margin: 0;
+    max-width: 42ch;
+    font-size: clamp(1.14rem, 1.45vw, 1.28rem);
     font-weight: 600;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
+    line-height: 1.5;
+    letter-spacing: 0;
     color: var(--foreground);
 }
 
 .pandayObjectiveBody {
-    margin-top: 1.25rem;
-    max-width: 72ch;
+    grid-area: body;
+    margin-top: 0;
+    max-width: none;
     display: grid;
     gap: 1rem;
 }
 
-.pandayObjectiveTop {
-    margin-top: 1.25rem;
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(240px, 0.75fr);
-    gap: 1.5rem 2rem;
-    align-items: start;
-}
-
 .pandayObjectiveVisual {
+    grid-area: visual;
+    position: relative;
     justify-self: end;
     width: min(100%, 430px);
+    overflow: visible;
+}
+
+.pandayObjectiveVisual::before {
+    content: "";
+    position: absolute;
+    inset: 12% 16%;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 40% 35%, rgba(0, 119, 204, 0.26), rgba(0, 119, 204, 0) 60%),
+        radial-gradient(circle at 65% 70%, rgba(201, 29, 57, 0.2), rgba(201, 29, 57, 0) 62%);
+    filter: blur(18px);
+    z-index: 0;
+    pointer-events: none;
 }
 
 .pandayObjectiveVisualImg {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: auto;
     display: block;
     object-fit: contain;
+    filter: drop-shadow(0 16px 28px rgba(7, 19, 46, 0.24));
+    transform: none;
+    transition: transform 240ms ease, filter 240ms ease;
+}
+
+.pandayObjectiveVisual:hover .pandayObjectiveVisualImg {
+    transform: translateY(-2px) scale(1.01);
+    filter: drop-shadow(0 20px 34px rgba(7, 19, 46, 0.28));
 }
 
 .pandayObjectiveBody p {
@@ -213,7 +241,8 @@
 }
 
 .pandayStatsGrid {
-    margin-top: 2rem;
+    grid-area: stats;
+    margin-top: 2.25rem;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.15rem;
@@ -296,11 +325,11 @@
 }
 
 .pandayStatFillOrange {
-    background: linear-gradient(180deg, rgba(254, 80, 0, 0.1), rgba(254, 80, 0, 0.36));
+    background: rgba(254, 80, 0, 0.58);
 }
 
 .pandayStatFillBlue {
-    background: linear-gradient(180deg, rgba(0, 119, 204, 0.1), rgba(0, 119, 204, 0.34));
+    background: rgba(0, 119, 204, 0.58);
 }
 
 .pandayStatPieFill {
@@ -315,19 +344,85 @@
 .pandayStatPieFillRed {
     background: conic-gradient(
         from 0deg,
-        rgba(201, 29, 57, 0.84) 0deg,
-        rgba(201, 29, 57, 0.84) calc(var(--panday-pct) * 3.6deg),
-        rgba(201, 29, 57, 0.16) calc(var(--panday-pct) * 3.6deg),
-        rgba(201, 29, 57, 0.16) 360deg
+        rgba(201, 29, 57, 0.58) 0deg,
+        rgba(201, 29, 57, 0.58) calc(var(--panday-pct) * 3.6deg),
+        rgba(201, 29, 57, 0.12) calc(var(--panday-pct) * 3.6deg),
+        rgba(201, 29, 57, 0.12) 360deg
     );
 }
 
 .pandayObjectiveClosing {
-    margin: 1.8rem 0 0;
+    grid-area: closing;
+    margin: 1.5rem 0 0;
     max-width: 74ch;
     font-size: 1.05rem;
     line-height: 1.75;
     color: var(--foreground);
+}
+
+@media (max-width: 900px) {
+    .pandayObjectiveSection {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "label"
+            "title"
+            "visual"
+            "body"
+            "stats"
+            "closing";
+        gap: 0.9rem;
+    }
+
+    .pandayObjectiveSection .projectSectionTitle,
+    .pandayObjectiveTitle,
+    .pandayObjectiveBody,
+    .pandayObjectiveClosing {
+        justify-self: center;
+        text-align: center;
+    }
+
+    .pandayObjectiveBody {
+        max-width: 68ch;
+    }
+
+    .pandayObjectiveVisual {
+        justify-self: center;
+        width: min(74vw, 270px);
+    }
+
+    .pandayObjectiveVisualImg {
+        transform: none;
+    }
+
+    .pandayStatsGrid {
+        margin-top: 1.65rem;
+    }
+
+    .pandayObjectiveClosing {
+        margin-top: 1.15rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .pandayStatsGrid {
+        margin-top: 1.6rem;
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    .pandayStatCard {
+        justify-items: center;
+        text-align: center;
+        gap: 0.7rem;
+    }
+
+    .pandayStatCircle {
+        width: clamp(155px, 44vw, 195px);
+    }
+
+    .pandayStatCaption {
+        max-width: 34ch;
+    }
 }
 
 .heroCompareLogo {
@@ -495,17 +590,17 @@
         gap: 0.6rem 0.8rem;
     }
 
-    .pandaySectionHead {
-        padding: 2rem 1.5rem 0;
+    .pandayObjectiveSection.projectSection {
+        padding: 2rem 1.5rem;
     }
 
-    .pandaySectionHeadTitle {
+    .pandayObjectiveSection .projectSectionTitle {
         font-size: 1.7rem;
     }
 
     .pandayObjectiveTitle {
-        margin-top: 0.85rem;
-        font-size: clamp(1.35rem, 6vw, 1.85rem);
+        margin-top: 0;
+        font-size: clamp(1.08rem, 4.2vw, 1.2rem);
     }
 
     .pandayObjectiveBody {
@@ -518,31 +613,13 @@
         line-height: 1.7;
     }
 
-    .pandayObjectiveTop {
-        margin-top: 1rem;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
     .pandayObjectiveVisual {
         justify-self: center;
-        width: min(84vw, 340px);
+        width: min(74vw, 270px);
     }
 
     .pandayStatsGrid {
-        margin-top: 1.5rem;
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-    }
-
-    .pandayStatCard {
-        justify-items: start;
-        text-align: left;
-        gap: 0.7rem;
-    }
-
-    .pandayStatCaption {
-        max-width: 40ch;
+        gap: 1.1rem;
     }
 
     .pandayMetaItem:nth-child(even) {
