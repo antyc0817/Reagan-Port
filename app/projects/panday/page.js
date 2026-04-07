@@ -167,6 +167,63 @@ export default function PandayProject() {
             </p>
           </article>
         </div>
+        <p className={styles.pandayResearchClosing}>
+          The system wasn&apos;t broken because the information was missing. It was
+          broken because nothing connected it together. No structure, no starting
+          point, no way to know what came next. And for thousands of apprentices
+          in BC, that gap was the difference between finishing and giving up.
+        </p>
+      </section>
+      <section className={`${styles.projectSection} ${styles.pandayIdeationSection}`}>
+        <h3 className={styles.projectSectionTitle}>[ Ideation ]</h3>
+        <div className={styles.pandayIdeationBody}>
+          <p>
+            The problem wasn&apos;t too much information. It was that none of it
+            had any shape.
+          </p>
+          <p>
+            Everything felt equally urgent and equally confusing. There was no
+            clear starting point and no way to tell what actually mattered.
+          </p>
+          <p className={styles.pandayIdeationBeat}>Then something clicked.</p>
+          <p>
+            In video games, you never face the final boss first. The game builds
+            you up to it. Level by level, checkpoint by checkpoint. You always
+            know where you are and what comes next.
+          </p>
+          <p className={styles.pandayIdeationBeat}>
+            That&apos;s what the trades path was missing.
+          </p>
+          <p>
+            <strong>Red Seal is the final boss.</strong> Levels 1 through 4 are
+            the stages to get there. And within each stage, three types of nodes
+            give every requirement, obstacle, and next step its own place on the
+            map.
+          </p>
+        </div>
+      </section>
+      <section className={`${styles.projectSection} ${styles.pandayTriNodeSection}`}>
+        <h3 className={styles.projectSectionTitle}>[ Tri-Node Ecosystem ]</h3>
+        <div className={styles.pandayTriNodeBody}>
+          <p className={styles.pandayTriNodeLead}>
+            <strong>Three node types. One clear system.</strong>
+          </p>
+          <p>
+            Once the level structure was in place, the next question was what
+            actually lives inside each level.
+          </p>
+          <p>
+            The trades journey isn&apos;t one type of thing. There are resources
+            to work through, obstacles that might slow you down, and actions that
+            move you forward. Treating them all the same way would bring back the
+            exact problem we were trying to solve.
+          </p>
+          <p>
+            So every milestone on the roadmap gets categorized into one of three
+            node types. Each one has its own color, its own purpose, and its own
+            place in the journey.
+          </p>
+        </div>
       </section>
     </main>
   );

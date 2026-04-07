@@ -359,6 +359,66 @@
     text-align: center;
 }
 
+.pandayIdeationSection .projectSectionTitle {
+    grid-column: unset;
+    grid-row: unset;
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.pandayTriNodeSection .projectSectionTitle {
+    grid-column: unset;
+    grid-row: unset;
+    width: 100%;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.pandayTriNodeBody {
+    margin: 1.8rem auto 0;
+    max-width: 84ch;
+    display: grid;
+    gap: 1rem;
+    text-align: center;
+}
+
+.pandayTriNodeBody p {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.78;
+    color: var(--foreground);
+}
+
+.pandayTriNodeLead {
+    font-size: clamp(1.24rem, 1.95vw, 1.52rem) !important;
+    line-height: 1.45 !important;
+}
+
+.pandayIdeationBody {
+    margin: 1.8rem auto 0;
+    max-width: 84ch;
+    display: grid;
+    gap: 1.05rem;
+    text-align: center;
+}
+
+.pandayIdeationBody p {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.78;
+    color: var(--foreground);
+}
+
+.pandayIdeationBeat {
+    margin-top: 0.2rem !important;
+    font-size: clamp(1.2rem, 1.85vw, 1.42rem) !important;
+    font-weight: 700;
+    line-height: 1.45 !important;
+    letter-spacing: 0.01em;
+    color: #0F5DA8 !important;
+}
+
 .pandayResearchSection.projectSection {
     max-width: 1280px;
 }
@@ -515,6 +575,15 @@
     color: var(--foreground);
 }
 
+.pandayResearchClosing {
+    margin: 2.25rem auto 0;
+    max-width: 86ch;
+    text-align: center;
+    font-size: 1.08rem;
+    line-height: 1.8;
+    color: var(--foreground);
+}
+
 .pandayObjectiveClosing {
     grid-area: closing;
     margin: 1.5rem 0 0;
@@ -582,6 +651,15 @@
 
     .pandayResearchLeadIn {
         margin-top: 1.7rem;
+    }
+
+    .pandayResearchClosing {
+        margin-top: 1.7rem;
+    }
+
+    .pandayIdeationBody {
+        margin-top: 1.35rem;
+        gap: 0.9rem;
     }
 }
 
