@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { FileText, GitBranch, Map } from "lucide-react";
 import styles from "../projects.module.css";
 import PandayObjectiveSection from "./PandayObjectiveSection";
 
@@ -58,6 +59,115 @@ export default function PandayProject() {
         </div>
       </div>
       <PandayObjectiveSection />
+      <section className={`${styles.projectSection} ${styles.pandayResearchSection}`}>
+        <h3 className={styles.projectSectionTitle}>[ Research ]</h3>
+        <div className={styles.pandayResearchBody}>
+          <p>
+            The problem wasn&apos;t a lack of information. It was that nobody could
+            tell you where to start.
+          </p>
+          <p>
+            I surveyed trades students and apprentices to understand what that
+            experience actually looked like.
+          </p>
+        </div>
+        <div className={styles.pandayResearchGallery}>
+          <figure className={styles.pandaySurveyCard}>
+            <Image
+              src="/images/panday/survey1.webp"
+              alt="Survey response chart from trades students"
+              width={1400}
+              height={980}
+              className={styles.pandaySurveyImage}
+              sizes="(max-width: 900px) 92vw, 46vw"
+              unoptimized
+            />
+          </figure>
+          <figure
+            className={`${styles.pandaySurveyCard} ${styles.pandaySurveyCardAlt}`}
+          >
+            <Image
+              src="/images/panday/survey2.webp"
+              alt="Survey response summary from apprentices"
+              width={1400}
+              height={980}
+              className={styles.pandaySurveyImage}
+              sizes="(max-width: 900px) 92vw, 46vw"
+              unoptimized
+            />
+          </figure>
+        </div>
+        <p className={styles.pandayResearchLeadIn}>
+          Without anyone to guide them through the system, three problems kept
+          coming up.
+        </p>
+        <div className={styles.pandayPainPoints}>
+          <article className={styles.pandayPainPointCard}>
+            <h4 className={styles.pandayPainPointTitle}>
+              <span
+                className={`${styles.pandayPainPointDot} ${styles.pandayPainPointDotOrange}`}
+                aria-hidden
+              />
+              <span
+                className={`${styles.pandayPainPointIconWrap} ${styles.pandayPainPointIconOrange}`}
+                aria-hidden
+              >
+                <FileText className={styles.pandayPainPointIcon} />
+              </span>
+              Too much, too scattered
+            </h4>
+            <p className={styles.pandayPainPointText}>
+              The information is out there, but it&apos;s spread across government
+              PDFs, outdated ITA pages, and forums with no clear hierarchy.
+              There&apos;s no single place to start and no way to know what
+              actually applies to you.
+            </p>
+          </article>
+
+          <article className={styles.pandayPainPointCard}>
+            <h4 className={styles.pandayPainPointTitle}>
+              <span
+                className={`${styles.pandayPainPointDot} ${styles.pandayPainPointDotGreen}`}
+                aria-hidden
+              />
+              <span
+                className={`${styles.pandayPainPointIconWrap} ${styles.pandayPainPointIconGreen}`}
+                aria-hidden
+              >
+                <Map className={styles.pandayPainPointIcon} />
+              </span>
+              No clear path forward
+            </h4>
+            <p className={styles.pandayPainPointText}>
+              The guidance that exists treats everyone the same. It doesn&apos;t
+              account for where you&apos;re coming from, your entry point, your
+              background, or how far along you already are. It&apos;s generic
+              advice for a journey that isn&apos;t generic.
+            </p>
+          </article>
+
+          <article className={styles.pandayPainPointCard}>
+            <h4 className={styles.pandayPainPointTitle}>
+              <span
+                className={`${styles.pandayPainPointDot} ${styles.pandayPainPointDotBlue}`}
+                aria-hidden
+              />
+              <span
+                className={`${styles.pandayPainPointIconWrap} ${styles.pandayPainPointIconBlue}`}
+                aria-hidden
+              >
+                <GitBranch className={styles.pandayPainPointIcon} />
+              </span>
+              No signal between steps
+            </h4>
+            <p className={styles.pandayPainPointText}>
+              Even when someone figures out what to do first, the next step
+              isn&apos;t obvious. There&apos;s nothing connecting one requirement to
+              the next. Every transition from one level to the next is a guess.
+            </p>
+          </article>
+        </div>
+      </section>
     </main>
   );
 }
