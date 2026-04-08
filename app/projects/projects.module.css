@@ -586,8 +586,10 @@
 
 .pandayObjectiveClosing {
     grid-area: closing;
-    margin: 1.5rem 0 0;
-    max-width: 74ch;
+    margin: 1.5rem auto 0;
+    max-width: none;
+    width: 100%;
+    text-align: center;
     font-size: 1.05rem;
     line-height: 1.75;
     color: var(--foreground);
