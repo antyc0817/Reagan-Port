@@ -224,6 +224,108 @@ export default function PandayProject() {
             place in the journey.
           </p>
         </div>
+        <div className={styles.pandayTriNodeList}>
+          <article
+            className={`${styles.pandayTriNodeItem} ${styles.pandayTriNodeItemImageLeft}`}
+          >
+            <figure className={styles.pandayTriNodeMedia}>
+              <Image
+                src="/images/panday/resources.webp"
+                alt="Resources node visual"
+                width={900}
+                height={900}
+                className={styles.pandayTriNodeImage}
+                sizes="(max-width: 900px) 64vw, 280px"
+                unoptimized
+              />
+            </figure>
+            <div className={styles.pandayTriNodeContent}>
+              <p>
+                These are your foundation. Before you can move forward, you need
+                to know what you&apos;re working with.
+              </p>
+              <ul className={styles.pandayTriNodePoints}>
+                <li>
+                  Study guides, technical manuals, and government forms relevant
+                  to your current level
+                </li>
+                <li>Work through a checklist as you go</li>
+                <li>
+                  The node fills up visually as you check items off, so your
+                  progress is always visible on the canvas
+                </li>
+              </ul>
+            </div>
+          </article>
+          <article
+            className={`${styles.pandayTriNodeItem} ${styles.pandayTriNodeItemImageRight} ${styles.pandayTriNodeItemGreen}`}
+          >
+            <figure className={styles.pandayTriNodeMedia}>
+              <Image
+                src="/images/panday/action.webp"
+                alt="Actions node visual"
+                width={900}
+                height={900}
+                className={styles.pandayTriNodeImage}
+                sizes="(max-width: 900px) 64vw, 280px"
+                unoptimized
+              />
+            </figure>
+            <div className={styles.pandayTriNodeContent}>
+              <p>
+                These are your next steps. No ambiguity, no reading between the
+                lines.
+              </p>
+              <ul className={styles.pandayTriNodePoints}>
+                <li>
+                  Specific tasks that need to happen to move from one level to
+                  the next
+                </li>
+                <li>Each action is ordered so you always know what to do first</li>
+                <li>
+                  Check them off as you complete them and watch the node fill up
+                  as you move closer to the next level
+                </li>
+              </ul>
+            </div>
+          </article>
+          <article
+            className={`${styles.pandayTriNodeItem} ${styles.pandayTriNodeItemImageLeft} ${styles.pandayTriNodeItemOrange}`}
+          >
+            <figure className={styles.pandayTriNodeMedia}>
+              <Image
+                src="/images/panday/roadblock.webp"
+                alt="Roadblocks node visual"
+                width={900}
+                height={900}
+                className={styles.pandayTriNodeImage}
+                sizes="(max-width: 900px) 64vw, 280px"
+                unoptimized
+              />
+            </figure>
+            <div className={styles.pandayTriNodeContent}>
+              <h4 className={styles.pandayTriNodeItemTitle}>Roadblocks</h4>
+              <p>
+                These are the obstacles that catch most apprentices off guard.
+                Panday surfaces them before they happen.
+              </p>
+              <ul className={styles.pandayTriNodePoints}>
+                <li>
+                  Common industry hurdles like seasonal layoffs, exam anxiety, or
+                  re-entry after a break
+                </li>
+                <li>
+                  Each roadblock comes with a contingency plan so you know what
+                  to do if it hits
+                </li>
+                <li>
+                  Work through the checklist and track your preparedness the same
+                  way as every other node
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
       </section>
     </main>
   );

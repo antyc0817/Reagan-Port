@@ -395,6 +395,124 @@
     line-height: 1.45 !important;
 }
 
+.pandayTriNodeList {
+    margin-top: 2.35rem;
+    display: grid;
+    gap: 2rem;
+}
+
+.pandayTriNodeItem {
+    display: grid;
+    grid-template-columns: minmax(250px, 340px) minmax(0, 1fr);
+    grid-template-areas: "media content";
+    gap: 1.7rem;
+    align-items: center;
+}
+
+.pandayTriNodeItemImageRight .pandayTriNodeMedia {
+    grid-area: media;
+    justify-self: end;
+}
+
+.pandayTriNodeItemImageRight .pandayTriNodeContent {
+    grid-area: content;
+}
+
+.pandayTriNodeItemImageRight {
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 340px);
+    grid-template-areas: "content media";
+}
+
+.pandayTriNodeMedia {
+    grid-area: media;
+    margin: 0;
+    width: min(100%, 340px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    transition: none;
+    justify-self: start;
+}
+
+.pandayTriNodeImage {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(22, 88, 188, 0.18));
+}
+
+.pandayTriNodeContent {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.72rem;
+    min-height: clamp(228px, 27vw, 312px);
+    padding: 0.56rem 1.2rem 0.72rem;
+    border: 1px solid rgba(66, 135, 245, 0.2);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(246, 250, 255, 0.97), rgba(237, 246, 255, 0.95));
+    box-shadow: 0 12px 24px rgba(14, 56, 126, 0.12);
+    transition: none;
+    text-align: left;
+}
+
+.pandayTriNodeItemGreen .pandayTriNodeContent {
+    border: 1px solid rgba(0, 163, 108, 0.24);
+    background: linear-gradient(180deg, rgba(241, 252, 247, 0.97), rgba(231, 248, 239, 0.95));
+    box-shadow: 0 12px 24px rgba(15, 108, 77, 0.12);
+}
+
+.pandayTriNodeItemOrange .pandayTriNodeContent {
+    border: 1px solid rgba(254, 80, 0, 0.24);
+    background: linear-gradient(180deg, rgba(255, 247, 242, 0.97), rgba(255, 239, 231, 0.95));
+    box-shadow: 0 12px 24px rgba(166, 74, 24, 0.14);
+}
+
+.pandayTriNodeItem:hover .pandayTriNodeMedia {
+    transform: none;
+    border-color: inherit;
+    box-shadow: none;
+}
+
+.pandayTriNodeItem:hover .pandayTriNodeContent {
+    transform: none;
+    border-color: rgba(66, 135, 245, 0.2);
+    box-shadow: 0 12px 24px rgba(14, 56, 126, 0.12);
+}
+
+.pandayTriNodeItemTitle {
+    margin: 0;
+    font-size: clamp(1.22rem, 1.8vw, 1.52rem);
+    line-height: 1.32;
+    font-weight: 500;
+    color: var(--foreground);
+}
+
+.pandayTriNodeContent p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.78;
+    color: var(--foreground);
+}
+
+.pandayTriNodePoints {
+    margin: 0.2rem 0 0;
+    padding-left: 1.15rem;
+    display: grid;
+    gap: 0.55rem;
+}
+
+.pandayTriNodePoints li {
+    font-size: 1.01rem;
+    line-height: 1.7;
+    color: var(--foreground);
+}
+
 .pandayIdeationBody {
     margin: 1.8rem auto 0;
     max-width: 84ch;
@@ -595,7 +713,7 @@
     color: var(--foreground);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 760px) {
     .pandayObjectiveSection {
         grid-template-columns: 1fr;
         grid-template-areas:
@@ -662,6 +780,28 @@
     .pandayIdeationBody {
         margin-top: 1.35rem;
         gap: 0.9rem;
+    }
+
+    .pandayTriNodeItem {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "media"
+            "content";
+        gap: 1.15rem;
+    }
+
+    .pandayTriNodeItemImageRight .pandayTriNodeMedia,
+    .pandayTriNodeItemImageRight .pandayTriNodeContent {
+        grid-area: auto;
+    }
+
+    .pandayTriNodeMedia {
+        justify-self: center;
+        width: min(78vw, 290px);
+    }
+
+    .pandayTriNodeContent {
+        text-align: center;
     }
 }
 
