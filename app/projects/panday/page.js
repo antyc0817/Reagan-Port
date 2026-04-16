@@ -240,6 +240,7 @@ export default function PandayProject() {
               />
             </figure>
             <div className={styles.pandayTriNodeContent}>
+              <h4 className={styles.pandayTriNodeItemTitle}>Resources</h4>
               <p>
                 These are your foundation. Before you can move forward, you need
                 to know what you&apos;re working with.
@@ -272,6 +273,7 @@ export default function PandayProject() {
               />
             </figure>
             <div className={styles.pandayTriNodeContent}>
+              <h4 className={styles.pandayTriNodeItemTitle}>Actions</h4>
               <p>
                 These are your next steps. No ambiguity, no reading between the
                 lines.
@@ -324,6 +326,72 @@ export default function PandayProject() {
                 </li>
               </ul>
             </div>
+          </article>
+        </div>
+      </section>
+      <section className={`${styles.projectSection} ${styles.pandayRoadmapSection}`}>
+        <h3 className={styles.projectSectionTitle}>[ Roadmap ]</h3>
+        <div className={styles.pandayRoadmapIntro}>
+          <p className={styles.pandayRoadmapIntroLead}>
+            This is where it all comes together.
+          </p>
+          <p>
+            The roadmap is the core of Panday. A visual canvas that shows you
+            exactly where you are, what needs to happen next, and how far
+            you&apos;ve already come. Every node from every level sits in front of
+            you in one place, organized by stage and color coded by type.
+          </p>
+          <p>
+            No more digging through pages. No more guessing what comes next. Just
+            a clear path from where you are today to your Red Seal.
+          </p>
+        </div>
+        <div className={styles.pandayRoadmapGallery}>
+          <article className={styles.pandayRoadmapCard}>
+            <p className={styles.pandayRoadmapCardLabel}>
+              <strong>Track your progress as you go</strong>
+            </p>
+            <div className={styles.pandayRoadmapMedia}>
+              <Image
+                src="/images/panday/roadmap1.webp"
+                alt="Panday roadmap view with progress tracking"
+                width={1400}
+                height={900}
+                className={styles.pandayRoadmapImage}
+                sizes="(max-width: 900px) 92vw, 46vw"
+                unoptimized
+              />
+            </div>
+            <p className={styles.pandayRoadmapCardText}>
+              Every node has a built in checklist. As you work through each item
+              and check it off, the progress bar fills up and you can see exactly
+              how far along you are. No separate tracker, no spreadsheet. Your
+              progress lives directly on the canvas.
+            </p>
+          </article>
+
+          <article className={styles.pandayRoadmapCard}>
+            <p className={styles.pandayRoadmapCardLabel}>
+              <strong>Ask anything, get answers grounded in the source</strong>
+            </p>
+            <div className={styles.pandayRoadmapMedia}>
+              <Image
+                src="/images/panday/roadmap2.webp"
+                alt="Panday roadmap overview"
+                width={1400}
+                height={900}
+                className={styles.pandayRoadmapImage}
+                sizes="(max-width: 900px) 92vw, 46vw"
+                unoptimized
+              />
+            </div>
+            <p className={styles.pandayRoadmapCardText}>
+              The AI assistant lives alongside your roadmap. Ask it anything
+              about your journey, requirements, or next steps and it pulls
+              answers directly from official ITA BC and government sources. No
+              searching through PDFs, no second guessing whether the information
+              is accurate.
+            </p>
           </article>
         </div>
       </section>
