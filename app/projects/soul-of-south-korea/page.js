@@ -144,8 +144,8 @@ export default function SoulOfSouthKoreaProject() {
         <Link href="/work" className={styles.projectNavLink}>
           View All Work
         </Link>
-        <Link href="/projects/cuisine-clinic" className={styles.projectNavLink}>
-          Next: Cuisine Clinic
+        <Link href="/projects/panday" className={styles.projectNavLink}>
+          Next: Panday
         </Link>
       </nav>
     </main>

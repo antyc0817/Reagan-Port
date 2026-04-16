@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FileText, GitBranch, Map } from "lucide-react";
 import styles from "../projects.module.css";
 import PandayObjectiveSection from "./PandayObjectiveSection";
@@ -466,6 +467,22 @@ export default function PandayProject() {
           </article>
         </div>
       </section>
+      <section className={`${styles.projectSection} ${styles.retrospectiveSection}`}>
+        <h3 className={styles.projectSectionTitle}>[ Retrospective ]</h3>
+      </section>
+
+      <nav
+        className={styles.projectNav}
+        aria-label="Project navigation"
+        data-section="project-nav"
+      >
+        <Link href="/work" className={styles.projectNavLink}>
+          View All Work
+        </Link>
+        <Link href="/projects/whatsup" className={styles.projectNavLink}>
+          Next: WhatSUP
+        </Link>
+      </nav>
     </main>
   );
 }
