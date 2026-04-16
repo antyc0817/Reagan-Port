@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FileText, GitBranch, Map } from "lucide-react";
+import RetrospectivePoints from "../RetrospectivePoints";
 import styles from "../projects.module.css";
 import PandayObjectiveSection from "./PandayObjectiveSection";
+import { RETROSPECTIVE_POINTS } from "./retrospectiveData";
 
 export const metadata = {
   title: "Panday | Reagan",
@@ -469,6 +471,11 @@ export default function PandayProject() {
       </section>
       <section className={`${styles.projectSection} ${styles.retrospectiveSection}`}>
         <h3 className={styles.projectSectionTitle}>[ Retrospective ]</h3>
+        <p className={styles.retrospectiveMainText}>
+          The hardest part wasn&apos;t building the system.{" "}
+          <strong>It was making something genuinely complex feel simple enough.</strong>
+        </p>
+        <RetrospectivePoints points={RETROSPECTIVE_POINTS} />
       </section>
 
       <nav
@@ -479,8 +486,8 @@ export default function PandayProject() {
         <Link href="/work" className={styles.projectNavLink}>
           View All Work
         </Link>
-        <Link href="/projects/whatsup" className={styles.projectNavLink}>
-          Next: WhatSUP
+        <Link href="/projects/cuisine-clinic" className={styles.projectNavLink}>
+          Next: Cuisine Clinic
         </Link>
       </nav>
     </main>

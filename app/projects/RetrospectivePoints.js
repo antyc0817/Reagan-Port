@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { Eraser, Link2, Sparkles, Users, Palette, Zap, FolderCode, Layout, Type, Maximize2, Printer } from "lucide-react";
+import { Eraser, Link2, Sparkles, Users, Palette, Zap, FolderCode, Layout, Type, Maximize2, Printer, Rocket } from "lucide-react";
 import styles from "./projects.module.css";
 
-const ICON_MAP = { Eraser, Link2, Sparkles, Users, Palette, Zap, FolderCode, Layout, Type, Maximize2, Printer };
+const ICON_MAP = { Eraser, Link2, Sparkles, Users, Palette, Zap, FolderCode, Layout, Type, Maximize2, Printer, Rocket };
 
 export default function RetrospectivePoints({ points }) {
   const sectionRef = useRef(null);
@@ -107,7 +107,7 @@ export default function RetrospectivePoints({ points }) {
   return (
     <div ref={sectionRef} className={styles.retroTimeline}>
       {points.map((point, i) => {
-        const Icon = ICON_MAP[point.icon] ?? Sparkles;
+        const Icon = point.icon ? (ICON_MAP[point.icon] ?? Sparkles) : null;
         return (
           <article key={point.num} className={styles.retroTimelineItem}>
             <div className={styles.retroTimelineLine}>
@@ -120,9 +120,11 @@ export default function RetrospectivePoints({ points }) {
             </div>
             <div className={styles.retroTimelineContent}>
               <div className={styles.retroTimelineHeader}>
-                <div className={styles.retroTimelineIconWrap}>
-                  <Icon className={styles.retroTimelineIcon} size={20} strokeWidth={2} aria-hidden />
-                </div>
+                {Icon ? (
+                  <div className={styles.retroTimelineIconWrap}>
+                    <Icon className={styles.retroTimelineIcon} size={20} strokeWidth={2} aria-hidden />
+                  </div>
+                ) : null}
                 <h4 className={styles.retroTimelineTitle}>{point.title}</h4>
               </div>
               <p className={styles.retroTimelineText}>{point.text}</p>
