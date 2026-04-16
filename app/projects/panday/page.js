@@ -395,6 +395,77 @@ export default function PandayProject() {
           </article>
         </div>
       </section>
+      <section className={`${styles.projectSection} ${styles.pandayDesignSystemSection}`}>
+        <h3 className={styles.projectSectionTitle}>[ Design System ]</h3>
+        <p className={styles.pandayDesignSystemIntro}>
+          Color isn&apos;t decoration here. It&apos;s how the system speaks. Every
+          color in Panday was chosen with intention, directly tied to the trades
+          world and the node system it powers. When you&apos;re navigating something
+          this complex, color shouldn&apos;t make you think. It should already tell
+          you what you&apos;re looking at and what to do with it.
+        </p>
+
+        <div className={styles.pandayDesignSystemGrid}>
+          <article
+            className={`${styles.pandayDesignSystemCard} ${styles.pandayDesignSystemCardBlue}`}
+          >
+            <div
+              className={`${styles.pandayDesignSystemSwatch} ${styles.pandayDesignSystemSwatchBlue}`}
+              aria-hidden
+            />
+            <p className={styles.pandayDesignSystemHex}>
+              <strong>#0077CC</strong>
+            </p>
+            <h4 className={styles.pandayDesignSystemCardTitle}>Blueprint Blue</h4>
+            <p className={styles.pandayDesignSystemCardText}>
+              Represents trust, intelligence, and stability. The same thinking
+              behind an architectural blueprint. When you see blue, you know
+              you&apos;re looking at the information and materials you need to
+              study and work through at your current level.
+            </p>
+          </article>
+
+          <article
+            className={`${styles.pandayDesignSystemCard} ${styles.pandayDesignSystemCardOrange}`}
+          >
+            <div
+              className={`${styles.pandayDesignSystemSwatch} ${styles.pandayDesignSystemSwatchOrange}`}
+              aria-hidden
+            />
+            <p className={styles.pandayDesignSystemHex}>
+              <strong>#FE5000</strong>
+            </p>
+            <h4 className={styles.pandayDesignSystemCardTitle}>
+              Construction Orange
+            </h4>
+            <p className={styles.pandayDesignSystemCardText}>
+              High visibility and high energy, just like the safety gear worn on
+              every job site. Orange marks the obstacles and challenges you might
+              face along the way, surfacing them early so you can prepare before
+              they slow you down.
+            </p>
+          </article>
+
+          <article
+            className={`${styles.pandayDesignSystemCard} ${styles.pandayDesignSystemCardGreen}`}
+          >
+            <div
+              className={`${styles.pandayDesignSystemSwatch} ${styles.pandayDesignSystemSwatchGreen}`}
+              aria-hidden
+            />
+            <p className={styles.pandayDesignSystemHex}>
+              <strong>#00A36C</strong>
+            </p>
+            <h4 className={styles.pandayDesignSystemCardTitle}>Tradesman Green</h4>
+            <p className={styles.pandayDesignSystemCardText}>
+              A deep, confident green that signals growth and forward movement.
+              Green marks the specific steps and tasks that need to happen to
+              move from one level to the next. When you see green, you know
+              exactly what needs to be done.
+            </p>
+          </article>
+        </div>
+      </section>
     </main>
   );
 }
